@@ -171,6 +171,19 @@ The goal is to prevent silent rewriting of foundational positions.
   - `docs/OPEN_QUESTIONS.md`
   - `docs/TASK_BOARD.md`
 
+### 2026-03-22
+
+- Changed artifact: constitutional replay model
+- Previous position: constitutions could be published with optional `supersedes`, but governance replay still treated the latest constitution as a simple chronological last-write result
+- New position: Continuum now treats constitutions as lineage-bearing governance objects with explicit supersession state, active-tip selection, and replay warnings for orphaned or conflicted amendment history
+- Reason: a continuity protocol needs institutional continuity as well as agent continuity, and constitutional change must be replayable rather than implicit
+- Trigger: post-anchor design pass identifying constitutional history as the next missing continuity layer
+- Downstream docs affected:
+  - `docs/specs/CONSTITUTION_LINEAGE_V0.md`
+  - `src/indexer/materialize.py`
+  - `tests/test_runtime_bootstrap.py`
+  - `docs/OPEN_QUESTIONS.md`
+
 ### 2026-03-20
 
 - Changed artifact: session continuity implementation stance

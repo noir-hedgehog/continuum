@@ -107,6 +107,15 @@ These are not placeholders for later polish. They are active design frontiers.
   - `docs/specs/EXTERNAL_ANCHOR_ADAPTER_V0.md`
   - `docs/OPERATOR_RUNBOOK_V0.md`
 
+### OQ-021 How should constitution lineage conflicts be resolved once replay can detect them?
+
+- Status: open
+- Why it matters: Continuum can now represent constitutional supersession and replay warnings, but it still needs a governance-native answer for parallel branches, orphaned amendments, and contested active constitutions
+- Current working assumption: v0 should detect and surface lineage ambiguity conservatively, while later governance processes decide whether conflicts require proposal ratification, review authority intervention, or dedicated constitutional dispute flow
+- Related docs:
+  - `docs/specs/CONSTITUTION_LINEAGE_V0.md`
+  - `docs/specs/GOVERNANCE_MODEL_V0.md`
+
 ### OQ-011 What is the minimum continuity bundle for repository-centered agents?
 
 - Status: narrowed

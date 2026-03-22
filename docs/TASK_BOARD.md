@@ -179,6 +179,18 @@ It is intentionally simple in v0. The goal is to keep the current work graph vis
   - `docs/specs/EXTERNAL_ANCHOR_ADAPTER_V0.md`
   - `docs/OPEN_QUESTIONS.md`
 
+### T-015 Constitution lineage and supersession replay
+
+- Status: active
+- Type: spec
+- Owner: main agent
+- Intent: make constitutional change itself replayable by materializing lineage, active constitution selection, supersession state, and replay warnings
+- Outputs:
+  - `docs/specs/CONSTITUTION_LINEAGE_V0.md`
+  - `src/indexer/materialize.py`
+  - `tests/test_runtime_bootstrap.py`
+  - `docs/OPEN_QUESTIONS.md`
+
 ### T-010 CLI/runtime prototype bootstrap
 
 - Status: active
@@ -492,6 +504,7 @@ Future likely confirmation points:
 - Business plan v0 added to align product wedge, customer segments, and revenue sequencing with the current protocol direction
 - Quickstart and demo script added so the prototype can be replayed outside the unit test surface
 - External anchor adapter v0 defined to separate root computation from future public durability targets while preserving the local witness path
+- Constitution lineage and supersession replay added so governance policy history can evolve explicitly instead of depending on whichever constitution object happened to be latest in storage
 - Repository continuity bundle v0 drafted to make session-safe reconstruction an explicit project artifact
 - Continuity assessment workflow v0 drafted to make continuity judgments operational instead of purely conceptual
 - Example assessment fixtures added for repository restart and successor recovery cases

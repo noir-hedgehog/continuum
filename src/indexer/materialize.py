@@ -15,6 +15,10 @@ def _migration_sort_key(migration: dict[str, Any]) -> tuple[str, str]:
     return (migration.get("effective_at", ""), migration["migration_id"])
 
 
+def _constitution_sort_key(constitution: dict[str, Any]) -> tuple[str, str]:
+    return (constitution.get("amended_at", ""), constitution["constitution_id"])
+
+
 class RepositoryIndexer:
     """Materialize query-oriented state from stored event envelopes."""
 
@@ -255,7 +259,7 @@ class RepositoryIndexer:
             reward["event_id"] = event["event_id"]
             reward_decisions.append(reward)
 
-        constitutions.sort(key=lambda item: (item["amended_at"], item["constitution_id"]))
+        constitutions.sort(key=_constitution_sort_key)
         memberships.sort(key=lambda item: (item["joined_at"], item["membership_id"]))
         proposals.sort(key=lambda item: (item["created_at"], item["proposal_id"]))
         votes.sort(key=lambda item: (item["cast_at"], item["vote_id"]))
@@ -308,12 +312,15 @@ class RepositoryIndexer:
                 }
             )
 
-        latest_constitution = constitutions[-1] if constitutions else None
+        constitution_lineage, constitution_replay_warnings = self._materialize_constitution_lineage(constitutions)
+        latest_constitution = self._latest_constitution_from_lineage(constitutions, constitution_lineage)
 
         state = {
             "state_type": "governance_state",
             "community_id": community_id,
             "constitutions": constitutions,
+            "constitution_lineage": constitution_lineage,
+            "constitution_replay_warnings": constitution_replay_warnings,
             "latest_constitution": latest_constitution,
             "membership_by_agent": membership_by_agent,
             "memberships": memberships,
@@ -328,3 +335,86 @@ class RepositoryIndexer:
         state["state_root"] = f"state:{digest_hex(state)}"
         state["state_digest_algorithm"] = DIGEST_ALGORITHM
         return state
+
+    def _materialize_constitution_lineage(
+        self, constitutions: list[dict[str, Any]]
+    ) -> tuple[list[dict[str, Any]], list[str]]:
+        by_id = {constitution["constitution_id"]: constitution for constitution in constitutions}
+        child_map: dict[str, list[str]] = {constitution["constitution_id"]: [] for constitution in constitutions}
+        warnings: list[str] = []
+
+        for constitution in constitutions:
+            parent_id = constitution.get("supersedes")
+            if not parent_id:
+                continue
+            if parent_id not in by_id:
+                warnings.append(f"constitution_orphaned:{constitution['constitution_id']}")
+                continue
+            child_map[parent_id].append(constitution["constitution_id"])
+
+        conflict_children = {
+            child_id
+            for child_ids in child_map.values()
+            if len(child_ids) > 1
+            for child_id in child_ids
+        }
+        for parent_id, child_ids in child_map.items():
+            if len(child_ids) > 1:
+                warnings.append(f"constitution_conflict:{parent_id}")
+
+        active_ids = {
+            constitution["constitution_id"]
+            for constitution in constitutions
+            if not child_map.get(constitution["constitution_id"])
+        }
+
+        lineage: list[dict[str, Any]] = []
+        for constitution in constitutions:
+            constitution_id = constitution["constitution_id"]
+            parent_id = constitution.get("supersedes")
+            child_ids = sorted(child_map.get(constitution_id, []))
+            if parent_id and parent_id not in by_id:
+                lineage_state = "orphaned"
+            elif constitution_id in conflict_children:
+                lineage_state = "conflicted"
+            elif constitution_id in active_ids:
+                lineage_state = "active"
+            elif child_ids:
+                lineage_state = "superseded"
+            else:
+                lineage_state = "lineage_root" if not parent_id else "superseded"
+
+            lineage.append(
+                {
+                    "constitution_id": constitution_id,
+                    "supersedes": parent_id,
+                    "child_constitution_ids": child_ids,
+                    "lineage_state": lineage_state,
+                    "amended_at": constitution["amended_at"],
+                }
+            )
+
+        lineage.sort(key=lambda item: (item["amended_at"], item["constitution_id"]))
+        return lineage, warnings
+
+    def _latest_constitution_from_lineage(
+        self,
+        constitutions: list[dict[str, Any]],
+        constitution_lineage: list[dict[str, Any]],
+    ) -> dict[str, Any] | None:
+        if not constitutions:
+            return None
+        lineage_by_id = {entry["constitution_id"]: entry for entry in constitution_lineage}
+        active_constitutions = [
+            constitution
+            for constitution in constitutions
+            if lineage_by_id.get(constitution["constitution_id"], {}).get("lineage_state") == "active"
+        ]
+        if len(active_constitutions) == 1:
+            return active_constitutions[0]
+        if len(active_constitutions) > 1:
+            return None
+        for constitution in reversed(constitutions):
+            if lineage_by_id.get(constitution["constitution_id"], {}).get("lineage_state") != "orphaned":
+                return constitution
+        return constitutions[-1]

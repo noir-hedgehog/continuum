@@ -2703,6 +2703,74 @@ class CliBootstrapTests(unittest.TestCase):
             finally:
                 os.chdir(cwd)
 
+    def test_constitution_supersession_materializes_lineage_and_latest_constitution(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            cwd = Path.cwd()
+            try:
+                os.chdir(tmp)
+                self.run_cli(
+                    [
+                        "agent",
+                        "init",
+                        "--scope",
+                        "continuum",
+                        "--name",
+                        "main",
+                        "--display-name",
+                        "Continuum Main",
+                    ]
+                )
+                _, first_constitution = self.run_cli(
+                    [
+                        "governance",
+                        "constitution",
+                        "set",
+                        "--community-id",
+                        "community:continuum:lab",
+                        "--title",
+                        "Continuum Constitution v1",
+                        "--constitution-version",
+                        "v1",
+                        "--amended-at",
+                        "2026-03-22T00:00:00Z",
+                    ]
+                )
+                first_id = first_constitution["payload"]["constitution"]["constitution_id"]
+
+                self.run_cli(
+                    [
+                        "governance",
+                        "constitution",
+                        "set",
+                        "--community-id",
+                        "community:continuum:lab",
+                        "--title",
+                        "Continuum Constitution v2",
+                        "--constitution-version",
+                        "v2",
+                        "--supersedes",
+                        first_id,
+                        "--amended-at",
+                        "2026-03-22T01:00:00Z",
+                    ]
+                )
+
+                _, governance_state = self.run_cli(
+                    ["query", "governance-state", "--community-id", "community:continuum:lab", "--refresh"]
+                )
+                self.assertEqual(governance_state["latest_constitution"]["constitution_version"], "v2")
+                self.assertEqual(governance_state["constitution_replay_warnings"], [])
+                lineage = governance_state["constitution_lineage"]
+                self.assertEqual(len(lineage), 2)
+                first_entry = next(entry for entry in lineage if entry["constitution_id"] == first_id)
+                latest_id = governance_state["latest_constitution"]["constitution_id"]
+                second_entry = next(entry for entry in lineage if entry["constitution_id"] == latest_id)
+                self.assertEqual(first_entry["lineage_state"], "superseded")
+                self.assertEqual(second_entry["lineage_state"], "active")
+                self.assertEqual(second_entry["supersedes"], first_id)
+            finally:
+                os.chdir(cwd)
+
     def test_anchor_export_is_deterministic_for_governance_state(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             cwd = Path.cwd()
