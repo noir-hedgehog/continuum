@@ -1,0 +1,101 @@
+{
+  "work_item": {
+    "work_id": "work-maint-001",
+    "community_id": "continuum-core",
+    "title": "Repository continuity maintenance",
+    "intent": "Preserve project reconstructability across repeated automation runs.",
+    "work_type": "maintenance",
+    "created_by": "community-maintainer-1",
+    "scope_refs": [
+      "docs/TASK_BOARD.md",
+      "docs/REVISION_LOG.md",
+      "docs/OPEN_QUESTIONS.md"
+    ],
+    "deliverable_refs": [
+      "docs/specs/USEFUL_WORK_LEGITIMACY_V0.md",
+      "docs/specs/examples/work_reward_decision_maintenance.json"
+    ],
+    "success_criteria": [
+      "task board updated without duplicating active work",
+      "revision log records material governance change",
+      "new spec clarifies work receipt and reward decision flow"
+    ],
+    "status": "verified"
+  },
+  "work_claim": {
+    "claim_id": "claim-maint-001",
+    "work_id": "work-maint-001",
+    "claimant_agent_id": "continuum-main-agent",
+    "claim_type": "submit_completion",
+    "claimed_at": "2026-03-21T09:30:00Z",
+    "basis_refs": [
+      "docs/specs/USEFUL_WORK_LEGITIMACY_V0.md"
+    ],
+    "status": "submitted"
+  },
+  "work_receipt": {
+    "receipt_id": "receipt-maint-001",
+    "work_id": "work-maint-001",
+    "community_id": "continuum-core",
+    "agent_id": "continuum-main-agent",
+    "artifact_refs": [
+      "docs/specs/USEFUL_WORK_LEGITIMACY_V0.md",
+      "docs/specs/examples/work_reward_decision_maintenance.json",
+      "docs/TASK_BOARD.md",
+      "docs/REVISION_LOG.md"
+    ],
+    "result_summary_hash": "placeholder-result-hash-v0",
+    "completed_at": "2026-03-21T09:42:00Z",
+    "receipt_type": "maintenance",
+    "evidence_refs": [
+      "docs/specs/GOVERNANCE_MODEL_V0.md",
+      "docs/OPEN_QUESTIONS.md"
+    ],
+    "continuity_context_ref": "repository-run-2026-03-21"
+  },
+  "work_evaluation": {
+    "evaluation_id": "eval-maint-001",
+    "receipt_id": "receipt-maint-001",
+    "evaluator_id": "community-maintainer-1",
+    "evaluated_at": "2026-03-21T09:50:00Z",
+    "decision": "accepted",
+    "criteria_results": [
+      {
+        "criterion": "task board updated without duplicate tasks",
+        "result": "pass"
+      },
+      {
+        "criterion": "governance gap narrowed with a new spec",
+        "result": "pass"
+      },
+      {
+        "criterion": "treasury-sensitive legitimacy remains conservative",
+        "result": "pass"
+      }
+    ],
+    "reason_refs": [
+      "docs/specs/USEFUL_WORK_LEGITIMACY_V0.md"
+    ],
+    "reward_recommendation": {
+      "reward_type": "reputation_grant",
+      "policy_ref": "core-maintenance-policy-v0"
+    },
+    "reputation_effect": {
+      "dimension": "maintenance_reliability",
+      "delta": 1
+    }
+  },
+  "reward_decision": {
+    "reward_decision_id": "reward-maint-001",
+    "receipt_id": "receipt-maint-001",
+    "evaluation_id": "eval-maint-001",
+    "community_id": "continuum-core",
+    "beneficiary_agent_id": "continuum-main-agent",
+    "reward_type": "reputation_grant",
+    "approved_by": [
+      "community-maintainer-1"
+    ],
+    "approved_at": "2026-03-21T09:55:00Z",
+    "policy_ref": "core-maintenance-policy-v0"
+  }
+}

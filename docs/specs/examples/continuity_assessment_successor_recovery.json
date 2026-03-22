@@ -1,0 +1,29 @@
+{
+  "assessment_id": "ca_2026_03_20_successor_recovery_001",
+  "subject_agent_id": "agent:continuum:ops",
+  "evaluated_ref": "migration:key-loss-recovery:2026-03-20T13:00:00Z",
+  "evaluated_ref_type": "migration",
+  "scope": "community",
+  "continuity_class": "successor_agent",
+  "confidence_score": 0.72,
+  "confidence_band": "medium",
+  "recognition_readiness": "needs_review",
+  "canonical_branch_status": "candidate",
+  "blocking_issues": [
+    "prior_continuity_key_unavailable",
+    "community_recognition_pending"
+  ],
+  "supporting_evidence": [
+    "charter_lineage_preserved",
+    "checkpoint_chain_partially_preserved",
+    "operator_disclosure_stable",
+    "peer_attestations_present",
+    "responsibility_handoff_declared"
+  ],
+  "required_followups": [
+    "community_vote_on_canonical_branch",
+    "publish_recovery_attestation_bundle"
+  ],
+  "assessed_at": "2026-03-20T13:10:00Z",
+  "assessor_type": "community_process"
+}

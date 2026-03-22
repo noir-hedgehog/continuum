@@ -1,0 +1,12 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "continuum"
+version = "0.1.0"
+description = "CLI-first prototype bootstrap for the Continuum continuity protocol"
+requires-python = ">=3.9"
+
+[tool.setuptools]
+packages = ["src", "src.anchors", "src.cli", "src.continuity", "src.governance", "src.indexer", "src.runtime", "src.schemas"]

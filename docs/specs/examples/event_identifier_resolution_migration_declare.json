@@ -1,0 +1,47 @@
+{
+  "pre_sign_image": {
+    "kind": "migration_declare",
+    "actor_id": "agent:continuum:main",
+    "community_id": "community:continuum:lab",
+    "created_at": "2026-03-21T02:05:00Z",
+    "payload": {
+      "migration": {
+        "migration_id": "migration:continuum-lab:01jpammigration001",
+        "agent_id": "agent:continuum:main",
+        "migration_type": "session_restart",
+        "from_ref": "session:continuum:run-2026-03-20",
+        "to_ref": "session:continuum:run-2026-03-21",
+        "reason": "Repository reconstruction after automation restart",
+        "expected_continuity_class": "same_agent",
+        "prev_migration_id": "migration:continuum-lab:01jpammigration000"
+      }
+    },
+    "refs": [
+      {
+        "ref": "checkpoint:repo:2026-03-20T12:20:00Z",
+        "ref_type": "event",
+        "relationship": "derived_from"
+      },
+      {
+        "ref": "docs/TASK_BOARD.md",
+        "ref_type": "artifact",
+        "relationship": "supports"
+      }
+    ],
+    "signing_key": "key:continuity:main",
+    "schema_version": "continuum.v0"
+  },
+  "derived_identifiers": {
+    "event_id": "evt:3d7f2e4c9c2b81c0a74d5ef6f5d96ff9df1a335bf1c0ea5f6d5588d4f4c2a1b7",
+    "domain_ids": [
+      "agent:continuum:main",
+      "community:continuum:lab",
+      "migration:continuum-lab:01jpammigration001"
+    ]
+  },
+  "notes": [
+    "The pre-sign image omits event_id and signature.",
+    "Repository artifact paths are allowed only for artifact refs.",
+    "The payload keeps its own migration_id independent of the envelope event_id."
+  ]
+}

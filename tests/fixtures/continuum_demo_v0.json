@@ -1,0 +1,21 @@
+{
+  "scenario_id": "continuum_demo_v0",
+  "goal": "Prove the repository-local Continuum demo can be replayed from docs plus event state and still export anchor-worthy outputs.",
+  "required_repository_artifacts": [
+    "FOUNDING_THESIS.md",
+    "OPERATING_MODEL.md",
+    "TASK_BOARD.md",
+    "OPEN_QUESTIONS.md",
+    "REVISION_LOG.md",
+    "OPERATOR_RUNBOOK_V0.md"
+  ],
+  "expected_assessment": {
+    "continuity_class": "same_agent",
+    "recognition_readiness": "ready"
+  },
+  "expected_standing": "clear",
+  "expected_anchor_types": [
+    "continuity_assessment_root",
+    "governance_state_root"
+  ]
+}

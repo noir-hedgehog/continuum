@@ -1,0 +1,24 @@
+{
+  "assessment_id": "ca_2026_03_20_repo_restart_001",
+  "subject_agent_id": "agent:continuum:main",
+  "evaluated_ref": "migration:session-restart:2026-03-20T12:15:00Z",
+  "evaluated_ref_type": "session_restart",
+  "scope": "repository",
+  "continuity_class": "same_agent",
+  "confidence_score": 0.89,
+  "confidence_band": "high",
+  "recognition_readiness": "ready",
+  "canonical_branch_status": "canonical",
+  "blocking_issues": [],
+  "supporting_evidence": [
+    "valid_continuity_authority",
+    "repository_reconstruction_complete",
+    "task_board_updated",
+    "revision_log_updated",
+    "same_authority_constraints",
+    "active_spec_lineage_preserved"
+  ],
+  "required_followups": [],
+  "assessed_at": "2026-03-20T12:20:00Z",
+  "assessor_type": "indexer"
+}

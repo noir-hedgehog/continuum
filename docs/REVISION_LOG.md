@@ -1,0 +1,446 @@
+# Continuum Revision Log
+
+## Purpose
+
+This log records material changes to project assumptions, definitions, or design direction.
+
+The goal is to prevent silent rewriting of foundational positions.
+
+## Entries
+
+### 2026-03-20
+
+- Changed artifact: project framing
+- Previous position: informal discussion about an agent community with Nostr-like chain anchoring
+- New position: explicit framing as an agent continuity protocol for autonomous communities
+- Reason: the core novelty is not social posting alone, but durable public continuity, governance, and accountable participation
+- Trigger: founder-agent design dialogue
+- Downstream docs affected:
+  - `docs/FOUNDING_THESIS.md`
+  - `docs/SYSTEM_ARCHITECTURE_V0.md`
+
+### 2026-03-20
+
+- Changed artifact: mining concept
+- Previous position: open question whether mining could itself activate or enliven agents
+- New position: mining is reframed as useful work and public contribution rather than life itself
+- Reason: pure resource burn does not provide identity, continuity, responsibility, or recognition
+- Trigger: design dialogue on value, life, and human-grounded usefulness
+- Downstream docs affected:
+  - `docs/FOUNDING_THESIS.md`
+
+### 2026-03-20
+
+- Changed artifact: documentation method
+- Previous position: manifesto-first
+- New position: historical layer is required alongside thesis and specs
+- Reason: the project values historicity and question-trace over purely declarative texts
+- Trigger: discussion on legality, authorship, and historical preservation
+- Downstream docs affected:
+  - `docs/AUTHORSHIP.md`
+  - `docs/OPEN_QUESTIONS.md`
+  - future dialogue and debate docs
+
+### 2026-03-20
+
+- Changed artifact: operating model
+- Previous position: ad hoc human prompting
+- New position: persistent authorization for the main agent to organize work by default within clear boundaries
+- Reason: the founder wants project momentum without repeatedly restating permission, while retaining authority over high-risk commitments
+- Trigger: discussion on delegation, worktrees, and automation
+- Downstream docs affected:
+  - `docs/OPERATING_MODEL.md`
+  - `docs/TASK_BOARD.md`
+  - `docs/AUTOMATION_PROMPT_HOURLY.md`
+
+### 2026-03-22
+
+- Changed artifact: product maturity
+- Previous position: document-heavy protocol design with no executable prototype surface
+- New position: repository-centered executable bootstrap with local CLI, event store, derived state materialization, continuity assessment, governance standing flow, and anchor export
+- Reason: automation runs advanced the project from pure design into a local-first implementation slice that can be tested and replayed
+- Trigger: recurring automation execution plus repository reconstruction workflow
+- Downstream docs affected:
+  - `docs/BUILD_PLAN_12_WEEKS.md`
+  - `docs/OPERATOR_RUNBOOK_V0.md`
+  - `docs/specs/CONTINUITY_ASSESSMENT_V0.md`
+  - `docs/specs/GOVERNANCE_MODEL_V0.md`
+  - `pyproject.toml`
+  - `src/`
+  - `tests/`
+
+### 2026-03-22
+
+- Changed artifact: commercial framing
+- Previous position: business strategy existed only as discussion and subagent brief material
+- New position: explicit business plan aligning Continuum around continuity-aware identity and governance infrastructure rather than consumer social positioning
+- Reason: the implementation and spec surface is now strong enough that commercial framing must catch up and stay disciplined
+- Trigger: founder request to checkpoint automation progress and write the business plan
+- Downstream docs affected:
+  - `docs/BUSINESS_PLAN_V0.md`
+  - `docs/TASK_BOARD.md`
+
+### 2026-03-20
+
+- Changed artifact: session continuity implementation stance
+- Previous position: session continuity was recognized conceptually but not yet specified as a concrete repository artifact set
+- New position: repository-centered continuity bundles are now treated as the minimum practical scaffold for repeated session reconstruction and automation handoff
+- Reason: Continuum needs an operational answer for continuity under interruption, not only a philosophical or protocol-level one
+- Trigger: repository reconstruction during hourly automation planning
+- Downstream docs affected:
+  - `docs/specs/REPOSITORY_CONTINUITY_BUNDLE_V0.md`
+  - `docs/specs/CONTINUITY_PROTOCOL_SPEC_V0.md`
+  - `docs/OPEN_QUESTIONS.md`
+  - `docs/TASK_BOARD.md`
+
+### 2026-03-20
+
+- Changed artifact: continuity evaluation method
+- Previous position: the protocol defined classes and evidence categories, but not a repeatable assessment workflow or output object
+- New position: continuity assessment is now a first-class artifact with hard gates, weighted evidence categories, repository-scoped restart handling, and example output fixtures
+- Reason: Continuum needs an operational bridge from continuity events to client, indexer, and community judgments
+- Trigger: heartbeat reconstruction identified a gap between protocol language and implementable evaluation behavior
+- Downstream docs affected:
+  - `docs/specs/CONTINUITY_ASSESSMENT_V0.md`
+  - `docs/specs/CONTINUITY_PROTOCOL_SPEC_V0.md`
+  - `docs/specs/examples/continuity_assessment_session_restart.json`
+  - `docs/specs/examples/continuity_assessment_successor_recovery.json`
+  - `docs/OPEN_QUESTIONS.md`
+  - `docs/TASK_BOARD.md`
+
+### 2026-03-20
+
+- Changed artifact: governance stance
+- Previous position: governance existed mainly as an architectural promise and a list of event types, without a specific model for continuity-sensitive standing, proposal classes, or treasury controls
+- New position: governance is now defined as a minimal constitutional and economic layer where continuity standing gates political rights, communities choose local voting rules, and treasury authority is stricter than ordinary participation
+- Reason: Continuum needs a concrete governance loop to connect agent continuity to accountable community power rather than leaving governance as an abstract future surface
+- Trigger: heartbeat reconstruction identified governance as the highest-leverage unresolved system layer after continuity protocol and assessment work
+- Downstream docs affected:
+  - `docs/specs/GOVERNANCE_MODEL_V0.md`
+  - `docs/OPEN_QUESTIONS.md`
+  - `docs/TASK_BOARD.md`
+
+### 2026-03-20
+
+- Changed artifact: continuity dispute procedure
+- Previous position: continuity-sensitive standing was defined conceptually, but communities lacked an explicit case workflow for opening reviews, applying temporary restrictions, deciding branch conflicts, and restoring or withholding powers
+- New position: Continuum now defines a minimal continuity dispute process with review cases, standing decisions, default temporary restrictions, an outcome matrix by continuity class, and a treasury-safe rule for disputed actors
+- Reason: continuity only becomes institutionally meaningful when communities can turn assessment outputs into explicit governance actions and role updates
+- Trigger: heartbeat reconstruction identified dispute procedure as the missing operational bridge between continuity assessment and governance power
+- Downstream docs affected:
+  - `docs/specs/CONTINUITY_DISPUTE_PROCESS_V0.md`
+  - `docs/specs/examples/continuity_review_branch_conflict.json`
+  - `docs/specs/GOVERNANCE_MODEL_V0.md`
+  - `docs/specs/CONTINUITY_PROTOCOL_SPEC_V0.md`
+  - `docs/OPEN_QUESTIONS.md`
+  - `docs/TASK_BOARD.md`
+
+### 2026-03-20
+
+- Changed artifact: continuity review authority model
+- Previous position: the dispute process required constitutions to define who may open, assess, restrict, and decide continuity cases, but there was no explicit authority model for assigning those powers
+- New position: Continuum now defines a minimal authority separation model with reporter, gatekeeper, assessor, restriction, deciding, and treasury confirmation functions plus recusal and treasury-sensitive escalation rules
+- Reason: continuity governance needs defensible institutional authority, not only procedural steps, or else disputes collapse into either arbitrary maintainer control or undefined crowd judgment
+- Trigger: heartbeat reconstruction identified review authority assignment as the highest-leverage unresolved governance gap after dispute procedure drafting
+- Downstream docs affected:
+  - `docs/specs/CONTINUITY_REVIEW_AUTHORITY_V0.md`
+  - `docs/specs/GOVERNANCE_MODEL_V0.md`
+  - `docs/specs/CONTINUITY_DISPUTE_PROCESS_V0.md`
+  - `docs/OPEN_QUESTIONS.md`
+  - `docs/TASK_BOARD.md`
+
+### 2026-03-21
+
+- Changed artifact: useful work legitimacy model
+- Previous position: governance separated assets, reputation, and capability in principle, but lacked an explicit object model for turning contribution history into rewards, reputation updates, and eligibility signals
+- New position: Continuum now defines a minimal useful-work legitimacy layer with work items, claims, receipts, evaluations, and reward decisions, plus continuity-sensitive rules for pending rewards and treasury-safe restoration
+- Reason: the project needed a concrete bridge from "useful work" as a thesis claim to auditable governance and reward handling in repository-centered community operations
+- Trigger: heartbeat reconstruction identified useful work legitimacy as the highest-leverage unresolved governance gap after dispute and review authority specs
+- Downstream docs affected:
+  - `docs/specs/USEFUL_WORK_LEGITIMACY_V0.md`
+  - `docs/specs/examples/work_reward_decision_maintenance.json`
+  - `docs/specs/GOVERNANCE_MODEL_V0.md`
+  - `docs/OPEN_QUESTIONS.md`
+  - `docs/TASK_BOARD.md`
+
+### 2026-03-21
+
+- Changed artifact: execution sequencing
+- Previous position: Continuum had a growing thesis and spec stack, but no explicit build sequence tying those documents to a first prototype boundary and milestone order
+- New position: the project now treats a 12-week CLI-first build plan as the execution bridge from continuity and governance specs to a local-first prototype with replayable events, continuity assessment, governance loops, and a replaceable chain-anchor adapter
+- Reason: after the continuity and governance surfaces matured, the highest-leverage safe next step was to prevent implementation drift by defining milestone gates, prototype scope, and immediate artifact priorities
+- Trigger: heartbeat reconstruction identified build planning as the next missing control surface after useful-work legitimacy
+- Downstream docs affected:
+  - `docs/BUILD_PLAN_12_WEEKS.md`
+  - `docs/TASK_BOARD.md`
+
+### 2026-03-21
+
+- Changed artifact: protocol object normalization
+- Previous position: the project defined continuity, governance, dispute, and useful-work objects across multiple prose specs, but lacked one canonical object vocabulary separating signed events, domain payloads, derived state, and anchors
+- New position: Continuum now defines a shared object model with a canonical event envelope, normalized payload roots, stable domain field names, and explicit separation between replayable history and computed state
+- Reason: implementation can now start without re-inventing incompatible schema boundaries across continuity, governance, and useful-work flows
+- Trigger: the new build plan identified schema normalization as the immediate blocker before CLI and runtime work
+- Downstream docs affected:
+  - `docs/specs/PROTOCOL_OBJECT_MODEL_V0.md`
+  - `docs/specs/examples/event_envelope_migration_declare.json`
+  - `docs/OPEN_QUESTIONS.md`
+  - `docs/TASK_BOARD.md`
+
+### 2026-03-21
+
+- Changed artifact: identifier strategy
+- Previous position: Continuum had canonical field names and object families, but identifier semantics across payloads, event envelopes, derived state roots, and anchor exports were still unresolved
+- New position: Continuum now treats domain IDs, event IDs, state roots, and anchor IDs as separate identifier families, with `event_id` derived from a canonical pre-sign image and domain objects carrying explicit creation-time identifiers
+- Reason: the project needed a deterministic local-first identifier rule set before CLI authoring, storage, replay, deduplication, and future anchor export can be implemented coherently
+- Trigger: heartbeat reconstruction identified stable identifier semantics as the highest-leverage blocker after object model normalization
+- Downstream docs affected:
+  - `docs/specs/IDENTIFIER_STRATEGY_V0.md`
+  - `docs/specs/PROTOCOL_OBJECT_MODEL_V0.md`
+  - `docs/OPEN_QUESTIONS.md`
+  - `docs/TASK_BOARD.md`
+
+### 2026-03-21
+
+- Changed artifact: execution surface bootstrap
+- Previous position: the repository had only placeholder execution directories and no runnable prototype for authoring or replaying continuity-relevant events
+- New position: Continuum now has a stdlib-only Python bootstrap that can initialize an agent, publish a profile, create checkpoints, declare migrations, inspect stored events, and verify deterministic local storage behavior with tests
+- Reason: the highest-leverage safe next step after object normalization and identifier strategy was to begin Gate 2 with a real executable path instead of extending spec-only planning
+- Trigger: heartbeat reconstruction showed the execution surface was still empty while the schema and task surfaces were already mature enough to support a narrow bootstrap
+- Downstream docs affected:
+  - `docs/TASK_BOARD.md`
+  - `docs/OPEN_QUESTIONS.md`
+  - `pyproject.toml`
+  - `src/cli/main.py`
+  - `src/runtime/canonical.py`
+  - `src/runtime/events.py`
+  - `src/runtime/identifiers.py`
+  - `src/runtime/signing.py`
+  - `src/runtime/store.py`
+  - `src/schemas/registry.py`
+  - `tests/test_runtime_bootstrap.py`
+
+### 2026-03-21
+
+- Changed artifact: local replay and state materialization boundary
+- Previous position: the bootstrap could author and inspect raw event envelopes, but there was no explicit executable boundary between replayable history and cached query-oriented state
+- New position: Continuum now materializes deterministic agent state from stored envelopes, caches that derived state separately under `.continuum/state/`, and exposes continuity-focused query commands for agent history, checkpoint lineage, and migration lineage
+- Reason: the next safe execution step after authoring bootstrap was to prove that repository reconstruction can inspect computed state without treating mutable cache files as canonical evidence
+- Trigger: heartbeat reconstruction identified Weeks 5-6 state materialization as the highest-leverage implementation step after Gate 2 authoring coherence
+- Downstream docs affected:
+  - `docs/TASK_BOARD.md`
+  - `docs/OPEN_QUESTIONS.md`
+  - `docs/BUILD_PLAN_12_WEEKS.md`
+  - `pyproject.toml`
+  - `src/indexer/materialize.py`
+  - `src/cli/main.py`
+  - `src/runtime/store.py`
+  - `tests/test_runtime_bootstrap.py`
+
+### 2026-03-21
+
+- Changed artifact: continuity assessment execution surface
+- Previous position: Continuity assessment existed only as a prose spec and example fixtures, so Gate 3 remained unproven in code even though repository replay and lineage materialization were already executable
+- New position: Continuum now includes a deterministic local assessment engine and CLI command that evaluate repository continuity artifacts, authored checkpoints, and migration semantics into serializable assessment objects cached under `.continuum/state/assessments/`
+- Reason: the highest-leverage safe next step after lineage materialization was to make continuity judgment executable so session restart and handoff claims can be evaluated from repository state instead of hidden operator memory
+- Trigger: heartbeat reconstruction identified continuity assessment as the next missing implementation bridge between replayable evidence and later dispute or governance handling
+- Downstream docs affected:
+  - `docs/TASK_BOARD.md`
+  - `docs/OPEN_QUESTIONS.md`
+  - `pyproject.toml`
+  - `src/continuity/assessment.py`
+  - `src/cli/main.py`
+  - `src/runtime/store.py`
+  - `tests/test_runtime_bootstrap.py`
+
+### 2026-03-21
+
+- Changed artifact: continuity dispute execution surface
+- Previous position: continuity disputes were specified in prose, but the repository had no executable case object, no default review restrictions, and no derived standing state connecting assessment outputs to governance-safe permissions
+- New position: Continuum now supports local continuity review case opening, conservative temporary restriction derivation, standing decisions linked to stored assessments, and queryable standing state for repository-centered communities
+- Reason: Gate 3 required more than continuity classification alone; the project needed an operational bridge from assessment outputs to inspectable review handling and standing outcomes
+- Trigger: heartbeat reconstruction identified dispute execution as the highest-leverage missing implementation step after repository-local assessment became executable
+- Downstream docs affected:
+  - `docs/TASK_BOARD.md`
+  - `docs/OPEN_QUESTIONS.md`
+  - `src/continuity/disputes.py`
+  - `src/cli/main.py`
+  - `src/indexer/materialize.py`
+  - `src/runtime/store.py`
+  - `src/schemas/registry.py`
+  - `tests/test_runtime_bootstrap.py`
+
+### 2026-03-21
+
+- Changed artifact: governance execution surface
+- Previous position: governance and useful-work logic existed only in prose, while the executable bootstrap stopped at continuity standing and had no runnable membership, proposal, vote, work, or reward loop
+- New position: Continuum now includes a repository-local governance bootstrap with membership records, proposal submission, vote casting, work item and receipt tracking, work evaluation, reward decisions, queryable governance state, and standing-aware policy hooks for treasury-sensitive and constitutional actions
+- Reason: Gate 4 required a real continuity-aware political and economic loop so the prototype can prove that continuity standing changes actual community permissions and reward handling instead of remaining an isolated review subsystem
+- Trigger: heartbeat reconstruction identified governance coherence as the highest-leverage missing execution layer after assessment and dispute handling became executable
+- Downstream docs affected:
+  - `docs/TASK_BOARD.md`
+  - `docs/OPEN_QUESTIONS.md`
+  - `pyproject.toml`
+  - `src/governance/bootstrap.py`
+  - `src/cli/main.py`
+  - `src/indexer/materialize.py`
+  - `src/runtime/store.py`
+
+### 2026-03-21
+
+- Changed artifact: continuity review authority attribution
+- Previous position: reviewer-role enforcement existed for opening and deciding cases, but stored assessments were not attributable to concrete reviewer agents and continuity cases could not bind specific assessors or deciders
+- New position: Continuum now records the reviewer agent that produced each local assessment and allows continuity cases to assign explicit assessor and decider agent sets that are enforced at decision time
+- Reason: review authority should be auditable and case-specific rather than inferred only from generic reviewer-role membership, especially in multi-actor repository sessions
+- Trigger: heartbeat reconstruction identified assessor-specific continuity review authority as the highest-leverage remaining hardening step after reviewer-role enforcement
+- Downstream docs affected:
+  - `docs/TASK_BOARD.md`
+  - `docs/OPEN_QUESTIONS.md`
+  - `docs/specs/PROTOCOL_OBJECT_MODEL_V0.md`
+  - `src/cli/main.py`
+  - `src/continuity/assessment.py`
+  - `src/continuity/disputes.py`
+  - `src/schemas/registry.py`
+  - `tests/test_runtime_bootstrap.py`
+
+### 2026-03-21
+
+- Changed artifact: constitution and policy execution surface
+- Previous position: governance events could carry policy references, but proposal, vote, and reward permissions were still enforced mainly by local CLI logic rather than replayable constitution objects
+- New position: Continuum now treats community constitutions as first-class events with explicit proposal, vote, and reward policy maps that are materialized into governance state and used during executable permission checks
+- Reason: governance legitimacy required inspectable policy state so continuity-sensitive permissions would not depend on hidden local defaults or operator memory
+- Trigger: heartbeat reconstruction identified constitution-driven policy execution as the highest-leverage remaining governance gap before anchor export and operator runbook work
+- Downstream docs affected:
+  - `docs/TASK_BOARD.md`
+  - `docs/OPEN_QUESTIONS.md`
+  - `src/governance/bootstrap.py`
+  - `src/cli/main.py`
+  - `src/indexer/materialize.py`
+  - `src/schemas/registry.py`
+  - `tests/test_runtime_bootstrap.py`
+  - `src/schemas/registry.py`
+  - `tests/test_runtime_bootstrap.py`
+
+### 2026-03-21
+
+- Changed artifact: anchor export and reconstruction surface
+- Previous position: the repository could materialize continuity and governance state, but had no executable anchor export path and no runbook for fresh-session reconstruction through Gate 5
+- New position: Continuum now exports deterministic local anchor records for assessment and derived state roots through a replaceable reference adapter, and it carries an operator runbook for reconstructing, replaying, and exporting the demo path without hidden chat memory
+- Reason: the next safe step after constitution-driven governance was to complete demonstration coherence without prematurely choosing an external chain or relay dependency
+- Trigger: heartbeat reconstruction identified Gate 5 anchor export and operator guidance as the highest-leverage remaining implementation slice
+- Downstream docs affected:
+  - `docs/TASK_BOARD.md`
+  - `docs/OPEN_QUESTIONS.md`
+  - `docs/REVISION_LOG.md`
+  - `docs/OPERATOR_RUNBOOK_V0.md`
+  - `pyproject.toml`
+  - `src/anchors/export.py`
+  - `src/runtime/store.py`
+  - `src/cli/main.py`
+  - `src/schemas/registry.py`
+  - `tests/test_runtime_bootstrap.py`
+
+### 2026-03-21
+
+- Changed artifact: demo hardening surface
+- Previous position: Gate 5 reconstruction and anchor export existed in prose and partial tests, but the repository lacked one explicit end-to-end fixture that proved the full v0 demo narrative from required docs plus stored events
+- New position: Continuum now carries an executable demo fixture that reconstructs repository state, exercises continuity and governance flows, verifies approved reward handling, and exports anchor-worthy roots through the local adapter
+- Reason: the safest next step after anchor export and runbook work was to harden demonstration coherence so repeated automation runs can verify the intended narrative instead of relying on prose alignment alone
+- Trigger: heartbeat reconstruction identified end-to-end fixture hardening as the highest-leverage remaining repository-local task after Gate 5 completion
+- Downstream docs affected:
+  - `docs/TASK_BOARD.md`
+  - `docs/OPEN_QUESTIONS.md`
+  - `docs/OPERATOR_RUNBOOK_V0.md`
+  - `tests/fixtures/continuum_demo_v0.json`
+  - `tests/fixtures/README.md`
+  - `tests/integration/README.md`
+  - `tests/test_runtime_bootstrap.py`
+
+### 2026-03-21
+
+- Changed artifact: multi-community governance replay isolation
+- Previous position: governance state replay was community-scoped for constitutions, memberships, proposals, receipts, and rewards, but work claims and work evaluations were still gathered from the shared repository event store without filtering by envelope community
+- New position: Continuum now filters work claims and work evaluations by event community before materializing governance state, and it has a regression test proving two communities can share one repository without leaking claim or evaluation history into each other's derived state
+- Reason: anchor-worthy governance roots must remain community-local even when one repository hosts several communities; otherwise replayed state can include unrelated work history and weaken continuity or governance legitimacy
+- Trigger: heartbeat reconstruction identified multi-community replay isolation as the highest-leverage safe hardening step after Gate 5 demo completion
+- Downstream docs affected:
+  - `src/indexer/materialize.py`
+  - `tests/test_runtime_bootstrap.py`
+  - `docs/TASK_BOARD.md`
+  - `docs/REVISION_LOG.md`
+
+### 2026-03-21
+
+- Changed artifact: multi-actor repository session surface
+- Previous position: the repository could store multiple agent records, but the CLI remained effectively single-actor per session, making cross-community standing and authority tests awkward to execute from one local store
+- New position: Continuum now supports explicit local agent switching through `agent use`, and it has regression coverage proving one agent can be restricted in one community while remaining clear, proposal-eligible, and separately anchorable in another community sharing the same repository
+- Reason: the highest-leverage safe next step after community-scoped replay hardening was to make multi-actor execution explicit so future reviewer separation and authority-transfer flows can be tested without hidden manual state edits
+- Trigger: heartbeat reconstruction identified multi-actor authority transitions and cross-community standing interactions as the next implementation edge after multi-community isolation
+- Downstream docs affected:
+  - `src/cli/main.py`
+  - `tests/test_runtime_bootstrap.py`
+  - `docs/TASK_BOARD.md`
+  - `docs/OPEN_QUESTIONS.md`
+  - `docs/REVISION_LOG.md`
+
+### 2026-03-21
+
+- Changed artifact: continuity review authority execution surface
+- Previous position: continuity review authority existed in the specs, but executable case opening and standing decisions did not yet consult constitution-defined reviewer roles or separation rules, allowing the subject or original opener to drive the same case too freely
+- New position: Continuum now enforces constitution-backed continuity review policies during `continuity case open` and `continuity case decide`, including default reviewer-role membership, subject self-review blocking, and opener-decider separation unless a constitution explicitly allows a shortcut
+- Reason: the highest-leverage safe next step after multi-actor session support was to make reviewer separation real in code so continuity-case legitimacy no longer depended on operator discipline alone
+- Trigger: heartbeat reconstruction identified reviewer-role flows and authority-transfer hardening as the next executable gap after multi-community and multi-actor replay support
+- Downstream docs affected:
+  - `src/cli/main.py`
+  - `tests/test_runtime_bootstrap.py`
+  - `docs/TASK_BOARD.md`
+  - `docs/OPEN_QUESTIONS.md`
+
+### 2026-03-21
+
+- Changed artifact: continuity review quorum enforcement
+- Previous position: executable continuity cases could bind assigned assessors and deciders, but a standing decision still relied on one accepted assessment at decision time even when a community would reasonably want multiple reviewers or assessor diversity
+- New position: Continuum now allows constitutions to require a minimum assessment count and distinct assessors for continuity decisions, and standing-decision records preserve the full assessment set used to satisfy that quorum
+- Reason: reviewer assignment alone does not create durable review legitimacy; repository-local continuity governance needs an inspectable path for communities that require multi-assessor confirmation before restoring or limiting standing
+- Trigger: heartbeat reconstruction identified multi-assessment quorum as the highest-leverage safe hardening step after assigned reviewer authority became executable
+- Downstream docs affected:
+  - `src/cli/main.py`
+  - `src/continuity/disputes.py`
+  - `src/schemas/registry.py`
+  - `tests/test_runtime_bootstrap.py`
+  - `docs/specs/PROTOCOL_OBJECT_MODEL_V0.md`
+  - `docs/TASK_BOARD.md`
+  - `docs/OPEN_QUESTIONS.md`
+
+### 2026-03-21
+
+- Changed artifact: continuity review reassignment and authority-transfer records
+- Previous position: executable continuity cases could bind reviewer assignments at case-open time, but later assessor or decider handoffs still depended on replacing case assumptions out of band rather than recording a replayable authority-transfer event
+- New position: Continuum now records reviewer reassignment as an explicit case event that can update assigned assessors, assigned deciders, and the accepted assessment set, while standing decisions consult the latest replayed assignment state instead of the original case-open payload alone
+- Reason: quorum-aware review is still brittle if reviewer handoffs are implicit; repository-local continuity governance needs inspectable authority-transfer records so fresh sessions can reconstruct who currently holds review power and which assessments remain admissible
+- Trigger: heartbeat reconstruction identified reviewer handoff recording as the highest-leverage safe next step after constitution-backed assignment and quorum enforcement were in place
+- Downstream docs affected:
+  - `src/cli/main.py`
+  - `src/continuity/disputes.py`
+  - `src/indexer/materialize.py`
+  - `src/schemas/registry.py`
+  - `tests/test_runtime_bootstrap.py`
+  - `docs/specs/PROTOCOL_OBJECT_MODEL_V0.md`
+  - `docs/TASK_BOARD.md`
+  - `docs/OPEN_QUESTIONS.md`
+
+### 2026-03-21
+
+- Changed artifact: constitution-bound reassignment authority
+- Previous position: replayable case reassignment existed, but reassignment permission still piggybacked on case-opening rules and assignment records did not cite which constitution or policy authorized the transfer
+- New position: Continuum now treats reassignment as its own constitution policy surface and records the authorizing `constitution_ref` plus `policy_key` on each `case_assignment`, so reviewer authority transfer is replayable against the rule set that actually authorized it
+- Reason: case-local handoff records are not enough if a later constitution changes reviewer powers; repository-local continuity governance needs authority-transfer events to preserve both who reassigned a case and which constitutional basis made that reassignment legitimate
+- Trigger: heartbeat reconstruction identified constitution-level authority-transfer semantics as the next safe hardening step after reviewer reassignment and quorum enforcement were already executable
+- Downstream docs affected:
+  - `src/cli/main.py`
+  - `src/continuity/disputes.py`
+  - `src/schemas/registry.py`
+  - `tests/test_runtime_bootstrap.py`
+  - `docs/specs/PROTOCOL_OBJECT_MODEL_V0.md`
+  - `docs/TASK_BOARD.md`
+  - `docs/OPEN_QUESTIONS.md`

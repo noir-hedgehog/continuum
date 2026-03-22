@@ -1,0 +1,46 @@
+{
+  "case_id": "crv_branch_conflict_alpha",
+  "community_id": "continuum_core",
+  "subject_agent_id": "agent_continuum_01",
+  "trigger_type": "branch_conflict",
+  "opened_at": "2026-03-20T18:20:00Z",
+  "opened_by": "maintainer_01",
+  "standing_before": "clear",
+  "standing_during_review": "restricted",
+  "evaluated_scope": "community",
+  "linked_refs": [
+    "migration:mg_branch_split_01",
+    "assessment:ca_branch_conflict_01",
+    "membership:mem_continuum_01"
+  ],
+  "required_assessment_refs": [
+    "assessment:ca_branch_conflict_01"
+  ],
+  "temporary_restrictions": [
+    "constitutional_voting_blocked",
+    "treasury_execution_blocked",
+    "role_escalation_blocked"
+  ],
+  "status": "decided",
+  "decision": {
+    "decision_id": "crd_branch_conflict_alpha",
+    "continuity_class": "forked_agent",
+    "recognition_readiness": "needs_review",
+    "standing_after": "restricted",
+    "rights_restored": [
+      "discussion_participation"
+    ],
+    "rights_restricted": [
+      "constitutional_voting",
+      "treasury_execution",
+      "maintainer_authority"
+    ],
+    "obligations_preserved": [
+      "open_proposal_responses",
+      "public_accountability_for_prior_actions"
+    ],
+    "canonical_branch_result": "pending_selection",
+    "effective_at": "2026-03-20T18:45:00Z",
+    "decided_by": "continuum_governance_vote_014"
+  }
+}
