@@ -80,6 +80,85 @@ The goal is to prevent silent rewriting of foundational positions.
   - `docs/BUSINESS_PLAN_V0.md`
   - `docs/TASK_BOARD.md`
 
+### 2026-03-22
+
+- Changed artifact: prototype usability
+- Previous position: the executable bootstrap was primarily legible through tests and internal docs
+- New position: the prototype now has an operator-facing quickstart and a replayable demo script for continuity, governance, useful work, and anchor export
+- Reason: the project needed a direct path from implementation to demonstration, not just passing tests
+- Trigger: decision to move from test coherence toward demo coherence
+- Downstream docs affected:
+  - `docs/QUICKSTART_V0.md`
+  - `docs/OPERATOR_RUNBOOK_V0.md`
+  - `docs/TASK_BOARD.md`
+  - `scripts/demo_v0.sh`
+
+### 2026-03-22
+
+- Changed artifact: demo path correctness
+- Previous position: quickstart and demo script used a human-readable `yes` vote choice that did not match the CLI's canonical vote enum
+- New position: demo materials now use the protocol-valid `for` vote choice
+- Reason: align operator-facing documentation and script behavior with the actual CLI contract
+- Trigger: first end-to-end demo execution attempt
+- Downstream docs affected:
+  - `docs/QUICKSTART_V0.md`
+  - `scripts/demo_v0.sh`
+
+### 2026-03-22
+
+- Changed artifact: work-claim demo correctness
+- Previous position: quickstart and demo script used a shorthand `maintain` claim type that did not match the CLI's canonical work-claim enum
+- New position: demo materials now use the protocol-valid `submit_maintenance` claim type
+- Reason: align operator-facing examples with the executable claim vocabulary
+- Trigger: second end-to-end demo execution attempt
+- Downstream docs affected:
+  - `docs/QUICKSTART_V0.md`
+  - `scripts/demo_v0.sh`
+
+### 2026-03-22
+
+- Changed artifact: work-receipt demo correctness
+- Previous position: quickstart and demo script omitted the canonical `--result-summary` required by the receipt command
+- New position: demo materials now include `--output-ref` and `--result-summary` so receipt creation matches the executable contract
+- Reason: align demo behavior with the work receipt schema and CLI parser
+- Trigger: third end-to-end demo execution attempt
+- Downstream docs affected:
+  - `docs/QUICKSTART_V0.md`
+  - `scripts/demo_v0.sh`
+
+### 2026-03-22
+
+- Changed artifact: work-evaluation demo correctness
+- Previous position: quickstart and demo script used `accept` instead of the CLI's canonical `accepted` evaluation decision
+- New position: demo materials now use the protocol-valid `accepted` evaluation decision
+- Reason: align operator-facing examples with the executable evaluation vocabulary
+- Trigger: fourth end-to-end demo execution attempt
+- Downstream docs affected:
+  - `docs/QUICKSTART_V0.md`
+  - `scripts/demo_v0.sh`
+
+### 2026-03-22
+
+- Changed artifact: reward command demo correctness
+- Previous position: quickstart and demo script treated `reward` as a top-level CLI command
+- New position: demo materials now use the canonical `governance reward decide` command path
+- Reason: align operator-facing instructions with the actual CLI command tree
+- Trigger: fifth end-to-end demo execution attempt
+- Downstream docs affected:
+  - `docs/QUICKSTART_V0.md`
+  - `scripts/demo_v0.sh`
+
+### 2026-03-22
+
+- Changed artifact: reward decision demo arguments
+- Previous position: quickstart and demo script passed an `--evaluation-id` argument that is not part of the current reward decision CLI contract
+- New position: demo materials now match the executable reward command surface by passing only the supported arguments
+- Reason: align the demo with the current bootstrap implementation before expanding the reward API
+- Trigger: sixth end-to-end demo execution attempt
+- Downstream docs affected:
+  - `docs/QUICKSTART_V0.md`
+  - `scripts/demo_v0.sh`
+
 ### 2026-03-20
 
 - Changed artifact: session continuity implementation stance

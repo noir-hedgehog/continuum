@@ -258,6 +258,20 @@ It is intentionally simple in v0. The goal is to keep the current work graph vis
 - Owner: main agent
 - Intent: make continuity review operational by opening inspectable review cases, deriving conservative temporary restrictions, recording standing decisions from assessment outputs, and materializing current standing for repository-local communities
 - Outputs:
+  - continuity case events
+  - standing decision events
+  - repository-local standing state
+
+### T-013 Demo and quickstart coherence
+
+- Status: decided
+- Type: integration
+- Owner: main agent
+- Intent: turn the tested repository-local prototype into a reproducible operator-facing demo path
+- Outputs:
+  - `docs/QUICKSTART_V0.md`
+  - `scripts/demo_v0.sh`
+  - `docs/OPERATOR_RUNBOOK_V0.md`
   - `src/continuity/disputes.py`
   - `src/cli/main.py`
   - `src/indexer/materialize.py`
@@ -466,6 +480,7 @@ Future likely confirmation points:
 - Subagent interruption after product update recognized as a live continuity case rather than mere tooling noise
 - Repo-centered executable prototype bootstrap landed with CLI, indexer, governance, continuity, and anchor export surfaces
 - Business plan v0 added to align product wedge, customer segments, and revenue sequencing with the current protocol direction
+- Quickstart and demo script added so the prototype can be replayed outside the unit test surface
 - Repository continuity bundle v0 drafted to make session-safe reconstruction an explicit project artifact
 - Continuity assessment workflow v0 drafted to make continuity judgments operational instead of purely conceptual
 - Example assessment fixtures added for repository restart and successor recovery cases
