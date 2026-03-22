@@ -116,6 +116,15 @@ These are not placeholders for later polish. They are active design frontiers.
   - `docs/specs/CONSTITUTION_LINEAGE_V0.md`
   - `docs/specs/GOVERNANCE_MODEL_V0.md`
 
+### OQ-022 Which governance actions should require execution receipts in v0 versus later phases?
+
+- Status: open
+- Why it matters: Continuum can now begin recording governance execution, but not every approved action deserves the same receipt burden or replay sensitivity
+- Current working assumption: treasury-sensitive, constitution-changing, and externally meaningful proposal actions should prefer explicit execution receipts first, while low-risk internal actions may remain approval-only until the execution surface is broader
+- Related docs:
+  - `docs/specs/GOVERNANCE_EXECUTION_RECEIPTS_V0.md`
+  - `docs/specs/GOVERNANCE_MODEL_V0.md`
+
 ### OQ-011 What is the minimum continuity bundle for repository-centered agents?
 
 - Status: narrowed

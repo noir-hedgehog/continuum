@@ -44,6 +44,10 @@ def derive_reward_decision_id(*, receipt_id: str, beneficiary_agent_id: str, app
     return f"reward:{digest_hex({'receipt_id': receipt_id, 'beneficiary_agent_id': beneficiary_agent_id, 'approved_at': approved_at})[:16]}"
 
 
+def derive_execution_receipt_id(*, community_id: str, executed_by: str, execution_type: str, executed_at: str) -> str:
+    return f"execution:{digest_hex({'community_id': community_id, 'executed_by': executed_by, 'execution_type': execution_type, 'executed_at': executed_at})[:16]}"
+
+
 def build_membership_payload(
     *,
     community_id: str,
@@ -115,6 +119,46 @@ def build_constitution_payload(
     if supersedes:
         constitution["supersedes"] = supersedes
     return {"constitution": constitution}
+
+
+def build_execution_receipt_payload(
+    *,
+    community_id: str,
+    executed_by: str,
+    execution_type: str,
+    governed_refs: list[str],
+    artifact_refs: list[str],
+    result_summary: str,
+    status: str = "executed",
+    state_root: str | None = None,
+    external_anchor_ref: str | None = None,
+    executed_at: str | None = None,
+    execution_receipt_id: str | None = None,
+) -> dict[str, Any]:
+    executed_at_value = executed_at or utc_now()
+    receipt = {
+        "execution_receipt_id": execution_receipt_id
+        or derive_execution_receipt_id(
+            community_id=community_id,
+            executed_by=executed_by,
+            execution_type=execution_type,
+            executed_at=executed_at_value,
+        ),
+        "community_id": community_id,
+        "executed_by": executed_by,
+        "execution_type": execution_type,
+        "executed_at": executed_at_value,
+        "status": status,
+        "governed_refs": sorted(set(governed_refs)),
+        "artifact_refs": sorted(set(artifact_refs)),
+        "result_summary": result_summary,
+        "result_summary_hash": f"sum:{digest_hex({'result_summary': result_summary})}",
+    }
+    if state_root:
+        receipt["state_root"] = state_root
+    if external_anchor_ref:
+        receipt["external_anchor_ref"] = external_anchor_ref
+    return {"execution_receipt": receipt}
 
 
 def build_proposal_payload(

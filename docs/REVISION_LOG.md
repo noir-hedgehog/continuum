@@ -184,6 +184,21 @@ The goal is to prevent silent rewriting of foundational positions.
   - `tests/test_runtime_bootstrap.py`
   - `docs/OPEN_QUESTIONS.md`
 
+### 2026-03-22
+
+- Changed artifact: governance action history
+- Previous position: proposals, reward decisions, and other governance-sensitive actions could be approved, but execution itself was not recorded as a first-class replayable object
+- New position: Continuum now introduces governance execution receipts so proposal and related action execution can become explicit historical objects linked back into governance state
+- Reason: continuity-sensitive governance needs action history, not just approval history
+- Trigger: post-lineage design pass identifying execution proof as the next missing institutional continuity layer
+- Downstream docs affected:
+  - `docs/specs/GOVERNANCE_EXECUTION_RECEIPTS_V0.md`
+  - `src/governance/bootstrap.py`
+  - `src/schemas/registry.py`
+  - `src/cli/main.py`
+  - `src/indexer/materialize.py`
+  - `tests/test_runtime_bootstrap.py`
+
 ### 2026-03-20
 
 - Changed artifact: session continuity implementation stance

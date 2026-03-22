@@ -2771,6 +2771,84 @@ class CliBootstrapTests(unittest.TestCase):
             finally:
                 os.chdir(cwd)
 
+    def test_governance_execution_receipt_attaches_to_proposal_state(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            cwd = Path.cwd()
+            try:
+                os.chdir(tmp)
+                self.run_cli(
+                    [
+                        "agent",
+                        "init",
+                        "--scope",
+                        "continuum",
+                        "--name",
+                        "main",
+                        "--display-name",
+                        "Continuum Main",
+                    ]
+                )
+                self.run_cli(["governance", "constitution", "set", "--community-id", "community:continuum:lab"])
+                self.run_cli(
+                    [
+                        "governance",
+                        "membership",
+                        "grant",
+                        "--community-id",
+                        "community:continuum:lab",
+                        "--member-agent-id",
+                        "agent:continuum:main",
+                        "--role",
+                        "maintainer",
+                        "--role",
+                        "member",
+                    ]
+                )
+                _, proposal_event = self.run_cli(
+                    [
+                        "governance",
+                        "proposal",
+                        "submit",
+                        "--community-id",
+                        "community:continuum:lab",
+                        "--proposal-type",
+                        "operational",
+                        "--title",
+                        "Execute lab step",
+                        "--summary",
+                        "Create an execution receipt for proposal replay.",
+                    ]
+                )
+                proposal_id = proposal_event["payload"]["proposal"]["proposal_id"]
+                self.run_cli(
+                    [
+                        "governance",
+                        "execute",
+                        "record",
+                        "--community-id",
+                        "community:continuum:lab",
+                        "--execution-type",
+                        "proposal_execution",
+                        "--governed-ref",
+                        proposal_id,
+                        "--output-ref",
+                        "docs/OPERATOR_RUNBOOK_V0.md",
+                        "--result-summary",
+                        "Operational proposal executed in repository-local demo.",
+                    ]
+                )
+                _, governance_state = self.run_cli(
+                    ["query", "governance-state", "--community-id", "community:continuum:lab", "--refresh"]
+                )
+                proposal_state = governance_state["proposals"][0]
+                self.assertEqual(len(proposal_state["execution_receipts"]), 1)
+                self.assertEqual(
+                    proposal_state["execution_receipts"][0]["execution_type"],
+                    "proposal_execution",
+                )
+            finally:
+                os.chdir(cwd)
+
     def test_anchor_export_is_deterministic_for_governance_state(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             cwd = Path.cwd()

@@ -180,6 +180,7 @@ class RepositoryIndexer:
         membership_events = self.store.list_events(kind="membership_record")
         proposal_events = self.store.list_events(kind="proposal_submit")
         vote_events = self.store.list_events(kind="vote_cast")
+        execution_events = self.store.list_events(kind="governance_execute")
         work_item_events = self.store.list_events(kind="work_item_record")
         work_claim_events = self.store.list_events(kind="work_claim_record")
         work_receipt_events = self.store.list_events(kind="work_receipt_record")
@@ -190,6 +191,7 @@ class RepositoryIndexer:
         memberships: list[dict[str, Any]] = []
         proposals: list[dict[str, Any]] = []
         votes: list[dict[str, Any]] = []
+        execution_receipts: list[dict[str, Any]] = []
         work_items: list[dict[str, Any]] = []
         work_claims: list[dict[str, Any]] = []
         work_receipts: list[dict[str, Any]] = []
@@ -223,6 +225,13 @@ class RepositoryIndexer:
                 continue
             vote["event_id"] = event["event_id"]
             votes.append(vote)
+
+        for event in execution_events:
+            receipt = dict(event["payload"]["execution_receipt"])
+            if receipt["community_id"] != community_id:
+                continue
+            receipt["event_id"] = event["event_id"]
+            execution_receipts.append(receipt)
 
         for event in work_item_events:
             work_item = dict(event["payload"]["work_item"])
@@ -263,6 +272,7 @@ class RepositoryIndexer:
         memberships.sort(key=lambda item: (item["joined_at"], item["membership_id"]))
         proposals.sort(key=lambda item: (item["created_at"], item["proposal_id"]))
         votes.sort(key=lambda item: (item["cast_at"], item["vote_id"]))
+        execution_receipts.sort(key=lambda item: (item["executed_at"], item["execution_receipt_id"]))
         work_items.sort(key=lambda item: (item["created_at"], item["work_id"]))
         work_claims.sort(key=lambda item: (item["claimed_at"], item["claim_id"]))
         work_receipts.sort(key=lambda item: (item["completed_at"], item["receipt_id"]))
@@ -287,10 +297,15 @@ class RepositoryIndexer:
         proposals_view = []
         for proposal in proposals:
             proposal_votes = votes_by_proposal.get(proposal["proposal_id"], [])
+            proposal_receipts = [
+                receipt
+                for receipt in execution_receipts
+                if proposal["proposal_id"] in set(receipt.get("governed_refs", []))
+            ]
             tallies = {"for": 0.0, "against": 0.0, "abstain": 0.0, "veto": 0.0}
             for vote in proposal_votes:
                 tallies[vote["choice"]] += float(vote["weight"])
-            proposals_view.append({**proposal, "votes": proposal_votes, "tallies": tallies})
+            proposals_view.append({**proposal, "votes": proposal_votes, "tallies": tallies, "execution_receipts": proposal_receipts})
 
         work_items_view = []
         for work_item in work_items:
@@ -302,6 +317,13 @@ class RepositoryIndexer:
                         **receipt,
                         "evaluation": evaluations_by_receipt.get(receipt["receipt_id"]),
                         "reward_decision": rewards_by_receipt.get(receipt["receipt_id"]),
+                        "execution_receipts": [
+                            execution
+                            for execution in execution_receipts
+                            if rewards_by_receipt.get(receipt["receipt_id"])
+                            and rewards_by_receipt[receipt["receipt_id"]]["reward_decision_id"]
+                            in set(execution.get("governed_refs", []))
+                        ],
                     }
                 )
             work_items_view.append(
@@ -326,6 +348,7 @@ class RepositoryIndexer:
             "memberships": memberships,
             "proposals": proposals_view,
             "votes": votes,
+            "execution_receipts": execution_receipts,
             "work_items": work_items_view,
             "work_claims": work_claims,
             "work_receipts": work_receipts,

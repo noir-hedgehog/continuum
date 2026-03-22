@@ -16,6 +16,7 @@ from src.continuity.disputes import (
 )
 from src.governance.bootstrap import (
     build_constitution_payload,
+    build_execution_receipt_payload,
     build_membership_payload,
     build_proposal_payload,
     build_reward_decision_payload,
@@ -893,6 +894,37 @@ def cmd_governance_membership_grant(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_governance_execute_record(args: argparse.Namespace) -> int:
+    store = _store()
+    operator = _load_current_agent(store)
+    _require_active_membership(store, args.community_id, operator["agent_id"])
+    payload = build_execution_receipt_payload(
+        community_id=args.community_id,
+        executed_by=operator["agent_id"],
+        execution_type=args.execution_type,
+        governed_refs=args.governed_ref,
+        artifact_refs=args.output_ref,
+        result_summary=args.result_summary,
+        status=args.status,
+        state_root=args.state_root,
+        external_anchor_ref=args.external_anchor_ref,
+        executed_at=args.executed_at,
+    )
+    envelope = build_event(
+        kind="governance_execute",
+        actor_id=operator["agent_id"],
+        signing_key=operator["signing_key"],
+        secret_hex=operator["secret_hex"],
+        community_id=args.community_id,
+        payload=payload,
+        refs=artifact_refs(args.artifact_ref),
+        created_at=args.executed_at,
+    )
+    store.save_event(envelope)
+    print(json.dumps(envelope, indent=2, sort_keys=True))
+    return 0
+
+
 def cmd_governance_proposal_submit(args: argparse.Namespace) -> int:
     store = _store()
     proposer = _load_current_agent(store)
@@ -1528,6 +1560,31 @@ def build_parser() -> argparse.ArgumentParser:
     reward_decide.add_argument("--approved-at")
     reward_decide.add_argument("--artifact-ref", action="append", default=[])
     reward_decide.set_defaults(func=cmd_reward_decide)
+
+    execute = governance_sub.add_parser("execute")
+    execute_sub = execute.add_subparsers(dest="execute_command", required=True)
+    execute_record = execute_sub.add_parser("record")
+    execute_record.add_argument("--community-id", required=True)
+    execute_record.add_argument(
+        "--execution-type",
+        required=True,
+        choices=[
+            "proposal_execution",
+            "standing_execution",
+            "reward_execution",
+            "treasury_execution",
+            "constitution_execution",
+        ],
+    )
+    execute_record.add_argument("--governed-ref", action="append", default=[], required=True)
+    execute_record.add_argument("--output-ref", action="append", default=[])
+    execute_record.add_argument("--result-summary", required=True)
+    execute_record.add_argument("--status", default="executed")
+    execute_record.add_argument("--state-root")
+    execute_record.add_argument("--external-anchor-ref")
+    execute_record.add_argument("--executed-at")
+    execute_record.add_argument("--artifact-ref", action="append", default=[])
+    execute_record.set_defaults(func=cmd_governance_execute_record)
 
     query_cases = query_sub.add_parser("continuity-cases")
     query_cases.add_argument("--subject-agent-id")

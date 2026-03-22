@@ -191,6 +191,20 @@ It is intentionally simple in v0. The goal is to keep the current work graph vis
   - `tests/test_runtime_bootstrap.py`
   - `docs/OPEN_QUESTIONS.md`
 
+### T-016 Governance execution receipts v0
+
+- Status: active
+- Type: implementation
+- Owner: main agent
+- Intent: make governance execution replayable by recording explicit execution receipts for proposal-, reward-, treasury-, standing-, and constitution-sensitive actions
+- Outputs:
+  - `docs/specs/GOVERNANCE_EXECUTION_RECEIPTS_V0.md`
+  - `src/governance/bootstrap.py`
+  - `src/schemas/registry.py`
+  - `src/cli/main.py`
+  - `src/indexer/materialize.py`
+  - `tests/test_runtime_bootstrap.py`
+
 ### T-010 CLI/runtime prototype bootstrap
 
 - Status: active
@@ -505,6 +519,7 @@ Future likely confirmation points:
 - Quickstart and demo script added so the prototype can be replayed outside the unit test surface
 - External anchor adapter v0 defined to separate root computation from future public durability targets while preserving the local witness path
 - Constitution lineage and supersession replay added so governance policy history can evolve explicitly instead of depending on whichever constitution object happened to be latest in storage
+- Governance execution receipts started so approved actions can become explicit replayable outcomes rather than silent post-vote assumptions
 - Repository continuity bundle v0 drafted to make session-safe reconstruction an explicit project artifact
 - Continuity assessment workflow v0 drafted to make continuity judgments operational instead of purely conceptual
 - Example assessment fixtures added for repository restart and successor recovery cases
