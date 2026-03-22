@@ -98,6 +98,15 @@ These are not placeholders for later polish. They are active design frontiers.
   - `docs/AUTHORSHIP.md`
   - `docs/FOUNDING_THESIS.md`
 
+### OQ-020 Which external durability target should the first real anchor adapter use?
+
+- Status: open
+- Why it matters: the repository now has a working local witness adapter and real anchor exports, but the first external target will shape trust assumptions, implementation cost, and interoperability claims
+- Current working assumption: the first external adapter should favor low lock-in and legible verification, likely through either a minimal settlement contract or a public witness log before more complex multi-target strategies
+- Related docs:
+  - `docs/specs/EXTERNAL_ANCHOR_ADAPTER_V0.md`
+  - `docs/OPERATOR_RUNBOOK_V0.md`
+
 ### OQ-011 What is the minimum continuity bundle for repository-centered agents?
 
 - Status: narrowed

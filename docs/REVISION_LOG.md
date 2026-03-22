@@ -159,6 +159,18 @@ The goal is to prevent silent rewriting of foundational positions.
   - `docs/QUICKSTART_V0.md`
   - `scripts/demo_v0.sh`
 
+### 2026-03-22
+
+- Changed artifact: anchor strategy
+- Previous position: Continuum had a working local witness adapter, but the external anchoring boundary was still implicit and mixed together with implementation detail
+- New position: Continuum now has an explicit external anchor adapter spec that separates governed root computation from external durability targets and keeps chain choice outside the protocol core
+- Reason: the repository-local continuity path is now strong enough that the next architectural need is a clean public anchoring boundary rather than immediate chain lock-in
+- Trigger: post-demo design pass on how repo-centered continuity should extend into public continuity
+- Downstream docs affected:
+  - `docs/specs/EXTERNAL_ANCHOR_ADAPTER_V0.md`
+  - `docs/OPEN_QUESTIONS.md`
+  - `docs/TASK_BOARD.md`
+
 ### 2026-03-20
 
 - Changed artifact: session continuity implementation stance

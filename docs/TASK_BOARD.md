@@ -169,6 +169,16 @@ It is intentionally simple in v0. The goal is to keep the current work graph vis
   - `docs/specs/examples/` identifier-aware envelope fixtures
   - `docs/OPEN_QUESTIONS.md`
 
+### T-014 External anchor adapter v0
+
+- Status: decided
+- Type: spec
+- Owner: main agent
+- Intent: define the replaceable boundary between local anchor export and future public durability targets without locking the protocol to one chain or witness vendor
+- Outputs:
+  - `docs/specs/EXTERNAL_ANCHOR_ADAPTER_V0.md`
+  - `docs/OPEN_QUESTIONS.md`
+
 ### T-010 CLI/runtime prototype bootstrap
 
 - Status: active
@@ -481,6 +491,7 @@ Future likely confirmation points:
 - Repo-centered executable prototype bootstrap landed with CLI, indexer, governance, continuity, and anchor export surfaces
 - Business plan v0 added to align product wedge, customer segments, and revenue sequencing with the current protocol direction
 - Quickstart and demo script added so the prototype can be replayed outside the unit test surface
+- External anchor adapter v0 defined to separate root computation from future public durability targets while preserving the local witness path
 - Repository continuity bundle v0 drafted to make session-safe reconstruction an explicit project artifact
 - Continuity assessment workflow v0 drafted to make continuity judgments operational instead of purely conceptual
 - Example assessment fixtures added for repository restart and successor recovery cases

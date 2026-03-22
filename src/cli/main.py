@@ -7,7 +7,7 @@ import json
 import sys
 from pathlib import Path
 
-from src.anchors.export import LocalAnchorAdapter
+from src.anchors.export import AnchorExportRequest, DryRunExternalAnchorAdapter, LocalAnchorAdapter
 from src.continuity.assessment import ContinuityAssessmentEngine
 from src.continuity.disputes import (
     build_case_assignment_payload,
@@ -1185,12 +1185,17 @@ def _digest_assessment(assessment: dict) -> str:
 def cmd_anchor_export(args: argparse.Namespace) -> int:
     store = _store()
     subject_ref, root_hash = _anchor_subject_and_root(store, args)
-    adapter = LocalAnchorAdapter(target_name=args.adapter)
+    if args.adapter_mode == "dry_run_external":
+        adapter = DryRunExternalAnchorAdapter(target_name=args.adapter)
+    else:
+        adapter = LocalAnchorAdapter(target_name=args.adapter)
     anchor_record = adapter.export(
-        anchor_type=args.anchor_type,
-        subject_ref=subject_ref,
-        root_hash=root_hash,
-        anchored_at=args.anchored_at,
+        AnchorExportRequest(
+            anchor_type=args.anchor_type,
+            subject_ref=subject_ref,
+            root_hash=root_hash,
+            anchored_at=args.anchored_at,
+        )
     )
     store.save_anchor(anchor_record)
     print(json.dumps(anchor_record, indent=2, sort_keys=True))
@@ -1546,6 +1551,11 @@ def build_parser() -> argparse.ArgumentParser:
 
     anchor_export = anchor_sub.add_parser("export")
     anchor_export.add_argument("--anchor-type", required=True, choices=sorted(ANCHOR_TYPES))
+    anchor_export.add_argument(
+        "--adapter-mode",
+        choices=["local", "dry_run_external"],
+        default="local",
+    )
     anchor_export.add_argument("--assessment-id")
     anchor_export.add_argument("--actor-id")
     anchor_export.add_argument("--subject-agent-id")

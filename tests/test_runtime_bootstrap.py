@@ -8,6 +8,7 @@ from contextlib import redirect_stdout
 from io import StringIO
 from pathlib import Path
 
+from src.anchors.export import AnchorExportRequest, DryRunExternalAnchorAdapter, LocalAnchorAdapter
 from src.cli.main import main
 from src.runtime.canonical import canonical_json
 from src.runtime.events import build_checkpoint_payload, build_event, build_migration_payload
@@ -77,6 +78,35 @@ class CanonicalRuntimeTests(unittest.TestCase):
             second_path = store.save_event(event)
             self.assertEqual(first_path, second_path)
             self.assertEqual(store.load_event(event["event_id"])["event_id"], event["event_id"])
+
+    def test_local_anchor_adapter_records_confirmed_local_witness(self) -> None:
+        adapter = LocalAnchorAdapter()
+        record = adapter.export(
+            AnchorExportRequest(
+                anchor_type="governance_state_root",
+                subject_ref="community:continuum:lab",
+                root_hash="state:test",
+                anchored_at="2026-03-22T00:00:00Z",
+            )
+        )
+        self.assertEqual(record["anchor_target"], "adapter:local_witness_v0")
+        self.assertEqual(record["anchor_status"], "confirmed_external")
+        self.assertNotIn("external_reference", record)
+
+    def test_dry_run_external_adapter_exposes_external_shape(self) -> None:
+        adapter = DryRunExternalAnchorAdapter()
+        record = adapter.export(
+            AnchorExportRequest(
+                anchor_type="continuity_assessment_root",
+                subject_ref="assessment:test",
+                root_hash="state:test",
+                anchored_at="2026-03-22T00:00:00Z",
+            )
+        )
+        self.assertEqual(record["anchor_target"], "adapter:dry_run_external_v0")
+        self.assertEqual(record["anchor_status"], "submitted_external")
+        self.assertIn("external_reference", record)
+        self.assertEqual(record["target_metadata"]["submission_mode"], "dry_run")
 
 
 class CliBootstrapTests(unittest.TestCase):
