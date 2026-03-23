@@ -122,7 +122,7 @@ Communities may also declare a constitution policy for branch resolution.
 In v0, the practical split is:
 
 - `proposal_ref` may become a constitution-enforced requirement at resolution creation time
-- execution proof may remain a replay-visible legitimacy warning, or be elevated by constitution policy into a stronger replay warning such as `constitution_resolution_execution_required:*`
+- execution proof may remain a replay-visible legitimacy warning, or be elevated by constitution policy into a stronger replay gate such as `constitution_resolution_execution_required:*`, where the resolution stays recorded but does not become replay-effective until a matching execution receipt exists
 
 This lets communities tighten constitutional process without creating a deadlock where a resolution cannot exist until its own execution already exists.
 

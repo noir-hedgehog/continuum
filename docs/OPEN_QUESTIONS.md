@@ -111,7 +111,7 @@ These are not placeholders for later polish. They are active design frontiers.
 
 - Status: narrowed
 - Why it matters: Continuum can now represent constitutional supersession, replay warnings, and explicit branch-selection resolutions, but it still needs a stronger answer for when those resolutions are legitimate and how much process they require
-- Current working assumption: v0 may use a first-class constitution resolution object to select a canonical branch or root without rewriting publication history; constitution policy may already require `proposal_ref` as a hard precondition for resolution creation, while execution proof remains replay-visible legitimacy evidence that communities can tighten later without creating an execution-order deadlock
+- Current working assumption: v0 may use a first-class constitution resolution object to select a canonical branch or root without rewriting publication history; constitution policy may already require `proposal_ref` as a hard precondition for resolution creation, while execution proof may stay warning-level or be elevated into a replay gate where the resolution remains recorded but is not yet effective for canonical branch selection
 - Related docs:
   - `docs/specs/CONSTITUTION_LINEAGE_V0.md`
   - `docs/specs/CONSTITUTION_CONFLICT_RESOLUTION_V0.md`

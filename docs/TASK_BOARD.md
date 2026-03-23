@@ -524,6 +524,7 @@ Future likely confirmation points:
 - Constitution resolutions can now cite constitutional proposals and materialize linked execution receipts so canonical branch selection begins to carry a visible legitimacy surface in governance replay
 - Constitution resolution replay now emits explicit warnings when proposal linkage or execution proof is missing, so weak institutional grounding becomes visible before it becomes a hard policy gate
 - Constitution policy can now force `proposal_ref` for branch-resolution creation, establishing the first community-configurable hard legitimacy requirement without blocking later execution-proof recording
+- Constitution policy can now also elevate missing execution proof into a replay gate, so a branch-resolution record may exist historically without yet taking canonical effect
 - Repository continuity bundle v0 drafted to make session-safe reconstruction an explicit project artifact
 - Continuity assessment workflow v0 drafted to make continuity judgments operational instead of purely conceptual
 - Example assessment fixtures added for repository restart and successor recovery cases

@@ -332,14 +332,21 @@ class RepositoryIndexer:
             proposals_view.append(enriched_proposal)
             proposals_by_id[proposal["proposal_id"]] = enriched_proposal
 
+        constitutions_by_id = {constitution["constitution_id"]: constitution for constitution in constitutions}
         resolution_warnings: list[str] = []
         constitution_resolutions_view = []
+        effective_constitution_resolutions = []
         for resolution in constitution_resolutions:
             resolution_receipts = [
                 receipt
                 for receipt in execution_receipts
                 if resolution["resolution_id"] in set(receipt.get("governed_refs", []))
             ]
+            recognized_constitution = constitutions_by_id.get(resolution["recognized_constitution_id"])
+            resolution_policy = _policy_for(
+                (recognized_constitution or {}).get("continuity_policies"),
+                "constitution_resolution",
+            )
             if not resolution.get("proposal_ref"):
                 resolution_warnings.append(
                     f"constitution_resolution_missing_proposal:{resolution['resolution_id']}"
@@ -352,13 +359,29 @@ class RepositoryIndexer:
                 resolution_warnings.append(
                     f"constitution_resolution_missing_execution:{resolution['resolution_id']}"
                 )
+            replay_effective = True
+            legitimacy_status = "sufficient"
+            if resolution_policy.get("require_execution_receipt", False) and not resolution_receipts:
+                resolution_warnings.append(
+                    f"constitution_resolution_execution_required:{resolution['resolution_id']}"
+                )
+                replay_effective = False
+                legitimacy_status = "execution_required"
+            elif not resolution.get("proposal_ref") or resolution.get("proposal_ref") not in proposals_by_id:
+                legitimacy_status = "proposal_incomplete"
+            elif not resolution_receipts:
+                legitimacy_status = "execution_incomplete"
             constitution_resolutions_view.append(
                 {
                     **resolution,
                     "proposal": proposals_by_id.get(resolution.get("proposal_ref")),
                     "execution_receipts": resolution_receipts,
+                    "legitimacy_status": legitimacy_status,
+                    "replay_effective": replay_effective,
                 }
             )
+            if replay_effective:
+                effective_constitution_resolutions.append(resolution)
 
         work_items_view = []
         for work_item in work_items:
@@ -389,20 +412,10 @@ class RepositoryIndexer:
 
         constitution_lineage, constitution_replay_warnings = self._materialize_constitution_lineage(
             constitutions,
-            constitution_resolutions,
+            effective_constitution_resolutions,
         )
         constitution_replay_warnings.extend(resolution_warnings)
         latest_constitution = self._latest_constitution_from_lineage(constitutions, constitution_lineage)
-        resolution_policy = _policy_for(
-            (latest_constitution or {}).get("continuity_policies"),
-            "constitution_resolution",
-        )
-        if resolution_policy.get("require_execution_receipt", False):
-            for resolution in constitution_resolutions_view:
-                if not resolution["execution_receipts"]:
-                    constitution_replay_warnings.append(
-                        f"constitution_resolution_execution_required:{resolution['resolution_id']}"
-                    )
 
         state = {
             "state_type": "governance_state",

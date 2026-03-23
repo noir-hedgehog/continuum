@@ -23,6 +23,19 @@ The goal is to prevent silent rewriting of foundational positions.
 
 ### 2026-03-23
 
+- Changed artifact: execution-proof replay gate for constitution resolution
+- Previous position: a constitution could require execution proof for branch resolution only as a stronger replay warning, but the resolution still counted as replay-effective once recorded
+- New position: when the recognized branch's constitution policy requires execution proof, the resolution now remains recorded but is not replay-effective until a matching constitution execution receipt exists
+- Reason: this preserves institutional history while letting communities refuse to treat an unexecuted constitutional branch selection as canonically settled
+- Trigger: follow-on mainline pass on how `require_execution_receipt` should become stronger than a warning without causing creation-time deadlock
+- Downstream docs affected:
+  - `docs/specs/CONSTITUTION_CONFLICT_RESOLUTION_V0.md`
+  - `docs/OPEN_QUESTIONS.md`
+  - `src/indexer/materialize.py`
+  - `tests/test_runtime_bootstrap.py`
+
+### 2026-03-23
+
 - Changed artifact: constitutional conflict handling
 - Previous position: constitution lineage replay could detect branch conflicts and surface warnings, but it could not yet record a community decision that selected a canonical branch for future replay
 - New position: Continuum now has a first-class constitution resolution object so conflicted sibling branches can be explicitly recognized or rejected without rewriting prior constitution publication events
