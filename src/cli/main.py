@@ -149,6 +149,12 @@ def _default_constitution(community_id: str) -> dict:
                 "min_assessment_count": 1,
                 "require_distinct_assessors": False,
             },
+            "constitution_resolution": {
+                "allowed_standings": ["clear"],
+                "required_roles": ["maintainer"],
+                "require_proposal_ref": False,
+                "require_execution_receipt": False,
+            },
         },
         "role_definitions": {
             "maintainer": {
@@ -746,6 +752,32 @@ def _ensure_proposal_permission(store: RepositoryStore, agent_id: str, community
         )
 
 
+def _ensure_constitution_resolution_permission(
+    store: RepositoryStore,
+    agent_id: str,
+    community_id: str,
+    proposal_ref: str | None,
+) -> None:
+    membership = _require_active_membership(store, community_id, agent_id)
+    standing = _standing_level(store, agent_id, community_id)
+    constitution = _constitution(store, community_id)
+    policy = _policy_for(constitution.get("continuity_policies"), "constitution_resolution")
+    allowed_standings = policy.get("allowed_standings")
+    required_roles = policy.get("required_roles", [])
+    if standing in {"suspended", "revoked"}:
+        raise ValueError(f"Standing {standing} blocks constitution resolution for {agent_id}.")
+    if allowed_standings and standing not in set(allowed_standings):
+        raise ValueError(
+            f"Standing {standing} blocks constitution resolution for {agent_id} in {community_id}."
+        )
+    if not _membership_has_required_role(membership, required_roles):
+        raise ValueError(
+            f"Roles {membership.get('role_set', [])} do not satisfy constitution resolution policy in {community_id}."
+        )
+    if policy.get("require_proposal_ref", False) and not proposal_ref:
+        raise ValueError(f"Constitution resolution policy in {community_id} requires --proposal-ref.")
+
+
 def _ensure_vote_permission(
     store: RepositoryStore,
     agent_id: str,
@@ -871,6 +903,12 @@ def cmd_governance_constitution_resolve(args: argparse.Namespace) -> int:
     store = _store()
     operator = _load_current_agent(store)
     _ensure_proposal_permission(store, operator["agent_id"], args.community_id, "constitutional")
+    _ensure_constitution_resolution_permission(
+        store,
+        operator["agent_id"],
+        args.community_id,
+        args.proposal_ref,
+    )
     payload = build_constitution_resolution_payload(
         community_id=args.community_id,
         resolved_by=operator["agent_id"],

@@ -10,6 +10,19 @@ The goal is to prevent silent rewriting of foundational positions.
 
 ### 2026-03-23
 
+- Changed artifact: constitution-resolution policy boundary
+- Previous position: legitimacy around constitution resolutions existed only as optional proposal linkage, execution linkage, and replay warnings
+- New position: communities may now use constitution policy to require `proposal_ref` as a hard precondition for branch-resolution creation, while execution proof remains a replay-visible legitimacy layer that can be tightened without creating a creation-time deadlock
+- Reason: Continuum needs a practical split between what can be enforced before a resolution exists and what only becomes meaningful after it has been carried out
+- Trigger: mainline pass on moving part of constitutional legitimacy from soft replay warnings into community-configurable hard requirements
+- Downstream docs affected:
+  - `docs/specs/CONSTITUTION_CONFLICT_RESOLUTION_V0.md`
+  - `docs/OPEN_QUESTIONS.md`
+  - `src/cli/main.py`
+  - `src/indexer/materialize.py`
+
+### 2026-03-23
+
 - Changed artifact: constitutional conflict handling
 - Previous position: constitution lineage replay could detect branch conflicts and surface warnings, but it could not yet record a community decision that selected a canonical branch for future replay
 - New position: Continuum now has a first-class constitution resolution object so conflicted sibling branches can be explicitly recognized or rejected without rewriting prior constitution publication events

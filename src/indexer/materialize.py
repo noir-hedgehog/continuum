@@ -19,6 +19,12 @@ def _constitution_sort_key(constitution: dict[str, Any]) -> tuple[str, str]:
     return (constitution.get("amended_at", ""), constitution["constitution_id"])
 
 
+def _policy_for(mapping: dict | None, key: str) -> dict:
+    if not mapping:
+        return {}
+    return mapping.get(key, {})
+
+
 class RepositoryIndexer:
     """Materialize query-oriented state from stored event envelopes."""
 
@@ -387,6 +393,16 @@ class RepositoryIndexer:
         )
         constitution_replay_warnings.extend(resolution_warnings)
         latest_constitution = self._latest_constitution_from_lineage(constitutions, constitution_lineage)
+        resolution_policy = _policy_for(
+            (latest_constitution or {}).get("continuity_policies"),
+            "constitution_resolution",
+        )
+        if resolution_policy.get("require_execution_receipt", False):
+            for resolution in constitution_resolutions_view:
+                if not resolution["execution_receipts"]:
+                    constitution_replay_warnings.append(
+                        f"constitution_resolution_execution_required:{resolution['resolution_id']}"
+                    )
 
         state = {
             "state_type": "governance_state",

@@ -117,6 +117,15 @@ This gives v0 a narrow legitimacy surface without requiring a full constitutiona
 
 Where those legitimacy links are absent, replay may emit warnings rather than silently treating the resolution as equally well-grounded.
 
+Communities may also declare a constitution policy for branch resolution.
+
+In v0, the practical split is:
+
+- `proposal_ref` may become a constitution-enforced requirement at resolution creation time
+- execution proof may remain a replay-visible legitimacy warning, or be elevated by constitution policy into a stronger replay warning such as `constitution_resolution_execution_required:*`
+
+This lets communities tighten constitutional process without creating a deadlock where a resolution cannot exist until its own execution already exists.
+
 ## 8. v0 Boundary
 
 This spec does not yet require:
