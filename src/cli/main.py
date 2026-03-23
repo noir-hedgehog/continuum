@@ -878,6 +878,7 @@ def cmd_governance_constitution_resolve(args: argparse.Namespace) -> int:
         rejected_constitution_ids=args.rejected_constitution_id,
         reason=args.reason,
         basis_refs=args.basis_ref,
+        proposal_ref=args.proposal_ref,
         parent_constitution_id=args.parent_constitution_id,
         resolved_at=args.resolved_at,
     )
@@ -1463,6 +1464,7 @@ def build_parser() -> argparse.ArgumentParser:
     constitution_resolve.add_argument("--recognized-constitution-id", required=True)
     constitution_resolve.add_argument("--rejected-constitution-id", action="append", default=[])
     constitution_resolve.add_argument("--parent-constitution-id")
+    constitution_resolve.add_argument("--proposal-ref")
     constitution_resolve.add_argument("--reason", required=True)
     constitution_resolve.add_argument("--basis-ref", action="append", default=[])
     constitution_resolve.add_argument("--resolved-at")

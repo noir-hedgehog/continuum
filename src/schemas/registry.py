@@ -120,6 +120,7 @@ PAYLOAD_REQUIRED_FIELDS = {
         "rejected_constitution_ids",
         "reason",
         "basis_refs",
+        "proposal_ref",
     ],
     "execution_receipt": [
         "execution_receipt_id",

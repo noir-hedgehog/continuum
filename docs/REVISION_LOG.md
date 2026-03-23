@@ -25,6 +25,22 @@ The goal is to prevent silent rewriting of foundational positions.
   - `src/schemas/registry.py`
   - `tests/test_runtime_bootstrap.py`
 
+### 2026-03-23
+
+- Changed artifact: constitution-resolution legitimacy surface
+- Previous position: constitution resolutions could select a canonical branch, but their legitimacy basis remained mostly implicit outside free-form reason text and external document references
+- New position: constitution resolutions may now cite a constitutional proposal directly and materialize linked execution receipts so governance replay can show not just which branch was chosen, but what proposal and execution history supported that choice
+- Reason: the next continuity gap after canonical branch resolution is making the basis for that resolution more legible without prematurely hard-coding a full constitutional court or mandatory ratification flow
+- Trigger: post-resolution mainline pass on how institutional legitimacy should start appearing in replayed governance state
+- Downstream docs affected:
+  - `docs/specs/CONSTITUTION_CONFLICT_RESOLUTION_V0.md`
+  - `docs/OPEN_QUESTIONS.md`
+  - `src/governance/bootstrap.py`
+  - `src/cli/main.py`
+  - `src/indexer/materialize.py`
+  - `src/schemas/registry.py`
+  - `tests/test_runtime_bootstrap.py`
+
 ### 2026-03-20
 
 - Changed artifact: project framing

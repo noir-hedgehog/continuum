@@ -58,6 +58,7 @@ Suggested fields:
 - `parent_constitution_id` optional
 - `recognized_constitution_id`
 - `rejected_constitution_ids`
+- `proposal_ref` optional
 - `reason`
 - `basis_refs`
 
@@ -106,6 +107,13 @@ Governance state should expose:
 Affected lineage entries should include:
 
 - `resolution_ref` optional
+
+Constitution resolutions may also expose:
+
+- the linked constitutional proposal when one was cited
+- linked execution receipts when the resolution itself was later carried out as a governance-sensitive action
+
+This gives v0 a narrow legitimacy surface without requiring a full constitutional court.
 
 ## 8. v0 Boundary
 

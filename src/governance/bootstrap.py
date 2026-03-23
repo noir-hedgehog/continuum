@@ -142,6 +142,7 @@ def build_constitution_resolution_payload(
     rejected_constitution_ids: list[str] | None = None,
     reason: str,
     basis_refs: list[str] | None = None,
+    proposal_ref: str | None = None,
     parent_constitution_id: str | None = None,
     resolution_type: str = "select_canonical_branch",
     resolved_at: str | None = None,
@@ -164,6 +165,7 @@ def build_constitution_resolution_payload(
         "rejected_constitution_ids": sorted(set(rejected_constitution_ids or [])),
         "reason": reason,
         "basis_refs": sorted(set(basis_refs or [])),
+        "proposal_ref": proposal_ref,
     }
     if parent_constitution_id:
         resolution["parent_constitution_id"] = parent_constitution_id

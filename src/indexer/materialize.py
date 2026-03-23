@@ -297,6 +297,8 @@ class RepositoryIndexer:
         for vote in votes:
             votes_by_proposal.setdefault(vote["proposal_id"], []).append(vote)
 
+        proposals_by_id: dict[str, dict[str, Any]] = {}
+
         work_claims_by_work: dict[str, list[dict[str, Any]]] = {}
         for claim in work_claims:
             work_claims_by_work.setdefault(claim["work_id"], []).append(claim)
@@ -315,7 +317,29 @@ class RepositoryIndexer:
             tallies = {"for": 0.0, "against": 0.0, "abstain": 0.0, "veto": 0.0}
             for vote in proposal_votes:
                 tallies[vote["choice"]] += float(vote["weight"])
-            proposals_view.append({**proposal, "votes": proposal_votes, "tallies": tallies, "execution_receipts": proposal_receipts})
+            enriched_proposal = {
+                **proposal,
+                "votes": proposal_votes,
+                "tallies": tallies,
+                "execution_receipts": proposal_receipts,
+            }
+            proposals_view.append(enriched_proposal)
+            proposals_by_id[proposal["proposal_id"]] = enriched_proposal
+
+        constitution_resolutions_view = []
+        for resolution in constitution_resolutions:
+            resolution_receipts = [
+                receipt
+                for receipt in execution_receipts
+                if resolution["resolution_id"] in set(receipt.get("governed_refs", []))
+            ]
+            constitution_resolutions_view.append(
+                {
+                    **resolution,
+                    "proposal": proposals_by_id.get(resolution.get("proposal_ref")),
+                    "execution_receipts": resolution_receipts,
+                }
+            )
 
         work_items_view = []
         for work_item in work_items:
@@ -354,7 +378,7 @@ class RepositoryIndexer:
             "state_type": "governance_state",
             "community_id": community_id,
             "constitutions": constitutions,
-            "constitution_resolutions": constitution_resolutions,
+            "constitution_resolutions": constitution_resolutions_view,
             "constitution_lineage": constitution_lineage,
             "constitution_replay_warnings": constitution_replay_warnings,
             "latest_constitution": latest_constitution,

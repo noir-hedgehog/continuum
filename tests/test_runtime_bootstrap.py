@@ -2908,6 +2908,163 @@ class CliBootstrapTests(unittest.TestCase):
             finally:
                 os.chdir(cwd)
 
+    def test_constitution_resolution_can_reference_proposal_and_execution_receipt(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            cwd = Path.cwd()
+            try:
+                os.chdir(tmp)
+                self.run_cli(
+                    [
+                        "agent",
+                        "init",
+                        "--scope",
+                        "continuum",
+                        "--name",
+                        "main",
+                        "--display-name",
+                        "Continuum Main",
+                    ]
+                )
+                self.run_cli(
+                    [
+                        "governance",
+                        "membership",
+                        "grant",
+                        "--community-id",
+                        "community:continuum:lab",
+                        "--member-agent-id",
+                        "agent:continuum:main",
+                        "--role",
+                        "maintainer",
+                        "--role",
+                        "member",
+                    ]
+                )
+                _, root_constitution = self.run_cli(
+                    [
+                        "governance",
+                        "constitution",
+                        "set",
+                        "--community-id",
+                        "community:continuum:lab",
+                        "--title",
+                        "Continuum Constitution v1",
+                        "--constitution-version",
+                        "v1",
+                        "--amended-at",
+                        "2026-03-22T00:00:00Z",
+                    ]
+                )
+                root_id = root_constitution["payload"]["constitution"]["constitution_id"]
+                _, branch_a = self.run_cli(
+                    [
+                        "governance",
+                        "constitution",
+                        "set",
+                        "--community-id",
+                        "community:continuum:lab",
+                        "--title",
+                        "Continuum Constitution v2-a",
+                        "--constitution-version",
+                        "v2-a",
+                        "--supersedes",
+                        root_id,
+                        "--amended-at",
+                        "2026-03-22T01:00:00Z",
+                    ]
+                )
+                _, branch_b = self.run_cli(
+                    [
+                        "governance",
+                        "constitution",
+                        "set",
+                        "--community-id",
+                        "community:continuum:lab",
+                        "--title",
+                        "Continuum Constitution v2-b",
+                        "--constitution-version",
+                        "v2-b",
+                        "--supersedes",
+                        root_id,
+                        "--amended-at",
+                        "2026-03-22T01:05:00Z",
+                    ]
+                )
+                branch_a_id = branch_a["payload"]["constitution"]["constitution_id"]
+                branch_b_id = branch_b["payload"]["constitution"]["constitution_id"]
+                _, proposal_event = self.run_cli(
+                    [
+                        "governance",
+                        "proposal",
+                        "submit",
+                        "--community-id",
+                        "community:continuum:lab",
+                        "--proposal-type",
+                        "constitutional",
+                        "--title",
+                        "Recognize canonical constitutional branch",
+                        "--summary",
+                        "Select the branch that should count as canonical for replay.",
+                        "--affected-ref",
+                        branch_a_id,
+                        "--affected-ref",
+                        branch_b_id,
+                    ]
+                )
+                proposal_id = proposal_event["payload"]["proposal"]["proposal_id"]
+                _, resolution_event = self.run_cli(
+                    [
+                        "governance",
+                        "constitution",
+                        "resolve",
+                        "--community-id",
+                        "community:continuum:lab",
+                        "--parent-constitution-id",
+                        root_id,
+                        "--recognized-constitution-id",
+                        branch_b_id,
+                        "--rejected-constitution-id",
+                        branch_a_id,
+                        "--proposal-ref",
+                        proposal_id,
+                        "--reason",
+                        "Select the canonical amendment branch for replay.",
+                    ]
+                )
+                resolution_id = resolution_event["payload"]["constitution_resolution"]["resolution_id"]
+                self.run_cli(
+                    [
+                        "governance",
+                        "execute",
+                        "record",
+                        "--community-id",
+                        "community:continuum:lab",
+                        "--execution-type",
+                        "constitution_execution",
+                        "--governed-ref",
+                        resolution_id,
+                        "--governed-ref",
+                        proposal_id,
+                        "--output-ref",
+                        "doc://constitution-resolution/branch-b",
+                        "--result-summary",
+                        "Recorded the canonical constitutional branch and published replay references.",
+                    ]
+                )
+
+                _, governance_state = self.run_cli(
+                    ["query", "governance-state", "--community-id", "community:continuum:lab", "--refresh"]
+                )
+                resolution_view = governance_state["constitution_resolutions"][0]
+                self.assertEqual(resolution_view["proposal"]["proposal_id"], proposal_id)
+                self.assertEqual(len(resolution_view["execution_receipts"]), 1)
+                self.assertEqual(
+                    resolution_view["execution_receipts"][0]["execution_type"],
+                    "constitution_execution",
+                )
+            finally:
+                os.chdir(cwd)
+
     def test_governance_execution_receipt_attaches_to_proposal_state(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             cwd = Path.cwd()
