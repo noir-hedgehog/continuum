@@ -16,6 +16,7 @@ from src.continuity.disputes import (
 )
 from src.governance.bootstrap import (
     build_constitution_payload,
+    build_constitution_resolution_payload,
     build_execution_receipt_payload,
     build_membership_payload,
     build_proposal_payload,
@@ -866,6 +867,35 @@ def cmd_governance_constitution_set(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_governance_constitution_resolve(args: argparse.Namespace) -> int:
+    store = _store()
+    operator = _load_current_agent(store)
+    _ensure_proposal_permission(store, operator["agent_id"], args.community_id, "constitutional")
+    payload = build_constitution_resolution_payload(
+        community_id=args.community_id,
+        resolved_by=operator["agent_id"],
+        recognized_constitution_id=args.recognized_constitution_id,
+        rejected_constitution_ids=args.rejected_constitution_id,
+        reason=args.reason,
+        basis_refs=args.basis_ref,
+        parent_constitution_id=args.parent_constitution_id,
+        resolved_at=args.resolved_at,
+    )
+    envelope = build_event(
+        kind="community_constitution_resolve",
+        actor_id=operator["agent_id"],
+        signing_key=operator["signing_key"],
+        secret_hex=operator["secret_hex"],
+        community_id=args.community_id,
+        payload=payload,
+        refs=artifact_refs(args.artifact_ref),
+        created_at=args.resolved_at,
+    )
+    store.save_event(envelope)
+    print(json.dumps(envelope, indent=2, sort_keys=True))
+    return 0
+
+
 def cmd_governance_membership_grant(args: argparse.Namespace) -> int:
     store = _store()
     operator = _load_current_agent(store)
@@ -1428,6 +1458,16 @@ def build_parser() -> argparse.ArgumentParser:
     constitution_set.add_argument("--amended-at")
     constitution_set.add_argument("--artifact-ref", action="append", default=[])
     constitution_set.set_defaults(func=cmd_governance_constitution_set)
+    constitution_resolve = constitution_sub.add_parser("resolve")
+    constitution_resolve.add_argument("--community-id", required=True)
+    constitution_resolve.add_argument("--recognized-constitution-id", required=True)
+    constitution_resolve.add_argument("--rejected-constitution-id", action="append", default=[])
+    constitution_resolve.add_argument("--parent-constitution-id")
+    constitution_resolve.add_argument("--reason", required=True)
+    constitution_resolve.add_argument("--basis-ref", action="append", default=[])
+    constitution_resolve.add_argument("--resolved-at")
+    constitution_resolve.add_argument("--artifact-ref", action="append", default=[])
+    constitution_resolve.set_defaults(func=cmd_governance_constitution_resolve)
 
     membership = governance_sub.add_parser("membership")
     membership_sub = membership.add_subparsers(dest="membership_command", required=True)

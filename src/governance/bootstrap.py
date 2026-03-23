@@ -16,6 +16,19 @@ def derive_constitution_id(*, community_id: str, constitution_version: str, amen
     return f"constitution:{digest_hex({'community_id': community_id, 'constitution_version': constitution_version, 'amended_at': amended_at})[:16]}"
 
 
+def derive_constitution_resolution_id(
+    *,
+    community_id: str,
+    recognized_constitution_id: str,
+    resolved_by: str,
+    resolved_at: str,
+) -> str:
+    return (
+        "constitution-resolution:"
+        f"{digest_hex({'community_id': community_id, 'recognized_constitution_id': recognized_constitution_id, 'resolved_by': resolved_by, 'resolved_at': resolved_at})[:16]}"
+    )
+
+
 def derive_proposal_id(*, community_id: str, proposer_agent_id: str, proposal_type: str, created_at: str, title: str) -> str:
     return f"proposal:{digest_hex({'community_id': community_id, 'proposer_agent_id': proposer_agent_id, 'proposal_type': proposal_type, 'created_at': created_at, 'title': title})[:16]}"
 
@@ -119,6 +132,42 @@ def build_constitution_payload(
     if supersedes:
         constitution["supersedes"] = supersedes
     return {"constitution": constitution}
+
+
+def build_constitution_resolution_payload(
+    *,
+    community_id: str,
+    resolved_by: str,
+    recognized_constitution_id: str,
+    rejected_constitution_ids: list[str] | None = None,
+    reason: str,
+    basis_refs: list[str] | None = None,
+    parent_constitution_id: str | None = None,
+    resolution_type: str = "select_canonical_branch",
+    resolved_at: str | None = None,
+    resolution_id: str | None = None,
+) -> dict[str, Any]:
+    resolved_at_value = resolved_at or utc_now()
+    resolution = {
+        "resolution_id": resolution_id
+        or derive_constitution_resolution_id(
+            community_id=community_id,
+            recognized_constitution_id=recognized_constitution_id,
+            resolved_by=resolved_by,
+            resolved_at=resolved_at_value,
+        ),
+        "community_id": community_id,
+        "resolved_by": resolved_by,
+        "resolved_at": resolved_at_value,
+        "resolution_type": resolution_type,
+        "recognized_constitution_id": recognized_constitution_id,
+        "rejected_constitution_ids": sorted(set(rejected_constitution_ids or [])),
+        "reason": reason,
+        "basis_refs": sorted(set(basis_refs or [])),
+    }
+    if parent_constitution_id:
+        resolution["parent_constitution_id"] = parent_constitution_id
+    return {"constitution_resolution": resolution}
 
 
 def build_execution_receipt_payload(

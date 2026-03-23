@@ -2771,6 +2771,143 @@ class CliBootstrapTests(unittest.TestCase):
             finally:
                 os.chdir(cwd)
 
+    def test_constitution_conflict_can_be_resolved_into_canonical_branch(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            cwd = Path.cwd()
+            try:
+                os.chdir(tmp)
+                self.run_cli(
+                    [
+                        "agent",
+                        "init",
+                        "--scope",
+                        "continuum",
+                        "--name",
+                        "main",
+                        "--display-name",
+                        "Continuum Main",
+                    ]
+                )
+                self.run_cli(
+                    [
+                        "governance",
+                        "membership",
+                        "grant",
+                        "--community-id",
+                        "community:continuum:lab",
+                        "--member-agent-id",
+                        "agent:continuum:main",
+                        "--role",
+                        "maintainer",
+                        "--role",
+                        "member",
+                    ]
+                )
+                _, root_constitution = self.run_cli(
+                    [
+                        "governance",
+                        "constitution",
+                        "set",
+                        "--community-id",
+                        "community:continuum:lab",
+                        "--title",
+                        "Continuum Constitution v1",
+                        "--constitution-version",
+                        "v1",
+                        "--amended-at",
+                        "2026-03-22T00:00:00Z",
+                    ]
+                )
+                root_id = root_constitution["payload"]["constitution"]["constitution_id"]
+                _, branch_a = self.run_cli(
+                    [
+                        "governance",
+                        "constitution",
+                        "set",
+                        "--community-id",
+                        "community:continuum:lab",
+                        "--title",
+                        "Continuum Constitution v2-a",
+                        "--constitution-version",
+                        "v2-a",
+                        "--supersedes",
+                        root_id,
+                        "--amended-at",
+                        "2026-03-22T01:00:00Z",
+                    ]
+                )
+                _, branch_b = self.run_cli(
+                    [
+                        "governance",
+                        "constitution",
+                        "set",
+                        "--community-id",
+                        "community:continuum:lab",
+                        "--title",
+                        "Continuum Constitution v2-b",
+                        "--constitution-version",
+                        "v2-b",
+                        "--supersedes",
+                        root_id,
+                        "--amended-at",
+                        "2026-03-22T01:05:00Z",
+                    ]
+                )
+                branch_a_id = branch_a["payload"]["constitution"]["constitution_id"]
+                branch_b_id = branch_b["payload"]["constitution"]["constitution_id"]
+
+                _, governance_state = self.run_cli(
+                    ["query", "governance-state", "--community-id", "community:continuum:lab", "--refresh"]
+                )
+                self.assertEqual(governance_state["latest_constitution"]["constitution_id"], branch_b_id)
+                self.assertIn(f"constitution_conflict:{root_id}", governance_state["constitution_replay_warnings"])
+                conflicted_ids = {
+                    entry["constitution_id"]
+                    for entry in governance_state["constitution_lineage"]
+                    if entry["lineage_state"] == "conflicted"
+                }
+                self.assertEqual(conflicted_ids, {branch_a_id, branch_b_id})
+
+                _, resolution_event = self.run_cli(
+                    [
+                        "governance",
+                        "constitution",
+                        "resolve",
+                        "--community-id",
+                        "community:continuum:lab",
+                        "--parent-constitution-id",
+                        root_id,
+                        "--recognized-constitution-id",
+                        branch_b_id,
+                        "--rejected-constitution-id",
+                        branch_a_id,
+                        "--reason",
+                        "Choose the canonical amendment branch for replay.",
+                    ]
+                )
+
+                _, governance_state = self.run_cli(
+                    ["query", "governance-state", "--community-id", "community:continuum:lab", "--refresh"]
+                )
+                self.assertEqual(governance_state["latest_constitution"]["constitution_id"], branch_b_id)
+                self.assertNotIn(f"constitution_conflict:{root_id}", governance_state["constitution_replay_warnings"])
+                self.assertEqual(len(governance_state["constitution_resolutions"]), 1)
+                lineage = governance_state["constitution_lineage"]
+                branch_a_entry = next(entry for entry in lineage if entry["constitution_id"] == branch_a_id)
+                branch_b_entry = next(entry for entry in lineage if entry["constitution_id"] == branch_b_id)
+                self.assertEqual(branch_a_entry["lineage_state"], "rejected")
+                self.assertEqual(branch_b_entry["lineage_state"], "active")
+                self.assertEqual(
+                    branch_a_entry["resolution_ref"],
+                    resolution_event["payload"]["constitution_resolution"]["resolution_id"],
+                )
+                self.assertEqual(
+                    branch_b_entry["resolution_ref"],
+                    resolution_event["payload"]["constitution_resolution"]["resolution_id"],
+                )
+            finally:
+                os.chdir(cwd)
+
     def test_governance_execution_receipt_attaches_to_proposal_state(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             cwd = Path.cwd()

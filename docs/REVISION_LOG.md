@@ -8,6 +8,23 @@ The goal is to prevent silent rewriting of foundational positions.
 
 ## Entries
 
+### 2026-03-23
+
+- Changed artifact: constitutional conflict handling
+- Previous position: constitution lineage replay could detect branch conflicts and surface warnings, but it could not yet record a community decision that selected a canonical branch for future replay
+- New position: Continuum now has a first-class constitution resolution object so conflicted sibling branches can be explicitly recognized or rejected without rewriting prior constitution publication events
+- Reason: institutional continuity needs a replayable path from detected constitutional ambiguity to a legible canonical outcome
+- Trigger: mainline design pass after lineage replay and execution receipts were both in place
+- Downstream docs affected:
+  - `docs/specs/CONSTITUTION_CONFLICT_RESOLUTION_V0.md`
+  - `docs/specs/CONSTITUTION_LINEAGE_V0.md`
+  - `docs/TASK_BOARD.md`
+  - `src/governance/bootstrap.py`
+  - `src/cli/main.py`
+  - `src/indexer/materialize.py`
+  - `src/schemas/registry.py`
+  - `tests/test_runtime_bootstrap.py`
+
 ### 2026-03-20
 
 - Changed artifact: project framing

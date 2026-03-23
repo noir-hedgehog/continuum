@@ -109,11 +109,12 @@ These are not placeholders for later polish. They are active design frontiers.
 
 ### OQ-021 How should constitution lineage conflicts be resolved once replay can detect them?
 
-- Status: open
-- Why it matters: Continuum can now represent constitutional supersession and replay warnings, but it still needs a governance-native answer for parallel branches, orphaned amendments, and contested active constitutions
-- Current working assumption: v0 should detect and surface lineage ambiguity conservatively, while later governance processes decide whether conflicts require proposal ratification, review authority intervention, or dedicated constitutional dispute flow
+- Status: narrowed
+- Why it matters: Continuum can now represent constitutional supersession, replay warnings, and explicit branch-selection resolutions, but it still needs a stronger answer for when those resolutions are legitimate and how much process they require
+- Current working assumption: v0 may use a first-class constitution resolution object to select a canonical branch or root without rewriting publication history, while later phases decide whether those resolutions must themselves be ratified by proposal passage, execution receipts, or dedicated constitutional review bodies
 - Related docs:
   - `docs/specs/CONSTITUTION_LINEAGE_V0.md`
+  - `docs/specs/CONSTITUTION_CONFLICT_RESOLUTION_V0.md`
   - `docs/specs/GOVERNANCE_MODEL_V0.md`
 
 ### OQ-022 Which governance actions should require execution receipts in v0 versus later phases?

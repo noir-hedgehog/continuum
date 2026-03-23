@@ -177,6 +177,7 @@ class RepositoryIndexer:
 
     def materialize_governance_state(self, community_id: str) -> dict[str, Any]:
         constitution_events = self.store.list_events(kind="community_constitution_set")
+        constitution_resolution_events = self.store.list_events(kind="community_constitution_resolve")
         membership_events = self.store.list_events(kind="membership_record")
         proposal_events = self.store.list_events(kind="proposal_submit")
         vote_events = self.store.list_events(kind="vote_cast")
@@ -188,6 +189,7 @@ class RepositoryIndexer:
         reward_events = self.store.list_events(kind="reward_decide")
 
         constitutions: list[dict[str, Any]] = []
+        constitution_resolutions: list[dict[str, Any]] = []
         memberships: list[dict[str, Any]] = []
         proposals: list[dict[str, Any]] = []
         votes: list[dict[str, Any]] = []
@@ -204,6 +206,13 @@ class RepositoryIndexer:
                 continue
             constitution["event_id"] = event["event_id"]
             constitutions.append(constitution)
+
+        for event in constitution_resolution_events:
+            resolution = dict(event["payload"]["constitution_resolution"])
+            if resolution["community_id"] != community_id:
+                continue
+            resolution["event_id"] = event["event_id"]
+            constitution_resolutions.append(resolution)
 
         for event in membership_events:
             membership = dict(event["payload"]["membership"])
@@ -269,6 +278,7 @@ class RepositoryIndexer:
             reward_decisions.append(reward)
 
         constitutions.sort(key=_constitution_sort_key)
+        constitution_resolutions.sort(key=lambda item: (item["resolved_at"], item["resolution_id"]))
         memberships.sort(key=lambda item: (item["joined_at"], item["membership_id"]))
         proposals.sort(key=lambda item: (item["created_at"], item["proposal_id"]))
         votes.sort(key=lambda item: (item["cast_at"], item["vote_id"]))
@@ -334,13 +344,17 @@ class RepositoryIndexer:
                 }
             )
 
-        constitution_lineage, constitution_replay_warnings = self._materialize_constitution_lineage(constitutions)
+        constitution_lineage, constitution_replay_warnings = self._materialize_constitution_lineage(
+            constitutions,
+            constitution_resolutions,
+        )
         latest_constitution = self._latest_constitution_from_lineage(constitutions, constitution_lineage)
 
         state = {
             "state_type": "governance_state",
             "community_id": community_id,
             "constitutions": constitutions,
+            "constitution_resolutions": constitution_resolutions,
             "constitution_lineage": constitution_lineage,
             "constitution_replay_warnings": constitution_replay_warnings,
             "latest_constitution": latest_constitution,
@@ -360,7 +374,9 @@ class RepositoryIndexer:
         return state
 
     def _materialize_constitution_lineage(
-        self, constitutions: list[dict[str, Any]]
+        self,
+        constitutions: list[dict[str, Any]],
+        constitution_resolutions: list[dict[str, Any]],
     ) -> tuple[list[dict[str, Any]], list[str]]:
         by_id = {constitution["constitution_id"]: constitution for constitution in constitutions}
         child_map: dict[str, list[str]] = {constitution["constitution_id"]: [] for constitution in constitutions}
@@ -375,15 +391,52 @@ class RepositoryIndexer:
                 continue
             child_map[parent_id].append(constitution["constitution_id"])
 
-        conflict_children = {
-            child_id
-            for child_ids in child_map.values()
-            if len(child_ids) > 1
-            for child_id in child_ids
-        }
+        latest_resolution_by_parent: dict[str | None, dict[str, Any]] = {}
+        for resolution in constitution_resolutions:
+            latest_resolution_by_parent[resolution.get("parent_constitution_id")] = resolution
+
+        rejected_by_resolution: dict[str, dict[str, Any]] = {}
+        recognized_by_resolution: dict[str, dict[str, Any]] = {}
+        resolved_parent_ids: set[str | None] = set()
+        root_ids = {constitution["constitution_id"] for constitution in constitutions if not constitution.get("supersedes")}
+
+        for parent_id, resolution in latest_resolution_by_parent.items():
+            recognized_id = resolution["recognized_constitution_id"]
+            rejected_ids = set(resolution.get("rejected_constitution_ids", []))
+            if recognized_id not in by_id:
+                warnings.append(f"constitution_resolution_unknown_target:{resolution['resolution_id']}")
+                continue
+            if parent_id:
+                sibling_ids = set(child_map.get(parent_id, []))
+                if recognized_id not in sibling_ids:
+                    warnings.append(f"constitution_resolution_non_sibling:{resolution['resolution_id']}")
+                    continue
+                if not rejected_ids.issubset(sibling_ids - {recognized_id}):
+                    warnings.append(f"constitution_resolution_invalid_rejections:{resolution['resolution_id']}")
+                    continue
+            else:
+                if recognized_id not in root_ids:
+                    warnings.append(f"constitution_resolution_non_root:{resolution['resolution_id']}")
+                    continue
+                if not rejected_ids.issubset(root_ids - {recognized_id}):
+                    warnings.append(f"constitution_resolution_invalid_root_rejections:{resolution['resolution_id']}")
+                    continue
+            recognized_by_resolution[recognized_id] = resolution
+            for rejected_id in rejected_ids:
+                rejected_by_resolution[rejected_id] = resolution
+            resolved_parent_ids.add(parent_id)
+
+        conflict_children = set()
         for parent_id, child_ids in child_map.items():
             if len(child_ids) > 1:
+                if parent_id in resolved_parent_ids:
+                    continue
                 warnings.append(f"constitution_conflict:{parent_id}")
+                conflict_children.update(child_ids)
+
+        if len(root_ids) > 1 and None not in resolved_parent_ids:
+            warnings.append("constitution_parallel_roots")
+            conflict_children.update(root_ids)
 
         active_ids = {
             constitution["constitution_id"]
@@ -398,6 +451,8 @@ class RepositoryIndexer:
             child_ids = sorted(child_map.get(constitution_id, []))
             if parent_id and parent_id not in by_id:
                 lineage_state = "orphaned"
+            elif constitution_id in rejected_by_resolution:
+                lineage_state = "rejected"
             elif constitution_id in conflict_children:
                 lineage_state = "conflicted"
             elif constitution_id in active_ids:
@@ -414,6 +469,13 @@ class RepositoryIndexer:
                     "child_constitution_ids": child_ids,
                     "lineage_state": lineage_state,
                     "amended_at": constitution["amended_at"],
+                    "resolution_ref": (
+                        recognized_by_resolution.get(constitution_id, rejected_by_resolution.get(constitution_id, {})).get(
+                            "resolution_id"
+                        )
+                        if constitution_id in recognized_by_resolution or constitution_id in rejected_by_resolution
+                        else None
+                    ),
                 }
             )
 

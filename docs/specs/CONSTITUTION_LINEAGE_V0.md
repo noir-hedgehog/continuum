@@ -76,6 +76,7 @@ Replay should classify constitutions into these practical states:
 - `lineage_root`
 - `active`
 - `superseded`
+- `rejected`
 - `orphaned`
 - `conflicted`
 
@@ -95,7 +96,11 @@ A constitution explicitly replaced by a later constitution in the same lineage.
 
 A constitution that claims to supersede an unknown prior constitution.
 
-### 5.5 `conflicted`
+### 5.5 `rejected`
+
+A constitution branch that was published, but later explicitly rejected by a recorded constitutional resolution.
+
+### 5.6 `conflicted`
 
 Two or more constitutions claim the same parent or the same active slot without a resolved branch-selection rule.
 
