@@ -10,6 +10,17 @@ The goal is to prevent silent rewriting of foundational positions.
 
 ### 2026-03-23
 
+- Changed artifact: external narrative surface
+- Previous position: the repository had thesis, specs, architecture, and business framing, but no single whitepaper-style document that unified the protocol story for outside readers
+- New position: Continuum now has a dedicated whitepaper draft that compresses the project thesis, system design, governance model, anchoring position, commercial wedge, and near-term roadmap into one outward-facing document
+- Reason: the project has reached the point where an integrated narrative document is needed alongside internal specs and code
+- Trigger: recognition that the repository had enough substance for a whitepaper, but no single canonical synthesis
+- Downstream docs affected:
+  - `docs/WHITEPAPER_V0.md`
+  - `docs/TASK_BOARD.md`
+
+### 2026-03-23
+
 - Changed artifact: constitution-resolution policy boundary
 - Previous position: legitimacy around constitution resolutions existed only as optional proposal linkage, execution linkage, and replay warnings
 - New position: communities may now use constitution policy to require `proposal_ref` as a hard precondition for branch-resolution creation, while execution proof remains a replay-visible legitimacy layer that can be tightened without creating a creation-time deadlock
