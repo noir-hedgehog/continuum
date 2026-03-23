@@ -326,6 +326,7 @@ class RepositoryIndexer:
             proposals_view.append(enriched_proposal)
             proposals_by_id[proposal["proposal_id"]] = enriched_proposal
 
+        resolution_warnings: list[str] = []
         constitution_resolutions_view = []
         for resolution in constitution_resolutions:
             resolution_receipts = [
@@ -333,6 +334,18 @@ class RepositoryIndexer:
                 for receipt in execution_receipts
                 if resolution["resolution_id"] in set(receipt.get("governed_refs", []))
             ]
+            if not resolution.get("proposal_ref"):
+                resolution_warnings.append(
+                    f"constitution_resolution_missing_proposal:{resolution['resolution_id']}"
+                )
+            elif resolution.get("proposal_ref") not in proposals_by_id:
+                resolution_warnings.append(
+                    f"constitution_resolution_unknown_proposal:{resolution['resolution_id']}"
+                )
+            if not resolution_receipts:
+                resolution_warnings.append(
+                    f"constitution_resolution_missing_execution:{resolution['resolution_id']}"
+                )
             constitution_resolutions_view.append(
                 {
                     **resolution,
@@ -372,6 +385,7 @@ class RepositoryIndexer:
             constitutions,
             constitution_resolutions,
         )
+        constitution_replay_warnings.extend(resolution_warnings)
         latest_constitution = self._latest_constitution_from_lineage(constitutions, constitution_lineage)
 
         state = {

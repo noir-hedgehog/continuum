@@ -522,6 +522,7 @@ Future likely confirmation points:
 - Governance execution receipts started so approved actions can become explicit replayable outcomes rather than silent post-vote assumptions
 - Constitution conflict resolution v0 started so replay can move from passive branch warnings to explicit canonical-branch selection without rewriting historical publication events
 - Constitution resolutions can now cite constitutional proposals and materialize linked execution receipts so canonical branch selection begins to carry a visible legitimacy surface in governance replay
+- Constitution resolution replay now emits explicit warnings when proposal linkage or execution proof is missing, so weak institutional grounding becomes visible before it becomes a hard policy gate
 - Repository continuity bundle v0 drafted to make session-safe reconstruction an explicit project artifact
 - Continuity assessment workflow v0 drafted to make continuity judgments operational instead of purely conceptual
 - Example assessment fixtures added for repository restart and successor recovery cases

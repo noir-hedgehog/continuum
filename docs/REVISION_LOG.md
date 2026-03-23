@@ -41,6 +41,19 @@ The goal is to prevent silent rewriting of foundational positions.
   - `src/schemas/registry.py`
   - `tests/test_runtime_bootstrap.py`
 
+### 2026-03-23
+
+- Changed artifact: constitution-resolution replay warnings
+- Previous position: constitution resolutions could optionally cite proposal and execution history, but replay stayed silent when those legitimacy links were absent
+- New position: governance replay now emits explicit warnings when a constitution resolution has no proposal basis or no linked execution receipt, making legitimacy gaps visible without yet turning them into hard protocol failures
+- Reason: Continuum should expose weak institutional grounding before it hard-codes mandatory constitutional process
+- Trigger: follow-on pass after linking constitution resolutions to proposal and execution history
+- Downstream docs affected:
+  - `docs/specs/CONSTITUTION_CONFLICT_RESOLUTION_V0.md`
+  - `docs/OPEN_QUESTIONS.md`
+  - `src/indexer/materialize.py`
+  - `tests/test_runtime_bootstrap.py`
+
 ### 2026-03-20
 
 - Changed artifact: project framing

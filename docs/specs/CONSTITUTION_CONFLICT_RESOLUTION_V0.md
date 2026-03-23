@@ -115,6 +115,8 @@ Constitution resolutions may also expose:
 
 This gives v0 a narrow legitimacy surface without requiring a full constitutional court.
 
+Where those legitimacy links are absent, replay may emit warnings rather than silently treating the resolution as equally well-grounded.
+
 ## 8. v0 Boundary
 
 This spec does not yet require:

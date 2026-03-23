@@ -2891,6 +2891,14 @@ class CliBootstrapTests(unittest.TestCase):
                 )
                 self.assertEqual(governance_state["latest_constitution"]["constitution_id"], branch_b_id)
                 self.assertNotIn(f"constitution_conflict:{root_id}", governance_state["constitution_replay_warnings"])
+                self.assertIn(
+                    f"constitution_resolution_missing_proposal:{resolution_event['payload']['constitution_resolution']['resolution_id']}",
+                    governance_state["constitution_replay_warnings"],
+                )
+                self.assertIn(
+                    f"constitution_resolution_missing_execution:{resolution_event['payload']['constitution_resolution']['resolution_id']}",
+                    governance_state["constitution_replay_warnings"],
+                )
                 self.assertEqual(len(governance_state["constitution_resolutions"]), 1)
                 lineage = governance_state["constitution_lineage"]
                 branch_a_entry = next(entry for entry in lineage if entry["constitution_id"] == branch_a_id)
@@ -3061,6 +3069,14 @@ class CliBootstrapTests(unittest.TestCase):
                 self.assertEqual(
                     resolution_view["execution_receipts"][0]["execution_type"],
                     "constitution_execution",
+                )
+                self.assertNotIn(
+                    f"constitution_resolution_missing_proposal:{resolution_id}",
+                    governance_state["constitution_replay_warnings"],
+                )
+                self.assertNotIn(
+                    f"constitution_resolution_missing_execution:{resolution_id}",
+                    governance_state["constitution_replay_warnings"],
                 )
             finally:
                 os.chdir(cwd)
