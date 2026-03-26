@@ -44,6 +44,16 @@ It is intentionally simple in v0. The goal is to keep the current work graph vis
   - `docs/WHITEPAPER_SYSTEM_OVERVIEW_V0.md`
   - `docs/WHITEPAPER_MECHANISM_OVERVIEW_V0.md`
 
+### T-003B Constitutional conflict demo package
+
+- Status: active
+- Type: integration
+- Owner: main agent
+- Intent: turn the strongest current institutional mechanism path into a repeatable outward-facing demo that ties together whitepaper claims, governance replay, and executable artifacts
+- Outputs:
+  - `docs/DEMO_CONSTITUTIONAL_CONFLICT_V0.md`
+  - `scripts/demo_constitutional_conflict_v0.sh`
+
 ### T-004 Continuity protocol spec v0
 
 - Status: active

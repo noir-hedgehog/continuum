@@ -23,6 +23,18 @@ The goal is to prevent silent rewriting of foundational positions.
 
 ### 2026-03-23
 
+- Changed artifact: outward-facing demo surface
+- Previous position: the strongest constitutional branch-resolution mechanism existed across tests, specs, and whitepaper prose, but not as a dedicated operator-facing demo package
+- New position: Continuum now has a focused constitutional conflict demo document and executable script so the project can demonstrate proposal-backed branch resolution, delayed replay effect, and execution-proof activation as a coherent story
+- Reason: the project needed a demonstrable institutional narrative, not just internal tests and scattered docs
+- Trigger: decision to turn the strongest current mechanism path into a proper demo package
+- Downstream docs affected:
+  - `docs/DEMO_CONSTITUTIONAL_CONFLICT_V0.md`
+  - `scripts/demo_constitutional_conflict_v0.sh`
+  - `docs/TASK_BOARD.md`
+
+### 2026-03-23
+
 - Changed artifact: constitution-resolution policy boundary
 - Previous position: legitimacy around constitution resolutions existed only as optional proposal linkage, execution linkage, and replay warnings
 - New position: communities may now use constitution policy to require `proposal_ref` as a hard precondition for branch-resolution creation, while execution proof remains a replay-visible legitimacy layer that can be tightened without creating a creation-time deadlock
