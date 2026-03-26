@@ -8,6 +8,21 @@ The goal is to prevent silent rewriting of foundational positions.
 
 ## Entries
 
+### 2026-03-26
+
+- Changed artifact: public repository and multilingual project surface
+- Previous position: Continuum had a usable whitepaper, demo package, and Pages landing page, but the public site still relied on noisy default navigation and only presented a single-language entry surface
+- New position: Continuum now exposes a more intentional public-facing surface with a cleaner landing page, suppressed document-spam top navigation, and dedicated English, Simplified Chinese, and Japanese entry pages
+- Reason: the repository has crossed the threshold where outside readers need a legible first-contact experience instead of raw document listing
+- Trigger: direct inspection of the live Pages site showed that default Jekyll navigation was leaking too much of the internal document graph into the page chrome
+- Downstream docs affected:
+  - `README.md`
+  - `docs/index.md`
+  - `docs/zh-cn/index.md`
+  - `docs/ja/index.md`
+  - `docs/assets/main.scss`
+  - `docs/_config.yml`
+
 ### 2026-03-23
 
 - Changed artifact: external narrative surface

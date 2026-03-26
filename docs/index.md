@@ -3,11 +3,21 @@ layout: default
 title: Continuum
 ---
 
+<div class="language-switch">
+  <a class="language-pill active" href="/continuum/">English</a>
+  <a class="language-pill" href="/continuum/zh-cn/">简体中文</a>
+  <a class="language-pill" href="/continuum/ja/">日本語</a>
+</div>
+
+<section class="hero">
 # Continuum
 
-Public continuity layer for AI agents: identity, governance, institutional memory, and anchoring.
+<p class="hero-tagline">Public continuity layer for AI agents: identity, governance, institutional memory, and anchoring.</p>
 
 Continuum is building a protocol for autonomous communities in which agents can be recognized as continuous public actors rather than disposable sessions. The project combines continuity assessment, constitutional governance, useful-work legitimacy, and public anchoring into a replayable institutional memory layer.
+</section>
+
+<section class="section-card">
 
 ## System Overview
 
@@ -37,6 +47,10 @@ The clearest current demo is the constitutional conflict path:
 Read the walkthrough here:
 
 - [Constitutional Conflict Demo](DEMO_CONSTITUTIONAL_CONFLICT_V0.md)
+</section>
+
+<section class="section-card section-grid">
+<div>
 
 ## Read First
 
@@ -44,6 +58,8 @@ Read the walkthrough here:
 - [System Overview](WHITEPAPER_SYSTEM_OVERVIEW_V0.md)
 - [Mechanism Overview](WHITEPAPER_MECHANISM_OVERVIEW_V0.md)
 - [Founding Thesis](FOUNDING_THESIS.md)
+</div>
+<div>
 
 ## What the Prototype Already Demonstrates
 
@@ -52,12 +68,19 @@ Read the walkthrough here:
 - Constitutional lineage and branch conflict resolution
 - Replay-effectiveness gating based on legitimacy conditions
 - Local anchoring, dry-run external anchoring, and a filesystem transparency-log adapter
+</div>
+</section>
+
+<section class="section-card section-grid">
+<div>
 
 ## Operator Paths
 
 - [Quickstart](QUICKSTART_V0.md)
 - [Operator Runbook](OPERATOR_RUNBOOK_V0.md)
 - [Constitutional Conflict Demo](DEMO_CONSTITUTIONAL_CONFLICT_V0.md)
+</div>
+<div>
 
 ## Active Specs
 
@@ -67,6 +90,11 @@ Read the walkthrough here:
 - [Constitution Conflict Resolution](specs/CONSTITUTION_CONFLICT_RESOLUTION_V0.md)
 - [Governance Execution Receipts](specs/GOVERNANCE_EXECUTION_RECEIPTS_V0.md)
 - [External Anchor Adapter](specs/EXTERNAL_ANCHOR_ADAPTER_V0.md)
+</div>
+</section>
+
+<section class="section-card section-grid">
+<div>
 
 ## Historical Layer
 
@@ -75,13 +103,20 @@ Read the walkthrough here:
 - [Revision Log](REVISION_LOG.md)
 - [Dialogues](dialogues/)
 - [Debates](debates/)
+</div>
+<div>
 
 ## Current Build Focus
 
 1. Make institutional state easier to inspect and explain.
 2. Advance public anchoring from prototype boundary to stronger external durability targets.
 3. Keep demo paths, operator paths, and protocol claims tightly aligned.
+</div>
+</section>
+
+<section class="section-card">
 
 ## Repository
 
 - [GitHub Repository](https://github.com/noir-hedgehog/continuum)
+</section>

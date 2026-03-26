@@ -54,6 +54,19 @@ It is intentionally simple in v0. The goal is to keep the current work graph vis
   - `docs/DEMO_CONSTITUTIONAL_CONFLICT_V0.md`
   - `scripts/demo_constitutional_conflict_v0.sh`
 
+### T-003C Public repository and Pages surface
+
+- Status: active
+- Type: integration
+- Owner: main agent
+- Intent: make the public repository and Pages site legible as a first-contact protocol surface rather than a raw document dump
+- Outputs:
+  - `README.md`
+  - `docs/index.md`
+  - `docs/zh-cn/index.md`
+  - `docs/ja/index.md`
+  - `docs/assets/main.scss`
+
 ### T-004 Continuity protocol spec v0
 
 - Status: active
