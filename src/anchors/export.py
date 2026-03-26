@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 
+import json
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Any
 
 from src.runtime.canonical import DIGEST_ALGORITHM, digest_hex
@@ -123,5 +125,47 @@ class DryRunExternalAnchorAdapter(AnchorAdapter):
             request=request,
             anchor_status="submitted_external",
             external_reference=external_reference,
+            target_metadata=target_metadata,
+        )
+
+
+class TransparencyLogAnchorAdapter(AnchorAdapter):
+    """Append-only external witness log adapter backed by a separate JSONL file."""
+
+    def __init__(self, *, log_path: str, target_name: str = "public_witness_log_v0"):
+        self.target_name = target_name
+        self.log_path = Path(log_path).expanduser()
+
+    def export(self, request: AnchorExportRequest) -> dict[str, Any]:
+        self.log_path.parent.mkdir(parents=True, exist_ok=True)
+        anchored_at_value = request.anchored_at or utc_now()
+        entry_source = {
+            "target": self.target_name,
+            "anchor_type": request.anchor_type,
+            "subject_ref": request.subject_ref,
+            "root_hash": request.root_hash,
+            "anchored_at": anchored_at_value,
+        }
+        entry_id = f"logentry:{digest_hex(entry_source)[:16]}"
+        entry = {
+            "entry_id": entry_id,
+            "anchor_type": request.anchor_type,
+            "subject_ref": request.subject_ref,
+            "root_hash": request.root_hash,
+            "anchored_at": anchored_at_value,
+            "target_name": self.target_name,
+        }
+        with self.log_path.open("a", encoding="utf-8") as handle:
+            handle.write(json.dumps(entry, sort_keys=True) + "\n")
+        target_metadata = {
+            "target_kind": "public_witness_log",
+            "target_name": self.target_name,
+            "log_path": str(self.log_path),
+            "entry_id": entry_id,
+        }
+        return self._build_record(
+            request=request,
+            anchor_status="confirmed_external",
+            external_reference=f"filelog:{entry_id}",
             target_metadata=target_metadata,
         )

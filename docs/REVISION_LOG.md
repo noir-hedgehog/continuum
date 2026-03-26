@@ -33,6 +33,20 @@ The goal is to prevent silent rewriting of foundational positions.
   - `scripts/demo_constitutional_conflict_v0.sh`
   - `docs/TASK_BOARD.md`
 
+### 2026-03-26
+
+- Changed artifact: first external anchor target
+- Previous position: Continuum had a local witness adapter and a dry-run external adapter boundary, but no executable external target that actually wrote durable witness data outside the repository anchor cache
+- New position: Continuum now has a first real external target in the form of an append-only filesystem-backed transparency log, exposed through a dedicated anchor adapter and CLI export mode
+- Reason: the project needed to move public continuity from architectural boundary to executable reality without prematurely binding itself to one chain or vendor
+- Trigger: decision to prioritize the first real external anchor target after narrative and demo layers became strong enough
+- Downstream docs affected:
+  - `docs/specs/EXTERNAL_ANCHOR_ADAPTER_V0.md`
+  - `docs/OPEN_QUESTIONS.md`
+  - `src/anchors/export.py`
+  - `src/cli/main.py`
+  - `tests/test_runtime_bootstrap.py`
+
 ### 2026-03-23
 
 - Changed artifact: constitution-resolution policy boundary

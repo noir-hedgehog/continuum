@@ -7,7 +7,12 @@ import json
 import sys
 from pathlib import Path
 
-from src.anchors.export import AnchorExportRequest, DryRunExternalAnchorAdapter, LocalAnchorAdapter
+from src.anchors.export import (
+    AnchorExportRequest,
+    DryRunExternalAnchorAdapter,
+    LocalAnchorAdapter,
+    TransparencyLogAnchorAdapter,
+)
 from src.continuity.assessment import ContinuityAssessmentEngine
 from src.continuity.disputes import (
     build_case_assignment_payload,
@@ -1288,6 +1293,13 @@ def cmd_anchor_export(args: argparse.Namespace) -> int:
     subject_ref, root_hash = _anchor_subject_and_root(store, args)
     if args.adapter_mode == "dry_run_external":
         adapter = DryRunExternalAnchorAdapter(target_name=args.adapter)
+    elif args.adapter_mode == "transparency_log":
+        if not args.external_log_path:
+            raise ValueError("--external-log-path is required when --adapter-mode transparency_log is used.")
+        adapter = TransparencyLogAnchorAdapter(
+            log_path=args.external_log_path,
+            target_name=args.adapter,
+        )
     else:
         adapter = LocalAnchorAdapter(target_name=args.adapter)
     anchor_record = adapter.export(
@@ -1690,7 +1702,7 @@ def build_parser() -> argparse.ArgumentParser:
     anchor_export.add_argument("--anchor-type", required=True, choices=sorted(ANCHOR_TYPES))
     anchor_export.add_argument(
         "--adapter-mode",
-        choices=["local", "dry_run_external"],
+        choices=["local", "dry_run_external", "transparency_log"],
         default="local",
     )
     anchor_export.add_argument("--assessment-id")
@@ -1698,6 +1710,7 @@ def build_parser() -> argparse.ArgumentParser:
     anchor_export.add_argument("--subject-agent-id")
     anchor_export.add_argument("--community-id")
     anchor_export.add_argument("--adapter", default="local_witness_v0")
+    anchor_export.add_argument("--external-log-path")
     anchor_export.add_argument("--anchored-at")
     anchor_export.add_argument("--refresh", action="store_true")
     anchor_export.set_defaults(func=cmd_anchor_export)

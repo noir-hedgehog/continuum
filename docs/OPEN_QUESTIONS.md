@@ -100,9 +100,9 @@ These are not placeholders for later polish. They are active design frontiers.
 
 ### OQ-020 Which external durability target should the first real anchor adapter use?
 
-- Status: open
-- Why it matters: the repository now has a working local witness adapter and real anchor exports, but the first external target will shape trust assumptions, implementation cost, and interoperability claims
-- Current working assumption: the first external adapter should favor low lock-in and legible verification, likely through either a minimal settlement contract or a public witness log before more complex multi-target strategies
+- Status: narrowed
+- Why it matters: the repository now has a first executable external witness target, so the remaining question is no longer whether to stay purely local, but whether the next target after the transparency log should be a settlement chain, a stronger public witness service, or both
+- Current working assumption: the first external adapter should favor low lock-in and legible verification; the repository now implements an append-only transparency log as that first step, while later phases can add a settlement target once the exported root set and operational trust model stabilize
 - Related docs:
   - `docs/specs/EXTERNAL_ANCHOR_ADAPTER_V0.md`
   - `docs/OPERATOR_RUNBOOK_V0.md`

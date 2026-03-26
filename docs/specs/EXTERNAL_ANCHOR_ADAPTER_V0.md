@@ -130,6 +130,23 @@ Properties:
 
 v0 may combine these classes later, but the adapter contract should treat them distinctly.
 
+### 6.4 First concrete target in the repository prototype
+
+The first executable external target in the repository prototype is an append-only filesystem-backed transparency log.
+
+This is not the final public network target.
+
+It is the first real external durability target because it:
+
+- writes outside the in-repository anchor cache
+- produces a concrete external reference
+- preserves append-only witness history
+- keeps chain choice deferred
+
+In code this target is represented as:
+
+- `adapter:public_witness_log_v0`
+
 ## 7. Core Adapter Contract
 
 An external anchor adapter should accept:

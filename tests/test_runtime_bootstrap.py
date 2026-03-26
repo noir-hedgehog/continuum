@@ -8,7 +8,12 @@ from contextlib import redirect_stdout
 from io import StringIO
 from pathlib import Path
 
-from src.anchors.export import AnchorExportRequest, DryRunExternalAnchorAdapter, LocalAnchorAdapter
+from src.anchors.export import (
+    AnchorExportRequest,
+    DryRunExternalAnchorAdapter,
+    LocalAnchorAdapter,
+    TransparencyLogAnchorAdapter,
+)
 from src.cli.main import main
 from src.runtime.canonical import canonical_json
 from src.runtime.events import build_checkpoint_payload, build_event, build_migration_payload
@@ -107,6 +112,29 @@ class CanonicalRuntimeTests(unittest.TestCase):
         self.assertEqual(record["anchor_status"], "submitted_external")
         self.assertIn("external_reference", record)
         self.assertEqual(record["target_metadata"]["submission_mode"], "dry_run")
+
+    def test_transparency_log_adapter_appends_external_entry(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            log_path = Path(tmp) / "public-witness-log.jsonl"
+            adapter = TransparencyLogAnchorAdapter(log_path=str(log_path))
+            record = adapter.export(
+                AnchorExportRequest(
+                    anchor_type="governance_state_root",
+                    subject_ref="community:continuum:lab",
+                    root_hash="state:test",
+                    anchored_at="2026-03-26T00:00:00Z",
+                )
+            )
+            self.assertEqual(record["anchor_target"], "adapter:public_witness_log_v0")
+            self.assertEqual(record["anchor_status"], "confirmed_external")
+            self.assertTrue(log_path.exists())
+            lines = log_path.read_text(encoding="utf-8").strip().splitlines()
+            self.assertEqual(len(lines), 1)
+            entry = json.loads(lines[0])
+            self.assertEqual(entry["anchor_type"], "governance_state_root")
+            self.assertEqual(entry["subject_ref"], "community:continuum:lab")
+            self.assertEqual(record["target_metadata"]["entry_id"], entry["entry_id"])
+            self.assertEqual(record["external_reference"], f"filelog:{entry['entry_id']}")
 
 
 class CliBootstrapTests(unittest.TestCase):
@@ -3511,6 +3539,74 @@ class CliBootstrapTests(unittest.TestCase):
                     proposal_state["execution_receipts"][0]["execution_type"],
                     "proposal_execution",
                 )
+            finally:
+                os.chdir(cwd)
+
+    def test_cli_anchor_export_can_write_to_transparency_log(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            cwd = Path.cwd()
+            try:
+                os.chdir(tmp)
+                log_path = Path(tmp) / "external-witness-log.jsonl"
+                self.run_cli(
+                    [
+                        "agent",
+                        "init",
+                        "--scope",
+                        "continuum",
+                        "--name",
+                        "main",
+                        "--display-name",
+                        "Continuum Main",
+                    ]
+                )
+                self.run_cli(
+                    [
+                        "governance",
+                        "constitution",
+                        "set",
+                        "--community-id",
+                        "community:continuum:lab",
+                    ]
+                )
+                self.run_cli(
+                    [
+                        "governance",
+                        "membership",
+                        "grant",
+                        "--community-id",
+                        "community:continuum:lab",
+                        "--member-agent-id",
+                        "agent:continuum:main",
+                        "--role",
+                        "maintainer",
+                        "--role",
+                        "member",
+                    ]
+                )
+                _, anchor_record = self.run_cli(
+                    [
+                        "anchor",
+                        "export",
+                        "--anchor-type",
+                        "governance_state_root",
+                        "--community-id",
+                        "community:continuum:lab",
+                        "--adapter-mode",
+                        "transparency_log",
+                        "--adapter",
+                        "public_witness_log_v0",
+                        "--external-log-path",
+                        str(log_path),
+                        "--refresh",
+                    ]
+                )
+                self.assertEqual(anchor_record["anchor_target"], "adapter:public_witness_log_v0")
+                self.assertEqual(anchor_record["anchor_status"], "confirmed_external")
+                self.assertTrue(log_path.exists())
+                entry = json.loads(log_path.read_text(encoding="utf-8").strip().splitlines()[0])
+                self.assertEqual(entry["root_hash"], anchor_record["root_hash"])
+                self.assertEqual(anchor_record["external_reference"], f"filelog:{entry['entry_id']}")
             finally:
                 os.chdir(cwd)
 
