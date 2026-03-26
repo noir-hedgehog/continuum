@@ -12,11 +12,13 @@ The goal is to prevent silent rewriting of foundational positions.
 
 - Changed artifact: external narrative surface
 - Previous position: the repository had thesis, specs, architecture, and business framing, but no single whitepaper-style document that unified the protocol story for outside readers
-- New position: Continuum now has a dedicated whitepaper draft that compresses the project thesis, system design, governance model, anchoring position, commercial wedge, and near-term roadmap into one outward-facing document
+- New position: Continuum now has a dedicated whitepaper draft plus two compressed companion overviews that separate system boundary from institutional mechanism, making the project easier to present without losing conceptual discipline
 - Reason: the project has reached the point where an integrated narrative document is needed alongside internal specs and code
 - Trigger: recognition that the repository had enough substance for a whitepaper, but no single canonical synthesis
 - Downstream docs affected:
   - `docs/WHITEPAPER_V0.md`
+  - `docs/WHITEPAPER_SYSTEM_OVERVIEW_V0.md`
+  - `docs/WHITEPAPER_MECHANISM_OVERVIEW_V0.md`
   - `docs/TASK_BOARD.md`
 
 ### 2026-03-23

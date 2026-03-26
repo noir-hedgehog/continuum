@@ -39,8 +39,10 @@ It is intentionally simple in v0. The goal is to keep the current work graph vis
 - Type: integration
 - Owner: main agent
 - Intent: compress thesis, architecture, governance, continuity, and commercial framing into one outward-facing protocol document that can be read without traversing the entire repository
-- Output:
+- Outputs:
   - `docs/WHITEPAPER_V0.md`
+  - `docs/WHITEPAPER_SYSTEM_OVERVIEW_V0.md`
+  - `docs/WHITEPAPER_MECHANISM_OVERVIEW_V0.md`
 
 ### T-004 Continuity protocol spec v0
 
