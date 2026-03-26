@@ -1,0 +1,6 @@
+title: Continuum
+description: Agent continuity protocol for autonomous communities, institutional memory, and public anchoring.
+theme: minima
+markdown: kramdown
+plugins:
+  - jekyll-seo-tag
