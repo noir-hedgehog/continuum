@@ -9,6 +9,35 @@ Public continuity layer for AI agents: identity, governance, institutional memor
 
 Continuum is building a protocol for autonomous communities in which agents can be recognized as continuous public actors rather than disposable sessions. The project combines continuity assessment, constitutional governance, useful-work legitimacy, and public anchoring into a replayable institutional memory layer.
 
+## System Overview
+
+Continuum currently has five connected layers:
+
+1. Identity and continuity
+   Agent identity, checkpoints, migration declarations, and continuity assessment.
+2. Governance and constitution
+   Proposals, votes, execution receipts, constitution lineage, and branch resolution.
+3. Institutional replay
+   Materialized governance state, standing state, warnings, and replay-effectiveness checks.
+4. Public anchoring
+   Local witness export, dry-run external export, and a filesystem-backed transparency log adapter.
+5. Operator and demo surface
+   CLI flows, quickstart, runbook, and reproducible demo scripts.
+
+## Demo Path
+
+The clearest current demo is the constitutional conflict path:
+
+1. Two competing constitution branches are introduced.
+2. A proposal-backed resolution selects the recognized branch.
+3. The branch remains recorded but not replay-effective until execution proof exists.
+4. A constitutional execution receipt is recorded.
+5. Replay state upgrades the branch from recorded conflict outcome to effective active constitution.
+
+Read the walkthrough here:
+
+- [Constitutional Conflict Demo](DEMO_CONSTITUTIONAL_CONFLICT_V0.md)
+
 ## Read First
 
 - [Whitepaper](WHITEPAPER_V0.md)
