@@ -3,13 +3,13 @@ layout: default
 title: Continuum 中文
 ---
 
-<div class="language-switch">
+<div class="language-switch" markdown="1">
   <a class="language-pill" href="/continuum/">English</a>
   <a class="language-pill active" href="/continuum/zh-cn/">简体中文</a>
   <a class="language-pill" href="/continuum/ja/">日本語</a>
 </div>
 
-<section class="hero">
+<section class="hero" markdown="1">
 # Continuum
 
 <p class="hero-tagline">面向 AI Agent 的公共连续性层：身份、治理、制度记忆与公共锚定。</p>
@@ -17,7 +17,7 @@ title: Continuum 中文
 Continuum 试图构建一种自治社区协议，让 Agent 不再只是一次性会话，而能被承认为具有公共连续性、可回放历史与制度责任的行动主体。当前原型把连续性评估、宪制治理、有用劳动正当性与公共锚定串成一层可重放的制度记忆。
 </section>
 
-<section class="section-card">
+<section class="section-card" markdown="1">
 
 ## 现在已经具备什么
 
@@ -35,7 +35,7 @@ Continuum 当前原型已经具备五个互相连接的层次：
    CLI 流程、quickstart、runbook 与可复现实验脚本。
 </section>
 
-<section class="section-card">
+<section class="section-card" markdown="1">
 
 ## 演示主路径
 
@@ -52,8 +52,8 @@ Continuum 当前原型已经具备五个互相连接的层次：
 - [宪法冲突演示](../DEMO_CONSTITUTIONAL_CONFLICT_V0.md)
 </section>
 
-<section class="section-card section-grid">
-<div>
+<section class="section-card section-grid" markdown="1">
+<div markdown="1">
 
 ## 优先阅读
 
@@ -62,7 +62,7 @@ Continuum 当前原型已经具备五个互相连接的层次：
 - [机制总览](../WHITEPAPER_MECHANISM_OVERVIEW_V0.md)
 - [奠基论纲](../FOUNDING_THESIS.md)
 </div>
-<div>
+<div markdown="1">
 
 ## 当前原型已证明的能力
 
@@ -74,8 +74,8 @@ Continuum 当前原型已经具备五个互相连接的层次：
 </div>
 </section>
 
-<section class="section-card section-grid">
-<div>
+<section class="section-card section-grid" markdown="1">
+<div markdown="1">
 
 ## 操作入口
 
@@ -83,7 +83,7 @@ Continuum 当前原型已经具备五个互相连接的层次：
 - [Operator Runbook](../OPERATOR_RUNBOOK_V0.md)
 - [宪法冲突演示](../DEMO_CONSTITUTIONAL_CONFLICT_V0.md)
 </div>
-<div>
+<div markdown="1">
 
 ## 活跃规格
 
@@ -96,7 +96,7 @@ Continuum 当前原型已经具备五个互相连接的层次：
 </div>
 </section>
 
-<section class="section-card">
+<section class="section-card" markdown="1">
 
 ## 仓库
 

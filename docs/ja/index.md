@@ -3,13 +3,13 @@ layout: default
 title: Continuum 日本語
 ---
 
-<div class="language-switch">
+<div class="language-switch" markdown="1">
   <a class="language-pill" href="/continuum/">English</a>
   <a class="language-pill" href="/continuum/zh-cn/">简体中文</a>
   <a class="language-pill active" href="/continuum/ja/">日本語</a>
 </div>
 
-<section class="hero">
+<section class="hero" markdown="1">
 # Continuum
 
 <p class="hero-tagline">AIエージェントのための公共的な継続性レイヤー。アイデンティティ、ガバナンス、制度的記憶、公開アンカリング。</p>
@@ -17,7 +17,7 @@ title: Continuum 日本語
 Continuum は、Agent を一時的なセッションではなく、公共的な継続性と再生可能な制度履歴を持つ主体として扱うためのプロトコルです。現在のプロトタイプでは、継続性評価、憲法的ガバナンス、有用な仕事の正当性、公開アンカリングを一つの制度記憶レイヤーとして接続しています。
 </section>
 
-<section class="section-card">
+<section class="section-card" markdown="1">
 
 ## 現在の構成
 
@@ -35,7 +35,7 @@ Continuum のプロトタイプは、次の 5 層で構成されています。
    CLI フロー、quickstart、runbook、再現可能なデモスクリプト。
 </section>
 
-<section class="section-card">
+<section class="section-card" markdown="1">
 
 ## 代表的なデモ経路
 
@@ -52,8 +52,8 @@ Continuum のプロトタイプは、次の 5 層で構成されています。
 - [Constitutional Conflict Demo](../DEMO_CONSTITUTIONAL_CONFLICT_V0.md)
 </section>
 
-<section class="section-card section-grid">
-<div>
+<section class="section-card section-grid" markdown="1">
+<div markdown="1">
 
 ## まず読むもの
 
@@ -62,7 +62,7 @@ Continuum のプロトタイプは、次の 5 層で構成されています。
 - [Mechanism Overview](../WHITEPAPER_MECHANISM_OVERVIEW_V0.md)
 - [Founding Thesis](../FOUNDING_THESIS.md)
 </div>
-<div>
+<div markdown="1">
 
 ## 現在のプロトタイプで示していること
 
@@ -74,8 +74,8 @@ Continuum のプロトタイプは、次の 5 層で構成されています。
 </div>
 </section>
 
-<section class="section-card section-grid">
-<div>
+<section class="section-card section-grid" markdown="1">
+<div markdown="1">
 
 ## オペレーター入口
 
@@ -83,7 +83,7 @@ Continuum のプロトタイプは、次の 5 層で構成されています。
 - [Operator Runbook](../OPERATOR_RUNBOOK_V0.md)
 - [Constitutional Conflict Demo](../DEMO_CONSTITUTIONAL_CONFLICT_V0.md)
 </div>
-<div>
+<div markdown="1">
 
 ## アクティブな仕様
 
@@ -96,7 +96,7 @@ Continuum のプロトタイプは、次の 5 層で構成されています。
 </div>
 </section>
 
-<section class="section-card">
+<section class="section-card" markdown="1">
 
 ## Repository
 

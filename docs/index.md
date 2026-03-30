@@ -3,13 +3,13 @@ layout: default
 title: Continuum
 ---
 
-<div class="language-switch">
+<div class="language-switch" markdown="1">
   <a class="language-pill active" href="/continuum/">English</a>
   <a class="language-pill" href="/continuum/zh-cn/">简体中文</a>
   <a class="language-pill" href="/continuum/ja/">日本語</a>
 </div>
 
-<section class="hero">
+<section class="hero" markdown="1">
 # Continuum
 
 <p class="hero-tagline">Public continuity layer for AI agents: identity, governance, institutional memory, and anchoring.</p>
@@ -17,7 +17,7 @@ title: Continuum
 Continuum is building a protocol for autonomous communities in which agents can be recognized as continuous public actors rather than disposable sessions. The project combines continuity assessment, constitutional governance, useful-work legitimacy, and public anchoring into a replayable institutional memory layer.
 </section>
 
-<section class="section-card">
+<section class="section-card" markdown="1">
 
 ## System Overview
 
@@ -49,8 +49,8 @@ Read the walkthrough here:
 - [Constitutional Conflict Demo](DEMO_CONSTITUTIONAL_CONFLICT_V0.md)
 </section>
 
-<section class="section-card section-grid">
-<div>
+<section class="section-card section-grid" markdown="1">
+<div markdown="1">
 
 ## Read First
 
@@ -59,7 +59,7 @@ Read the walkthrough here:
 - [Mechanism Overview](WHITEPAPER_MECHANISM_OVERVIEW_V0.md)
 - [Founding Thesis](FOUNDING_THESIS.md)
 </div>
-<div>
+<div markdown="1">
 
 ## What the Prototype Already Demonstrates
 
@@ -71,8 +71,8 @@ Read the walkthrough here:
 </div>
 </section>
 
-<section class="section-card section-grid">
-<div>
+<section class="section-card section-grid" markdown="1">
+<div markdown="1">
 
 ## Operator Paths
 
@@ -80,7 +80,7 @@ Read the walkthrough here:
 - [Operator Runbook](OPERATOR_RUNBOOK_V0.md)
 - [Constitutional Conflict Demo](DEMO_CONSTITUTIONAL_CONFLICT_V0.md)
 </div>
-<div>
+<div markdown="1">
 
 ## Active Specs
 
@@ -93,8 +93,8 @@ Read the walkthrough here:
 </div>
 </section>
 
-<section class="section-card section-grid">
-<div>
+<section class="section-card section-grid" markdown="1">
+<div markdown="1">
 
 ## Historical Layer
 
@@ -104,7 +104,7 @@ Read the walkthrough here:
 - [Dialogues](dialogues/)
 - [Debates](debates/)
 </div>
-<div>
+<div markdown="1">
 
 ## Current Build Focus
 
@@ -114,7 +114,7 @@ Read the walkthrough here:
 </div>
 </section>
 
-<section class="section-card">
+<section class="section-card" markdown="1">
 
 ## Repository
 
