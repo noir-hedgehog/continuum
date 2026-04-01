@@ -63,10 +63,9 @@ This playground turns current Continuum demo paths into inspectable state machin
 <section class="section-card" markdown="1">
 ## Related Docs
 
-- [Constitutional Conflict Demo](../DEMO_CONSTITUTIONAL_CONFLICT_V0.md)
-- [Constitution Conflict Resolution Spec](../specs/CONSTITUTION_CONFLICT_RESOLUTION_V0.md)
-- [Constitution Lineage Spec](../specs/CONSTITUTION_LINEAGE_V0.md)
-- [Governance Execution Receipts](../specs/GOVERNANCE_EXECUTION_RECEIPTS_V0.md)
+<ul id="related-docs-list">
+  <li>Loading related documents...</li>
+</ul>
 </section>
 
 <script>
@@ -97,6 +96,7 @@ const stateListEl = document.getElementById("state-list");
 const warningListEl = document.getElementById("warning-list");
 const meaningEl = document.getElementById("stage-meaning");
 const stateJsonEl = document.getElementById("state-json");
+const relatedDocsEl = document.getElementById("related-docs-list");
 
 function renderScenarioButtons() {
   scenarioSwitchEl.innerHTML = SCENARIOS
@@ -141,6 +141,15 @@ function installScenario(scenario) {
   }));
 
   scenarioSummaryEl.textContent = scenario.summary;
+  relatedDocsEl.innerHTML = (scenario.related_docs || [])
+    .map((docPath) => {
+      const parts = docPath.split("/");
+      const label = parts[parts.length - 1]
+        .replace(".md", "")
+        .replace(/[-_]/g, " ");
+      return `<li><a href="${docPath}">${label}</a></li>`;
+    })
+    .join("");
   stepContainerEl.innerHTML = scenario.stages
     .map(
       (stage, index) =>
@@ -161,6 +170,7 @@ function loadScenario(index) {
   activeScenarioIndex = index;
   renderScenarioButtons();
   scenarioSummaryEl.textContent = "Loading scenario...";
+  relatedDocsEl.innerHTML = "<li>Loading related documents...</li>";
   stepContainerEl.innerHTML = "";
   titleEl.textContent = scenarioMeta.label;
   summaryEl.textContent = "Loading stage data...";
@@ -183,6 +193,7 @@ function loadScenario(index) {
       summaryEl.textContent = error.message;
       meaningEl.textContent =
         "The visual playground expects repository-backed scenario fixtures. Once the JSON is available, the page will hydrate from repository data instead of hard-coded stage objects.";
+      relatedDocsEl.innerHTML = "<li>Related documents unavailable.</li>";
       warningListEl.innerHTML = "<li>fixture_load_failed</li>";
       stateListEl.innerHTML = "<li>scenario_fixture: unavailable</li>";
       stateJsonEl.textContent = JSON.stringify({ error: error.message, path: scenarioMeta.path }, null, 2);
