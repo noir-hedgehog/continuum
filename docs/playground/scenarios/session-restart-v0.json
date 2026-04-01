@@ -9,6 +9,16 @@
     "../specs/REPOSITORY_CONTINUITY_BUNDLE_V0.md",
     "../specs/examples/continuity_assessment_session_restart.json"
   ],
+  "source_artifacts": [
+    {
+      "label": "Scenario fixture",
+      "path": "/continuum/playground/scenarios/session-restart-v0.json"
+    },
+    {
+      "label": "Assessment example",
+      "path": "../specs/examples/continuity_assessment_session_restart.json"
+    }
+  ],
   "stages": [
     {
       "id": "active_session",

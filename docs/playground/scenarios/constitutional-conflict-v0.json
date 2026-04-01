@@ -8,6 +8,16 @@
     "../specs/CONSTITUTION_LINEAGE_V0.md",
     "../specs/GOVERNANCE_EXECUTION_RECEIPTS_V0.md"
   ],
+  "source_artifacts": [
+    {
+      "label": "Scenario fixture",
+      "path": "/continuum/playground/scenarios/constitutional-conflict-v0.json"
+    },
+    {
+      "label": "Demo script",
+      "path": "https://github.com/noir-hedgehog/continuum/blob/main/scripts/demo_constitutional_conflict_v0.sh"
+    }
+  ],
   "stages": [
     {
       "id": "root_constitution",

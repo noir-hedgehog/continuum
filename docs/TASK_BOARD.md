@@ -80,6 +80,7 @@ It is intentionally simple in v0. The goal is to keep the current work graph vis
   - `docs/playground/scenarios/successor-recovery-v0.json`
   - `docs/assets/main.scss`
   - `README.md`
+- Current focus: scenario chooser clarity, related-doc linkage, and source-artifact traceability
 
 ### T-004 Continuity protocol spec v0
 

@@ -57,6 +57,19 @@ The goal is to prevent silent rewriting of foundational positions.
   - `docs/playground/index.md`
   - `docs/playground/scenarios/successor-recovery-v0.json`
 
+### 2026-04-01
+
+- Changed artifact: playground auditability surface
+- Previous position: playground scenarios were viewable, but the page did not yet expose a direct path back to their fixture sources or adjacent exportable artifacts
+- New position: each playground scenario now exposes source artifacts alongside related docs, making the visual demo easier to audit and trace back into repository materials
+- Reason: the project should not separate visual explanation from inspectable protocol artifacts
+- Trigger: decision to make the playground feel more like a protocol viewer than a marketing microsite
+- Downstream docs affected:
+  - `docs/playground/index.md`
+  - `docs/playground/scenarios/constitutional-conflict-v0.json`
+  - `docs/playground/scenarios/session-restart-v0.json`
+  - `docs/playground/scenarios/successor-recovery-v0.json`
+
 ### 2026-03-26
 
 - Changed artifact: public repository and multilingual project surface

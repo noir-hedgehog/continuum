@@ -69,6 +69,14 @@ This playground turns current Continuum demo paths into inspectable state machin
 </ul>
 </section>
 
+<section class="section-card" markdown="1">
+## Source and Export
+
+<ul id="source-artifacts-list">
+  <li>Loading source artifacts...</li>
+</ul>
+</section>
+
 <script>
 const SCENARIOS = [
   {
@@ -110,6 +118,7 @@ const warningListEl = document.getElementById("warning-list");
 const meaningEl = document.getElementById("stage-meaning");
 const stateJsonEl = document.getElementById("state-json");
 const relatedDocsEl = document.getElementById("related-docs-list");
+const sourceArtifactsEl = document.getElementById("source-artifacts-list");
 
 function renderScenarioButtons() {
   scenarioSwitchEl.innerHTML = SCENARIOS
@@ -173,6 +182,9 @@ function installScenario(scenario) {
       return `<li><a href="${docPath}">${label}</a></li>`;
     })
     .join("");
+  sourceArtifactsEl.innerHTML = (scenario.source_artifacts || [])
+    .map((artifact) => `<li><a href="${artifact.path}">${artifact.label}</a></li>`)
+    .join("");
   stepContainerEl.innerHTML = scenario.stages
     .map(
       (stage, index) =>
@@ -194,6 +206,7 @@ function loadScenario(index) {
   renderScenarioButtons();
   scenarioSummaryEl.textContent = "Loading scenario...";
   relatedDocsEl.innerHTML = "<li>Loading related documents...</li>";
+  sourceArtifactsEl.innerHTML = "<li>Loading source artifacts...</li>";
   stepContainerEl.innerHTML = "";
   titleEl.textContent = scenarioMeta.label;
   summaryEl.textContent = "Loading stage data...";
@@ -217,6 +230,7 @@ function loadScenario(index) {
       meaningEl.textContent =
         "The visual playground expects repository-backed scenario fixtures. Once the JSON is available, the page will hydrate from repository data instead of hard-coded stage objects.";
       relatedDocsEl.innerHTML = "<li>Related documents unavailable.</li>";
+      sourceArtifactsEl.innerHTML = "<li>Source artifacts unavailable.</li>";
       warningListEl.innerHTML = "<li>fixture_load_failed</li>";
       stateListEl.innerHTML = "<li>scenario_fixture: unavailable</li>";
       stateJsonEl.textContent = JSON.stringify({ error: error.message, path: scenarioMeta.path }, null, 2);
