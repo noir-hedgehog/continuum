@@ -20,16 +20,9 @@ This playground turns the current strongest Continuum demo path into an inspecta
 <div class="playground-layout">
   <section class="section-card playground-sidebar">
     <h2>Scenario</h2>
-    <p>One community publishes two competing constitutional branches. A proposal-backed resolution chooses one branch, but replay still refuses to treat it as canon until execution proof exists.</p>
+    <p id="scenario-summary">Loading scenario...</p>
 
-    <div class="playground-steps" id="playground-steps">
-      <button class="playground-step active" data-step="0">1. Root constitution</button>
-      <button class="playground-step" data-step="1">2. Competing branches</button>
-      <button class="playground-step" data-step="2">3. Proposal-backed resolution</button>
-      <button class="playground-step" data-step="3">4. Recorded, not effective</button>
-      <button class="playground-step" data-step="4">5. Execution proof</button>
-      <button class="playground-step" data-step="5">6. Canonical replay</button>
-    </div>
+    <div class="playground-steps" id="playground-steps"></div>
   </section>
 
   <section class="section-card playground-main">
@@ -76,130 +69,12 @@ This playground turns the current strongest Continuum demo path into an inspecta
 </section>
 
 <script>
-const PLAYGROUND_STAGES = [
-  {
-    title: "Root constitution",
-    summary: "The community starts from a single recognized constitution. There is no institutional ambiguity yet.",
-    badges: ["stable", "single lineage"],
-    stateList: [
-      "recognized_constitution: constitution:v1",
-      "lineage_status: clear",
-      "branch_conflict: none",
-      "replay_effective: true"
-    ],
-    meaning:
-      "This is the baseline most systems assume forever. Continuum treats it as only the starting point, not the whole story.",
-    warnings: [],
-    snapshot: {
-      root_constitution: "constitution:v1",
-      active_constitution: "constitution:v1",
-      constitution_lineage: "single_branch",
-      replay_effective: true
-    }
-  },
-  {
-    title: "Competing branches",
-    summary: "Two child constitutions supersede the same parent, creating a branch conflict that replay can see.",
-    badges: ["conflict", "history preserved"],
-    stateList: [
-      "recognized_constitution: constitution:v1",
-      "branch_a: constitution:v2-a",
-      "branch_b: constitution:v2-b",
-      "branch_conflict: detected"
-    ],
-    meaning:
-      "Instead of pretending conflict never happened, Continuum keeps constitutional ambiguity visible inside institutional history.",
-    warnings: ["constitution_branch_conflict:constitution:v1"],
-    snapshot: {
-      root_constitution: "constitution:v1",
-      competing_children: ["constitution:v2-a", "constitution:v2-b"],
-      active_constitution: "constitution:v1",
-      replay_effective: true
-    }
-  },
-  {
-    title: "Proposal-backed resolution",
-    summary: "A constitutional proposal and a branch resolution choose branch B as the recognized path forward.",
-    badges: ["proposal-linked", "legible legitimacy"],
-    stateList: [
-      "proposal_id: proposal:constitutional:001",
-      "resolution_id: resolution:constitution:001",
-      "recognized_branch: constitution:v2-b",
-      "rejected_branch: constitution:v2-a"
-    ],
-    meaning:
-      "Continuum does not reduce branch selection to admin fiat. The decision becomes a replayable governance object with explicit basis.",
-    warnings: ["constitution_resolution_execution_required:resolution:constitution:001"],
-    snapshot: {
-      proposal_ref: "proposal:constitutional:001",
-      resolution_ref: "resolution:constitution:001",
-      recognized_constitution: "constitution:v2-b",
-      replay_effective: false
-    }
-  },
-  {
-    title: "Recorded, not effective",
-    summary: "The branch resolution exists in history, but the chosen constitution is still not canonically active because execution proof is missing.",
-    badges: ["delayed canonical effect", "execution pending"],
-    stateList: [
-      "resolution_recorded: true",
-      "replay_effective: false",
-      "active_constitution: constitution:v1",
-      "execution_receipt: missing"
-    ],
-    meaning:
-      "This is a key Continuum idea: history can record an outcome before institutions are willing to treat that outcome as effective canon.",
-    warnings: ["constitution_resolution_execution_required:resolution:constitution:001"],
-    snapshot: {
-      resolution_recorded: true,
-      active_constitution: "constitution:v1",
-      pending_constitution: "constitution:v2-b",
-      replay_effective: false
-    }
-  },
-  {
-    title: "Execution proof",
-    summary: "A constitution_execution receipt is recorded for the resolution and its governing proposal.",
-    badges: ["receipt recorded", "proof attached"],
-    stateList: [
-      "execution_receipt: receipt:constitution:001",
-      "governed_ref: resolution:constitution:001",
-      "governed_ref: proposal:constitutional:001",
-      "proof_status: satisfied"
-    ],
-    meaning:
-      "Legitimacy is no longer only claimed. It is attached to a replayable execution event that future sessions can inspect.",
-    warnings: [],
-    snapshot: {
-      execution_receipt: "receipt:constitution:001",
-      governed_refs: ["resolution:constitution:001", "proposal:constitutional:001"],
-      replay_effective: true
-    }
-  },
-  {
-    title: "Canonical replay",
-    summary: "Replay now upgrades branch B into the active constitution, while preserving the conflict, proposal, resolution, and execution history.",
-    badges: ["canonical", "historical continuity"],
-    stateList: [
-      "active_constitution: constitution:v2-b",
-      "replay_effective: true",
-      "historical_conflict: preserved",
-      "warnings: cleared"
-    ],
-    meaning:
-      "This is the value proposition in miniature: institutions can change, but they change through visible, replayable history rather than silent replacement.",
-    warnings: [],
-    snapshot: {
-      active_constitution: "constitution:v2-b",
-      prior_conflict: ["constitution:v2-a", "constitution:v2-b"],
-      proposal_ref: "proposal:constitutional:001",
-      execution_receipt: "receipt:constitution:001",
-      replay_effective: true
-    }
-  }
-];
+const SCENARIO_PATH = "/continuum/playground/scenarios/constitutional-conflict-v0.json";
 
-const stepButtons = Array.from(document.querySelectorAll(".playground-step"));
+let PLAYGROUND_STAGES = [];
+let stepButtons = [];
+const scenarioSummaryEl = document.getElementById("scenario-summary");
+const stepContainerEl = document.getElementById("playground-steps");
 const titleEl = document.getElementById("stage-title");
 const summaryEl = document.getElementById("stage-summary");
 const badgesEl = document.getElementById("stage-badges");
@@ -225,9 +100,49 @@ function renderStage(index) {
   });
 }
 
-stepButtons.forEach((button, index) => {
-  button.addEventListener("click", () => renderStage(index));
-});
+function installScenario(scenario) {
+  PLAYGROUND_STAGES = scenario.stages.map((stage) => ({
+    title: stage.title,
+    summary: stage.summary,
+    badges: stage.badges,
+    stateList: stage.state_list,
+    meaning: stage.meaning,
+    warnings: stage.warnings,
+    snapshot: stage.snapshot
+  }));
 
-renderStage(0);
+  scenarioSummaryEl.textContent = scenario.summary;
+  stepContainerEl.innerHTML = scenario.stages
+    .map(
+      (stage, index) =>
+        `<button class="playground-step${index === 0 ? " active" : ""}" data-step="${index}">${stage.button_label}</button>`
+    )
+    .join("");
+
+  stepButtons = Array.from(document.querySelectorAll(".playground-step"));
+  stepButtons.forEach((button, index) => {
+    button.addEventListener("click", () => renderStage(index));
+  });
+
+  renderStage(0);
+}
+
+fetch(SCENARIO_PATH)
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error(`Failed to load scenario: ${response.status}`);
+    }
+    return response.json();
+  })
+  .then((scenario) => installScenario(scenario))
+  .catch((error) => {
+    scenarioSummaryEl.textContent = "Scenario fixture failed to load.";
+    titleEl.textContent = "Playground load error";
+    summaryEl.textContent = error.message;
+    meaningEl.textContent =
+      "The visual playground now expects a scenario fixture. Once the JSON is available, the page will hydrate from repository data instead of hard-coded stage objects.";
+    warningListEl.innerHTML = "<li>fixture_load_failed</li>";
+    stateListEl.innerHTML = "<li>scenario_fixture: unavailable</li>";
+    stateJsonEl.textContent = JSON.stringify({ error: error.message, path: SCENARIO_PATH }, null, 2);
+  });
 </script>

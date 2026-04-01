@@ -21,6 +21,18 @@ The goal is to prevent silent rewriting of foundational positions.
   - `README.md`
   - `docs/index.md`
 
+### 2026-04-01
+
+- Changed artifact: playground scenario data boundary
+- Previous position: the playground existed, but its constitutional-conflict states were still hard-coded inside the page itself
+- New position: the playground now hydrates from a dedicated repository fixture, making the first visual demo consume scenario data instead of embedding the protocol story directly in page code
+- Reason: future scenarios should share a stable shape with repository artifacts instead of repeating the same state model in HTML
+- Trigger: decision to move the playground from narrative-only UI toward a reusable protocol-viewer surface
+- Downstream docs affected:
+  - `docs/playground/index.md`
+  - `docs/playground/scenarios/constitutional-conflict-v0.json`
+  - `README.md`
+
 ### 2026-03-26
 
 - Changed artifact: public repository and multilingual project surface

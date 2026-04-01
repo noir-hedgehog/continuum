@@ -75,6 +75,7 @@ It is intentionally simple in v0. The goal is to keep the current work graph vis
 - Intent: turn the strongest current constitutional demo path into a visual, inspectable playground that bridges protocol specs and a future application UI
 - Outputs:
   - `docs/playground/index.md`
+  - `docs/playground/scenarios/constitutional-conflict-v0.json`
   - `docs/assets/main.scss`
   - `README.md`
 

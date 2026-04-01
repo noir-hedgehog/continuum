@@ -56,3 +56,5 @@ Project pages live under [`docs/`](/Users/ninebot/homestead/docs). After enablin
 ## Status
 
 Continuum is a live protocol prototype, not a finished network. The current phase focuses on continuity, governance, institutional memory, public anchoring, and operator-coherent demos.
+
+The GitHub Pages playground is now moving from hand-authored state to repository-backed scenario fixtures, starting with the constitutional conflict path.
