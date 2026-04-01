@@ -46,6 +46,17 @@ The goal is to prevent silent rewriting of foundational positions.
   - `docs/playground/scenarios/session-restart-v0.json`
   - `docs/assets/main.scss`
 
+### 2026-04-01
+
+- Changed artifact: successor recovery playground path
+- Previous position: the playground could show clean replayable continuity and constitutional legitimacy, but not the more ambiguous case where continuity degrades into successor status
+- New position: the playground now includes a successor recovery scenario that visualizes disruption, recovery claim, successor assessment, required followups, and pending recognition
+- Reason: Continuum's value is not only in clean same-agent continuity, but in handling broken lineages without collapsing into either amnesia or false sameness
+- Trigger: decision to extend the visual surface toward more realistic continuity outcomes after establishing multi-scenario playback
+- Downstream docs affected:
+  - `docs/playground/index.md`
+  - `docs/playground/scenarios/successor-recovery-v0.json`
+
 ### 2026-03-26
 
 - Changed artifact: public repository and multilingual project surface

@@ -77,6 +77,7 @@ It is intentionally simple in v0. The goal is to keep the current work graph vis
   - `docs/playground/index.md`
   - `docs/playground/scenarios/constitutional-conflict-v0.json`
   - `docs/playground/scenarios/session-restart-v0.json`
+  - `docs/playground/scenarios/successor-recovery-v0.json`
   - `docs/assets/main.scss`
   - `README.md`
 

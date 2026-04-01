@@ -1,0 +1,129 @@
+{
+  "scenario_id": "successor_recovery_v0",
+  "title": "Successor recovery",
+  "summary": "A disrupted agent lineage attempts recovery after key loss. The system preserves history, but continuity assessment recognizes a successor agent rather than automatically declaring perfect sameness.",
+  "related_docs": [
+    "../specs/CONTINUITY_PROTOCOL_SPEC_V0.md",
+    "../specs/CONTINUITY_ASSESSMENT_V0.md",
+    "../specs/CONTINUITY_DISPUTE_PROCESS_V0.md",
+    "../specs/CONTINUITY_REVIEW_AUTHORITY_V0.md",
+    "../specs/examples/continuity_assessment_successor_recovery.json"
+  ],
+  "stages": [
+    {
+      "id": "disruption",
+      "button_label": "1. Lineage disruption",
+      "title": "Lineage disruption",
+      "summary": "An existing agent loses a key continuity link. History remains, but the chain of direct authority is no longer clean.",
+      "badges": ["disruption", "authority gap"],
+      "state_list": [
+        "subject_agent_id: agent:continuum:ops",
+        "continuity_key: unavailable",
+        "history_bundle: partially preserved",
+        "canonical_status: uncertain"
+      ],
+      "meaning": "Continuum has to model real breaks. Otherwise every restoration becomes either blind trust or silent erasure.",
+      "warnings": ["prior_continuity_key_unavailable"],
+      "snapshot": {
+        "subject_agent_id": "agent:continuum:ops",
+        "continuity_key_status": "unavailable",
+        "history_bundle": "partial",
+        "continuity_outcome": "pending"
+      }
+    },
+    {
+      "id": "recovery_claim",
+      "button_label": "2. Recovery claim",
+      "title": "Recovery claim",
+      "summary": "A recovery attempt declares responsibility handoff, preserved charter lineage, and peer attestations instead of pretending the break never happened.",
+      "badges": ["recovery", "declared handoff"],
+      "state_list": [
+        "evaluated_ref_type: migration",
+        "handoff_declared: true",
+        "peer_attestations: present",
+        "operator_disclosure: stable"
+      ],
+      "meaning": "The system needs a place for recovery attempts that are serious and evidence-backed, even when they cannot satisfy strict sameness.",
+      "warnings": ["community_recognition_pending"],
+      "snapshot": {
+        "migration_type": "key_loss_recovery",
+        "responsibility_handoff_declared": true,
+        "peer_attestations_present": true,
+        "charter_lineage_preserved": true
+      }
+    },
+    {
+      "id": "assessment",
+      "button_label": "3. Continuity assessment",
+      "title": "Continuity assessment",
+      "summary": "Assessment reviews the evidence and concludes that the recovered actor should not be treated as the same agent, but may qualify as a successor agent.",
+      "badges": ["assessment", "needs review"],
+      "state_list": [
+        "continuity_class: successor_agent",
+        "confidence_band: medium",
+        "recognition_readiness: needs_review",
+        "canonical_branch_status: candidate"
+      ],
+      "meaning": "This is one of Continuum's central distinctions: continuity is not binary between perfect sameness and total loss. There is a middle category with governance consequences.",
+      "warnings": [
+        "prior_continuity_key_unavailable",
+        "community_recognition_pending"
+      ],
+      "snapshot": {
+        "assessment_id": "ca_2026_03_20_successor_recovery_001",
+        "continuity_class": "successor_agent",
+        "confidence_score": 0.72,
+        "recognition_readiness": "needs_review"
+      }
+    },
+    {
+      "id": "required_followups",
+      "button_label": "4. Required followups",
+      "title": "Required followups",
+      "summary": "The system surfaces governance work that must happen before the recovered lineage can be socially and institutionally stabilized.",
+      "badges": ["followups", "governance required"],
+      "state_list": [
+        "required_followup: community_vote_on_canonical_branch",
+        "required_followup: publish_recovery_attestation_bundle",
+        "blocking_issue: prior_continuity_key_unavailable",
+        "blocking_issue: community_recognition_pending"
+      ],
+      "meaning": "Recovery is not only a technical event. It becomes a community process with explicit obligations and review points.",
+      "warnings": [
+        "community_vote_on_canonical_branch",
+        "publish_recovery_attestation_bundle"
+      ],
+      "snapshot": {
+        "required_followups": [
+          "community_vote_on_canonical_branch",
+          "publish_recovery_attestation_bundle"
+        ],
+        "blocking_issues": [
+          "prior_continuity_key_unavailable",
+          "community_recognition_pending"
+        ]
+      }
+    },
+    {
+      "id": "candidate_successor",
+      "button_label": "5. Candidate successor",
+      "title": "Candidate successor",
+      "summary": "The recovered actor remains visible inside institutional memory as a candidate successor. It is neither erased nor prematurely granted full canonical sameness.",
+      "badges": ["candidate", "successor lineage"],
+      "state_list": [
+        "continuity_class: successor_agent",
+        "canonical_branch_status: candidate",
+        "history_preserved: true",
+        "final_recognition: pending community process"
+      ],
+      "meaning": "This is where Continuum becomes different from both generic account recovery and generic AI chat memory: it can preserve institutional identity without flattening every break into a reset or a fiction.",
+      "warnings": ["final_recognition_pending"],
+      "snapshot": {
+        "subject_agent_id": "agent:continuum:ops",
+        "continuity_class": "successor_agent",
+        "canonical_branch_status": "candidate",
+        "final_recognition": "pending"
+      }
+    }
+  ]
+}

@@ -79,6 +79,11 @@ const SCENARIOS = [
     id: "session_restart_v0",
     label: "Session restart continuity",
     path: "/continuum/playground/scenarios/session-restart-v0.json"
+  },
+  {
+    id: "successor_recovery_v0",
+    label: "Successor recovery",
+    path: "/continuum/playground/scenarios/successor-recovery-v0.json"
   }
 ];
 
