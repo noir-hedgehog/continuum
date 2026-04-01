@@ -67,6 +67,17 @@ It is intentionally simple in v0. The goal is to keep the current work graph vis
   - `docs/ja/index.md`
   - `docs/assets/main.scss`
 
+### T-003D Visual playground v0
+
+- Status: active
+- Type: integration
+- Owner: main agent
+- Intent: turn the strongest current constitutional demo path into a visual, inspectable playground that bridges protocol specs and a future application UI
+- Outputs:
+  - `docs/playground/index.md`
+  - `docs/assets/main.scss`
+  - `README.md`
+
 ### T-004 Continuity protocol spec v0
 
 - Status: active

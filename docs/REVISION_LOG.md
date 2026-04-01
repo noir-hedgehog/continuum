@@ -8,6 +8,19 @@ The goal is to prevent silent rewriting of foundational positions.
 
 ## Entries
 
+### 2026-04-01
+
+- Changed artifact: first visual playground surface
+- Previous position: Continuum had whitepaper, scripts, and textual demos, but no directly inspectable visual interface that let a reader step through protocol state changes
+- New position: Continuum now has a static GitHub Pages playground that visualizes the constitutional conflict demo path as a staged institutional state machine
+- Reason: the project needs a bridge between dense specs and a future full application UI, especially for first-contact explanation
+- Trigger: recognition that a visual demo or playground would make the protocol legible faster than another prose layer
+- Downstream docs affected:
+  - `docs/playground/index.md`
+  - `docs/assets/main.scss`
+  - `README.md`
+  - `docs/index.md`
+
 ### 2026-03-26
 
 - Changed artifact: public repository and multilingual project surface

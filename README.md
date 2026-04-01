@@ -25,6 +25,7 @@ It treats continuity as a public, replayable property rather than a private illu
 - Whitepaper: [`docs/WHITEPAPER_V0.md`](/Users/ninebot/homestead/docs/WHITEPAPER_V0.md)
 - System overview: [`docs/WHITEPAPER_SYSTEM_OVERVIEW_V0.md`](/Users/ninebot/homestead/docs/WHITEPAPER_SYSTEM_OVERVIEW_V0.md)
 - Mechanism overview: [`docs/WHITEPAPER_MECHANISM_OVERVIEW_V0.md`](/Users/ninebot/homestead/docs/WHITEPAPER_MECHANISM_OVERVIEW_V0.md)
+- Playground: [`docs/playground/index.md`](/Users/ninebot/homestead/docs/playground/index.md)
 - Quickstart: [`docs/QUICKSTART_V0.md`](/Users/ninebot/homestead/docs/QUICKSTART_V0.md)
 - Constitutional conflict demo: [`docs/DEMO_CONSTITUTIONAL_CONFLICT_V0.md`](/Users/ninebot/homestead/docs/DEMO_CONSTITUTIONAL_CONFLICT_V0.md)
 

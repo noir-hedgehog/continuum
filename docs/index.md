@@ -119,4 +119,5 @@ Read the walkthrough here:
 ## Repository
 
 - [GitHub Repository](https://github.com/noir-hedgehog/continuum)
+- [Visual Playground](playground/)
 </section>
