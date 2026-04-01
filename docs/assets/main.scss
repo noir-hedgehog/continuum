@@ -123,6 +123,30 @@
   color: #ffffff;
 }
 
+.playground-scenario-meta {
+  margin-bottom: 1rem;
+}
+
+.playground-scenario-card {
+  padding: 0.95rem 1rem 0.55rem;
+  border: 1px solid #dbe4ef;
+  border-radius: 14px;
+  background: #f8fbff;
+}
+
+.playground-scenario-value {
+  margin: 0.1rem 0 0.8rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.playground-scenario-caption {
+  margin: 0.1rem 0 0.25rem;
+  color: #475569;
+  font-size: 0.94rem;
+}
+
 .playground-step {
   width: 100%;
   padding: 0.9rem 1rem;

@@ -21,6 +21,7 @@ This playground turns current Continuum demo paths into inspectable state machin
   <section class="section-card playground-sidebar">
     <h2>Scenario</h2>
     <div class="playground-scenario-switch" id="scenario-switch"></div>
+    <div class="playground-scenario-meta" id="scenario-meta"></div>
     <p id="scenario-summary">Loading scenario...</p>
 
     <div class="playground-steps" id="playground-steps"></div>
@@ -73,16 +74,22 @@ const SCENARIOS = [
   {
     id: "constitutional_conflict_v0",
     label: "Constitutional conflict",
+    lens: "Institutional legitimacy",
+    bestFor: "Why constitutions need replayable conflict resolution",
     path: "/continuum/playground/scenarios/constitutional-conflict-v0.json"
   },
   {
     id: "session_restart_v0",
     label: "Session restart continuity",
+    lens: "Same-agent continuity",
+    bestFor: "Why session death does not have to break public identity",
     path: "/continuum/playground/scenarios/session-restart-v0.json"
   },
   {
     id: "successor_recovery_v0",
     label: "Successor recovery",
+    lens: "Broken-lineage recovery",
+    bestFor: "Why recovery is not the same as perfect sameness",
     path: "/continuum/playground/scenarios/successor-recovery-v0.json"
   }
 ];
@@ -92,6 +99,7 @@ let stepButtons = [];
 let scenarioButtons = [];
 let activeScenarioIndex = 0;
 const scenarioSwitchEl = document.getElementById("scenario-switch");
+const scenarioMetaEl = document.getElementById("scenario-meta");
 const scenarioSummaryEl = document.getElementById("scenario-summary");
 const stepContainerEl = document.getElementById("playground-steps");
 const titleEl = document.getElementById("stage-title");
@@ -115,6 +123,16 @@ function renderScenarioButtons() {
   scenarioButtons.forEach((button, index) => {
     button.addEventListener("click", () => loadScenario(index));
   });
+
+  const activeScenario = SCENARIOS[activeScenarioIndex];
+  scenarioMetaEl.innerHTML = `
+    <div class="playground-scenario-card">
+      <p class="playground-label">Lens</p>
+      <p class="playground-scenario-value">${activeScenario.lens}</p>
+      <p class="playground-label">Best for</p>
+      <p class="playground-scenario-caption">${activeScenario.bestFor}</p>
+    </div>
+  `;
 }
 
 function renderStage(index) {
