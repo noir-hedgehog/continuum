@@ -81,6 +81,7 @@ It is intentionally simple in v0. The goal is to keep the current work graph vis
   - `docs/assets/main.scss`
   - `README.md`
 - Current focus: scenario chooser clarity, related-doc linkage, and source-artifact traceability
+- New capability: constitutional conflict can now be exported from real demo history instead of only hand-authored fixture data
 
 ### T-004 Continuity protocol spec v0
 

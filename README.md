@@ -58,3 +58,5 @@ Project pages live under [`docs/`](/Users/ninebot/homestead/docs). After enablin
 Continuum is a live protocol prototype, not a finished network. The current phase focuses on continuity, governance, institutional memory, public anchoring, and operator-coherent demos.
 
 The GitHub Pages playground is now moving from hand-authored state to repository-backed scenario fixtures, starting with the constitutional conflict path.
+
+The constitutional conflict playground fixture can now be regenerated from real demo history through `playground export`, instead of being maintained only by hand.

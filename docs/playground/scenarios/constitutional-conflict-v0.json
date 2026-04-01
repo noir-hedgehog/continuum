@@ -1,13 +1,11 @@
 {
-  "scenario_id": "constitutional_conflict_v0",
-  "title": "Constitutional conflict",
-  "summary": "A community publishes competing constitutional branches, records a proposal-backed resolution, waits for execution proof, and then observes replay become canonically effective.",
   "related_docs": [
     "../DEMO_CONSTITUTIONAL_CONFLICT_V0.md",
     "../specs/CONSTITUTION_CONFLICT_RESOLUTION_V0.md",
     "../specs/CONSTITUTION_LINEAGE_V0.md",
     "../specs/GOVERNANCE_EXECUTION_RECEIPTS_V0.md"
   ],
+  "scenario_id": "constitutional_conflict_v0",
   "source_artifacts": [
     {
       "label": "Scenario fixture",
@@ -20,130 +18,169 @@
   ],
   "stages": [
     {
-      "id": "root_constitution",
+      "badges": [
+        "stable",
+        "single lineage"
+      ],
       "button_label": "1. Root constitution",
-      "title": "Root constitution",
-      "summary": "The community starts from a single recognized constitution. There is no institutional ambiguity yet.",
-      "badges": ["stable", "single lineage"],
+      "id": "root_constitution",
+      "meaning": "This is the baseline most systems assume forever. Continuum treats it as only the starting point, not the whole story.",
+      "snapshot": {
+        "active_constitution": "constitution:ba4da1416585c809",
+        "constitution_lineage": "single_branch",
+        "replay_effective": true,
+        "root_constitution": "constitution:ba4da1416585c809"
+      },
       "state_list": [
-        "recognized_constitution: constitution:v1",
+        "recognized_constitution: constitution:ba4da1416585c809",
         "lineage_status: clear",
         "branch_conflict: none",
         "replay_effective: true"
       ],
-      "meaning": "This is the baseline most systems assume forever. Continuum treats it as only the starting point, not the whole story.",
-      "warnings": [],
-      "snapshot": {
-        "root_constitution": "constitution:v1",
-        "active_constitution": "constitution:v1",
-        "constitution_lineage": "single_branch",
-        "replay_effective": true
-      }
+      "summary": "The community starts from a single recognized constitution. There is no institutional ambiguity yet.",
+      "title": "Root constitution",
+      "warnings": []
     },
     {
-      "id": "competing_branches",
+      "badges": [
+        "conflict",
+        "history preserved"
+      ],
       "button_label": "2. Competing branches",
-      "title": "Competing branches",
-      "summary": "Two child constitutions supersede the same parent, creating a branch conflict that replay can see.",
-      "badges": ["conflict", "history preserved"],
+      "id": "competing_branches",
+      "meaning": "Instead of pretending conflict never happened, Continuum keeps constitutional ambiguity visible inside institutional history.",
+      "snapshot": {
+        "active_constitution": "constitution:ba4da1416585c809",
+        "competing_children": [
+          "constitution:8c554b9c5f8e33d3",
+          "constitution:078b4a265e08a71c"
+        ],
+        "replay_effective": true,
+        "root_constitution": "constitution:ba4da1416585c809"
+      },
       "state_list": [
-        "recognized_constitution: constitution:v1",
-        "branch_a: constitution:v2-a",
-        "branch_b: constitution:v2-b",
+        "recognized_constitution: constitution:ba4da1416585c809",
+        "branch_a: constitution:8c554b9c5f8e33d3",
+        "branch_b: constitution:078b4a265e08a71c",
         "branch_conflict: detected"
       ],
-      "meaning": "Instead of pretending conflict never happened, Continuum keeps constitutional ambiguity visible inside institutional history.",
-      "warnings": ["constitution_branch_conflict:constitution:v1"],
-      "snapshot": {
-        "root_constitution": "constitution:v1",
-        "competing_children": ["constitution:v2-a", "constitution:v2-b"],
-        "active_constitution": "constitution:v1",
-        "replay_effective": true
-      }
+      "summary": "Two child constitutions supersede the same parent, creating a branch conflict that replay can see.",
+      "title": "Competing branches",
+      "warnings": [
+        "constitution_conflict:constitution:ba4da1416585c809"
+      ]
     },
     {
-      "id": "proposal_resolution",
-      "button_label": "3. Proposal-backed resolution",
-      "title": "Proposal-backed resolution",
-      "summary": "A constitutional proposal and a branch resolution choose branch B as the recognized path forward.",
-      "badges": ["proposal-linked", "legible legitimacy"],
-      "state_list": [
-        "proposal_id: proposal:constitutional:001",
-        "resolution_id: resolution:constitution:001",
-        "recognized_branch: constitution:v2-b",
-        "rejected_branch: constitution:v2-a"
+      "badges": [
+        "proposal-linked",
+        "legible legitimacy"
       ],
+      "button_label": "3. Proposal-backed resolution",
+      "id": "proposal_resolution",
       "meaning": "Continuum does not reduce branch selection to admin fiat. The decision becomes a replayable governance object with explicit basis.",
-      "warnings": ["constitution_resolution_execution_required:resolution:constitution:001"],
       "snapshot": {
-        "proposal_ref": "proposal:constitutional:001",
-        "resolution_ref": "resolution:constitution:001",
-        "recognized_constitution": "constitution:v2-b",
-        "replay_effective": false
-      }
+        "proposal_ref": "proposal:49d9f715e90fe4ff",
+        "recognized_constitution": "constitution:078b4a265e08a71c",
+        "replay_effective": false,
+        "resolution_ref": "constitution-resolution:2f4ee9265f5fe59f"
+      },
+      "state_list": [
+        "proposal_id: proposal:49d9f715e90fe4ff",
+        "resolution_id: constitution-resolution:2f4ee9265f5fe59f",
+        "recognized_branch: constitution:078b4a265e08a71c",
+        "rejected_branch: constitution:8c554b9c5f8e33d3"
+      ],
+      "summary": "A constitutional proposal and a branch resolution choose branch B as the recognized path forward.",
+      "title": "Proposal-backed resolution",
+      "warnings": [
+        "constitution_conflict:constitution:ba4da1416585c809",
+        "constitution_resolution_missing_execution:constitution-resolution:2f4ee9265f5fe59f",
+        "constitution_resolution_execution_required:constitution-resolution:2f4ee9265f5fe59f"
+      ]
     },
     {
-      "id": "recorded_not_effective",
+      "badges": [
+        "delayed canonical effect",
+        "execution pending"
+      ],
       "button_label": "4. Recorded, not effective",
-      "title": "Recorded, not effective",
-      "summary": "The branch resolution exists in history, but the chosen constitution is still not canonically active because execution proof is missing.",
-      "badges": ["delayed canonical effect", "execution pending"],
+      "id": "recorded_not_effective",
+      "meaning": "This is a key Continuum idea: history can record an outcome before institutions are willing to treat that outcome as effective canon.",
+      "snapshot": {
+        "active_constitution": "constitution:ba4da1416585c809",
+        "pending_constitution": "constitution:078b4a265e08a71c",
+        "replay_effective": false,
+        "resolution_recorded": true
+      },
       "state_list": [
         "resolution_recorded: true",
         "replay_effective: false",
-        "active_constitution: constitution:v1",
+        "active_constitution: constitution:ba4da1416585c809",
         "execution_receipt: missing"
       ],
-      "meaning": "This is a key Continuum idea: history can record an outcome before institutions are willing to treat that outcome as effective canon.",
-      "warnings": ["constitution_resolution_execution_required:resolution:constitution:001"],
-      "snapshot": {
-        "resolution_recorded": true,
-        "active_constitution": "constitution:v1",
-        "pending_constitution": "constitution:v2-b",
-        "replay_effective": false
-      }
+      "summary": "The branch resolution exists in history, but the chosen constitution is still not canonically active because execution proof is missing.",
+      "title": "Recorded, not effective",
+      "warnings": [
+        "constitution_conflict:constitution:ba4da1416585c809",
+        "constitution_resolution_missing_execution:constitution-resolution:2f4ee9265f5fe59f",
+        "constitution_resolution_execution_required:constitution-resolution:2f4ee9265f5fe59f"
+      ]
     },
     {
-      "id": "execution_proof",
+      "badges": [
+        "receipt recorded",
+        "proof attached"
+      ],
       "button_label": "5. Execution proof",
-      "title": "Execution proof",
-      "summary": "A constitution_execution receipt is recorded for the resolution and its governing proposal.",
-      "badges": ["receipt recorded", "proof attached"],
+      "id": "execution_proof",
+      "meaning": "Legitimacy is no longer only claimed. It is attached to a replayable execution event that future sessions can inspect.",
+      "snapshot": {
+        "execution_receipt": "execution:0b039e3cc21f63c5",
+        "governed_refs": [
+          "constitution-resolution:2f4ee9265f5fe59f",
+          "proposal:49d9f715e90fe4ff"
+        ],
+        "replay_effective": true
+      },
       "state_list": [
-        "execution_receipt: receipt:constitution:001",
-        "governed_ref: resolution:constitution:001",
-        "governed_ref: proposal:constitutional:001",
+        "execution_receipt: execution:0b039e3cc21f63c5",
+        "governed_ref: constitution-resolution:2f4ee9265f5fe59f",
+        "governed_ref: proposal:49d9f715e90fe4ff",
         "proof_status: satisfied"
       ],
-      "meaning": "Legitimacy is no longer only claimed. It is attached to a replayable execution event that future sessions can inspect.",
-      "warnings": [],
-      "snapshot": {
-        "execution_receipt": "receipt:constitution:001",
-        "governed_refs": ["resolution:constitution:001", "proposal:constitutional:001"],
-        "replay_effective": true
-      }
+      "summary": "A constitution_execution receipt is recorded for the resolution and its governing proposal.",
+      "title": "Execution proof",
+      "warnings": []
     },
     {
-      "id": "canonical_replay",
+      "badges": [
+        "canonical",
+        "historical continuity"
+      ],
       "button_label": "6. Canonical replay",
-      "title": "Canonical replay",
-      "summary": "Replay now upgrades branch B into the active constitution, while preserving the conflict, proposal, resolution, and execution history.",
-      "badges": ["canonical", "historical continuity"],
+      "id": "canonical_replay",
+      "meaning": "This is the value proposition in miniature: institutions can change, but they change through visible, replayable history rather than silent replacement.",
+      "snapshot": {
+        "active_constitution": "constitution:078b4a265e08a71c",
+        "execution_receipt": "execution:0b039e3cc21f63c5",
+        "prior_conflict": [
+          "constitution:8c554b9c5f8e33d3",
+          "constitution:078b4a265e08a71c"
+        ],
+        "proposal_ref": "proposal:49d9f715e90fe4ff",
+        "replay_effective": true
+      },
       "state_list": [
-        "active_constitution: constitution:v2-b",
+        "active_constitution: constitution:078b4a265e08a71c",
         "replay_effective: true",
         "historical_conflict: preserved",
         "warnings: cleared"
       ],
-      "meaning": "This is the value proposition in miniature: institutions can change, but they change through visible, replayable history rather than silent replacement.",
-      "warnings": [],
-      "snapshot": {
-        "active_constitution": "constitution:v2-b",
-        "prior_conflict": ["constitution:v2-a", "constitution:v2-b"],
-        "proposal_ref": "proposal:constitutional:001",
-        "execution_receipt": "receipt:constitution:001",
-        "replay_effective": true
-      }
+      "summary": "Replay now upgrades branch B into the active constitution, while preserving the conflict, proposal, resolution, and execution history.",
+      "title": "Canonical replay",
+      "warnings": []
     }
-  ]
+  ],
+  "summary": "A community publishes competing constitutional branches, records a proposal-backed resolution, waits for execution proof, and then observes replay become canonically effective.",
+  "title": "Constitutional conflict"
 }

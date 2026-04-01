@@ -33,6 +33,7 @@ from src.governance.bootstrap import (
     build_work_receipt_payload,
 )
 from src.indexer.materialize import RepositoryIndexer
+from src.playground.export import export_constitutional_conflict_playground_scenario
 from src.runtime.events import (
     artifact_refs,
     build_checkpoint_payload,
@@ -1328,6 +1329,17 @@ def cmd_anchor_inspect(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_playground_export(args: argparse.Namespace) -> int:
+    store = _store()
+    output_path = Path(args.output)
+    if args.scenario == "constitutional_conflict_v0":
+        target = export_constitutional_conflict_playground_scenario(store, args.community_id, output_path)
+    else:
+        raise ValueError(f"Unsupported playground scenario {args.scenario}.")
+    print(json.dumps({"scenario": args.scenario, "output": str(target)}, indent=2, sort_keys=True))
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="continuum")
     subparsers = parser.add_subparsers(dest="command", required=True)
@@ -1723,6 +1735,14 @@ def build_parser() -> argparse.ArgumentParser:
     anchor_inspect = anchor_sub.add_parser("inspect")
     anchor_inspect.add_argument("--anchor-id", required=True)
     anchor_inspect.set_defaults(func=cmd_anchor_inspect)
+
+    playground = subparsers.add_parser("playground")
+    playground_sub = playground.add_subparsers(dest="playground_command", required=True)
+    playground_export = playground_sub.add_parser("export")
+    playground_export.add_argument("--scenario", required=True, choices=["constitutional_conflict_v0"])
+    playground_export.add_argument("--community-id", required=True)
+    playground_export.add_argument("--output", required=True)
+    playground_export.set_defaults(func=cmd_playground_export)
 
     return parser
 

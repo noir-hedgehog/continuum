@@ -70,6 +70,21 @@ The goal is to prevent silent rewriting of foundational positions.
   - `docs/playground/scenarios/session-restart-v0.json`
   - `docs/playground/scenarios/successor-recovery-v0.json`
 
+### 2026-04-01
+
+- Changed artifact: repository-backed playground export path
+- Previous position: playground fixtures were repository files, but constitutional conflict still depended on hand-maintained scenario content
+- New position: Continuum now has a playground export command and regeneration script that derive the constitutional conflict scenario from real governance history and demo events
+- Reason: the visual demo should increasingly reflect replayed protocol artifacts rather than manually curated summaries
+- Trigger: decision to make the strongest current playground path genuinely artifact-driven
+- Downstream docs affected:
+  - `src/playground/export.py`
+  - `src/cli/main.py`
+  - `scripts/export_constitutional_conflict_playground_v0.sh`
+  - `docs/playground/scenarios/constitutional-conflict-v0.json`
+  - `tests/test_runtime_bootstrap.py`
+  - `README.md`
+
 ### 2026-03-26
 
 - Changed artifact: public repository and multilingual project surface

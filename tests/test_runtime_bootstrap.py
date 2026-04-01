@@ -3610,6 +3610,219 @@ class CliBootstrapTests(unittest.TestCase):
             finally:
                 os.chdir(cwd)
 
+    def test_cli_can_export_constitutional_conflict_playground_scenario(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            cwd = Path.cwd()
+            try:
+                os.chdir(tmp)
+                community_id = "community:continuum:lab"
+                self.assertEqual(
+                    self.run_cli(
+                        [
+                            "agent",
+                            "init",
+                            "--scope",
+                            "continuum",
+                            "--name",
+                            "main",
+                            "--display-name",
+                            "Continuum Main",
+                        ]
+                    )[0],
+                    0,
+                )
+                self.assertEqual(
+                    self.run_cli(
+                        [
+                            "governance",
+                            "membership",
+                            "grant",
+                            "--community-id",
+                            community_id,
+                            "--member-agent-id",
+                            "agent:continuum:main",
+                            "--membership-status",
+                            "active",
+                            "--role",
+                            "maintainer",
+                            "--role",
+                            "member",
+                            "--sponsor-ref",
+                            "docs/FOUNDING_THESIS.md",
+                        ]
+                    )[0],
+                    0,
+                )
+                root_payload = self.run_cli(
+                    [
+                        "governance",
+                        "constitution",
+                        "set",
+                        "--community-id",
+                        community_id,
+                        "--title",
+                        "Continuum Constitution v1",
+                        "--constitution-version",
+                        "v1",
+                        "--amended-at",
+                        "2026-03-22T00:00:00Z",
+                    ]
+                )[1]
+                root_id = root_payload["payload"]["constitution"]["constitution_id"]
+                branch_a_payload = self.run_cli(
+                    [
+                        "governance",
+                        "constitution",
+                        "set",
+                        "--community-id",
+                        community_id,
+                        "--title",
+                        "Continuum Constitution v2-a",
+                        "--constitution-version",
+                        "v2-a",
+                        "--supersedes",
+                        root_id,
+                        "--amended-at",
+                        "2026-03-22T01:00:00Z",
+                    ]
+                )[1]
+                branch_a_id = branch_a_payload["payload"]["constitution"]["constitution_id"]
+                continuity_policies = json.dumps(
+                    {
+                        "case_assign": {
+                            "allow_subject_self_assign": False,
+                            "allowed_standings": ["clear"],
+                            "required_roles": ["maintainer"],
+                        },
+                        "case_decide": {
+                            "allow_opener_as_decider": False,
+                            "allow_subject_self_decide": False,
+                            "allowed_standings": ["clear"],
+                            "min_assessment_count": 1,
+                            "require_distinct_assessors": False,
+                            "required_roles": ["maintainer", "reviewer"],
+                        },
+                        "case_open": {
+                            "allow_subject_self_open": False,
+                            "allowed_standings": ["clear"],
+                            "required_roles": ["maintainer", "reviewer"],
+                        },
+                        "constitution_resolution": {
+                            "allowed_standings": ["clear"],
+                            "required_roles": ["maintainer"],
+                            "require_proposal_ref": False,
+                            "require_execution_receipt": True,
+                        },
+                    },
+                    sort_keys=True,
+                )
+                branch_b_payload = self.run_cli(
+                    [
+                        "governance",
+                        "constitution",
+                        "set",
+                        "--community-id",
+                        community_id,
+                        "--title",
+                        "Continuum Constitution v2-b",
+                        "--constitution-version",
+                        "v2-b",
+                        "--supersedes",
+                        root_id,
+                        "--amended-at",
+                        "2026-03-22T01:05:00Z",
+                        "--continuity-policies-json",
+                        continuity_policies,
+                    ]
+                )[1]
+                branch_b_id = branch_b_payload["payload"]["constitution"]["constitution_id"]
+                proposal_payload = self.run_cli(
+                    [
+                        "governance",
+                        "proposal",
+                        "submit",
+                        "--community-id",
+                        community_id,
+                        "--proposal-type",
+                        "constitutional",
+                        "--title",
+                        "Recognize canonical constitutional branch",
+                        "--summary",
+                        "Select the branch that should count as canonical for replay.",
+                        "--affected-ref",
+                        branch_a_id,
+                        "--affected-ref",
+                        branch_b_id,
+                    ]
+                )[1]
+                proposal_id = proposal_payload["payload"]["proposal"]["proposal_id"]
+                resolution_payload = self.run_cli(
+                    [
+                        "governance",
+                        "constitution",
+                        "resolve",
+                        "--community-id",
+                        community_id,
+                        "--parent-constitution-id",
+                        root_id,
+                        "--recognized-constitution-id",
+                        branch_b_id,
+                        "--rejected-constitution-id",
+                        branch_a_id,
+                        "--proposal-ref",
+                        proposal_id,
+                        "--reason",
+                        "Select canonical branch and require execution proof.",
+                    ]
+                )[1]
+                resolution_id = resolution_payload["payload"]["constitution_resolution"]["resolution_id"]
+                self.assertEqual(
+                    self.run_cli(
+                        [
+                            "governance",
+                            "execute",
+                            "record",
+                            "--community-id",
+                            community_id,
+                            "--execution-type",
+                            "constitution_execution",
+                            "--governed-ref",
+                            resolution_id,
+                            "--governed-ref",
+                            proposal_id,
+                            "--output-ref",
+                            "doc://constitution-resolution/branch-b-finalized",
+                            "--result-summary",
+                            "Execution proof recorded for the canonical constitutional branch.",
+                        ]
+                    )[0],
+                    0,
+                )
+
+                output_path = Path(tmp) / "constitutional-conflict-v0.json"
+                code, payload = self.run_cli(
+                    [
+                        "playground",
+                        "export",
+                        "--scenario",
+                        "constitutional_conflict_v0",
+                        "--community-id",
+                        community_id,
+                        "--output",
+                        str(output_path),
+                    ]
+                )
+                self.assertEqual(code, 0)
+                self.assertEqual(payload["scenario"], "constitutional_conflict_v0")
+                exported = json.loads(output_path.read_text(encoding="utf-8"))
+                self.assertEqual(exported["scenario_id"], "constitutional_conflict_v0")
+                self.assertEqual(len(exported["stages"]), 6)
+                self.assertEqual(exported["stages"][2]["snapshot"]["proposal_ref"], proposal_id)
+                self.assertFalse(exported["stages"][3]["snapshot"]["replay_effective"])
+                self.assertTrue(exported["stages"][5]["snapshot"]["replay_effective"])
+            finally:
+                os.chdir(cwd)
+
     def test_anchor_export_is_deterministic_for_governance_state(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             cwd = Path.cwd()
