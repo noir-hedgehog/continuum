@@ -98,6 +98,31 @@
   margin-top: 1rem;
 }
 
+.playground-scenario-switch {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin: 0.5rem 0 1rem;
+}
+
+.playground-scenario-pill {
+  display: inline-block;
+  padding: 0.45rem 0.8rem;
+  border: 1px solid #d0d7de;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #0f172a;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.playground-scenario-pill.active {
+  background: #2563eb;
+  border-color: #2563eb;
+  color: #ffffff;
+}
+
 .playground-step {
   width: 100%;
   padding: 0.9rem 1rem;

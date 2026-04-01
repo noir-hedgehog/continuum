@@ -33,6 +33,19 @@ The goal is to prevent silent rewriting of foundational positions.
   - `docs/playground/scenarios/constitutional-conflict-v0.json`
   - `README.md`
 
+### 2026-04-01
+
+- Changed artifact: multi-scenario playground surface
+- Previous position: the playground could visualize only one protocol story, even though the repository already contained multiple continuity and governance narratives
+- New position: the playground now supports multiple repository-backed scenarios, beginning with constitutional conflict and session restart continuity
+- Reason: a real protocol viewer needs to compare distinct institutional paths rather than freeze one canonical story into a single page
+- Trigger: decision to stabilize the playground as a reusable viewing surface before adding more demo types
+- Downstream docs affected:
+  - `docs/playground/index.md`
+  - `docs/playground/scenarios/constitutional-conflict-v0.json`
+  - `docs/playground/scenarios/session-restart-v0.json`
+  - `docs/assets/main.scss`
+
 ### 2026-03-26
 
 - Changed artifact: public repository and multilingual project surface

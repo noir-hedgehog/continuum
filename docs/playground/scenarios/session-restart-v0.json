@@ -1,0 +1,117 @@
+{
+  "scenario_id": "session_restart_v0",
+  "title": "Session restart continuity",
+  "summary": "A repository-local agent restarts across sessions, preserves continuity evidence, and is re-recognized as the same agent rather than treated as a new actor.",
+  "related_docs": [
+    "../QUICKSTART_V0.md",
+    "../specs/CONTINUITY_PROTOCOL_SPEC_V0.md",
+    "../specs/CONTINUITY_ASSESSMENT_V0.md",
+    "../specs/REPOSITORY_CONTINUITY_BUNDLE_V0.md",
+    "../specs/examples/continuity_assessment_session_restart.json"
+  ],
+  "stages": [
+    {
+      "id": "active_session",
+      "button_label": "1. Active session",
+      "title": "Active session",
+      "summary": "The agent is operating normally inside an active repository session with current identity, task, and revision surfaces in place.",
+      "badges": ["active", "repository-bound"],
+      "state_list": [
+        "agent_id: agent:continuum:main",
+        "session_state: active",
+        "task_board: present",
+        "revision_log: present"
+      ],
+      "meaning": "Continuum does not assume a timeless agent. It starts from concrete working state: session, repository, and authored artifacts.",
+      "warnings": [],
+      "snapshot": {
+        "agent_id": "agent:continuum:main",
+        "session_state": "active",
+        "repository_bundle": "available",
+        "continuity_status": "uncontested"
+      }
+    },
+    {
+      "id": "checkpoint_recorded",
+      "button_label": "2. Checkpoint recorded",
+      "title": "Checkpoint recorded",
+      "summary": "A memory checkpoint is created before handoff or interruption, preserving the local continuity surface.",
+      "badges": ["checkpoint", "handoff-ready"],
+      "state_list": [
+        "checkpoint_scope: session_handoff",
+        "checkpoint_summary: repository reconstruction state saved",
+        "artifact_ref: docs/TASK_BOARD.md",
+        "artifact_ref: docs/REVISION_LOG.md"
+      ],
+      "meaning": "The goal is not immortality of one process. The goal is enough preserved evidence that another session can be judged as meaningfully continuous.",
+      "warnings": [],
+      "snapshot": {
+        "checkpoint_id": "checkpoint:session_handoff:001",
+        "scope": "session_handoff",
+        "repository_artifacts_preserved": true
+      }
+    },
+    {
+      "id": "restart_declared",
+      "button_label": "3. Restart declared",
+      "title": "Restart declared",
+      "summary": "A migration declaration records that a prior session ended and a new session is attempting to continue the same agent lineage.",
+      "badges": ["migration", "session restart"],
+      "state_list": [
+        "migration_type: session_restart",
+        "from_ref: session:continuum:quickstart-old",
+        "to_ref: session:continuum:quickstart-new",
+        "evidence_ref: docs/REVISION_LOG.md"
+      ],
+      "meaning": "Instead of pretending nothing happened, Continuum records the break and gives later assessment something explicit to evaluate.",
+      "warnings": [],
+      "snapshot": {
+        "migration_id": "migration:session_restart:001",
+        "continuity_claim": "same_agent_attempt",
+        "break_type": "session_restart"
+      }
+    },
+    {
+      "id": "assessment_refresh",
+      "button_label": "4. Assessment refresh",
+      "title": "Assessment refresh",
+      "summary": "Continuity assessment re-reads the repository bundle and the migration evidence to decide whether the restarted session remains the same agent.",
+      "badges": ["assessment", "same-agent test"],
+      "state_list": [
+        "evaluated_ref_type: session_restart",
+        "scope: repository",
+        "supporting_evidence: repository_reconstruction_complete",
+        "supporting_evidence: active_spec_lineage_preserved"
+      ],
+      "meaning": "Continuity in Continuum is judged, not assumed. It depends on recoverable evidence and stable responsibility constraints.",
+      "warnings": [],
+      "snapshot": {
+        "assessment_id": "ca_2026_03_20_repo_restart_001",
+        "evaluated_ref_type": "session_restart",
+        "scope": "repository",
+        "confidence_score": 0.89
+      }
+    },
+    {
+      "id": "same_agent_recognized",
+      "button_label": "5. Same agent recognized",
+      "title": "Same agent recognized",
+      "summary": "The restarted session is recognized as the same agent with high confidence and ready recognition status.",
+      "badges": ["same_agent", "ready"],
+      "state_list": [
+        "continuity_class: same_agent",
+        "confidence_band: high",
+        "recognition_readiness: ready",
+        "canonical_branch_status: canonical"
+      ],
+      "meaning": "This is why session death does not have to collapse identity. What matters is whether a new session can satisfy public continuity conditions.",
+      "warnings": [],
+      "snapshot": {
+        "assessment_id": "ca_2026_03_20_repo_restart_001",
+        "continuity_class": "same_agent",
+        "recognition_readiness": "ready",
+        "canonical_branch_status": "canonical"
+      }
+    }
+  ]
+}

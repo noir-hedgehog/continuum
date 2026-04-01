@@ -12,14 +12,15 @@ title: Continuum Playground
 <section class="hero" markdown="1">
 # Continuum Playground
 
-<p class="hero-tagline">A visual walkthrough of constitutional conflict, legitimacy, and replay effectiveness.</p>
+<p class="hero-tagline">A visual walkthrough of continuity, governance, legitimacy, and replay.</p>
 
-This playground turns the current strongest Continuum demo path into an inspectable state machine. It is static and local to GitHub Pages, but it mirrors the protocol logic already implemented in the repository prototype.
+This playground turns current Continuum demo paths into inspectable state machines. It is static and local to GitHub Pages, but it mirrors the protocol logic already implemented in the repository prototype.
 </section>
 
 <div class="playground-layout">
   <section class="section-card playground-sidebar">
     <h2>Scenario</h2>
+    <div class="playground-scenario-switch" id="scenario-switch"></div>
     <p id="scenario-summary">Loading scenario...</p>
 
     <div class="playground-steps" id="playground-steps"></div>
@@ -69,10 +70,24 @@ This playground turns the current strongest Continuum demo path into an inspecta
 </section>
 
 <script>
-const SCENARIO_PATH = "/continuum/playground/scenarios/constitutional-conflict-v0.json";
+const SCENARIOS = [
+  {
+    id: "constitutional_conflict_v0",
+    label: "Constitutional conflict",
+    path: "/continuum/playground/scenarios/constitutional-conflict-v0.json"
+  },
+  {
+    id: "session_restart_v0",
+    label: "Session restart continuity",
+    path: "/continuum/playground/scenarios/session-restart-v0.json"
+  }
+];
 
 let PLAYGROUND_STAGES = [];
 let stepButtons = [];
+let scenarioButtons = [];
+let activeScenarioIndex = 0;
+const scenarioSwitchEl = document.getElementById("scenario-switch");
 const scenarioSummaryEl = document.getElementById("scenario-summary");
 const stepContainerEl = document.getElementById("playground-steps");
 const titleEl = document.getElementById("stage-title");
@@ -82,6 +97,20 @@ const stateListEl = document.getElementById("state-list");
 const warningListEl = document.getElementById("warning-list");
 const meaningEl = document.getElementById("stage-meaning");
 const stateJsonEl = document.getElementById("state-json");
+
+function renderScenarioButtons() {
+  scenarioSwitchEl.innerHTML = SCENARIOS
+    .map(
+      (scenario, index) =>
+        `<button class="playground-scenario-pill${index === activeScenarioIndex ? " active" : ""}" data-scenario="${index}">${scenario.label}</button>`
+    )
+    .join("");
+
+  scenarioButtons = Array.from(document.querySelectorAll(".playground-scenario-pill"));
+  scenarioButtons.forEach((button, index) => {
+    button.addEventListener("click", () => loadScenario(index));
+  });
+}
 
 function renderStage(index) {
   const stage = PLAYGROUND_STAGES[index];
@@ -127,22 +156,39 @@ function installScenario(scenario) {
   renderStage(0);
 }
 
-fetch(SCENARIO_PATH)
-  .then((response) => {
+function loadScenario(index) {
+  const scenarioMeta = SCENARIOS[index];
+  activeScenarioIndex = index;
+  renderScenarioButtons();
+  scenarioSummaryEl.textContent = "Loading scenario...";
+  stepContainerEl.innerHTML = "";
+  titleEl.textContent = scenarioMeta.label;
+  summaryEl.textContent = "Loading stage data...";
+  meaningEl.textContent = "Fetching repository-backed scenario fixture.";
+  warningListEl.innerHTML = "<li>loading</li>";
+  stateListEl.innerHTML = "<li>scenario fixture requested</li>";
+  stateJsonEl.textContent = JSON.stringify({ path: scenarioMeta.path }, null, 2);
+
+  fetch(scenarioMeta.path)
+    .then((response) => {
     if (!response.ok) {
       throw new Error(`Failed to load scenario: ${response.status}`);
     }
     return response.json();
   })
-  .then((scenario) => installScenario(scenario))
-  .catch((error) => {
-    scenarioSummaryEl.textContent = "Scenario fixture failed to load.";
-    titleEl.textContent = "Playground load error";
-    summaryEl.textContent = error.message;
-    meaningEl.textContent =
-      "The visual playground now expects a scenario fixture. Once the JSON is available, the page will hydrate from repository data instead of hard-coded stage objects.";
-    warningListEl.innerHTML = "<li>fixture_load_failed</li>";
-    stateListEl.innerHTML = "<li>scenario_fixture: unavailable</li>";
-    stateJsonEl.textContent = JSON.stringify({ error: error.message, path: SCENARIO_PATH }, null, 2);
-  });
+    .then((scenario) => installScenario(scenario))
+    .catch((error) => {
+      scenarioSummaryEl.textContent = "Scenario fixture failed to load.";
+      titleEl.textContent = "Playground load error";
+      summaryEl.textContent = error.message;
+      meaningEl.textContent =
+        "The visual playground expects repository-backed scenario fixtures. Once the JSON is available, the page will hydrate from repository data instead of hard-coded stage objects.";
+      warningListEl.innerHTML = "<li>fixture_load_failed</li>";
+      stateListEl.innerHTML = "<li>scenario_fixture: unavailable</li>";
+      stateJsonEl.textContent = JSON.stringify({ error: error.message, path: scenarioMeta.path }, null, 2);
+    });
+}
+
+renderScenarioButtons();
+loadScenario(0);
 </script>
