@@ -3823,6 +3823,117 @@ class CliBootstrapTests(unittest.TestCase):
             finally:
                 os.chdir(cwd)
 
+    def test_cli_can_export_session_restart_playground_scenario(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            cwd = Path.cwd()
+            try:
+                os.chdir(tmp)
+                docs_dir = Path("docs")
+                docs_dir.mkdir(parents=True, exist_ok=True)
+                for artifact in (
+                    "FOUNDING_THESIS.md",
+                    "OPERATING_MODEL.md",
+                    "TASK_BOARD.md",
+                    "REVISION_LOG.md",
+                ):
+                    (docs_dir / artifact).write_text(f"# {artifact}\n", encoding="utf-8")
+
+                self.assertEqual(
+                    self.run_cli(
+                        [
+                            "agent",
+                            "init",
+                            "--scope",
+                            "continuum",
+                            "--name",
+                            "main",
+                            "--display-name",
+                            "Continuum Main",
+                        ]
+                    )[0],
+                    0,
+                )
+                self.assertEqual(
+                    self.run_cli(
+                        [
+                            "agent",
+                            "profile",
+                            "set",
+                            "--display-name",
+                            "Continuum Main",
+                            "--description",
+                            "Bootstrap agent",
+                        ]
+                    )[0],
+                    0,
+                )
+                _, checkpoint = self.run_cli(
+                    [
+                        "memory",
+                        "checkpoint",
+                        "create",
+                        "--scope",
+                        "session_handoff",
+                        "--summary",
+                        "Checkpoint one",
+                        "--artifact-ref",
+                        "docs/TASK_BOARD.md",
+                        "--artifact-ref",
+                        "docs/REVISION_LOG.md",
+                    ]
+                )
+                _, migration = self.run_cli(
+                    [
+                        "migration",
+                        "declare",
+                        "--migration-type",
+                        "session_restart",
+                        "--from-ref",
+                        "session:continuum:run-old",
+                        "--to-ref",
+                        "session:continuum:run-new",
+                        "--reason",
+                        "Automation restart",
+                        "--evidence",
+                        "docs/REVISION_LOG.md",
+                    ]
+                )
+                _, assessment = self.run_cli(
+                    [
+                        "continuity",
+                        "assess",
+                        "--event-id",
+                        migration["event_id"],
+                        "--refresh",
+                    ]
+                )
+
+                output_path = Path(tmp) / "session-restart-v0.json"
+                code, payload = self.run_cli(
+                    [
+                        "playground",
+                        "export",
+                        "--scenario",
+                        "session_restart_v0",
+                        "--actor-id",
+                        "agent:continuum:main",
+                        "--output",
+                        str(output_path),
+                    ]
+                )
+                self.assertEqual(code, 0)
+                self.assertEqual(payload["scenario"], "session_restart_v0")
+                exported = json.loads(output_path.read_text(encoding="utf-8"))
+                self.assertEqual(exported["scenario_id"], "session_restart_v0")
+                self.assertEqual(len(exported["stages"]), 5)
+                self.assertEqual(exported["stages"][1]["snapshot"]["checkpoint_id"], checkpoint["payload"]["checkpoint"]["checkpoint_id"])
+                self.assertEqual(exported["stages"][2]["snapshot"]["migration_id"], migration["payload"]["migration"]["migration_id"])
+                self.assertEqual(exported["stages"][3]["snapshot"]["assessment_id"], assessment["assessment_id"])
+                self.assertEqual(exported["stages"][4]["snapshot"]["continuity_class"], "same_agent")
+                self.assertEqual(exported["stages"][4]["snapshot"]["recognition_readiness"], "ready")
+            finally:
+                os.chdir(cwd)
+
     def test_anchor_export_is_deterministic_for_governance_state(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             cwd = Path.cwd()

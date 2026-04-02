@@ -33,7 +33,10 @@ from src.governance.bootstrap import (
     build_work_receipt_payload,
 )
 from src.indexer.materialize import RepositoryIndexer
-from src.playground.export import export_constitutional_conflict_playground_scenario
+from src.playground.export import (
+    export_constitutional_conflict_playground_scenario,
+    export_session_restart_playground_scenario,
+)
 from src.runtime.events import (
     artifact_refs,
     build_checkpoint_payload,
@@ -1333,7 +1336,12 @@ def cmd_playground_export(args: argparse.Namespace) -> int:
     store = _store()
     output_path = Path(args.output)
     if args.scenario == "constitutional_conflict_v0":
+        if not args.community_id:
+            raise ValueError("--community-id is required for constitutional_conflict_v0.")
         target = export_constitutional_conflict_playground_scenario(store, args.community_id, output_path)
+    elif args.scenario == "session_restart_v0":
+        actor_id = args.actor_id or _load_current_agent(store)["agent_id"]
+        target = export_session_restart_playground_scenario(store, actor_id, output_path)
     else:
         raise ValueError(f"Unsupported playground scenario {args.scenario}.")
     print(json.dumps({"scenario": args.scenario, "output": str(target)}, indent=2, sort_keys=True))
@@ -1739,8 +1747,11 @@ def build_parser() -> argparse.ArgumentParser:
     playground = subparsers.add_parser("playground")
     playground_sub = playground.add_subparsers(dest="playground_command", required=True)
     playground_export = playground_sub.add_parser("export")
-    playground_export.add_argument("--scenario", required=True, choices=["constitutional_conflict_v0"])
-    playground_export.add_argument("--community-id", required=True)
+    playground_export.add_argument(
+        "--scenario", required=True, choices=["constitutional_conflict_v0", "session_restart_v0"]
+    )
+    playground_export.add_argument("--community-id")
+    playground_export.add_argument("--actor-id")
     playground_export.add_argument("--output", required=True)
     playground_export.set_defaults(func=cmd_playground_export)
 

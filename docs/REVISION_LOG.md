@@ -85,6 +85,21 @@ The goal is to prevent silent rewriting of foundational positions.
   - `tests/test_runtime_bootstrap.py`
   - `README.md`
 
+### 2026-04-02
+
+- Changed artifact: repository-backed session restart playground export path
+- Previous position: the session restart continuity scenario existed in the playground, but its fixture was still curated by hand rather than derived from actual checkpoint, migration, and assessment history
+- New position: Continuum now exports the session restart playground path from real repository-local continuity events and assessment output, with a dedicated regeneration script and CLI scenario export
+- Reason: the second core continuity demo should be grounded in protocol artifacts, not only constitutional governance should enjoy artifact-driven playback
+- Trigger: decision to make session restart the second artifact-driven playground path after constitutional conflict
+- Downstream docs affected:
+  - `src/playground/export.py`
+  - `src/cli/main.py`
+  - `scripts/export_session_restart_playground_v0.sh`
+  - `docs/playground/scenarios/session-restart-v0.json`
+  - `tests/test_runtime_bootstrap.py`
+  - `README.md`
+
 ### 2026-03-26
 
 - Changed artifact: public repository and multilingual project surface
