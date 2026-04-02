@@ -120,4 +120,5 @@ Read the walkthrough here:
 
 - [GitHub Repository](https://github.com/noir-hedgehog/continuum)
 - [Visual Playground](playground/)
+- [Agent Explorer Prototype](explorer/)
 </section>

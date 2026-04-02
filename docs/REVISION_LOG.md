@@ -100,6 +100,30 @@ The goal is to prevent silent rewriting of foundational positions.
   - `tests/test_runtime_bootstrap.py`
   - `README.md`
 
+### 2026-04-02
+
+- Changed artifact: first explicit chain-anchoring plan
+- Previous position: Continuum had external-style anchor adapters and a transparency log witness target, but no concrete decision about how to become minimally onchain or how that would connect to an agent-centric public identity surface
+- New position: Continuum now defines a minimal chain path centered on a tiny anchor registry, Base Sepolia as the first public demo target, Base Mainnet as the first production witness target, and an explorer-first follow-up that makes one agent publicly visible through anchored continuity history
+- Reason: the project had reached the point where the gap was no longer more mechanism prose, but the absence of a credible public witness path that could make an agent feel genuinely public rather than locally simulated
+- Trigger: direct recognition that the current playground explains protocol scenarios but does not yet show an already anchored public agent with visible footsteps
+- Downstream docs affected:
+  - `docs/specs/MINIMAL_CHAIN_ANCHORING_V0.md`
+  - `docs/TASK_BOARD.md`
+
+### 2026-04-02
+
+- Changed artifact: first agent-centric public explorer surface
+- Previous position: the public web surface explained protocol scenarios and system layers, but it did not yet present one agent as a visible public actor with identity, continuity history, anchor status, and institutional footprint
+- New position: Continuum now has an explorer prototype centered on `agent:continuum:main`, explicitly showing the gap between repository-backed public continuity and the still-missing chain-backed witness layer
+- Reason: the project needed a public surface that feels closer to "an agent with visible footsteps" than to "a mechanism walkthrough"
+- Trigger: recognition that the playground is useful for protocol explanation but does not satisfy the desire to inspect a public agent as a subject
+- Downstream docs affected:
+  - `docs/explorer/index.md`
+  - `docs/index.md`
+  - `docs/assets/main.scss`
+  - `README.md`
+
 ### 2026-03-26
 
 - Changed artifact: public repository and multilingual project surface

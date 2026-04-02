@@ -227,6 +227,37 @@
   line-height: 1.45;
 }
 
+.explorer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+  margin: 1.25rem 0;
+}
+
+.explorer-panel {
+  margin: 0;
+}
+
+.explorer-summary ul,
+.explorer-list {
+  margin-left: 1.1rem;
+}
+
+.explorer-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.4rem 0 1rem;
+}
+
+.explorer-timeline {
+  margin-left: 1.2rem;
+}
+
+.explorer-timeline li {
+  margin-bottom: 0.85rem;
+}
+
 @media (max-width: 900px) {
   .playground-layout,
   .playground-grid {

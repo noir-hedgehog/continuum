@@ -84,6 +84,18 @@ It is intentionally simple in v0. The goal is to keep the current work graph vis
 - New capability: constitutional conflict can now be exported from real demo history instead of only hand-authored fixture data
 - New capability: session restart continuity can now be exported from real checkpoint, migration, and assessment history instead of only hand-authored fixture data
 
+### T-003E Public agent explorer and chain witness
+
+- Status: active
+- Type: integration
+- Owner: main agent
+- Intent: shift the public demo surface from scenario-first protocol explanation toward an agent-first view with public identity, anchor history, and visible institutional footprint
+- Outputs:
+  - `docs/specs/MINIMAL_CHAIN_ANCHORING_V0.md`
+  - `docs/explorer/index.md`
+  - future EVM-backed anchor adapter integration
+- Current focus: define the minimum chain path, the first anchorable object set, and the smallest explorer surface that makes one agent feel publicly witnessed rather than merely simulated
+
 ### T-004 Continuity protocol spec v0
 
 - Status: active
