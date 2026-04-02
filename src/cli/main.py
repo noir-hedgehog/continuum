@@ -1352,7 +1352,7 @@ def cmd_playground_export(args: argparse.Namespace) -> int:
 def cmd_app_export(args: argparse.Namespace) -> int:
     store = _store()
     output_path = Path(args.output)
-    actor_ids = args.actor_id or [_load_current_agent(store)["agent_id"]]
+    actor_ids = args.actor_id or [agent["agent_id"] for agent in store.list_agents()]
     target = export_agents_app_data(
         store,
         actor_ids=actor_ids,

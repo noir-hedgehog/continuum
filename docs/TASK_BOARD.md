@@ -124,6 +124,7 @@ It is intentionally simple in v0. The goal is to keep the current work graph vis
   - `docs/index.md`
 - Current focus: grow from a static app shell into a state-driven explorer surface through exported agent snapshots, then advance toward live state queries
 - New capability: `docs/app/data/agents-v0.json` can now be regenerated from real repository state, assessments, governance state, standing state, and anchors
+- New capability: `app export` now defaults to exporting every known agent, giving the app shell a true directory behavior instead of a single-subject-only path
 
 ### T-004 Continuity protocol spec v0
 

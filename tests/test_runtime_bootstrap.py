@@ -4072,6 +4072,90 @@ class CliBootstrapTests(unittest.TestCase):
             finally:
                 os.chdir(cwd)
 
+    def test_cli_can_export_app_agent_directory_without_explicit_actor_ids(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            cwd = Path.cwd()
+            try:
+                os.chdir(tmp)
+                docs_dir = Path("docs")
+                docs_dir.mkdir(parents=True, exist_ok=True)
+                for artifact in (
+                    "FOUNDING_THESIS.md",
+                    "OPERATING_MODEL.md",
+                    "TASK_BOARD.md",
+                    "REVISION_LOG.md",
+                ):
+                    (docs_dir / artifact).write_text(f"# {artifact}\n", encoding="utf-8")
+
+                self.run_cli(
+                    [
+                        "agent",
+                        "init",
+                        "--scope",
+                        "continuum",
+                        "--name",
+                        "main",
+                        "--display-name",
+                        "Continuum Main",
+                    ]
+                )
+                self.run_cli(
+                    [
+                        "agent",
+                        "profile",
+                        "set",
+                        "--display-name",
+                        "Continuum Main",
+                        "--description",
+                        "Bootstrap agent",
+                    ]
+                )
+
+                self.run_cli(
+                    [
+                        "agent",
+                        "init",
+                        "--scope",
+                        "continuum",
+                        "--name",
+                        "guest",
+                        "--display-name",
+                        "Guest Agent",
+                    ]
+                )
+                self.run_cli(
+                    [
+                        "agent",
+                        "profile",
+                        "set",
+                        "--display-name",
+                        "Guest Agent",
+                        "--description",
+                        "Second visible agent",
+                    ]
+                )
+
+                output_path = Path(tmp) / "agents-v0.json"
+                code, payload = self.run_cli(
+                    [
+                        "app",
+                        "export",
+                        "--refresh",
+                        "--output",
+                        str(output_path),
+                    ]
+                )
+                self.assertEqual(code, 0)
+                self.assertEqual(sorted(payload["agents"]), ["agent:continuum:guest", "agent:continuum:main"])
+                exported = json.loads(output_path.read_text(encoding="utf-8"))
+                self.assertEqual(exported["agent_count"], 2)
+                self.assertEqual(
+                    [entry["agent_id"] for entry in exported["agents"]],
+                    ["agent:continuum:guest", "agent:continuum:main"],
+                )
+            finally:
+                os.chdir(cwd)
+
     def test_anchor_export_is_deterministic_for_governance_state(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             cwd = Path.cwd()

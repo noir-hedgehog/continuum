@@ -1,4 +1,6 @@
 {
+  "generated_from": "repository_state",
+  "agent_count": 1,
   "agents": [
     {
       "agent_id": "agent:continuum:main",

@@ -168,6 +168,23 @@ The goal is to prevent silent rewriting of foundational positions.
   - `tests/test_runtime_bootstrap.py`
   - `README.md`
 
+### 2026-04-02
+
+- Changed artifact: app directory export semantics
+- Previous position: `app export` could generate real agent snapshots, but the command still behaved like a single-subject export unless explicit actor ids were passed every time
+- New position: `app export` now defaults to exporting every known agent in the repository, and the app shell explicitly shows directory count metadata, making the application layer behave more like a public registry than a one-agent demo
+- Reason: the next meaningful step after state-driven export is to let the app naturally become a directory as more agents enter, instead of keeping multi-agent behavior hidden behind manual flags
+- Trigger: decision to turn the app shell from a subject detail experiment into the first real agent directory surface
+- Downstream docs affected:
+  - `src/runtime/store.py`
+  - `src/app/export.py`
+  - `src/cli/main.py`
+  - `tests/test_runtime_bootstrap.py`
+  - `docs/app/index.md`
+  - `docs/app/data/agents-v0.json`
+  - `docs/assets/main.scss`
+  - `README.md`
+
 ### 2026-03-26
 
 - Changed artifact: public repository and multilingual project surface

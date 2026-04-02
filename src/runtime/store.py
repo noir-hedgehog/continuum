@@ -50,6 +50,14 @@ class RepositoryStore:
             raise FileNotFoundError(f"Agent record not found for {agent_id}.")
         return json.loads(target.read_text(encoding="utf-8"))
 
+    def list_agents(self) -> list[dict[str, Any]]:
+        self.ensure()
+        items = []
+        for agent_path in sorted(self.agents_dir.glob("*.json")):
+            items.append(json.loads(agent_path.read_text(encoding="utf-8")))
+        items.sort(key=lambda agent: agent["agent_id"])
+        return items
+
     def save_event(self, envelope: dict[str, Any]) -> Path:
         self.ensure()
         target = self.events_dir / f"{_safe_name(envelope['event_id'])}.json"

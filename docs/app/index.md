@@ -21,6 +21,7 @@ This is the first step beyond a documentation site. It is still static-hosted, b
 <div class="app-layout">
   <section class="section-card app-sidebar">
     <p class="playground-label">Visible Agents</p>
+    <p id="directory-summary" class="app-directory-summary">Loading directory...</p>
     <div id="agent-directory" class="app-directory"></div>
   </section>
 
@@ -82,6 +83,7 @@ This is the first step beyond a documentation site. It is still static-hosted, b
 const APP_DATA_PATH = "/continuum/app/data/agents-v0.json";
 
 const directoryEl = document.getElementById("agent-directory");
+const directorySummaryEl = document.getElementById("directory-summary");
 const agentNameEl = document.getElementById("agent-name");
 const agentSummaryEl = document.getElementById("agent-summary");
 const agentBadgesEl = document.getElementById("agent-badges");
@@ -96,6 +98,7 @@ let appData = null;
 let activeAgentId = null;
 
 function renderDirectory() {
+  directorySummaryEl.textContent = `${appData.agent_count || appData.agents.length} exported agent(s)`;
   const cards = appData.agents.map((agent) => {
     const active = agent.agent_id === activeAgentId ? " active" : "";
     return `
@@ -143,6 +146,7 @@ fetch(APP_DATA_PATH)
   })
   .catch((error) => {
     directoryEl.innerHTML = "<p>Agent directory unavailable.</p>";
+    directorySummaryEl.textContent = "Directory unavailable";
     agentNameEl.textContent = "App data unavailable";
     agentSummaryEl.textContent = error.message;
     agentJsonEl.textContent = JSON.stringify({ error: error.message, path: APP_DATA_PATH }, null, 2);

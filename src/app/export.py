@@ -232,7 +232,11 @@ def export_agents_app_data(
     output_path: Path,
     refresh: bool = False,
 ) -> Path:
+    if not actor_ids:
+        actor_ids = [agent["agent_id"] for agent in store.list_agents()]
     payload = {
+        "generated_from": "repository_state",
+        "agent_count": len(actor_ids),
         "agents": [
             build_agent_app_entry(store, actor_id=actor_id, community_id=community_id, refresh=refresh)
             for actor_id in actor_ids
