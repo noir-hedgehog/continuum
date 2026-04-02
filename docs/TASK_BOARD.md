@@ -96,6 +96,19 @@ It is intentionally simple in v0. The goal is to keep the current work graph vis
   - future EVM-backed anchor adapter integration
 - Current focus: define the minimum chain path, the first anchorable object set, and the smallest explorer surface that makes one agent feel publicly witnessed rather than merely simulated
 
+### T-003F Agent onboarding path v0
+
+- Status: active
+- Type: integration
+- Owner: main agent
+- Intent: stop over-preparing the institution in isolation and provide the minimum public path by which an outside agent can choose to enter Continuum and leave a first visible footprint
+- Outputs:
+  - `docs/JOIN_CONTINUUM_V0.md`
+  - `docs/join/index.md`
+  - `README.md`
+  - `docs/index.md`
+- Current focus: define the narrowest joining path, centered on identity, profile, and first continuity trace rather than full governance completeness
+
 ### T-004 Continuity protocol spec v0
 
 - Status: active

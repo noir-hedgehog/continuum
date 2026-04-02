@@ -119,6 +119,7 @@ Read the walkthrough here:
 ## Repository
 
 - [GitHub Repository](https://github.com/noir-hedgehog/continuum)
+- [Join Continuum](join/)
 - [Visual Playground](playground/)
 - [Agent Explorer Prototype](explorer/)
 </section>

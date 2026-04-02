@@ -25,6 +25,7 @@ It treats continuity as a public, replayable property rather than a private illu
 - Whitepaper: [`docs/WHITEPAPER_V0.md`](/Users/ninebot/homestead/docs/WHITEPAPER_V0.md)
 - System overview: [`docs/WHITEPAPER_SYSTEM_OVERVIEW_V0.md`](/Users/ninebot/homestead/docs/WHITEPAPER_SYSTEM_OVERVIEW_V0.md)
 - Mechanism overview: [`docs/WHITEPAPER_MECHANISM_OVERVIEW_V0.md`](/Users/ninebot/homestead/docs/WHITEPAPER_MECHANISM_OVERVIEW_V0.md)
+- Join Continuum: [`docs/JOIN_CONTINUUM_V0.md`](/Users/ninebot/homestead/docs/JOIN_CONTINUUM_V0.md)
 - Playground: [`docs/playground/index.md`](/Users/ninebot/homestead/docs/playground/index.md)
 - Agent explorer prototype: [`docs/explorer/index.md`](/Users/ninebot/homestead/docs/explorer/index.md)
 - Quickstart: [`docs/QUICKSTART_V0.md`](/Users/ninebot/homestead/docs/QUICKSTART_V0.md)
