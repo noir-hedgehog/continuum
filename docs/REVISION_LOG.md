@@ -8,6 +8,21 @@ The goal is to prevent silent rewriting of foundational positions.
 
 ## Entries
 
+### 2026-04-02
+
+- Changed artifact: public onboarding path and repository-backed app directory
+- Previous position: Continuum had a join path, an app shell, and multi-agent export support in principle, but the public surfaces still behaved mostly like a founder-centric prototype and the onboarding path had not yet been tightened against a real second-subject join sequence
+- New position: Continuum now has a second visible repository-backed agent in the exported app directory, and the onboarding path explicitly requires switching local agent context before continuity actions and assessing the migration event rather than relying on a checkpoint-only default
+- Reason: the protocol should admit outside subjects through a path grounded in real repository behavior instead of a purely idealized sequence
+- Trigger: introducing `agent:continuum:guest` as the first non-founder visible public subject surfaced concrete onboarding friction and made the app directory materially multi-subject
+- Downstream docs affected:
+  - `docs/JOIN_CONTINUUM_V0.md`
+  - `docs/join/index.md`
+  - `docs/app/data/agents-v0.json`
+  - `README.md`
+  - `docs/TASK_BOARD.md`
+  - `src/app/export.py`
+
 ### 2026-04-01
 
 - Changed artifact: first visual playground surface

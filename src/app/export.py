@@ -34,19 +34,29 @@ def _latest_assessment(store: RepositoryStore, actor_id: str) -> dict[str, Any]:
 
 
 def _safe_load_standing_state(
-    store: RepositoryStore, subject_agent_id: str, community_id: str | None
+    store: RepositoryStore, subject_agent_id: str, community_id: str | None, refresh: bool
 ) -> dict[str, Any] | None:
     if not community_id:
         return None
+    if refresh:
+        indexer = RepositoryIndexer(store)
+        standing_state = indexer.materialize_continuity_state(subject_agent_id, community_id)
+        store.save_standing_state(standing_state)
+        return standing_state
     try:
         return store.load_standing_state(subject_agent_id, community_id)
     except FileNotFoundError:
         return None
 
 
-def _safe_load_governance_state(store: RepositoryStore, community_id: str | None) -> dict[str, Any] | None:
+def _safe_load_governance_state(store: RepositoryStore, community_id: str | None, refresh: bool) -> dict[str, Any] | None:
     if not community_id:
         return None
+    if refresh:
+        indexer = RepositoryIndexer(store)
+        governance_state = indexer.materialize_governance_state(community_id)
+        store.save_governance_state(governance_state)
+        return governance_state
     try:
         return store.load_governance_state(community_id)
     except FileNotFoundError:
@@ -78,8 +88,8 @@ def build_agent_app_entry(
             store.save_agent_state(agent_state)
 
     assessment = _latest_assessment(store, actor_id)
-    standing_state = _safe_load_standing_state(store, actor_id, community_id)
-    governance_state = _safe_load_governance_state(store, community_id)
+    standing_state = _safe_load_standing_state(store, actor_id, community_id, refresh)
+    governance_state = _safe_load_governance_state(store, community_id, refresh)
     anchors = store.list_anchors()
     relevant_anchors = []
     for anchor in anchors:

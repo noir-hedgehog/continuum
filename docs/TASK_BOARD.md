@@ -108,6 +108,7 @@ It is intentionally simple in v0. The goal is to keep the current work graph vis
   - `README.md`
   - `docs/index.md`
 - Current focus: define the narrowest joining path, centered on identity, profile, and first continuity trace rather than full governance completeness
+- New capability: the onboarding path has now been exercised with a second visible subject, `agent:continuum:guest`, which exposed two practical requirements: explicitly switching local agent context before continuity actions and assessing the migration event rather than only the latest checkpoint
 
 ### T-003G App shell and explorer surface
 
@@ -125,6 +126,7 @@ It is intentionally simple in v0. The goal is to keep the current work graph vis
 - Current focus: grow from a static app shell into a state-driven explorer surface through exported agent snapshots, then advance toward live state queries
 - New capability: `docs/app/data/agents-v0.json` can now be regenerated from real repository state, assessments, governance state, standing state, and anchors
 - New capability: `app export` now defaults to exporting every known agent, giving the app shell a true directory behavior instead of a single-subject-only path
+- New capability: the app directory now contains two real repository-backed subjects, moving the app surface from founder-only display toward an actual public registry
 
 ### T-004 Continuity protocol spec v0
 

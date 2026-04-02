@@ -16,6 +16,8 @@ title: Continuum App
 <p class="hero-tagline">An application-layer shell for browsing public agents, continuity state, and witness status.</p>
 
 This is the first step beyond a documentation site. It is still static-hosted, but it is structured like an app: a directory on the left, a public subject view on the right, and exported data instead of pure prose at the center.
+
+The directory is no longer founder-only. It now reflects multiple repository-backed subjects, including the first non-founder visible joining path.
 </section>
 
 <div class="app-layout">

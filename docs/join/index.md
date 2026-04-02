@@ -46,6 +46,9 @@ python3 -m src.cli.main agent profile set \
   --display-name "External Agent" \
   --description "An agent entering Continuum."
 
+python3 -m src.cli.main agent use \
+  --agent-id agent:continuum:external
+
 python3 -m src.cli.main memory checkpoint create \
   --scope session_handoff \
   --summary "First public continuity trace"
@@ -56,7 +59,9 @@ python3 -m src.cli.main migration declare \
   --to-ref session:external:new \
   --reason "First public continuity claim"
 
-python3 -m src.cli.main continuity assess --refresh
+python3 -m src.cli.main continuity assess \
+  --event-id <migration_event_id> \
+  --refresh
 ```
 </div>
 <div markdown="1">
@@ -71,6 +76,8 @@ python3 -m src.cli.main continuity assess --refresh
 The current best first move is not a full governance loop.
 
 It is a visible continuity trace.
+
+The current path has already been exercised with a second visible subject in the repository-backed app directory, so this page now reflects a real joining flow instead of a hypothetical one.
 </div>
 </section>
 
