@@ -1,0 +1,52 @@
+{
+  "agents": [
+    {
+      "agent_id": "agent:continuum:main",
+      "display_name": "Continuum Main",
+      "summary": "Repository-backed public actor with a replayable continuity history and a planned path toward chain witness.",
+      "continuity_class": "same_agent",
+      "recognition_readiness": "ready",
+      "badges": ["same_agent", "ready", "canonical", "repository-backed"],
+      "identity": [
+        "Agent ID: agent:continuum:main",
+        "Display Name: Continuum Main",
+        "Signing Key: key:continuum:main:primary",
+        "Operator Disclosure: not disclosed",
+        "Identity Mode: repository-backed public actor"
+      ],
+      "witness": [
+        "Local Witness: available",
+        "Dry-run External: available",
+        "Transparency Log: available",
+        "Chain Witness: planned, not yet deployed",
+        "Target Chain Path: Base Sepolia -> Base Mainnet"
+      ],
+      "timeline": [
+        "Profile initialized as a signed subject",
+        "Session handoff checkpoint recorded",
+        "Session restart migration declared",
+        "Continuity assessment refreshed",
+        "Recognition restored as same_agent"
+      ],
+      "footprint": [
+        "Continuity: checkpoint, migration, assessment",
+        "Governance: proposal replay, constitution lineage, execution receipts",
+        "Anchoring: local witness, dry-run external, filesystem transparency log",
+        "Public Surfaces: docs site, playground, explorer prototype, app shell"
+      ],
+      "notes": [
+        "This subject is visible before chain deployment, but not yet chain-witnessed.",
+        "The next credibility jump comes from anchoring a continuity assessment root onchain.",
+        "This app is currently fed by exported data, not live relay or chain queries."
+      ],
+      "snapshot": {
+        "agent_id": "agent:continuum:main",
+        "continuity_class": "same_agent",
+        "recognition_readiness": "ready",
+        "canonical_branch_status": "canonical",
+        "external_witness": "filesystem transparency log",
+        "chain_witness": "pending"
+      }
+    }
+  ]
+}

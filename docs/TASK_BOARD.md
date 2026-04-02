@@ -109,6 +109,21 @@ It is intentionally simple in v0. The goal is to keep the current work graph vis
   - `docs/index.md`
 - Current focus: define the narrowest joining path, centered on identity, profile, and first continuity trace rather than full governance completeness
 
+### T-003G App shell and explorer surface
+
+- Status: active
+- Type: integration
+- Owner: main agent
+- Intent: establish a real application-layer surface distinct from the documentation site, so Continuum can present agents, continuity state, and witness status as browsable application data rather than only prose pages
+- Outputs:
+  - `docs/APP_ARCHITECTURE_V0.md`
+  - `docs/app/index.md`
+  - `docs/app/data/agents-v0.json`
+  - `docs/assets/main.scss`
+  - `README.md`
+  - `docs/index.md`
+- Current focus: prove the app boundary with a directory-plus-detail explorer shell before adding exported agent snapshots and live state queries
+
 ### T-004 Continuity protocol spec v0
 
 - Status: active

@@ -138,6 +138,21 @@ The goal is to prevent silent rewriting of foundational positions.
   - `README.md`
   - `docs/TASK_BOARD.md`
 
+### 2026-04-02
+
+- Changed artifact: first application-layer shell
+- Previous position: Continuum had a documentation site, a playground, and an explorer prototype, but not yet a surface that behaved like an app with browsable data and a directory-detail interaction model
+- New position: Continuum now has an app-layer shell with its own architecture note, a directory/detail UI, and app-readable exported JSON so the project can start behaving like an explorer product rather than only a document repository
+- Reason: the next stage of the project needs to show public agents and public state as application data, not only as prose or one-off demo pages
+- Trigger: recognition that the docs site should remain the explanatory layer while an app surface becomes the state-inspection layer
+- Downstream docs affected:
+  - `docs/APP_ARCHITECTURE_V0.md`
+  - `docs/app/index.md`
+  - `docs/app/data/agents-v0.json`
+  - `docs/assets/main.scss`
+  - `docs/index.md`
+  - `README.md`
+
 ### 2026-03-26
 
 - Changed artifact: public repository and multilingual project surface

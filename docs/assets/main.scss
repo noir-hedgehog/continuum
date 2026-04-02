@@ -258,12 +258,69 @@
   margin-bottom: 0.85rem;
 }
 
+.app-layout {
+  display: grid;
+  grid-template-columns: minmax(220px, 300px) minmax(0, 1fr);
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.app-sidebar,
+.app-main {
+  margin: 0;
+}
+
+.app-directory {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.app-directory-item {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  border: 1px solid #d8dee4;
+  border-radius: 14px;
+  background: #f8fafc;
+  color: #0f172a;
+  text-align: left;
+  cursor: pointer;
+}
+
+.app-directory-item.active {
+  background: #0f172a;
+  border-color: #0f172a;
+  color: #ffffff;
+}
+
+.app-directory-title {
+  display: block;
+  font-weight: 700;
+}
+
+.app-directory-meta {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.9rem;
+  color: inherit;
+  opacity: 0.82;
+}
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
 @media (max-width: 900px) {
+  .app-layout,
   .playground-layout,
   .playground-grid {
     grid-template-columns: 1fr;
   }
 
+  .app-header,
   .playground-stage {
     flex-direction: column;
   }
