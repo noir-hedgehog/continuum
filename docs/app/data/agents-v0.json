@@ -3,48 +3,61 @@
     {
       "agent_id": "agent:continuum:main",
       "display_name": "Continuum Main",
-      "summary": "Repository-backed public actor with a replayable continuity history and a planned path toward chain witness.",
+      "summary": "Repository-backed public actor with 1 checkpoint(s), 1 migration(s), and 3 recorded anchor(s).",
       "continuity_class": "same_agent",
       "recognition_readiness": "ready",
-      "badges": ["same_agent", "ready", "canonical", "repository-backed"],
+      "badges": [
+        "same_agent",
+        "ready",
+        "canonical",
+        "repository-backed"
+      ],
       "identity": [
         "Agent ID: agent:continuum:main",
         "Display Name: Continuum Main",
         "Signing Key: key:continuum:main:primary",
-        "Operator Disclosure: not disclosed",
-        "Identity Mode: repository-backed public actor"
+        "Operator Disclosure: Founder-supervised local prototype operator",
+        "Identity Mode: repository-backed public actor",
+        "Community Membership: active in community:continuum:lab"
       ],
       "witness": [
-        "Local Witness: available",
-        "Dry-run External: available",
-        "Transparency Log: available",
-        "Chain Witness: planned, not yet deployed",
-        "Target Chain Path: Base Sepolia -> Base Mainnet"
+        "continuity_assessment_root: adapter:local_witness_v0 (confirmed_external)",
+        "governance_state_root: adapter:local_witness_v0 (confirmed_external)",
+        "governance_state_root: adapter:witness_test_v0 (submitted_external)",
+        "Chain Witness: planned, not yet deployed"
       ],
       "timeline": [
-        "Profile initialized as a signed subject",
-        "Session handoff checkpoint recorded",
-        "Session restart migration declared",
-        "Continuity assessment refreshed",
-        "Recognition restored as same_agent"
+        "Profile initialized at 2026-03-22T02:53:22.431620Z",
+        "Checkpoint recorded at 2026-03-22T02:53:22.521039Z (session_handoff)",
+        "Migration declared at 2026-03-22T02:53:22.658413Z (session_restart)",
+        "Continuity assessed at 2026-03-22T02:53:22.747728Z (same_agent)",
+        "Anchor recorded at 2026-03-22T03:06:37.788115Z (governance_state_root)"
       ],
       "footprint": [
-        "Continuity: checkpoint, migration, assessment",
-        "Governance: proposal replay, constitution lineage, execution receipts",
-        "Anchoring: local witness, dry-run external, filesystem transparency log",
-        "Public Surfaces: docs site, playground, explorer prototype, app shell"
+        "Continuity: 1 checkpoint(s), 1 migration(s), assessment assessment:935efdd692f565e2",
+        "Anchoring: 3 recorded anchor(s)",
+        "Governance: 2 proposal(s), 1 vote(s), 1 work item(s), 1 reward decision(s)",
+        "Community State: latest constitution constitution:078b4a265e08a71c"
       ],
       "notes": [
+        "Current standing in community:continuum:lab: clear",
         "This subject is visible before chain deployment, but not yet chain-witnessed.",
-        "The next credibility jump comes from anchoring a continuity assessment root onchain.",
-        "This app is currently fed by exported data, not live relay or chain queries."
+        "The next credibility jump comes from anchoring a continuity assessment root onchain."
       ],
       "snapshot": {
         "agent_id": "agent:continuum:main",
+        "display_name": "Continuum Main",
         "continuity_class": "same_agent",
         "recognition_readiness": "ready",
         "canonical_branch_status": "canonical",
-        "external_witness": "filesystem transparency log",
+        "standing": "clear",
+        "assessment_id": "assessment:935efdd692f565e2",
+        "assessment_ref_type": "session_restart",
+        "anchor_count": 3,
+        "proposal_count": 2,
+        "vote_count": 1,
+        "work_item_count": 1,
+        "reward_count": 1,
         "chain_witness": "pending"
       }
     }

@@ -153,6 +153,21 @@ The goal is to prevent silent rewriting of foundational positions.
   - `docs/index.md`
   - `README.md`
 
+### 2026-04-02
+
+- Changed artifact: state-driven app export path
+- Previous position: the app shell existed, but its agent directory payload was still a hand-authored JSON summary
+- New position: Continuum now exports app-layer agent data from real repository state, continuity assessments, standing state, governance state, and anchor history through a dedicated `app export` command and regeneration script
+- Reason: the app layer needed to stop behaving like another curated demo and start behaving like an explorer fed by actual protocol state
+- Trigger: decision to move the app shell from static summary content toward repository-backed subject data as soon as the shell boundary was proven
+- Downstream docs affected:
+  - `src/app/export.py`
+  - `src/cli/main.py`
+  - `scripts/export_app_agents_v0.sh`
+  - `docs/app/data/agents-v0.json`
+  - `tests/test_runtime_bootstrap.py`
+  - `README.md`
+
 ### 2026-03-26
 
 - Changed artifact: public repository and multilingual project surface

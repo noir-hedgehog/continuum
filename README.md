@@ -65,3 +65,4 @@ The GitHub Pages playground is now moving from hand-authored state to repository
 
 - The constitutional conflict playground fixture can now be regenerated from real governance demo history through `playground export`.
 - The session restart continuity playground fixture can now be regenerated from real repository-local continuity history and assessment output.
+- The app shell agent directory can now be regenerated from real repository state, assessment, standing, governance, and anchor data through `app export`.

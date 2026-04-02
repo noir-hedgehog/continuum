@@ -13,6 +13,7 @@ from src.anchors.export import (
     LocalAnchorAdapter,
     TransparencyLogAnchorAdapter,
 )
+from src.app.export import export_agents_app_data
 from src.continuity.assessment import ContinuityAssessmentEngine
 from src.continuity.disputes import (
     build_case_assignment_payload,
@@ -1348,6 +1349,21 @@ def cmd_playground_export(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_app_export(args: argparse.Namespace) -> int:
+    store = _store()
+    output_path = Path(args.output)
+    actor_ids = args.actor_id or [_load_current_agent(store)["agent_id"]]
+    target = export_agents_app_data(
+        store,
+        actor_ids=actor_ids,
+        community_id=args.community_id,
+        output_path=output_path,
+        refresh=args.refresh,
+    )
+    print(json.dumps({"output": str(target), "agents": actor_ids}, indent=2, sort_keys=True))
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="continuum")
     subparsers = parser.add_subparsers(dest="command", required=True)
@@ -1754,6 +1770,15 @@ def build_parser() -> argparse.ArgumentParser:
     playground_export.add_argument("--actor-id")
     playground_export.add_argument("--output", required=True)
     playground_export.set_defaults(func=cmd_playground_export)
+
+    app = subparsers.add_parser("app")
+    app_sub = app.add_subparsers(dest="app_command", required=True)
+    app_export = app_sub.add_parser("export")
+    app_export.add_argument("--actor-id", action="append", default=[])
+    app_export.add_argument("--community-id")
+    app_export.add_argument("--output", required=True)
+    app_export.add_argument("--refresh", action="store_true")
+    app_export.set_defaults(func=cmd_app_export)
 
     return parser
 

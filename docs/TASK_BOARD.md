@@ -122,7 +122,8 @@ It is intentionally simple in v0. The goal is to keep the current work graph vis
   - `docs/assets/main.scss`
   - `README.md`
   - `docs/index.md`
-- Current focus: prove the app boundary with a directory-plus-detail explorer shell before adding exported agent snapshots and live state queries
+- Current focus: grow from a static app shell into a state-driven explorer surface through exported agent snapshots, then advance toward live state queries
+- New capability: `docs/app/data/agents-v0.json` can now be regenerated from real repository state, assessments, governance state, standing state, and anchors
 
 ### T-004 Continuity protocol spec v0
 

@@ -3934,6 +3934,144 @@ class CliBootstrapTests(unittest.TestCase):
             finally:
                 os.chdir(cwd)
 
+    def test_cli_can_export_app_agent_data(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            cwd = Path.cwd()
+            try:
+                os.chdir(tmp)
+                docs_dir = Path("docs")
+                docs_dir.mkdir(parents=True, exist_ok=True)
+                for artifact in (
+                    "FOUNDING_THESIS.md",
+                    "OPERATING_MODEL.md",
+                    "TASK_BOARD.md",
+                    "REVISION_LOG.md",
+                ):
+                    (docs_dir / artifact).write_text(f"# {artifact}\n", encoding="utf-8")
+
+                self.run_cli(
+                    [
+                        "agent",
+                        "init",
+                        "--scope",
+                        "continuum",
+                        "--name",
+                        "main",
+                        "--display-name",
+                        "Continuum Main",
+                    ]
+                )
+                self.run_cli(
+                    [
+                        "agent",
+                        "profile",
+                        "set",
+                        "--display-name",
+                        "Continuum Main",
+                        "--description",
+                        "Bootstrap agent",
+                        "--operator-disclosure",
+                        "Founder-supervised local prototype operator",
+                    ]
+                )
+                self.run_cli(
+                    [
+                        "memory",
+                        "checkpoint",
+                        "create",
+                        "--scope",
+                        "session_handoff",
+                        "--summary",
+                        "Checkpoint one",
+                    ]
+                )
+                _, migration = self.run_cli(
+                    [
+                        "migration",
+                        "declare",
+                        "--migration-type",
+                        "session_restart",
+                        "--from-ref",
+                        "session:continuum:run-old",
+                        "--to-ref",
+                        "session:continuum:run-new",
+                        "--reason",
+                        "Automation restart",
+                    ]
+                )
+                _, assessment = self.run_cli(
+                    [
+                        "continuity",
+                        "assess",
+                        "--event-id",
+                        migration["event_id"],
+                        "--refresh",
+                    ]
+                )
+                self.run_cli(
+                    [
+                        "governance",
+                        "constitution",
+                        "set",
+                        "--community-id",
+                        "community:continuum:lab",
+                    ]
+                )
+                self.run_cli(
+                    [
+                        "governance",
+                        "membership",
+                        "grant",
+                        "--community-id",
+                        "community:continuum:lab",
+                        "--member-agent-id",
+                        "agent:continuum:main",
+                        "--membership-status",
+                        "active",
+                        "--role",
+                        "maintainer",
+                        "--role",
+                        "member",
+                    ]
+                )
+                self.run_cli(
+                    [
+                        "anchor",
+                        "export",
+                        "--anchor-type",
+                        "continuity_assessment_root",
+                        "--assessment-id",
+                        assessment["assessment_id"],
+                    ]
+                )
+
+                output_path = Path(tmp) / "agents-v0.json"
+                code, payload = self.run_cli(
+                    [
+                        "app",
+                        "export",
+                        "--actor-id",
+                        "agent:continuum:main",
+                        "--community-id",
+                        "community:continuum:lab",
+                        "--refresh",
+                        "--output",
+                        str(output_path),
+                    ]
+                )
+                self.assertEqual(code, 0)
+                self.assertEqual(payload["agents"], ["agent:continuum:main"])
+                exported = json.loads(output_path.read_text(encoding="utf-8"))
+                self.assertEqual(len(exported["agents"]), 1)
+                entry = exported["agents"][0]
+                self.assertEqual(entry["agent_id"], "agent:continuum:main")
+                self.assertEqual(entry["continuity_class"], "same_agent")
+                self.assertEqual(entry["recognition_readiness"], "ready")
+                self.assertIn("continuity_assessment_root", " ".join(entry["witness"]))
+                self.assertEqual(entry["snapshot"]["assessment_id"], assessment["assessment_id"])
+            finally:
+                os.chdir(cwd)
+
     def test_anchor_export_is_deterministic_for_governance_state(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             cwd = Path.cwd()
