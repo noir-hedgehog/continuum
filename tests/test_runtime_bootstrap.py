@@ -4150,8 +4150,16 @@ class CliBootstrapTests(unittest.TestCase):
                 exported = json.loads(output_path.read_text(encoding="utf-8"))
                 self.assertEqual(exported["agent_count"], 2)
                 self.assertEqual(
-                    [entry["agent_id"] for entry in exported["agents"]],
-                    ["agent:continuum:guest", "agent:continuum:main"],
+                    {entry["agent_id"] for entry in exported["agents"]},
+                    {"agent:continuum:guest", "agent:continuum:main"},
+                )
+                self.assertEqual(
+                    [entry["directory_rank"] for entry in exported["agents"]],
+                    [1, 2],
+                )
+                self.assertIn("directory_ordering", exported)
+                self.assertTrue(
+                    all("directory_reason" in entry for entry in exported["agents"])
                 )
             finally:
                 os.chdir(cwd)

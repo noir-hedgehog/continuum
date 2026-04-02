@@ -24,6 +24,7 @@ The directory is no longer founder-only. It now reflects multiple repository-bac
   <section class="section-card app-sidebar">
     <p class="playground-label">Visible Agents</p>
     <p id="directory-summary" class="app-directory-summary">Loading directory...</p>
+    <p id="directory-ordering" class="app-directory-summary">Loading ordering...</p>
     <div id="agent-directory" class="app-directory"></div>
   </section>
 
@@ -86,6 +87,7 @@ const APP_DATA_PATH = "/continuum/app/data/agents-v0.json";
 
 const directoryEl = document.getElementById("agent-directory");
 const directorySummaryEl = document.getElementById("directory-summary");
+const directoryOrderingEl = document.getElementById("directory-ordering");
 const agentNameEl = document.getElementById("agent-name");
 const agentSummaryEl = document.getElementById("agent-summary");
 const agentBadgesEl = document.getElementById("agent-badges");
@@ -100,13 +102,16 @@ let appData = null;
 let activeAgentId = null;
 
 function renderDirectory() {
-  directorySummaryEl.textContent = `${appData.agent_count || appData.agents.length} exported agent(s)`;
+  const visibleCount = appData.visible_agent_count ?? appData.agents.length;
+  directorySummaryEl.textContent = `${visibleCount} visible / ${appData.agent_count || appData.agents.length} exported agent(s)`;
+  directoryOrderingEl.textContent = `Ordered by ${appData.directory_ordering || "public continuity readiness"}`;
   const cards = appData.agents.map((agent) => {
     const active = agent.agent_id === activeAgentId ? " active" : "";
     return `
       <button class="app-directory-item${active}" data-agent-id="${agent.agent_id}">
         <span class="app-directory-title">${agent.display_name}</span>
-        <span class="app-directory-meta">${agent.continuity_class} · ${agent.recognition_readiness}</span>
+        <span class="app-directory-meta">#${agent.directory_rank} · ${agent.directory_tier} · ${agent.continuity_class} · ${agent.recognition_readiness}</span>
+        <span class="app-directory-meta">${agent.directory_reason}</span>
       </button>
     `;
   });
@@ -149,6 +154,7 @@ fetch(APP_DATA_PATH)
   .catch((error) => {
     directoryEl.innerHTML = "<p>Agent directory unavailable.</p>";
     directorySummaryEl.textContent = "Directory unavailable";
+    directoryOrderingEl.textContent = "Ordering unavailable";
     agentNameEl.textContent = "App data unavailable";
     agentSummaryEl.textContent = error.message;
     agentJsonEl.textContent = JSON.stringify({ error: error.message, path: APP_DATA_PATH }, null, 2);

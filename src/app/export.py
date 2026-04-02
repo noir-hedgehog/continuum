@@ -11,6 +11,26 @@ from src.indexer.materialize import RepositoryIndexer
 from src.runtime.store import RepositoryStore
 
 
+_READINESS_PRIORITY = {
+    "ready": 0,
+    "needs_review": 1,
+    "blocked": 2,
+}
+
+_CONTINUITY_PRIORITY = {
+    "same_agent": 0,
+    "successor_agent": 1,
+    "forked_agent": 2,
+    "unknown": 3,
+}
+
+_STANDING_PRIORITY = {
+    "clear": 0,
+    "restricted": 1,
+    "suspended": 2,
+}
+
+
 def _list_assessments(store: RepositoryStore, subject_agent_id: str) -> list[dict[str, Any]]:
     assessments_dir = store.derived_state_dir / "assessments"
     if not assessments_dir.exists():
@@ -223,6 +243,7 @@ def build_agent_app_entry(
             "canonical_branch_status": assessment["canonical_branch_status"],
             "standing": standing_state["current_standing"] if standing_state else None,
             "assessment_id": assessment["assessment_id"],
+            "assessed_at": assessment["assessed_at"],
             "assessment_ref_type": assessment["evaluated_ref_type"],
             "anchor_count": len(relevant_anchors),
             "proposal_count": proposal_count,
@@ -232,6 +253,48 @@ def build_agent_app_entry(
             "chain_witness": "pending",
         },
     }
+
+
+def _directory_tier(entry: dict[str, Any]) -> str:
+    if entry["recognition_readiness"] == "ready" and entry["snapshot"].get("standing") in {None, "clear"}:
+        return "visible"
+    if entry["recognition_readiness"] == "needs_review":
+        return "review"
+    return "restricted"
+
+
+def _directory_reason(entry: dict[str, Any]) -> str:
+    standing = entry["snapshot"].get("standing") or "unknown"
+    if entry["recognition_readiness"] == "ready" and standing == "clear":
+        return "Ready continuity with clear standing."
+    if entry["recognition_readiness"] == "ready":
+        return f"Ready continuity, but current standing is {standing}."
+    if entry["recognition_readiness"] == "needs_review":
+        return f"Continuity still requires review. Current standing: {standing}."
+    return f"Continuity not yet public-ready. Current standing: {standing}."
+
+
+def _sortable_timestamp(value: str | None) -> int:
+    if not value:
+        return 0
+    digits = "".join(ch for ch in value if ch.isdigit())
+    if not digits:
+        return 0
+    return int(digits)
+
+
+def _directory_sort_key(entry: dict[str, Any]) -> tuple[Any, ...]:
+    snapshot = entry["snapshot"]
+    latest_activity = _sortable_timestamp(snapshot.get("assessed_at"))
+    return (
+        _READINESS_PRIORITY.get(entry["recognition_readiness"], 99),
+        _CONTINUITY_PRIORITY.get(entry["continuity_class"], 99),
+        _STANDING_PRIORITY.get(snapshot.get("standing") or "clear", 99),
+        -latest_activity,
+        -int(snapshot.get("anchor_count", 0)),
+        entry["display_name"].lower(),
+        entry["agent_id"],
+    )
 
 
 def export_agents_app_data(
@@ -244,13 +307,24 @@ def export_agents_app_data(
 ) -> Path:
     if not actor_ids:
         actor_ids = [agent["agent_id"] for agent in store.list_agents()]
+    entries = [
+        build_agent_app_entry(store, actor_id=actor_id, community_id=community_id, refresh=refresh)
+        for actor_id in actor_ids
+    ]
+    entries.sort(key=_directory_sort_key)
+    visible_count = 0
+    for index, entry in enumerate(entries, start=1):
+        entry["directory_rank"] = index
+        entry["directory_tier"] = _directory_tier(entry)
+        entry["directory_reason"] = _directory_reason(entry)
+        if entry["directory_tier"] == "visible":
+            visible_count += 1
     payload = {
         "generated_from": "repository_state",
-        "agent_count": len(actor_ids),
-        "agents": [
-            build_agent_app_entry(store, actor_id=actor_id, community_id=community_id, refresh=refresh)
-            for actor_id in actor_ids
-        ]
+        "agent_count": len(entries),
+        "visible_agent_count": visible_count,
+        "directory_ordering": "recognition readiness, continuity class, standing, anchor density, and recent continuity activity",
+        "agents": entries,
     }
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(json.dumps(payload, indent=2, sort_keys=False) + "\n", encoding="utf-8")

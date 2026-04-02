@@ -23,6 +23,19 @@ The goal is to prevent silent rewriting of foundational positions.
   - `docs/TASK_BOARD.md`
   - `src/app/export.py`
 
+### 2026-04-02
+
+- Changed artifact: app directory discoverability model
+- Previous position: the app surface could list multiple agents, but directory order still reflected export mechanics more than a public-facing visibility model
+- New position: the app directory now emits explicit rank, tier, and ordering reason metadata, and the public app surface explains that ordering as continuity-readiness-driven discoverability rather than raw repository enumeration
+- Reason: once Continuum contains more than one visible agent, the directory itself becomes part of the protocol surface and needs legible ordering semantics
+- Trigger: introducing a second visible agent made it clear that a public registry should explain why a subject appears where it does
+- Downstream docs affected:
+  - `src/app/export.py`
+  - `docs/app/index.md`
+  - `docs/TASK_BOARD.md`
+  - `README.md`
+
 ### 2026-04-01
 
 - Changed artifact: first visual playground surface

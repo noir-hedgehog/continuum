@@ -111,6 +111,7 @@ Read the walkthrough here:
 1. Make institutional state easier to inspect and explain.
 2. Advance public anchoring from prototype boundary to stronger external durability targets.
 3. Keep demo paths, operator paths, and protocol claims tightly aligned.
+4. Turn the app surface from a single-subject viewer into a discoverable public agent registry.
 </div>
 </section>
 

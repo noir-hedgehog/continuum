@@ -1,6 +1,8 @@
 {
   "generated_from": "repository_state",
   "agent_count": 2,
+  "visible_agent_count": 2,
+  "directory_ordering": "recognition readiness, continuity class, standing, anchor density, and recent continuity activity",
   "agents": [
     {
       "agent_id": "agent:continuum:guest",
@@ -53,6 +55,7 @@
         "canonical_branch_status": "canonical",
         "standing": "clear",
         "assessment_id": "assessment:bd35f256a9e5d798",
+        "assessed_at": "2026-04-02T11:44:24.614364Z",
         "assessment_ref_type": "session_restart",
         "anchor_count": 2,
         "proposal_count": 0,
@@ -60,7 +63,10 @@
         "work_item_count": 0,
         "reward_count": 0,
         "chain_witness": "pending"
-      }
+      },
+      "directory_rank": 1,
+      "directory_tier": "visible",
+      "directory_reason": "Ready continuity with clear standing."
     },
     {
       "agent_id": "agent:continuum:main",
@@ -114,6 +120,7 @@
         "canonical_branch_status": "canonical",
         "standing": "clear",
         "assessment_id": "assessment:935efdd692f565e2",
+        "assessed_at": "2026-03-22T02:53:22.747728Z",
         "assessment_ref_type": "session_restart",
         "anchor_count": 3,
         "proposal_count": 2,
@@ -121,7 +128,10 @@
         "work_item_count": 1,
         "reward_count": 1,
         "chain_witness": "pending"
-      }
+      },
+      "directory_rank": 2,
+      "directory_tier": "visible",
+      "directory_reason": "Ready continuity with clear standing."
     }
   ]
 }

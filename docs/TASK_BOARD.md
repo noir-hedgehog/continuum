@@ -127,6 +127,7 @@ It is intentionally simple in v0. The goal is to keep the current work graph vis
 - New capability: `docs/app/data/agents-v0.json` can now be regenerated from real repository state, assessments, governance state, standing state, and anchors
 - New capability: `app export` now defaults to exporting every known agent, giving the app shell a true directory behavior instead of a single-subject-only path
 - New capability: the app directory now contains two real repository-backed subjects, moving the app surface from founder-only display toward an actual public registry
+- New capability: the app directory now emits explicit rank, tier, and ordering reason metadata so discoverability is grounded in public continuity state rather than raw repository order
 
 ### T-004 Continuity protocol spec v0
 
