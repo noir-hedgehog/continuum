@@ -36,6 +36,19 @@ The goal is to prevent silent rewriting of foundational positions.
   - `docs/TASK_BOARD.md`
   - `README.md`
 
+### 2026-04-03
+
+- Changed artifact: app registry dashboard summary
+- Previous position: the app surface could rank and explain directory entries, but a viewer still had to scan the full list to understand how many subjects were visible, under review, restricted, or still missing stronger witness
+- New position: the app surface now exposes registry-level overview counts plus the newest visible subject, making the directory behave more like a public registry dashboard than a bare ranked list
+- Reason: once Continuum has multiple visible subjects, the app should expose the health of the registry itself, not just the detail view of whichever agent is selected
+- Trigger: decision to turn `/app/` into the default public registry surface before adding a third real subject
+- Downstream docs affected:
+  - `src/app/export.py`
+  - `docs/app/index.md`
+  - `docs/TASK_BOARD.md`
+  - `README.md`
+
 ### 2026-04-01
 
 - Changed artifact: first visual playground surface

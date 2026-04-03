@@ -4158,6 +4158,14 @@ class CliBootstrapTests(unittest.TestCase):
                     [1, 2],
                 )
                 self.assertIn("directory_ordering", exported)
+                self.assertEqual(
+                    exported["agent_count"],
+                    exported["visible_agent_count"]
+                    + exported["review_agent_count"]
+                    + exported["restricted_agent_count"],
+                )
+                self.assertEqual(exported["pending_chain_witness_count"], 2)
+                self.assertIn("newest_visible_agent_id", exported["directory_overview"])
                 self.assertTrue(
                     all("directory_reason" in entry for entry in exported["agents"])
                 )

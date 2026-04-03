@@ -68,3 +68,4 @@ The GitHub Pages playground is now moving from hand-authored state to repository
 - The app shell agent directory can now be regenerated from real repository state, assessment, standing, governance, and anchor data through `app export`, and it now defaults to exporting every known agent when no explicit actor list is provided.
 - The repository-backed app directory now exposes more than one real subject, including the first non-founder visible agent path used to tighten the onboarding flow.
 - The app directory now carries explicit public-ordering metadata so visible subjects can be ranked and explained as a registry rather than a raw file listing.
+- The app surface now includes registry-level status summaries, including visible/review/restricted counts and pending chain-witness subjects.

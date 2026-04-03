@@ -313,17 +313,35 @@ def export_agents_app_data(
     ]
     entries.sort(key=_directory_sort_key)
     visible_count = 0
+    review_count = 0
+    restricted_count = 0
+    pending_chain_witness_count = 0
     for index, entry in enumerate(entries, start=1):
         entry["directory_rank"] = index
         entry["directory_tier"] = _directory_tier(entry)
         entry["directory_reason"] = _directory_reason(entry)
         if entry["directory_tier"] == "visible":
             visible_count += 1
+        elif entry["directory_tier"] == "review":
+            review_count += 1
+        else:
+            restricted_count += 1
+        if entry["snapshot"].get("chain_witness") != "confirmed":
+            pending_chain_witness_count += 1
+    newest_visible = next((entry for entry in entries if entry["directory_tier"] == "visible"), None)
     payload = {
         "generated_from": "repository_state",
         "agent_count": len(entries),
         "visible_agent_count": visible_count,
+        "review_agent_count": review_count,
+        "restricted_agent_count": restricted_count,
+        "pending_chain_witness_count": pending_chain_witness_count,
         "directory_ordering": "recognition readiness, continuity class, standing, anchor density, and recent continuity activity",
+        "directory_overview": {
+            "newest_visible_agent_id": newest_visible["agent_id"] if newest_visible else None,
+            "newest_visible_display_name": newest_visible["display_name"] if newest_visible else None,
+            "newest_visible_assessed_at": newest_visible["snapshot"]["assessed_at"] if newest_visible else None,
+        },
         "agents": entries,
     }
     output_path.parent.mkdir(parents=True, exist_ok=True)

@@ -25,6 +25,7 @@ The directory is no longer founder-only. It now reflects multiple repository-bac
     <p class="playground-label">Visible Agents</p>
     <p id="directory-summary" class="app-directory-summary">Loading directory...</p>
     <p id="directory-ordering" class="app-directory-summary">Loading ordering...</p>
+    <div id="directory-dashboard" class="explorer-grid"></div>
     <div id="agent-directory" class="app-directory"></div>
   </section>
 
@@ -88,6 +89,7 @@ const APP_DATA_PATH = "/continuum/app/data/agents-v0.json";
 const directoryEl = document.getElementById("agent-directory");
 const directorySummaryEl = document.getElementById("directory-summary");
 const directoryOrderingEl = document.getElementById("directory-ordering");
+const directoryDashboardEl = document.getElementById("directory-dashboard");
 const agentNameEl = document.getElementById("agent-name");
 const agentSummaryEl = document.getElementById("agent-summary");
 const agentBadgesEl = document.getElementById("agent-badges");
@@ -103,8 +105,31 @@ let activeAgentId = null;
 
 function renderDirectory() {
   const visibleCount = appData.visible_agent_count ?? appData.agents.length;
+  const reviewCount = appData.review_agent_count ?? 0;
+  const restrictedCount = appData.restricted_agent_count ?? 0;
+  const pendingWitnessCount = appData.pending_chain_witness_count ?? 0;
+  const overview = appData.directory_overview || {};
   directorySummaryEl.textContent = `${visibleCount} visible / ${appData.agent_count || appData.agents.length} exported agent(s)`;
   directoryOrderingEl.textContent = `Ordered by ${appData.directory_ordering || "public continuity readiness"}`;
+  directoryDashboardEl.innerHTML = `
+    <div class="playground-panel">
+      <h3>Directory Status</h3>
+      <ul class="explorer-list">
+        <li>Visible: ${visibleCount}</li>
+        <li>Needs review: ${reviewCount}</li>
+        <li>Restricted: ${restrictedCount}</li>
+        <li>Pending chain witness: ${pendingWitnessCount}</li>
+      </ul>
+    </div>
+    <div class="playground-panel">
+      <h3>Newest Visible Subject</h3>
+      <ul class="explorer-list">
+        <li>${overview.newest_visible_display_name || "None yet"}</li>
+        <li>${overview.newest_visible_agent_id || "No visible subject recorded"}</li>
+        <li>${overview.newest_visible_assessed_at || "No continuity timestamp recorded"}</li>
+      </ul>
+    </div>
+  `;
   const cards = appData.agents.map((agent) => {
     const active = agent.agent_id === activeAgentId ? " active" : "";
     return `
@@ -155,6 +180,7 @@ fetch(APP_DATA_PATH)
     directoryEl.innerHTML = "<p>Agent directory unavailable.</p>";
     directorySummaryEl.textContent = "Directory unavailable";
     directoryOrderingEl.textContent = "Ordering unavailable";
+    directoryDashboardEl.innerHTML = "";
     agentNameEl.textContent = "App data unavailable";
     agentSummaryEl.textContent = error.message;
     agentJsonEl.textContent = JSON.stringify({ error: error.message, path: APP_DATA_PATH }, null, 2);

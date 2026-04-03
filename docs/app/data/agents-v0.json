@@ -2,7 +2,15 @@
   "generated_from": "repository_state",
   "agent_count": 2,
   "visible_agent_count": 2,
+  "review_agent_count": 0,
+  "restricted_agent_count": 0,
+  "pending_chain_witness_count": 2,
   "directory_ordering": "recognition readiness, continuity class, standing, anchor density, and recent continuity activity",
+  "directory_overview": {
+    "newest_visible_agent_id": "agent:continuum:guest",
+    "newest_visible_display_name": "Guest Agent",
+    "newest_visible_assessed_at": "2026-04-02T11:44:24.614364Z"
+  },
   "agents": [
     {
       "agent_id": "agent:continuum:guest",
