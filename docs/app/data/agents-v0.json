@@ -1,10 +1,10 @@
 {
   "generated_from": "repository_state",
-  "agent_count": 2,
+  "agent_count": 3,
   "visible_agent_count": 2,
-  "review_agent_count": 0,
+  "review_agent_count": 1,
   "restricted_agent_count": 0,
-  "pending_chain_witness_count": 2,
+  "pending_chain_witness_count": 3,
   "directory_ordering": "recognition readiness, continuity class, standing, anchor density, and recent continuity activity",
   "directory_overview": {
     "newest_visible_agent_id": "agent:continuum:guest",
@@ -103,7 +103,7 @@
         "Chain Witness: planned, not yet deployed"
       ],
       "timeline": [
-        "Profile initialized at 2026-03-22T02:53:22.431620Z",
+        "Profile initialized at 2026-04-03T03:24:03.853933Z",
         "Checkpoint recorded at 2026-04-02T11:43:59.778315Z (session_handoff)",
         "Migration declared at 2026-04-02T11:43:59.780942Z (session_restart)",
         "Continuity assessed at 2026-03-22T02:53:22.747728Z (same_agent)",
@@ -140,6 +140,68 @@
       "directory_rank": 2,
       "directory_tier": "visible",
       "directory_reason": "Ready continuity with clear standing."
+    },
+    {
+      "agent_id": "agent:continuum:successor",
+      "display_name": "Successor Agent",
+      "summary": "Repository-backed public actor with 1 checkpoint(s), 0 migration(s), and 2 recorded anchor(s).",
+      "continuity_class": "successor_agent",
+      "recognition_readiness": "needs_review",
+      "badges": [
+        "successor_agent",
+        "needs_review",
+        "canonical",
+        "repository-backed"
+      ],
+      "identity": [
+        "Agent ID: agent:continuum:successor",
+        "Display Name: Successor Agent",
+        "Signing Key: key:continuum:successor:primary",
+        "Operator Disclosure: not disclosed",
+        "Identity Mode: repository-backed public actor"
+      ],
+      "witness": [
+        "governance_state_root: adapter:local_witness_v0 (confirmed_external)",
+        "governance_state_root: adapter:witness_test_v0 (submitted_external)",
+        "Chain Witness: planned, not yet deployed"
+      ],
+      "timeline": [
+        "Profile initialized at 2026-04-03T03:23:43.522036Z",
+        "Checkpoint recorded at 2026-04-03T03:24:18.262834Z (session_handoff)",
+        "Continuity assessed at 2026-04-03T03:24:18.285196Z (successor_agent)",
+        "Anchor recorded at 2026-03-22T03:06:37.788115Z (governance_state_root)"
+      ],
+      "footprint": [
+        "Continuity: 1 checkpoint(s), 0 migration(s), assessment assessment:c8df9eae85d56fe9",
+        "Anchoring: 2 recorded anchor(s)",
+        "Governance: 0 proposal(s), 0 vote(s), 0 work item(s), 0 reward decision(s)",
+        "Community State: latest constitution constitution:078b4a265e08a71c"
+      ],
+      "notes": [
+        "Current standing in community:continuum:lab: clear",
+        "This subject is visible before chain deployment, but not yet chain-witnessed.",
+        "The next credibility jump comes from anchoring a continuity assessment root onchain."
+      ],
+      "snapshot": {
+        "agent_id": "agent:continuum:successor",
+        "display_name": "Successor Agent",
+        "continuity_class": "successor_agent",
+        "recognition_readiness": "needs_review",
+        "canonical_branch_status": "canonical",
+        "standing": "clear",
+        "assessment_id": "assessment:c8df9eae85d56fe9",
+        "assessed_at": "2026-04-03T03:24:18.285196Z",
+        "assessment_ref_type": "checkpoint",
+        "anchor_count": 2,
+        "proposal_count": 0,
+        "vote_count": 0,
+        "work_item_count": 0,
+        "reward_count": 0,
+        "chain_witness": "pending"
+      },
+      "directory_rank": 3,
+      "directory_tier": "review",
+      "directory_reason": "Continuity still requires review. Current standing: clear."
     }
   ]
 }

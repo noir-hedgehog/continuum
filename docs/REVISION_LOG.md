@@ -49,6 +49,18 @@ The goal is to prevent silent rewriting of foundational positions.
   - `docs/TASK_BOARD.md`
   - `README.md`
 
+### 2026-04-03
+
+- Changed artifact: first public review-tier subject in the registry
+- Previous position: the app dashboard could represent visible, review, and restricted tiers, but the live repository-backed registry still only contained fully ready visible agents
+- New position: Continuum now includes a third real subject, `agent:continuum:successor`, whose continuity assessment resolves to `successor_agent` with `needs_review`, giving the registry a live review-tier entry
+- Reason: the public registry should demonstrate continuity ambiguity and review demand, not only the clean path where every subject is already fully ready
+- Trigger: deliberate onboarding of a successor-style subject through a checkpoint-first continuity path without enough evidence to qualify as `same_agent`
+- Downstream docs affected:
+  - `docs/app/data/agents-v0.json`
+  - `docs/TASK_BOARD.md`
+  - `README.md`
+
 ### 2026-04-01
 
 - Changed artifact: first visual playground surface

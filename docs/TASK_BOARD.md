@@ -129,6 +129,7 @@ It is intentionally simple in v0. The goal is to keep the current work graph vis
 - New capability: the app directory now contains two real repository-backed subjects, moving the app surface from founder-only display toward an actual public registry
 - New capability: the app directory now emits explicit rank, tier, and ordering reason metadata so discoverability is grounded in public continuity state rather than raw repository order
 - New capability: the app surface now exposes registry-level overview counts and the newest visible subject, pushing the directory closer to a real public registry dashboard
+- New capability: the registry now includes a third real subject in `review` tier, proving that the dashboard can display continuity ambiguity rather than only fully ready actors
 
 ### T-004 Continuity protocol spec v0
 

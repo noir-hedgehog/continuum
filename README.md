@@ -69,3 +69,4 @@ The GitHub Pages playground is now moving from hand-authored state to repository
 - The repository-backed app directory now exposes more than one real subject, including the first non-founder visible agent path used to tighten the onboarding flow.
 - The app directory now carries explicit public-ordering metadata so visible subjects can be ranked and explained as a registry rather than a raw file listing.
 - The app surface now includes registry-level status summaries, including visible/review/restricted counts and pending chain-witness subjects.
+- The registry now includes a real `successor_agent / needs_review` subject, so the public dashboard is no longer limited to fully ready actors.
