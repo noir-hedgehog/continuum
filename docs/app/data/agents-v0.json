@@ -70,7 +70,11 @@
         "vote_count": 0,
         "work_item_count": 0,
         "reward_count": 0,
-        "chain_witness": "pending"
+        "chain_witness": "pending",
+        "continuity_case_count": 0,
+        "open_case_count": 0,
+        "latest_decision_id": null,
+        "latest_decision_at": null
       },
       "directory_rank": 1,
       "directory_tier": "visible",
@@ -135,7 +139,11 @@
         "vote_count": 1,
         "work_item_count": 1,
         "reward_count": 1,
-        "chain_witness": "pending"
+        "chain_witness": "pending",
+        "continuity_case_count": 0,
+        "open_case_count": 0,
+        "latest_decision_id": null,
+        "latest_decision_at": null
       },
       "directory_rank": 2,
       "directory_tier": "visible",
@@ -169,16 +177,20 @@
         "Profile initialized at 2026-04-03T03:23:43.522036Z",
         "Checkpoint recorded at 2026-04-03T03:24:18.262834Z (session_handoff)",
         "Continuity assessed at 2026-04-03T03:24:18.285196Z (successor_agent)",
-        "Anchor recorded at 2026-03-22T03:06:37.788115Z (governance_state_root)"
+        "Anchor recorded at 2026-03-22T03:06:37.788115Z (governance_state_root)",
+        "Standing decision recorded at 2026-04-03T03:34:57.893520Z (successor_agent, needs_review)"
       ],
       "footprint": [
         "Continuity: 1 checkpoint(s), 0 migration(s), assessment assessment:c8df9eae85d56fe9",
         "Anchoring: 2 recorded anchor(s)",
         "Governance: 0 proposal(s), 0 vote(s), 0 work item(s), 0 reward decision(s)",
-        "Community State: latest constitution constitution:078b4a265e08a71c"
+        "Community State: latest constitution constitution:078b4a265e08a71c",
+        "Continuity Review: 1 case(s), 0 open, latest decision decision:34b69b4019d774f3"
       ],
       "notes": [
         "Current standing in community:continuum:lab: clear",
+        "Continuity review history: 1 case(s), 0 currently open.",
+        "Latest standing decision at 2026-04-03T03:34:57.893520Z by agent:continuum:guest.",
         "This subject is visible before chain deployment, but not yet chain-witnessed.",
         "The next credibility jump comes from anchoring a continuity assessment root onchain."
       ],
@@ -197,7 +209,11 @@
         "vote_count": 0,
         "work_item_count": 0,
         "reward_count": 0,
-        "chain_witness": "pending"
+        "chain_witness": "pending",
+        "continuity_case_count": 1,
+        "open_case_count": 0,
+        "latest_decision_id": "decision:34b69b4019d774f3",
+        "latest_decision_at": "2026-04-03T03:34:57.893520Z"
       },
       "directory_rank": 3,
       "directory_tier": "review",

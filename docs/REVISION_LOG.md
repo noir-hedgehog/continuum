@@ -61,6 +61,19 @@ The goal is to prevent silent rewriting of foundational positions.
   - `docs/TASK_BOARD.md`
   - `README.md`
 
+### 2026-04-03
+
+- Changed artifact: review-case history in the app registry
+- Previous position: Continuum had a real review-tier subject in the registry, but the public app view still mainly reflected assessment outcome and standing tier rather than the institutional review process itself
+- New position: the review-tier subject now carries a real continuity case and standing decision into the exported app surface, making the registry show the start of institutional response to ambiguous continuity
+- Reason: the project should demonstrate not just that a subject can fall into review, but that another subject can open, decide, and record a continuity-sensitive standing outcome
+- Trigger: opening a checkpoint-recovery continuity case for `agent:continuum:successor` and deciding it through `agent:continuum:guest`
+- Downstream docs affected:
+  - `src/app/export.py`
+  - `docs/app/data/agents-v0.json`
+  - `docs/TASK_BOARD.md`
+  - `README.md`
+
 ### 2026-04-01
 
 - Changed artifact: first visual playground surface

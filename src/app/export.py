@@ -215,9 +215,29 @@ def build_agent_app_entry(
             f"Community State: latest constitution {governance_state['latest_constitution']['constitution_id']}"
         )
 
+    case_count = 0
+    open_case_count = 0
+    latest_decision = None
     notes = []
     if standing_state:
+        case_count = len(standing_state.get("cases", []))
+        open_case_count = len(standing_state.get("open_cases", []))
+        latest_decision = standing_state.get("latest_decision")
         notes.append(f"Current standing in {standing_state['community_id']}: {standing_state['current_standing']}")
+        if case_count:
+            footprint.append(
+                f"Continuity Review: {case_count} case(s), {open_case_count} open, latest decision {latest_decision['decision_id'] if latest_decision else 'none'}"
+            )
+            notes.append(
+                f"Continuity review history: {case_count} case(s), {open_case_count} currently open."
+            )
+        if latest_decision:
+            notes.append(
+                f"Latest standing decision at {latest_decision['effective_at']} by {latest_decision['decided_by']}."
+            )
+            timeline.append(
+                f"Standing decision recorded at {latest_decision['effective_at']} ({latest_decision['continuity_class']}, {latest_decision['recognition_readiness']})"
+            )
     else:
         notes.append("No standing state loaded for this agent/community pair.")
     notes.append("This subject is visible before chain deployment, but not yet chain-witnessed.")
@@ -251,6 +271,10 @@ def build_agent_app_entry(
             "work_item_count": work_item_count,
             "reward_count": reward_count,
             "chain_witness": "pending",
+            "continuity_case_count": case_count,
+            "open_case_count": open_case_count,
+            "latest_decision_id": latest_decision["decision_id"] if latest_decision else None,
+            "latest_decision_at": latest_decision["effective_at"] if latest_decision else None,
         },
     }
 
