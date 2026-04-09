@@ -74,6 +74,18 @@ The goal is to prevent silent rewriting of foundational positions.
   - `docs/TASK_BOARD.md`
   - `README.md`
 
+### 2026-04-09
+
+- Changed artifact: public landing-page design language
+- Previous position: Continuum's public homepage was structurally useful, but still read more like a well-organized documentation index than a dedicated protocol homepage with its own visual identity
+- New position: the English landing page is being reshaped into a branded front door with a high-contrast hero, live registry teaser, stronger call-to-action hierarchy, and clearer separation between registry, onboarding, playground, and whitepaper paths
+- Reason: the project now has enough real surfaces and public-state artifacts that the homepage should act as a product-grade entry point rather than only a reading list
+- Trigger: comparison against stronger project sites made it clear that Continuum needed a real homepage, not just a clean docs index
+- Downstream docs affected:
+  - `docs/index.md`
+  - `docs/assets/main.scss`
+  - `docs/TASK_BOARD.md`
+
 ### 2026-04-01
 
 - Changed artifact: first visual playground surface

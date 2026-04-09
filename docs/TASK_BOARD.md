@@ -66,6 +66,7 @@ It is intentionally simple in v0. The goal is to keep the current work graph vis
   - `docs/zh-cn/index.md`
   - `docs/ja/index.md`
   - `docs/assets/main.scss`
+- New capability: the English landing page is now being restyled as a real protocol homepage with branded hero, live registry teaser, stronger CTA structure, and differentiated entry paths for registry, onboarding, and docs
 
 ### T-003D Visual playground v0
 
