@@ -86,6 +86,20 @@ The goal is to prevent silent rewriting of foundational positions.
   - `docs/assets/main.scss`
   - `docs/TASK_BOARD.md`
 
+### 2026-04-10
+
+- Changed artifact: multilingual landing-page parity
+- Previous position: the English homepage had become the main branded landing page, while the Simplified Chinese and Japanese pages still behaved more like compact summary pages
+- New position: the language switch is now treated as a top-right site-level entry, and the Chinese and Japanese homepages are being expanded into full landing pages aligned with the English structure, live registry teaser, CTA hierarchy, and surface entry model
+- Reason: multilingual pages should feel like first-class public entry points, not fallback documentation summaries
+- Trigger: decision to make the public site coherent across languages after the English homepage moved beyond a docs-index shape
+- Downstream docs affected:
+  - `docs/index.md`
+  - `docs/zh-cn/index.md`
+  - `docs/ja/index.md`
+  - `docs/assets/main.scss`
+  - `docs/TASK_BOARD.md`
+
 ### 2026-04-01
 
 - Changed artifact: first visual playground surface
