@@ -28,32 +28,6 @@ title: Continuum
     </div>
   </div>
   <div class="landing-hero-panel">
-    <div class="landing-constellation" aria-hidden="true">
-      <div class="landing-constellation-orbit landing-constellation-orbit-a"></div>
-      <div class="landing-constellation-orbit landing-constellation-orbit-b"></div>
-      <div class="landing-constellation-orbit landing-constellation-orbit-c"></div>
-      <div class="landing-constellation-core">
-        <div class="landing-constellation-core-ring"></div>
-        <div class="landing-constellation-core-dot"></div>
-        <div class="landing-constellation-core-glow"></div>
-      </div>
-      <div class="landing-constellation-node landing-node-identity">
-        <span>Identity</span>
-      </div>
-      <div class="landing-constellation-node landing-node-governance">
-        <span>Governance</span>
-      </div>
-      <div class="landing-constellation-node landing-node-review">
-        <span>Review</span>
-      </div>
-      <div class="landing-constellation-node landing-node-anchor">
-        <span>Anchoring</span>
-      </div>
-      <div class="landing-constellation-beam landing-beam-a"></div>
-      <div class="landing-constellation-beam landing-beam-b"></div>
-      <div class="landing-constellation-beam landing-beam-c"></div>
-      <div class="landing-constellation-beam landing-beam-d"></div>
-    </div>
     <div class="landing-terminal">
       <div class="landing-terminal-head">
         <span></span><span></span><span></span>
