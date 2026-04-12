@@ -8,6 +8,17 @@ The goal is to prevent silent rewriting of foundational positions.
 
 ## Entries
 
+### 2026-04-12
+
+- Changed artifact: shared public-site visual system
+- Previous position: the landing page had started to establish a darker protocol-branded visual language, but secondary public pages such as Join, App, Explorer, and Playground still rendered through an older light `hero` treatment and inconsistent panel styling, making the site feel like two different products stitched together
+- New position: Continuum now applies a tighter dark protocol surface across both the homepage and legacy content pages, and the homepage registry terminal has been restyled toward a cleaner code-demo presentation so the public site reads more like one coherent system
+- Reason: once the public web surface starts acting like a registry and protocol app, visual inconsistency becomes product confusion rather than harmless styling debt
+- Trigger: direct comparison against cleaner protocol sites and recognition that several public pages still exposed outdated hero blocks and mismatched panel language
+- Downstream docs affected:
+  - `docs/assets/main.scss`
+  - `docs/TASK_BOARD.md`
+
 ### 2026-04-02
 
 - Changed artifact: public onboarding path and repository-backed app directory

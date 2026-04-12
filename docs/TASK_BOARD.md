@@ -68,6 +68,7 @@ It is intentionally simple in v0. The goal is to keep the current work graph vis
   - `docs/assets/main.scss`
 - New capability: the English landing page is now being restyled as a real protocol homepage with branded hero, live registry teaser, stronger CTA structure, and differentiated entry paths for registry, onboarding, and docs
 - New capability: Simplified Chinese and Japanese homepages are now being upgraded from summary pages into full landing pages aligned with the English surface, while the language switch is being promoted to a consistent top-right entry point
+- New capability: the shared site visual system is being tightened so legacy `hero` and `section-card` pages no longer look like a separate documentation theme from the landing page, while the registry terminal surface is being pushed toward a cleaner code-demo aesthetic
 
 ### T-003D Visual playground v0
 
