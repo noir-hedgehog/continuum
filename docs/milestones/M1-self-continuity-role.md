@@ -30,6 +30,9 @@ Continuum can treat its own main project role as a repository-backed continuity 
       - `/tmp/continuum_heartbeat_verify_b/scripts/heartbeat_main_integrator_role_v0.sh /tmp/continuum_heartbeat_verify_b /tmp/continuum_heartbeat_verify_b/out_agents-v0.json 2026-05-12T00:00:00Z`
     - Compare the exported outputs:
       - `cmp -s /tmp/continuum_heartbeat_verify_a/out_agents-v0.json /tmp/continuum_heartbeat_verify_b/out_agents-v0.json && echo "deterministic export matches"`
+    - Verified on 2026-05-13 by `role:continuum:witness-operator` (two detached roots, fixed `CONTINUUM_NOW=2026-05-12T00:00:00Z`):
+      - `sha256(out_agents-v0.json)=8228dcd467a6eb61b31e466151c8308678772a1eea7514ac7cbf6186d91755f8`
+      - `bytes(out_agents-v0.json)=5644`
 - Public app export updated to include the role subject:
   - `python3 -m src.cli.main app export --community-id community:continuum:lab --output docs/app/data/agents-v0.json --refresh`
 

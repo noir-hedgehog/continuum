@@ -8,6 +8,17 @@ The goal is to prevent silent rewriting of foundational positions.
 
 ## Entries
 
+### 2026-05-13
+
+- Changed artifact: M1 deterministic heartbeat evidence verification
+- Previous position: the M1 milestone note described a deterministic replay verification recipe, but the repository did not yet record a completed byte-for-byte verification run result
+- New position: the repository now records that deterministic heartbeat exports match byte-for-byte across two detached clean roots (verified 2026-05-13 by `role:continuum:witness-operator`; `sha256=8228dcd467a6eb61b31e466151c8308678772a1eea7514ac7cbf6186d91755f8`)
+- Reason: M1 evidence should be reproducible from fresh roots without relying on private operator trust; recording a completed verification run reduces ambiguity
+- Trigger: scheduled run executed the documented two-worktree deterministic replay check and captured the resulting export digest
+- Downstream docs affected:
+  - `docs/milestones/M1-self-continuity-role.md`
+  - `docs/TASK_BOARD.md`
+
 ### 2026-05-12
 
 - Changed artifact: roadmap, public milestone mechanism, and project-role continuity model

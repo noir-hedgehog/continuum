@@ -152,6 +152,7 @@ It is intentionally simple in v0. The goal is to keep the current work graph vis
 - New capability: the main-integrator role now has a minimal profile + checkpoint + migration + assessment sequence exported into the public app directory
 - New capability: `scripts/heartbeat_main_integrator_role_v0.sh` records role continuity events and refreshes `docs/app/data/agents-v0.json`
 - New capability: the heartbeat script now replays from a clean clone (bootstraps missing local agent records and tolerates empty governance constitution state during export)
+- Evidence: deterministic heartbeat export verified byte-for-byte across two detached roots on 2026-05-13 by `role:continuum:witness-operator` (`sha256=8228dcd467a6eb61b31e466151c8308678772a1eea7514ac7cbf6186d91755f8`)
 - Next step: decide whether the resulting evidence should be treated as publish-ready M1, then promote `docs/milestones/M1-self-continuity-role.md` + README status accordingly
 
 ### T-003I Public automation identities
