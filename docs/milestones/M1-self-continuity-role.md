@@ -22,6 +22,12 @@ Continuum can treat its own main project role as a repository-backed continuity 
     - `scripts/heartbeat_main_integrator_role_v0.sh "$ROOT" "$OUTPUT" 2026-05-12T00:00:00Z`
     - This sets `CONTINUUM_NOW` and `CONTINUUM_DOMAIN_TOKEN` for stable regenerated identifiers.
   - Optional deterministic replay verification (prove byte-for-byte stable export from fresh roots):
+    - Preferred helper script (creates two detached worktrees, runs the deterministic heartbeat in each, and prints the digest):
+      - `scripts/verify_deterministic_heartbeat_v0.sh "$ROOT" 2026-05-12T00:00:00Z`
+      - Expected output includes:
+        - `deterministic export matches`
+        - `sha256=...`
+        - `bytes=...`
     - Create two detached clean worktrees:
       - `git worktree add --detach /tmp/continuum_heartbeat_verify_a HEAD`
       - `git worktree add --detach /tmp/continuum_heartbeat_verify_b HEAD`

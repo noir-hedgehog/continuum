@@ -175,6 +175,7 @@ It is intentionally simple in v0. The goal is to keep the current work graph vis
 - New capability: deterministic heartbeat replay is supported via `CONTINUUM_NOW` + `CONTINUUM_DOMAIN_TOKEN` (also exposed as an optional third argument in `scripts/heartbeat_main_integrator_role_v0.sh`) so M1 evidence can be regenerated with stable identifiers when needed
 - New capability: the main-integrator automation prompt and quickstart now explicitly call out running `scripts/heartbeat_main_integrator_role_v0.sh` to refresh `docs/app/data/agents-v0.json`
 - New capability: deterministic replay stability can be verified by running the heartbeat from two fresh detached worktrees and comparing the exported JSON byte-for-byte (`cmp -s`)
+- New capability: `scripts/verify_deterministic_heartbeat_v0.sh` automates the two-worktree verification and prints `sha256` + `bytes` for the exported JSON
 - Next step: confirm the scheduled automation runner executes the heartbeat step by default (or document when it should be skipped to avoid unnecessary diffs)
   - Default guidance: skip the heartbeat on documentation-only runs; run it when you intend to refresh M1 evidence or app exports.
 
