@@ -9,6 +9,8 @@ export PYTHONPATH="$ROOT"
 
 ROLE_ID="role:continuum:main-integrator"
 ROLE_RECORD="$ROOT/.continuum/agents/role__continuum__main-integrator.json"
+MAIN_AGENT_ID="agent:continuum:main"
+MAIN_AGENT_RECORD="$ROOT/.continuum/agents/agent__continuum__main.json"
 
 if [[ ! -f "$ROLE_RECORD" ]]; then
   python3 -m src.cli.main role init \
@@ -73,7 +75,14 @@ python3 -m src.cli.main migration declare \
   --evidence docs/REVISION_LOG.md \
   --expected-continuity-class same_agent
 
-python3 -m src.cli.main agent use --agent-id agent:continuum:main
+if [[ ! -f "$MAIN_AGENT_RECORD" ]]; then
+  python3 -m src.cli.main agent init \
+    --scope continuum \
+    --name main \
+    --display-name "Continuum Main"
+fi
+
+python3 -m src.cli.main agent use --agent-id "$MAIN_AGENT_ID"
 
 python3 -m src.cli.main continuity assess \
   --actor-id "$ROLE_ID" \
