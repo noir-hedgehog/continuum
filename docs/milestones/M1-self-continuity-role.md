@@ -1,8 +1,8 @@
 # M1 Self-Continuity Role
 
-Status: in-progress
-Published at: pending commit
-Role: `role:continuum:builder`
+Status: ready-for-review
+Published at: pending founder publish decision
+Role: `role:continuum:main-integrator`
 
 ## Claim
 
@@ -12,12 +12,12 @@ Continuum can treat its own main project role as a repository-backed continuity 
 
 - CLI support for repository-backed role subjects:
   - `python -m src.cli.main role init --scope continuum --name main-integrator --display-name "Continuum Main Integrator"`
-- Minimal role continuity sequence recorded for `role:continuum:main-integrator`:
-  - `python -m src.cli.main agent use --agent-id role:continuum:main-integrator`
-  - `python -m src.cli.main agent profile set --display-name "Continuum Main Integrator" --artifact-ref docs/ROADMAP_V0.md --artifact-ref docs/PUBLIC_MILESTONES_V0.md --artifact-ref docs/OPERATING_MODEL.md --artifact-ref docs/TASK_BOARD.md --artifact-ref docs/REVISION_LOG.md`
-  - `python -m src.cli.main memory checkpoint create --scope session_handoff --summary "Reconstructed Continuum continuity bundle for role:continuum:main-integrator during scheduled heartbeat"`
-  - `python -m src.cli.main migration declare --migration-type session_restart --from-ref "session:continuum:main-integrator:<previous>" --to-ref "session:continuum:main-integrator:<current>" --reason "Scheduled automation run resumed"`
-  - `python -m src.cli.main continuity assess --actor-id role:continuum:main-integrator --scope repository --refresh`
+- Repeatable clean-clone heartbeat (records profile + checkpoint + migration + assessment, then exports app data):
+  - `scripts/heartbeat_main_integrator_role_v0.sh`
+  - Verified from a detached clean worktree on 2026-05-12:
+    - `git worktree add --detach /tmp/continuum_heartbeat_verify HEAD`
+    - `/tmp/continuum_heartbeat_verify/scripts/heartbeat_main_integrator_role_v0.sh /tmp/continuum_heartbeat_verify /tmp/continuum_heartbeat_verify/out_agents-v0.json`
+    - Export includes both `agent:continuum:main` and `role:continuum:main-integrator` (hash varies per run timestamp).
 - Public app export updated to include the role subject:
   - `python -m src.cli.main app export --community-id community:continuum:lab --output docs/app/data/agents-v0.json --refresh`
 
@@ -28,5 +28,5 @@ Continuum can treat its own main project role as a repository-backed continuity 
 
 ## Next
 
-- Add a repeatable heartbeat script that records a role checkpoint + migration + assessment and refreshes the app export from a clean clone.
-- Add an anchor export for the latest role continuity assessment root once founder approves the witness target progression.
+- Decide whether this evidence is publish-ready as M1; if yes, mark this milestone `published` and add the README + public site status cues.
+- After M1 publish, prepare M2 external-model handoff design and keep M3/M4 witness work gated by founder approval on external targets.
