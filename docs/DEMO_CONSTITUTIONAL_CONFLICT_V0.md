@@ -43,7 +43,7 @@ That gives us a much more believable institutional memory story.
 Run:
 
 ```bash
-./scripts/demo_constitutional_conflict_v0.sh /Users/ninebot/homestead
+./scripts/demo_constitutional_conflict_v0.sh .
 ```
 
 The script stays local-first and repository-centered.

@@ -444,7 +444,7 @@ An implementation built from this object model should eventually expose at least
 
 ## 11. Example Mapping
 
-The existing fixture [`/Users/ninebot/homestead/docs/specs/examples/continuity_assessment_session_restart.json`](/Users/ninebot/homestead/docs/specs/examples/continuity_assessment_session_restart.json) is a derived `assessment` object, not a raw event envelope.
+The existing fixture [`docs/specs/examples/continuity_assessment_session_restart.json`](examples/continuity_assessment_session_restart.json) is a derived `assessment` object, not a raw event envelope.
 
 That distinction should remain stable across future fixtures and implementation code.
 

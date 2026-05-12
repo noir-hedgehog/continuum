@@ -1,6 +1,6 @@
 # Integration Tests
 
-End-to-end Continuum flows currently live in [`/Users/ninebot/homestead/tests/test_runtime_bootstrap.py`](/Users/ninebot/homestead/tests/test_runtime_bootstrap.py) while the prototype remains stdlib-only.
+End-to-end Continuum flows currently live in [`tests/test_runtime_bootstrap.py`](../test_runtime_bootstrap.py) while the prototype remains stdlib-only.
 
 Integration focus areas:
 

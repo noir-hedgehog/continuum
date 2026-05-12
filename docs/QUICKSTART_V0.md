@@ -24,7 +24,7 @@ The goal is to prove one coherent story:
 All commands below should be run from:
 
 ```bash
-/Users/ninebot/homestead
+cd /path/to/continuum
 ```
 
 ## Demo Scope

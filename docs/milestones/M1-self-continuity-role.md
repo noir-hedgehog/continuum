@@ -41,6 +41,13 @@ Continuum can treat its own main project role as a repository-backed continuity 
 - This does not yet anchor the role's continuity assessment root (no external witness beyond the repository export yet).
 - This does not yet prove cross-model handoff; it records a same-role session restart with repository reconstruction evidence.
 
+## Publish checklist (founder gate)
+
+- Confirm the evidence section reflects the latest verified replay recipe and deterministic digest.
+- Confirm `docs/app/data/agents-v0.json` is refreshed via `python3 -m src.cli.main app export ... --refresh`.
+- Confirm the public note will describe this as **self-continuity** only (no cross-model handoff, no external anchoring yet).
+- If publishing, flip `Status:` to `published`, set `Published at:`, and update README status cues to match.
+
 ## Next
 
 - Decide whether this evidence is publish-ready as M1; if yes, mark this milestone `published` and add the README + public site status cues.
