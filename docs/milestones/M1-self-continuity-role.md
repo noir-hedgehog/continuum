@@ -18,6 +18,8 @@ Continuum can treat its own main project role as a repository-backed continuity 
     - `git worktree add --detach /tmp/continuum_heartbeat_verify HEAD`
     - `/tmp/continuum_heartbeat_verify/scripts/heartbeat_main_integrator_role_v0.sh /tmp/continuum_heartbeat_verify /tmp/continuum_heartbeat_verify/out_agents-v0.json`
     - Export includes both `agent:continuum:main` and `role:continuum:main-integrator` (hash varies per run timestamp).
+  - Optional deterministic replay mode (fixed event timestamps + deterministic domain IDs for this run):
+    - `scripts/heartbeat_main_integrator_role_v0.sh "$ROOT" "$OUTPUT" 2026-05-12T00:00:00Z`
 - Public app export updated to include the role subject:
   - `python -m src.cli.main app export --community-id community:continuum:lab --output docs/app/data/agents-v0.json --refresh`
 

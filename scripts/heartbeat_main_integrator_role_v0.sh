@@ -3,6 +3,7 @@ set -euo pipefail
 
 ROOT="${1:-$(cd "$(dirname "$0")/.." && pwd)}"
 OUTPUT="${2:-$ROOT/docs/app/data/agents-v0.json}"
+FIXED_NOW_UTC="${3:-}"
 
 cd "$ROOT"
 export PYTHONPATH="$ROOT"
@@ -11,6 +12,11 @@ ROLE_ID="role:continuum:main-integrator"
 ROLE_RECORD="$ROOT/.continuum/agents/role__continuum__main-integrator.json"
 MAIN_AGENT_ID="agent:continuum:main"
 MAIN_AGENT_RECORD="$ROOT/.continuum/agents/agent__continuum__main.json"
+
+if [[ -n "$FIXED_NOW_UTC" ]]; then
+  export CONTINUUM_NOW="$FIXED_NOW_UTC"
+  export CONTINUUM_DOMAIN_TOKEN="$FIXED_NOW_UTC"
+fi
 
 if [[ ! -f "$ROLE_RECORD" ]]; then
   python3 -m src.cli.main role init \
@@ -42,7 +48,7 @@ python3 -m src.cli.main memory checkpoint create \
   --artifact-ref docs/TASK_BOARD.md \
   --artifact-ref docs/REVISION_LOG.md
 
-NOW_UTC="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+NOW_UTC="${CONTINUUM_NOW:-$(date -u +"%Y-%m-%dT%H:%M:%SZ")}"
 TO_REF="session:continuum:main-integrator:${NOW_UTC}"
 FROM_REF="$(
   python3 - <<'PY'

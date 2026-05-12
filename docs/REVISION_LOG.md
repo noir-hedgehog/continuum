@@ -43,6 +43,21 @@ The goal is to prevent silent rewriting of foundational positions.
   - `docs/TASK_BOARD.md`
   - `docs/index.md`
 
+### 2026-05-12
+
+- Changed artifact: deterministic replay support for role heartbeat evidence
+- Previous position: `role:continuum:main-integrator` heartbeat scripts and runtime event timestamps were replayable but would produce different identifiers and export diffs across runs because timestamps and authoring tokens were always fresh
+- New position: Continuum now supports optional deterministic replay for event timestamps (`CONTINUUM_NOW`) and domain identifiers (`CONTINUUM_DOMAIN_TOKEN`), so the M1 self-continuity evidence path can be regenerated with stable identifiers when needed
+- Reason: public milestone evidence should be reproducible on demand; determinism makes it easier to validate clean-clone replays and compare exports without conflating time variance with behavioral variance
+- Trigger: preparing M1 evidence for repeatable verification and future cross-model handoff tests
+- Downstream code affected:
+  - `src/runtime/events.py`
+  - `src/runtime/identifiers.py`
+  - `scripts/heartbeat_main_integrator_role_v0.sh`
+  - `tests/test_runtime_bootstrap.py`
+  - `docs/milestones/M1-self-continuity-role.md`
+  - `docs/TASK_BOARD.md`
+
 ### 2026-04-12
 
 - Changed artifact: shared public-site visual system

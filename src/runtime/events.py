@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import os
 from datetime import datetime, timezone
 from typing import Any
 
@@ -19,6 +20,18 @@ from src.schemas.registry import (
 
 
 def utc_now() -> str:
+    fixed = os.getenv("CONTINUUM_NOW")
+    if fixed:
+        value = fixed.strip()
+        try:
+            parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+        except ValueError as exc:  # pragma: no cover
+            raise ValueError(
+                "Invalid CONTINUUM_NOW value; expected ISO-8601 timestamp like 2026-05-12T00:00:00Z"
+            ) from exc
+        if parsed.tzinfo is None:
+            parsed = parsed.replace(tzinfo=timezone.utc)
+        return parsed.astimezone(timezone.utc).isoformat(timespec="microseconds").replace("+00:00", "Z")
     return datetime.now(timezone.utc).isoformat(timespec="microseconds").replace("+00:00", "Z")
 
 

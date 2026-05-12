@@ -16,7 +16,8 @@ from src.anchors.export import (
 )
 from src.cli.main import main
 from src.runtime.canonical import canonical_json
-from src.runtime.events import build_checkpoint_payload, build_event, build_migration_payload
+from src.runtime.events import build_checkpoint_payload, build_event, build_migration_payload, utc_now
+from src.runtime.identifiers import generate_domain_id
 from src.runtime.store import RepositoryStore
 
 
@@ -83,6 +84,32 @@ class CanonicalRuntimeTests(unittest.TestCase):
             second_path = store.save_event(event)
             self.assertEqual(first_path, second_path)
             self.assertEqual(store.load_event(event["event_id"])["event_id"], event["event_id"])
+
+    def test_utc_now_respects_continuum_now_env(self) -> None:
+        previous = os.environ.get("CONTINUUM_NOW")
+        os.environ["CONTINUUM_NOW"] = "2026-05-12T00:00:00Z"
+        try:
+            self.assertEqual(utc_now(), "2026-05-12T00:00:00.000000Z")
+        finally:
+            if previous is None:
+                os.environ.pop("CONTINUUM_NOW", None)
+            else:
+                os.environ["CONTINUUM_NOW"] = previous
+
+    def test_generate_domain_id_respects_domain_token_env(self) -> None:
+        previous = os.environ.get("CONTINUUM_DOMAIN_TOKEN")
+        os.environ["CONTINUUM_DOMAIN_TOKEN"] = "fixed-token"
+        try:
+            first = generate_domain_id("checkpoint", "agent-continuum-main")
+            second = generate_domain_id("checkpoint", "agent-continuum-main")
+            other_family = generate_domain_id("migration", "agent-continuum-main")
+            self.assertEqual(first, second)
+            self.assertNotEqual(first, other_family)
+        finally:
+            if previous is None:
+                os.environ.pop("CONTINUUM_DOMAIN_TOKEN", None)
+            else:
+                os.environ["CONTINUUM_DOMAIN_TOKEN"] = previous
 
     def test_local_anchor_adapter_records_confirmed_local_witness(self) -> None:
         adapter = LocalAnchorAdapter()

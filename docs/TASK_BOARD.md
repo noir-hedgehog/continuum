@@ -171,6 +171,7 @@ It is intentionally simple in v0. The goal is to keep the current work graph vis
 - Current focus: start with role-level public identities before mapping them into registry-visible continuity subjects
 - New capability: scheduled work can now declare itself as `role:continuum:main-integrator`, `role:continuum:builder`, `role:continuum:witness-operator`, `role:continuum:protocol-steward`, or `role:continuum:validation-scout`
 - New capability: the public app export now includes `role:*` subjects alongside `agent:*` subjects when explicitly selected
+- New capability: deterministic heartbeat replay is supported via `CONTINUUM_NOW` + `CONTINUUM_DOMAIN_TOKEN` (also exposed as an optional third argument in `scripts/heartbeat_main_integrator_role_v0.sh`) so M1 evidence can be regenerated with stable identifiers when needed
 - Next step: wire the hourly automation prompts to refresh role continuity events and regenerate `docs/app/data/agents-v0.json` as part of each scheduled run
 
 ### T-004 Continuity protocol spec v0
