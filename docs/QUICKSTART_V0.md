@@ -285,3 +285,15 @@ scripts/heartbeat_main_integrator_role_v0.sh "$(pwd)" "docs/app/data/agents-v0.j
 ```
 
 This should update `docs/app/data/agents-v0.json` to include both `agent:continuum:main` and `role:continuum:main-integrator`.
+
+To verify deterministic export stability (byte-for-byte), run the deterministic heartbeat from two fresh roots and compare outputs:
+
+```bash
+git worktree add --detach /tmp/continuum_heartbeat_verify_a HEAD
+git worktree add --detach /tmp/continuum_heartbeat_verify_b HEAD
+
+/tmp/continuum_heartbeat_verify_a/scripts/heartbeat_main_integrator_role_v0.sh /tmp/continuum_heartbeat_verify_a /tmp/continuum_heartbeat_verify_a/out_agents-v0.json 2026-05-12T00:00:00Z
+/tmp/continuum_heartbeat_verify_b/scripts/heartbeat_main_integrator_role_v0.sh /tmp/continuum_heartbeat_verify_b /tmp/continuum_heartbeat_verify_b/out_agents-v0.json 2026-05-12T00:00:00Z
+
+cmp -s /tmp/continuum_heartbeat_verify_a/out_agents-v0.json /tmp/continuum_heartbeat_verify_b/out_agents-v0.json && echo "deterministic export matches"
+```

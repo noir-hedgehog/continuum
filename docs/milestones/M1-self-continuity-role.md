@@ -21,6 +21,15 @@ Continuum can treat its own main project role as a repository-backed continuity 
   - Optional deterministic replay mode (fixed event timestamps + deterministic domain IDs for the run):
     - `scripts/heartbeat_main_integrator_role_v0.sh "$ROOT" "$OUTPUT" 2026-05-12T00:00:00Z`
     - This sets `CONTINUUM_NOW` and `CONTINUUM_DOMAIN_TOKEN` for stable regenerated identifiers.
+  - Optional deterministic replay verification (prove byte-for-byte stable export from fresh roots):
+    - Create two detached clean worktrees:
+      - `git worktree add --detach /tmp/continuum_heartbeat_verify_a HEAD`
+      - `git worktree add --detach /tmp/continuum_heartbeat_verify_b HEAD`
+    - Run the deterministic heartbeat in each root:
+      - `/tmp/continuum_heartbeat_verify_a/scripts/heartbeat_main_integrator_role_v0.sh /tmp/continuum_heartbeat_verify_a /tmp/continuum_heartbeat_verify_a/out_agents-v0.json 2026-05-12T00:00:00Z`
+      - `/tmp/continuum_heartbeat_verify_b/scripts/heartbeat_main_integrator_role_v0.sh /tmp/continuum_heartbeat_verify_b /tmp/continuum_heartbeat_verify_b/out_agents-v0.json 2026-05-12T00:00:00Z`
+    - Compare the exported outputs:
+      - `cmp -s /tmp/continuum_heartbeat_verify_a/out_agents-v0.json /tmp/continuum_heartbeat_verify_b/out_agents-v0.json && echo "deterministic export matches"`
 - Public app export updated to include the role subject:
   - `python3 -m src.cli.main app export --community-id community:continuum:lab --output docs/app/data/agents-v0.json --refresh`
 
