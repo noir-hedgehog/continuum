@@ -155,6 +155,21 @@ class CliBootstrapTests(unittest.TestCase):
                 self.assertEqual(
                     self.run_cli(
                         [
+                            "role",
+                            "init",
+                            "--scope",
+                            "continuum",
+                            "--name",
+                            "main-integrator",
+                            "--display-name",
+                            "Continuum Main Integrator",
+                        ]
+                    )[0],
+                    0,
+                )
+                self.assertEqual(
+                    self.run_cli(
+                        [
                             "agent",
                             "init",
                             "--scope",

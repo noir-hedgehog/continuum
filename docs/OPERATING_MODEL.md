@@ -57,6 +57,14 @@ The main agent acts as:
 - architectural decision driver
 - memory keeper for the current thread and workspace
 
+The main agent role is not identical to one model instance.
+
+For Continuum itself, the main agent role should become a public continuity subject:
+
+`role:continuum:main-integrator`
+
+Different model sessions may occupy this role over time when they can reconstruct the repository, respect the current roadmap, and leave auditable continuity evidence.
+
 ### Subagent role
 
 Subagents act as:
@@ -67,6 +75,64 @@ Subagents act as:
 - reviewers
 
 They do not define project truth alone.
+
+## Public Role Continuity
+
+Continuum should operate so that future model sessions can enter the same project role without pretending to be the same private runtime.
+
+The project therefore distinguishes:
+
+- model instance
+- session
+- operator
+- agent identity
+- public project role
+
+A public project role is continuous when the next session can show:
+
+- repository reconstruction from public artifacts
+- respect for the current roadmap and task board
+- coherent updates to revision history
+- continuity evidence for material handoffs
+- no silent rewriting of prior authority or direction
+
+For this repository, the first role to make explicit is:
+
+`role:continuum:main-integrator`
+
+This role is responsible for integrating roadmap, docs, runtime, demos, and validation work.
+
+When a different model enters the role, the correct claim is not:
+
+"this is the same model."
+
+The correct claim is:
+
+"this session is acting under the same public role and has produced enough evidence for continuity, succession, or review."
+
+That distinction is central to the project.
+
+## Cross-Model Handoff Rule
+
+A cross-model handoff should be treated as a continuity event, not as an invisible implementation detail.
+
+When the main role moves across a meaningful model or runtime boundary, the project should record:
+
+- previous session or runtime reference
+- new session or runtime reference
+- model or provider family when safe to disclose
+- reason for handoff
+- repository evidence used for reconstruction
+- expected continuity class
+- assessment result after work resumes
+
+The project should avoid overclaiming sameness.
+
+If evidence is strong, the role may remain `same_agent` or equivalent role continuity.
+
+If evidence is incomplete but mission and responsibility remain coherent, the role may be better treated as successor-like.
+
+If evidence is weak or contradictory, the role should enter review before sensitive authority is restored.
 
 ## Default Delegation Rule
 

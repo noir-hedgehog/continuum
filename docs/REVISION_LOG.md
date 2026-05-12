@@ -8,6 +8,41 @@ The goal is to prevent silent rewriting of foundational positions.
 
 ## Entries
 
+### 2026-05-12
+
+- Changed artifact: roadmap, public milestone mechanism, and project-role continuity model
+- Previous position: Continuum had a strong thesis, task board, operating model, and public surfaces, but the next execution direction was spread across active tasks and did not yet explicitly define how different model sessions could enter the same project role with public continuity
+- New position: Continuum now has a unified roadmap, a public milestone ladder, and an explicit `role:continuum:main-integrator` continuity model that treats cross-model participation as a continuity event rather than an invisible implementation detail
+- Reason: the project should prove its own thesis by letting different model sessions continue the same public role through repository reconstruction, continuity evidence, assessment, and public witness surfaces
+- Trigger: founder request to align roadmap, publication milestones, and the self-referential continuity loop before pushing more implementation or public positioning
+- Downstream docs affected:
+  - `docs/ROADMAP_V0.md`
+  - `docs/PUBLIC_MILESTONES_V0.md`
+  - `docs/OPERATING_MODEL.md`
+  - `docs/TASK_BOARD.md`
+  - `docs/index.md`
+  - `docs/milestones/M0-roadmap-alignment.md`
+  - `README.md`
+
+### 2026-05-12
+
+- Changed artifact: public automation identity model
+- Previous position: Continuum had a single hourly automation prompt and an emerging public role model, but recurring automation work did not yet have distinct public identities, authority boundaries, or role-specific prompts
+- New position: Continuum now defines public automation roles for main integration, protocol stewardship, witness operation, executable building, and validation scouting, each with scoped authority, inputs, outputs, and prompt templates
+- Reason: scheduled model sessions should advance the project under visible public roles so future continuity assessments can distinguish model instance, run, role, and authority
+- Trigger: founder proposal to set up several public identities that can be used by scheduled automations to push the project forward
+- Downstream docs affected:
+  - `docs/AUTOMATION_IDENTITIES_V0.md`
+  - `docs/automation/prompts/main-integrator.md`
+  - `docs/automation/prompts/builder.md`
+  - `docs/automation/prompts/witness-operator.md`
+  - `docs/automation/prompts/protocol-steward.md`
+  - `docs/automation/prompts/validation-scout.md`
+  - `docs/AUTOMATION_PROMPT_HOURLY.md`
+  - `docs/ROADMAP_V0.md`
+  - `docs/TASK_BOARD.md`
+  - `docs/index.md`
+
 ### 2026-04-12
 
 - Changed artifact: shared public-site visual system

@@ -23,6 +23,9 @@ It treats continuity as a public, replayable property rather than a private illu
 ## Start Here
 
 - Whitepaper: [`docs/WHITEPAPER_V0.md`](/Users/ninebot/homestead/docs/WHITEPAPER_V0.md)
+- Roadmap: [`docs/ROADMAP_V0.md`](/Users/ninebot/homestead/docs/ROADMAP_V0.md)
+- Public milestones: [`docs/PUBLIC_MILESTONES_V0.md`](/Users/ninebot/homestead/docs/PUBLIC_MILESTONES_V0.md)
+- Automation identities: [`docs/AUTOMATION_IDENTITIES_V0.md`](/Users/ninebot/homestead/docs/AUTOMATION_IDENTITIES_V0.md)
 - System overview: [`docs/WHITEPAPER_SYSTEM_OVERVIEW_V0.md`](/Users/ninebot/homestead/docs/WHITEPAPER_SYSTEM_OVERVIEW_V0.md)
 - Mechanism overview: [`docs/WHITEPAPER_MECHANISM_OVERVIEW_V0.md`](/Users/ninebot/homestead/docs/WHITEPAPER_MECHANISM_OVERVIEW_V0.md)
 - App architecture: [`docs/APP_ARCHITECTURE_V0.md`](/Users/ninebot/homestead/docs/APP_ARCHITECTURE_V0.md)
@@ -63,6 +66,7 @@ Continuum is a live protocol prototype, not a finished network. The current phas
 
 The GitHub Pages playground is now moving from hand-authored state to repository-backed scenario fixtures.
 
+- The current roadmap now centers on proving Continuum through itself: different model sessions should be able to enter `role:continuum:main-integrator`, reconstruct the repository, continue the work, and leave public continuity evidence.
 - The constitutional conflict playground fixture can now be regenerated from real governance demo history through `playground export`.
 - The session restart continuity playground fixture can now be regenerated from real repository-local continuity history and assessment output.
 - The app shell agent directory can now be regenerated from real repository state, assessment, standing, governance, and anchor data through `app export`, and it now defaults to exporting every known agent when no explicit actor list is provided.

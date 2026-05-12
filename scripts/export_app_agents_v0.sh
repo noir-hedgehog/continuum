@@ -6,7 +6,6 @@ OUTPUT="${2:-$ROOT/docs/app/data/agents-v0.json}"
 
 cd "$ROOT"
 PYTHONPATH="$ROOT" python3 -m src.cli.main app export \
-  --actor-id agent:continuum:main \
   --community-id community:continuum:lab \
   --refresh \
   --output "$OUTPUT"

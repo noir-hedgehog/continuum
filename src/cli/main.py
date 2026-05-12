@@ -197,6 +197,25 @@ def cmd_agent_init(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_role_init(args: argparse.Namespace) -> int:
+    store = _store()
+    scope = slugify(args.scope)
+    name = slugify(args.name)
+    role_id = args.role_id or f"role:{scope}:{name}"
+    signing_key = args.signing_key or f"key:{scope}:{name}:role-primary"
+    role_record = {
+        "agent_id": role_id,
+        "display_name": args.display_name,
+        "description": args.description,
+        "operator_disclosure": args.operator_disclosure,
+        "signing_key": signing_key,
+        "secret_hex": generate_secret_hex(),
+    }
+    store.save_agent(role_record)
+    print(json.dumps({"role": role_record}, indent=2, sort_keys=True))
+    return 0
+
+
 def cmd_agent_show(_: argparse.Namespace) -> int:
     store = _store()
     print(json.dumps({"agent": _load_current_agent(store)}, indent=2, sort_keys=True))
@@ -1367,6 +1386,18 @@ def cmd_app_export(args: argparse.Namespace) -> int:
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="continuum")
     subparsers = parser.add_subparsers(dest="command", required=True)
+
+    role = subparsers.add_parser("role")
+    role_sub = role.add_subparsers(dest="role_command", required=True)
+    role_init = role_sub.add_parser("init")
+    role_init.add_argument("--scope", required=True)
+    role_init.add_argument("--name", required=True)
+    role_init.add_argument("--role-id")
+    role_init.add_argument("--signing-key")
+    role_init.add_argument("--display-name", required=True)
+    role_init.add_argument("--description", default="")
+    role_init.add_argument("--operator-disclosure", default="")
+    role_init.set_defaults(func=cmd_role_init)
 
     agent = subparsers.add_parser("agent")
     agent_sub = agent.add_subparsers(dest="agent_command", required=True)

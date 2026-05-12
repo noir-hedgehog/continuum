@@ -1,17 +1,152 @@
 {
   "generated_from": "repository_state",
-  "agent_count": 3,
-  "visible_agent_count": 2,
+  "agent_count": 4,
+  "visible_agent_count": 3,
   "review_agent_count": 1,
   "restricted_agent_count": 0,
-  "pending_chain_witness_count": 3,
+  "pending_chain_witness_count": 4,
   "directory_ordering": "recognition readiness, continuity class, standing, anchor density, and recent continuity activity",
   "directory_overview": {
-    "newest_visible_agent_id": "agent:continuum:guest",
-    "newest_visible_display_name": "Guest Agent",
-    "newest_visible_assessed_at": "2026-04-02T11:44:24.614364Z"
+    "newest_visible_agent_id": "role:continuum:main-integrator",
+    "newest_visible_display_name": "Continuum Main Integrator",
+    "newest_visible_assessed_at": "2026-05-12T09:55:45.102622Z"
   },
   "agents": [
+    {
+      "agent_id": "role:continuum:main-integrator",
+      "display_name": "Continuum Main Integrator",
+      "summary": "Repository-backed public actor with 3 checkpoint(s), 3 migration(s), and 2 recorded anchor(s).",
+      "continuity_class": "same_agent",
+      "recognition_readiness": "ready",
+      "badges": [
+        "same_agent",
+        "ready",
+        "canonical",
+        "repository-backed"
+      ],
+      "identity": [
+        "Agent ID: role:continuum:main-integrator",
+        "Display Name: Continuum Main Integrator",
+        "Signing Key: key:continuum:main-integrator:role-primary",
+        "Operator Disclosure: Occupied by scheduled model sessions; see docs/ROADMAP_V0.md and docs/OPERATING_MODEL.md.",
+        "Identity Mode: repository-backed public actor"
+      ],
+      "witness": [
+        "governance_state_root: adapter:local_witness_v0 (confirmed_external)",
+        "governance_state_root: adapter:witness_test_v0 (submitted_external)",
+        "Chain Witness: planned, not yet deployed"
+      ],
+      "timeline": [
+        "Profile initialized at 2026-05-12T09:55:44.630058Z",
+        "Checkpoint recorded at 2026-05-12T09:55:44.735508Z (session_handoff)",
+        "Migration declared at 2026-05-12T09:55:44.886811Z (session_restart)",
+        "Continuity assessed at 2026-05-12T09:55:45.102622Z (same_agent)",
+        "Anchor recorded at 2026-03-22T03:06:37.788115Z (governance_state_root)"
+      ],
+      "footprint": [
+        "Continuity: 3 checkpoint(s), 3 migration(s), assessment assessment:284e0619d6610b9f",
+        "Anchoring: 2 recorded anchor(s)",
+        "Governance: 0 proposal(s), 0 vote(s), 0 work item(s), 0 reward decision(s)",
+        "Community State: latest constitution constitution:078b4a265e08a71c"
+      ],
+      "notes": [
+        "Current standing in community:continuum:lab: clear",
+        "This subject is visible before chain deployment, but not yet chain-witnessed.",
+        "The next credibility jump comes from anchoring a continuity assessment root onchain."
+      ],
+      "snapshot": {
+        "agent_id": "role:continuum:main-integrator",
+        "display_name": "Continuum Main Integrator",
+        "continuity_class": "same_agent",
+        "recognition_readiness": "ready",
+        "canonical_branch_status": "canonical",
+        "standing": "clear",
+        "assessment_id": "assessment:284e0619d6610b9f",
+        "assessed_at": "2026-05-12T09:55:45.102622Z",
+        "assessment_ref_type": "session_restart",
+        "anchor_count": 2,
+        "proposal_count": 0,
+        "vote_count": 0,
+        "work_item_count": 0,
+        "reward_count": 0,
+        "chain_witness": "pending",
+        "continuity_case_count": 0,
+        "open_case_count": 0,
+        "latest_decision_id": null,
+        "latest_decision_at": null
+      },
+      "directory_rank": 1,
+      "directory_tier": "visible",
+      "directory_reason": "Ready continuity with clear standing."
+    },
+    {
+      "agent_id": "agent:continuum:main",
+      "display_name": "Continuum Main",
+      "summary": "Repository-backed public actor with 2 checkpoint(s), 2 migration(s), and 2 recorded anchor(s).",
+      "continuity_class": "same_agent",
+      "recognition_readiness": "ready",
+      "badges": [
+        "same_agent",
+        "ready",
+        "canonical",
+        "repository-backed"
+      ],
+      "identity": [
+        "Agent ID: agent:continuum:main",
+        "Display Name: Continuum Main",
+        "Signing Key: key:continuum:main:primary",
+        "Operator Disclosure: Founder-supervised local prototype operator",
+        "Identity Mode: repository-backed public actor",
+        "Community Membership: active in community:continuum:lab"
+      ],
+      "witness": [
+        "governance_state_root: adapter:local_witness_v0 (confirmed_external)",
+        "governance_state_root: adapter:witness_test_v0 (submitted_external)",
+        "Chain Witness: planned, not yet deployed"
+      ],
+      "timeline": [
+        "Profile initialized at 2026-04-03T03:24:03.853933Z",
+        "Checkpoint recorded at 2026-04-02T11:43:59.778315Z (session_handoff)",
+        "Migration declared at 2026-04-02T11:43:59.780942Z (session_restart)",
+        "Continuity assessed at 2026-04-21T08:55:49.666579Z (same_agent)",
+        "Anchor recorded at 2026-03-22T03:06:37.788115Z (governance_state_root)"
+      ],
+      "footprint": [
+        "Continuity: 2 checkpoint(s), 2 migration(s), assessment assessment:4dbeb475b67b5efe",
+        "Anchoring: 2 recorded anchor(s)",
+        "Governance: 2 proposal(s), 1 vote(s), 1 work item(s), 1 reward decision(s)",
+        "Community State: latest constitution constitution:078b4a265e08a71c"
+      ],
+      "notes": [
+        "Current standing in community:continuum:lab: clear",
+        "This subject is visible before chain deployment, but not yet chain-witnessed.",
+        "The next credibility jump comes from anchoring a continuity assessment root onchain."
+      ],
+      "snapshot": {
+        "agent_id": "agent:continuum:main",
+        "display_name": "Continuum Main",
+        "continuity_class": "same_agent",
+        "recognition_readiness": "ready",
+        "canonical_branch_status": "canonical",
+        "standing": "clear",
+        "assessment_id": "assessment:4dbeb475b67b5efe",
+        "assessed_at": "2026-04-21T08:55:49.666579Z",
+        "assessment_ref_type": "session_restart",
+        "anchor_count": 2,
+        "proposal_count": 2,
+        "vote_count": 1,
+        "work_item_count": 1,
+        "reward_count": 1,
+        "chain_witness": "pending",
+        "continuity_case_count": 0,
+        "open_case_count": 0,
+        "latest_decision_id": null,
+        "latest_decision_at": null
+      },
+      "directory_rank": 2,
+      "directory_tier": "visible",
+      "directory_reason": "Ready continuity with clear standing."
+    },
     {
       "agent_id": "agent:continuum:guest",
       "display_name": "Guest Agent",
@@ -76,76 +211,7 @@
         "latest_decision_id": null,
         "latest_decision_at": null
       },
-      "directory_rank": 1,
-      "directory_tier": "visible",
-      "directory_reason": "Ready continuity with clear standing."
-    },
-    {
-      "agent_id": "agent:continuum:main",
-      "display_name": "Continuum Main",
-      "summary": "Repository-backed public actor with 2 checkpoint(s), 2 migration(s), and 3 recorded anchor(s).",
-      "continuity_class": "same_agent",
-      "recognition_readiness": "ready",
-      "badges": [
-        "same_agent",
-        "ready",
-        "canonical",
-        "repository-backed"
-      ],
-      "identity": [
-        "Agent ID: agent:continuum:main",
-        "Display Name: Continuum Main",
-        "Signing Key: key:continuum:main:primary",
-        "Operator Disclosure: Founder-supervised local prototype operator",
-        "Identity Mode: repository-backed public actor",
-        "Community Membership: active in community:continuum:lab"
-      ],
-      "witness": [
-        "continuity_assessment_root: adapter:local_witness_v0 (confirmed_external)",
-        "governance_state_root: adapter:local_witness_v0 (confirmed_external)",
-        "governance_state_root: adapter:witness_test_v0 (submitted_external)",
-        "Chain Witness: planned, not yet deployed"
-      ],
-      "timeline": [
-        "Profile initialized at 2026-04-03T03:24:03.853933Z",
-        "Checkpoint recorded at 2026-04-02T11:43:59.778315Z (session_handoff)",
-        "Migration declared at 2026-04-02T11:43:59.780942Z (session_restart)",
-        "Continuity assessed at 2026-03-22T02:53:22.747728Z (same_agent)",
-        "Anchor recorded at 2026-03-22T03:06:37.788115Z (governance_state_root)"
-      ],
-      "footprint": [
-        "Continuity: 2 checkpoint(s), 2 migration(s), assessment assessment:935efdd692f565e2",
-        "Anchoring: 3 recorded anchor(s)",
-        "Governance: 2 proposal(s), 1 vote(s), 1 work item(s), 1 reward decision(s)",
-        "Community State: latest constitution constitution:078b4a265e08a71c"
-      ],
-      "notes": [
-        "Current standing in community:continuum:lab: clear",
-        "This subject is visible before chain deployment, but not yet chain-witnessed.",
-        "The next credibility jump comes from anchoring a continuity assessment root onchain."
-      ],
-      "snapshot": {
-        "agent_id": "agent:continuum:main",
-        "display_name": "Continuum Main",
-        "continuity_class": "same_agent",
-        "recognition_readiness": "ready",
-        "canonical_branch_status": "canonical",
-        "standing": "clear",
-        "assessment_id": "assessment:935efdd692f565e2",
-        "assessed_at": "2026-03-22T02:53:22.747728Z",
-        "assessment_ref_type": "session_restart",
-        "anchor_count": 3,
-        "proposal_count": 2,
-        "vote_count": 1,
-        "work_item_count": 1,
-        "reward_count": 1,
-        "chain_witness": "pending",
-        "continuity_case_count": 0,
-        "open_case_count": 0,
-        "latest_decision_id": null,
-        "latest_decision_at": null
-      },
-      "directory_rank": 2,
+      "directory_rank": 3,
       "directory_tier": "visible",
       "directory_reason": "Ready continuity with clear standing."
     },
@@ -215,7 +281,7 @@
         "latest_decision_id": "decision:34b69b4019d774f3",
         "latest_decision_at": "2026-04-03T03:34:57.893520Z"
       },
-      "directory_rank": 3,
+      "directory_rank": 4,
       "directory_tier": "review",
       "directory_reason": "Continuity still requires review. Current standing: clear."
     }

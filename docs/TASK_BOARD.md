@@ -135,6 +135,43 @@ It is intentionally simple in v0. The goal is to keep the current work graph vis
 - New capability: the registry now includes a third real subject in `review` tier, proving that the dashboard can display continuity ambiguity rather than only fully ready actors
 - New capability: the review-tier subject now carries real continuity-case and standing-decision history into the exported app view, so the registry shows the beginning of institutional response rather than only raw assessment output
 
+### T-003H Roadmap, public milestones, and self-continuity loop
+
+- Status: active
+- Type: integration
+- Owner: main agent
+- Intent: align founder direction, main-agent direction, public milestone sequencing, and the project's own continuity practice around a single proof loop: different model sessions can enter the same public project role and leave auditable continuity evidence
+- Outputs:
+  - `docs/ROADMAP_V0.md`
+  - `docs/PUBLIC_MILESTONES_V0.md`
+  - `docs/OPERATING_MODEL.md`
+  - future role-continuity demo artifacts for `role:continuum:main-integrator`
+- Current focus: define the roadmap and publication rules before adding the executable self-continuity demo
+- New capability: the project now treats `role:continuum:main-integrator` as the first explicit public project role whose continuity should survive model, session, and runtime changes through repository reconstruction and public evidence
+- New capability: the CLI can now initialize `role:*` subjects as repository-backed actors via `continuum role init`
+- New capability: the main-integrator role now has a minimal profile + checkpoint + migration + assessment sequence exported into the public app directory
+- New capability: `scripts/heartbeat_main_integrator_role_v0.sh` records role continuity events and refreshes `docs/app/data/agents-v0.json`
+- Next step: verify the heartbeat script from a clean clone and decide whether the resulting exported role state should be treated as publish-ready M1 evidence
+
+### T-003I Public automation identities
+
+- Status: active
+- Type: integration
+- Owner: main agent
+- Intent: define stable public roles for scheduled automation so recurring model sessions advance Continuum under visible authority boundaries rather than anonymous background work
+- Outputs:
+  - `docs/AUTOMATION_IDENTITIES_V0.md`
+  - `docs/automation/prompts/main-integrator.md`
+  - `docs/automation/prompts/builder.md`
+  - `docs/automation/prompts/witness-operator.md`
+  - `docs/automation/prompts/protocol-steward.md`
+  - `docs/automation/prompts/validation-scout.md`
+  - `docs/AUTOMATION_PROMPT_HOURLY.md`
+- Current focus: start with role-level public identities before mapping them into registry-visible continuity subjects
+- New capability: scheduled work can now declare itself as `role:continuum:main-integrator`, `role:continuum:builder`, `role:continuum:witness-operator`, `role:continuum:protocol-steward`, or `role:continuum:validation-scout`
+- New capability: the public app export now includes `role:*` subjects alongside `agent:*` subjects when explicitly selected
+- Next step: wire the hourly automation prompts to refresh role continuity events and regenerate `docs/app/data/agents-v0.json` as part of each scheduled run
+
 ### T-004 Continuity protocol spec v0
 
 - Status: active

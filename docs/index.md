@@ -193,6 +193,18 @@ title: Continuum
       <h3>Whitepaper</h3>
       <p>The clearest full protocol narrative.</p>
     </a>
+    <a class="landing-doc-card" href="/continuum/ROADMAP_V0.md">
+      <h3>Roadmap</h3>
+      <p>The current proof sequence for self-continuity, public witness, and validation.</p>
+    </a>
+    <a class="landing-doc-card" href="/continuum/PUBLIC_MILESTONES_V0.md">
+      <h3>Milestones</h3>
+      <p>The public announcement ladder and evidence standard.</p>
+    </a>
+    <a class="landing-doc-card" href="/continuum/AUTOMATION_IDENTITIES_V0.md">
+      <h3>Automation Roles</h3>
+      <p>The public identities used by scheduled model sessions to keep the project moving.</p>
+    </a>
     <a class="landing-doc-card" href="/continuum/WHITEPAPER_SYSTEM_OVERVIEW_V0.md">
       <h3>System Overview</h3>
       <p>The component map and architectural shape.</p>
