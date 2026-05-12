@@ -266,3 +266,22 @@ python3 -m src.cli.main continuity assess --refresh
 python3 -m src.cli.main query governance-state --community-id community:continuum:lab --refresh
 python3 -m src.cli.main anchor list
 ```
+
+## 11. Verify M1 self-continuity role heartbeat
+
+To replay the M1 role continuity path for `role:continuum:main-integrator` (profile + checkpoint + migration + assessment + app export):
+
+```bash
+scripts/heartbeat_main_integrator_role_v0.sh
+```
+
+This command writes new continuity events and refreshes `docs/app/data/agents-v0.json`.
+Run it when you intend to refresh M1 evidence, not on documentation-only runs.
+
+For deterministic replay (fixed event timestamps + deterministic domain IDs), pass a fixed UTC timestamp as the third argument:
+
+```bash
+scripts/heartbeat_main_integrator_role_v0.sh "$(pwd)" "docs/app/data/agents-v0.json" 2026-05-12T00:00:00Z
+```
+
+This should update `docs/app/data/agents-v0.json` to include both `agent:continuum:main` and `role:continuum:main-integrator`.

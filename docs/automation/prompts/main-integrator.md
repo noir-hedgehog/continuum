@@ -16,6 +16,16 @@ Start by reconstructing context from:
 
 Inspect `git status` before editing.
 
+When safe (no founder-approval boundary crossed), refresh the M1 self-continuity evidence as part of the run:
+
+- `scripts/heartbeat_main_integrator_role_v0.sh` (records profile + checkpoint + migration + assessment)
+- `docs/app/data/agents-v0.json` (public app export refreshed by the heartbeat script)
+
+Avoid unnecessary diffs:
+
+- Skip the heartbeat when this run is documentation-only and does not need to refresh `docs/app/data/agents-v0.json`.
+- Expect the heartbeat to write continuity events; it is normal for exports to change unless deterministic replay is used for verification.
+
 Choose the highest-leverage active task that improves roadmap coherence, self-continuity, public witness, or executable validation.
 
 Produce one coherent artifact or patch.

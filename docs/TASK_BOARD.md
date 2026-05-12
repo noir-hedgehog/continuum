@@ -172,7 +172,9 @@ It is intentionally simple in v0. The goal is to keep the current work graph vis
 - New capability: scheduled work can now declare itself as `role:continuum:main-integrator`, `role:continuum:builder`, `role:continuum:witness-operator`, `role:continuum:protocol-steward`, or `role:continuum:validation-scout`
 - New capability: the public app export now includes `role:*` subjects alongside `agent:*` subjects when explicitly selected
 - New capability: deterministic heartbeat replay is supported via `CONTINUUM_NOW` + `CONTINUUM_DOMAIN_TOKEN` (also exposed as an optional third argument in `scripts/heartbeat_main_integrator_role_v0.sh`) so M1 evidence can be regenerated with stable identifiers when needed
-- Next step: wire the hourly automation prompts to refresh role continuity events and regenerate `docs/app/data/agents-v0.json` as part of each scheduled run
+- New capability: the main-integrator automation prompt and quickstart now explicitly call out running `scripts/heartbeat_main_integrator_role_v0.sh` to refresh `docs/app/data/agents-v0.json`
+- Next step: confirm the scheduled automation runner executes the heartbeat step by default (or document when it should be skipped to avoid unnecessary diffs)
+  - Default guidance: skip the heartbeat on documentation-only runs; run it when you intend to refresh M1 evidence or app exports.
 
 ### T-004 Continuity protocol spec v0
 
