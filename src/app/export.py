@@ -211,8 +211,12 @@ def build_agent_app_entry(
         f"Governance: {proposal_count} proposal(s), {vote_count} vote(s), {work_item_count} work item(s), {reward_count} reward decision(s)",
     ]
     if governance_state:
+        latest_constitution = governance_state.get("latest_constitution") if isinstance(governance_state, dict) else None
+        constitution_id = None
+        if isinstance(latest_constitution, dict):
+            constitution_id = latest_constitution.get("constitution_id")
         footprint.append(
-            f"Community State: latest constitution {governance_state['latest_constitution']['constitution_id']}"
+            f"Community State: latest constitution {constitution_id or 'none'}"
         )
 
     case_count = 0

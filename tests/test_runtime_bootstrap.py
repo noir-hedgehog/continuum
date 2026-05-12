@@ -240,6 +240,43 @@ class CliBootstrapTests(unittest.TestCase):
             finally:
                 os.chdir(cwd)
 
+    def test_app_export_survives_missing_constitution_state(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            cwd = Path.cwd()
+            try:
+                os.chdir(tmp)
+                self.assertEqual(
+                    self.run_cli(
+                        [
+                            "agent",
+                            "init",
+                            "--scope",
+                            "continuum",
+                            "--name",
+                            "main",
+                            "--display-name",
+                            "Continuum Main",
+                        ]
+                    )[0],
+                    0,
+                )
+                code, _ = self.run_cli(
+                    [
+                        "app",
+                        "export",
+                        "--community-id",
+                        "community:continuum:lab",
+                        "--refresh",
+                        "--output",
+                        "out_agents.json",
+                    ]
+                )
+                self.assertEqual(code, 0)
+                exported = json.loads(Path("out_agents.json").read_text(encoding="utf-8"))
+                self.assertIn("agents", exported)
+            finally:
+                os.chdir(cwd)
+
     def test_query_commands_materialize_deterministic_agent_state(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             cwd = Path.cwd()
