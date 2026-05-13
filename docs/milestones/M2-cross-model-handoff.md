@@ -29,6 +29,7 @@ Suggested “evidence slots” to fill during the first M2 attempt:
 - `docs/REVISION_LOG.md` entry describing the handoff and why it still qualifies (or not)
 - `docs/app/data/agents-v0.json` refreshed so the role’s continuity and assessment state is visible
 - Optional: a small review note in `docs/reviews/` describing what was strong/weak about the evidence
+- Optional: an M2 handoff scaffold bundle produced by `scripts/build_m2_handoff_package_v0.sh` (includes a migration metadata stub + hashes for quick review)
 
 ## Limits
 
@@ -46,3 +47,11 @@ Founder approval is required before flipping this milestone to `published`, beca
   - the assessment result and reasoning
   - the replay recipe from two clean roots (when determinism is required)
 
+## Tooling (optional)
+
+To prepare a reviewable scaffold bundle (no new continuity events, snapshots only):
+
+1) ensure the app export is current:
+   - `scripts/refresh_m1_export_if_changed_v0.sh "$PWD" docs/app/data/agents-v0.json`
+2) build the M2 handoff scaffold bundle:
+   - `scripts/build_m2_handoff_package_v0.sh`
