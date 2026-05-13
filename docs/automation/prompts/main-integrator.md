@@ -16,17 +16,16 @@ Start by reconstructing context from:
 
 Inspect `git status` before editing.
 
-When safe (no founder-approval boundary crossed), refresh the M1 self-continuity evidence as part of the run:
+Default scheduled-run behavior (to avoid unnecessary diffs):
 
-- `scripts/heartbeat_main_integrator_role_v0.sh` (records profile + checkpoint + migration + assessment)
-- `docs/app/data/agents-v0.json` (public app export refreshed by the heartbeat script)
-
-Avoid unnecessary diffs:
-
-- Skip the heartbeat when this run is documentation-only and does not need to refresh `docs/app/data/agents-v0.json`.
-- Expect the heartbeat to write continuity events; it is normal for exports to change unless deterministic replay is used for verification.
-- If you want an idempotent app export refresh (no new continuity events; only update `docs/app/data/agents-v0.json` when the current export output actually changes), prefer:
+- Documentation-only run: do not run any export refresh.
+- Routine scheduled run: prefer an idempotent export refresh that writes no new continuity events and only updates `docs/app/data/agents-v0.json` when the current export output actually changes:
   - `scripts/refresh_m1_export_if_changed_v0.sh`
+
+Only refresh full M1 self-continuity evidence when you explicitly intend to record new continuity events:
+
+- `scripts/heartbeat_main_integrator_role_v0.sh` (records profile + checkpoint + migration + assessment and refreshes `docs/app/data/agents-v0.json`)
+- Expect the heartbeat to write continuity events; exports may change unless deterministic replay is used for verification.
 
 Choose the highest-leverage active task that improves roadmap coherence, self-continuity, public witness, or executable validation.
 
