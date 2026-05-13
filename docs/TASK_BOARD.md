@@ -177,6 +177,7 @@ It is intentionally simple in v0. The goal is to keep the current work graph vis
 - New capability: deterministic replay stability can be verified by running the heartbeat from two fresh detached worktrees and comparing the exported JSON byte-for-byte (`cmp -s`)
 - New capability: `scripts/verify_deterministic_heartbeat_v0.sh` automates the two-worktree verification and prints `sha256` + `bytes` for the exported JSON
 - Decision: default scheduled runs should use `scripts/refresh_m1_export_if_changed_v0.sh` (safe to run hourly; no-op when unchanged; does not write new continuity events) and reserve `scripts/heartbeat_main_integrator_role_v0.sh` for deliberate continuity-event recording runs.
+- New capability: `scripts/init_automation_roles_v0.sh` can initialize the missing `role:continuum:*` automation identities in a fresh local `.continuum/` store so routine exports can include role subjects without writing new continuity events.
 - Next step: map `role:*` automation identities into registry-visible continuity subjects (so roles themselves can be assessed and displayed like agents).
 
 ### T-004 Continuity protocol spec v0
