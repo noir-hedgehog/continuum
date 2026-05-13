@@ -4251,6 +4251,50 @@ class CliBootstrapTests(unittest.TestCase):
             finally:
                 os.chdir(cwd)
 
+    def test_cli_role_init_does_not_overwrite_current_agent(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            cwd = Path.cwd()
+            try:
+                os.chdir(tmp)
+                docs_dir = Path("docs")
+                docs_dir.mkdir(parents=True, exist_ok=True)
+                for artifact in (
+                    "FOUNDING_THESIS.md",
+                    "OPERATING_MODEL.md",
+                    "TASK_BOARD.md",
+                    "REVISION_LOG.md",
+                ):
+                    (docs_dir / artifact).write_text(f"# {artifact}\n", encoding="utf-8")
+
+                self.run_cli(
+                    [
+                        "agent",
+                        "init",
+                        "--scope",
+                        "continuum",
+                        "--name",
+                        "main",
+                        "--display-name",
+                        "Continuum Main",
+                    ]
+                )
+                self.run_cli(
+                    [
+                        "role",
+                        "init",
+                        "--scope",
+                        "continuum",
+                        "--name",
+                        "builder",
+                        "--display-name",
+                        "Continuum Builder",
+                    ]
+                )
+                _, payload = self.run_cli(["agent", "show"])
+                self.assertEqual(payload["agent"]["agent_id"], "agent:continuum:main")
+            finally:
+                os.chdir(cwd)
+
     def test_anchor_export_is_deterministic_for_governance_state(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             cwd = Path.cwd()

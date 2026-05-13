@@ -182,6 +182,7 @@ It is intentionally simple in v0. The goal is to keep the current work graph vis
 - Decision: default scheduled runs should use `scripts/refresh_m1_export_if_changed_v0.sh` (safe to run hourly; no-op when unchanged; does not write new continuity events) and reserve `scripts/heartbeat_main_integrator_role_v0.sh` for deliberate continuity-event recording runs.
 - New capability: `scripts/refresh_m1_export_if_changed_v0.sh` now self-bootstraps missing `role:continuum:*` automation identities (via `scripts/init_automation_roles_v0.sh` when available) so fresh clones can safely refresh exports in a single step.
 - New capability: `scripts/init_automation_roles_v0.sh` can initialize the missing `role:continuum:*` automation identities in a fresh local `.continuum/` store so routine exports can include role subjects without writing new continuity events.
+- New capability: `continuum role init` no longer overwrites the current agent context (so automation role bootstrapping does not silently switch the active actor).
 - New capability: the app export now labels `role:*` entries as roles (e.g. `Role ID:` + `Identity Mode: repository-backed public automation role`) to avoid conflating roles with human or model agents.
 - Next step: map `role:*` automation identities into registry-visible continuity subjects (so roles themselves can be assessed and displayed like agents).
 

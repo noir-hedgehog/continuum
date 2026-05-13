@@ -211,7 +211,8 @@ def cmd_role_init(args: argparse.Namespace) -> int:
         "signing_key": signing_key,
         "secret_hex": generate_secret_hex(),
     }
-    store.save_agent(role_record)
+    # Roles are not assumed to be the active operator context; keep current agent stable.
+    store.save_agent(role_record, make_current=False)
     print(json.dumps({"role": role_record}, indent=2, sort_keys=True))
     return 0
 
