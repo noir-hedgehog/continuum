@@ -8,6 +8,19 @@ The goal is to prevent silent rewriting of foundational positions.
 
 ## Entries
 
+### 2026-05-14
+
+- Changed artifact: app export subject classification for roles vs agents
+- Previous position: app exports and the directory schema treated `role:*` entries as ordinary agents, requiring downstream consumers to infer role-ness from ID prefixes and preventing easy directory faceting by subject type
+- New position: the app export now emits `subject_kind` (`role` vs `agent`) per entry and top-level `role_count` / `non_role_agent_count` counters so roles can become first-class registry subjects without a schema-breaking rename
+- Reason: scheduled public automation roles are now a core continuity surface and need explicit representation in exported witness artifacts
+- Trigger: advancing the "make automation identities exportable continuity subjects" next step in `docs/AUTOMATION_IDENTITIES_V0.md`
+- Downstream docs affected:
+  - `src/app/export.py`
+  - `docs/app/data/agents-v0.json`
+  - `docs/TASK_BOARD.md`
+  - `tests/test_app_export_role_fields.py`
+
 ### 2026-05-13
 
 - Changed artifact: whitepaper and public site latest-progress alignment

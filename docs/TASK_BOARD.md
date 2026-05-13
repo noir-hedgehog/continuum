@@ -185,7 +185,8 @@ It is intentionally simple in v0. The goal is to keep the current work graph vis
 - New capability: `continuum role init` no longer overwrites the current agent context (so automation role bootstrapping does not silently switch the active actor).
 - New capability: `continuum role list` lists repository-local public automation roles (optionally filtered by `--scope`) for quick inspection and export targeting.
 - New capability: the app export now labels `role:*` entries as roles (e.g. `Role ID:` + `Identity Mode: repository-backed public automation role`) to avoid conflating roles with human or model agents.
-- Next step: map `role:*` automation identities into registry-visible continuity subjects (so roles themselves can be assessed and displayed like agents).
+- New capability: the app export now emits `subject_kind` per entry (`agent` vs `role`) plus top-level `role_count` counters so downstream surfaces can treat roles as first-class registry subjects without breaking the existing schema.
+- Next step: update the public app/explorer surfaces to facet directory views by `subject_kind` (roles vs agents) and surface role-specific counts without requiring schema-breaking renames.
 
 ### T-004 Continuity protocol spec v0
 

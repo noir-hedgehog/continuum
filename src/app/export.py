@@ -91,6 +91,7 @@ def build_agent_app_entry(
     refresh: bool = False,
 ) -> dict[str, Any]:
     is_role = actor_id.startswith("role:")
+    subject_kind = "role" if is_role else "agent"
     subject_noun = "Role" if is_role else "Agent"
     try:
         agent = store.load_agent(actor_id)
@@ -258,6 +259,7 @@ def build_agent_app_entry(
 
     return {
         "agent_id": actor_id,
+        "subject_kind": subject_kind,
         "display_name": latest_profile.get("display_name", agent.get("display_name", actor_id)),
         "summary": summary,
         "continuity_class": assessment["continuity_class"],
@@ -270,6 +272,7 @@ def build_agent_app_entry(
         "notes": notes,
         "snapshot": {
             "agent_id": actor_id,
+            "subject_kind": subject_kind,
             "display_name": latest_profile.get("display_name", agent.get("display_name", actor_id)),
             "continuity_class": assessment["continuity_class"],
             "recognition_readiness": assessment["recognition_readiness"],
@@ -353,10 +356,13 @@ def export_agents_app_data(
     review_count = 0
     restricted_count = 0
     pending_chain_witness_count = 0
+    role_count = 0
     for index, entry in enumerate(entries, start=1):
         entry["directory_rank"] = index
         entry["directory_tier"] = _directory_tier(entry)
         entry["directory_reason"] = _directory_reason(entry)
+        if entry.get("subject_kind") == "role":
+            role_count += 1
         if entry["directory_tier"] == "visible":
             visible_count += 1
         elif entry["directory_tier"] == "review":
@@ -369,6 +375,8 @@ def export_agents_app_data(
     payload = {
         "generated_from": "repository_state",
         "agent_count": len(entries),
+        "role_count": role_count,
+        "non_role_agent_count": len(entries) - role_count,
         "visible_agent_count": visible_count,
         "review_agent_count": review_count,
         "restricted_agent_count": restricted_count,
