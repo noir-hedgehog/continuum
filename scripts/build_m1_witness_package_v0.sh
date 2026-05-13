@@ -90,7 +90,6 @@ WITNESS_MANIFEST.json.
 How to reproduce from a clean checkout:
   1) git clone the repo, cd into it
   2) ensure docs/app/data/agents-v0.json is current (optional refresh):
-       scripts/init_automation_roles_v0.sh
        scripts/refresh_m1_export_if_changed_v0.sh "\$PWD" docs/app/data/agents-v0.json
   3) rebuild this witness snapshot:
        scripts/build_m1_witness_package_v0.sh

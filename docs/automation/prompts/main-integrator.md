@@ -20,8 +20,7 @@ Default scheduled-run behavior (to avoid unnecessary diffs):
 
 - Documentation-only run: do not run any export refresh.
 - Routine scheduled run: run an idempotent export refresh (safe to do hourly) that writes no new continuity events and only updates `docs/app/data/agents-v0.json` when the current export output actually changes:
-  - Ensure the public automation roles exist locally (safe; writes no continuity events; may be needed on fresh clones): `scripts/init_automation_roles_v0.sh`
-  - `scripts/refresh_m1_export_if_changed_v0.sh`
+  - `scripts/refresh_m1_export_if_changed_v0.sh` (self-bootstraps missing automation roles via `scripts/init_automation_roles_v0.sh` when available)
 
 Only refresh full M1 self-continuity evidence when you explicitly intend to record new continuity events:
 

@@ -13,6 +13,10 @@ cleanup() {
 }
 trap cleanup EXIT
 
+if [[ -x "$ROOT/scripts/init_automation_roles_v0.sh" ]]; then
+  "$ROOT/scripts/init_automation_roles_v0.sh" "$ROOT" >/dev/null
+fi
+
 PYTHONPATH="$ROOT" python3 -m src.cli.main app export \
   --community-id community:continuum:lab \
   --refresh \
