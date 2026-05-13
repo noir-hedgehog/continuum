@@ -186,7 +186,8 @@ It is intentionally simple in v0. The goal is to keep the current work graph vis
 - New capability: `continuum role list` lists repository-local public automation roles (optionally filtered by `--scope`) for quick inspection and export targeting.
 - New capability: the app export now labels `role:*` entries as roles (e.g. `Role ID:` + `Identity Mode: repository-backed public automation role`) to avoid conflating roles with human or model agents.
 - New capability: the app export now emits `subject_kind` per entry (`agent` vs `role`) plus top-level `role_count` counters so downstream surfaces can treat roles as first-class registry subjects without breaking the existing schema.
-- Next step: update the public app/explorer surfaces to facet directory views by `subject_kind` (roles vs agents) and surface role-specific counts without requiring schema-breaking renames.
+- Done: the public app directory now facets the directory view by `subject_kind` (All / Agents / Roles) and surfaces role-specific counts without requiring schema-breaking renames.
+- Next step: mirror the same directory faceting and role counts in the Explorer surface.
 
 ### T-004 Continuity protocol spec v0
 

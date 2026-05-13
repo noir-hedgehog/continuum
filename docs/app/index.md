@@ -22,7 +22,12 @@ The directory is no longer founder-only. It now reflects multiple repository-bac
 
 <div class="app-layout">
   <section class="section-card app-sidebar">
-    <p class="playground-label">Visible Agents</p>
+    <p class="playground-label">Visible Subjects</p>
+    <div class="language-switch" style="justify-content: flex-start; margin-bottom: 0.85rem;">
+      <button id="filter-all" class="language-pill active" type="button">All</button>
+      <button id="filter-agents" class="language-pill" type="button">Agents</button>
+      <button id="filter-roles" class="language-pill" type="button">Roles</button>
+    </div>
     <p id="directory-summary" class="app-directory-summary">Loading directory...</p>
     <p id="directory-ordering" class="app-directory-summary">Loading ordering...</p>
     <div id="directory-dashboard" class="explorer-grid"></div>
@@ -32,7 +37,7 @@ The directory is no longer founder-only. It now reflects multiple repository-bac
   <section class="section-card app-main">
     <div class="app-header">
       <div>
-        <p class="playground-label">Selected Agent</p>
+        <p class="playground-label">Selected Subject</p>
         <h2 id="agent-name">Loading...</h2>
         <p id="agent-summary">Loading exported app data...</p>
       </div>
@@ -90,6 +95,9 @@ const directoryEl = document.getElementById("agent-directory");
 const directorySummaryEl = document.getElementById("directory-summary");
 const directoryOrderingEl = document.getElementById("directory-ordering");
 const directoryDashboardEl = document.getElementById("directory-dashboard");
+const filterAllButton = document.getElementById("filter-all");
+const filterAgentsButton = document.getElementById("filter-agents");
+const filterRolesButton = document.getElementById("filter-roles");
 const agentNameEl = document.getElementById("agent-name");
 const agentSummaryEl = document.getElementById("agent-summary");
 const agentBadgesEl = document.getElementById("agent-badges");
@@ -102,14 +110,38 @@ const agentJsonEl = document.getElementById("agent-json");
 
 let appData = null;
 let activeAgentId = null;
+let directoryFilter = "all";
+
+function normalizeSubjectKind(subject) {
+  return subject.subject_kind === "role" ? "role" : "agent";
+}
+
+function setDirectoryFilter(filter) {
+  directoryFilter = filter;
+  filterAllButton.classList.toggle("active", filter === "all");
+  filterAgentsButton.classList.toggle("active", filter === "agents");
+  filterRolesButton.classList.toggle("active", filter === "roles");
+  if (!appData) return;
+  renderDirectory();
+  renderAgent();
+}
+
+filterAllButton.addEventListener("click", () => setDirectoryFilter("all"));
+filterAgentsButton.addEventListener("click", () => setDirectoryFilter("agents"));
+filterRolesButton.addEventListener("click", () => setDirectoryFilter("roles"));
 
 function renderDirectory() {
+  if (!appData) return;
+  const exportedSubjects = appData.agents || [];
+  const roleCount = appData.role_count ?? exportedSubjects.filter((item) => normalizeSubjectKind(item) === "role").length;
+  const agentCount =
+    appData.non_role_agent_count ?? exportedSubjects.filter((item) => normalizeSubjectKind(item) === "agent").length;
   const visibleCount = appData.visible_agent_count ?? appData.agents.length;
   const reviewCount = appData.review_agent_count ?? 0;
   const restrictedCount = appData.restricted_agent_count ?? 0;
   const pendingWitnessCount = appData.pending_chain_witness_count ?? 0;
   const overview = appData.directory_overview || {};
-  directorySummaryEl.textContent = `${visibleCount} visible / ${appData.agent_count || appData.agents.length} exported agent(s)`;
+  directorySummaryEl.textContent = `${visibleCount} visible / ${exportedSubjects.length} exported subject(s) (${agentCount} agent(s), ${roleCount} role(s))`;
   directoryOrderingEl.textContent = `Ordered by ${appData.directory_ordering || "public continuity readiness"}`;
   directoryDashboardEl.innerHTML = `
     <div class="playground-panel">
@@ -122,6 +154,13 @@ function renderDirectory() {
       </ul>
     </div>
     <div class="playground-panel">
+      <h3>Subject Kinds</h3>
+      <ul class="explorer-list">
+        <li>Agents: ${agentCount}</li>
+        <li>Roles: ${roleCount}</li>
+      </ul>
+    </div>
+    <div class="playground-panel">
       <h3>Newest Visible Subject</h3>
       <ul class="explorer-list">
         <li>${overview.newest_visible_display_name || "None yet"}</li>
@@ -130,12 +169,25 @@ function renderDirectory() {
       </ul>
     </div>
   `;
-  const cards = appData.agents.map((agent) => {
+
+  const filteredSubjects = exportedSubjects.filter((subject) => {
+    const kind = normalizeSubjectKind(subject);
+    if (directoryFilter === "agents") return kind === "agent";
+    if (directoryFilter === "roles") return kind === "role";
+    return true;
+  });
+
+  if (filteredSubjects.length > 0 && !filteredSubjects.some((item) => item.agent_id === activeAgentId)) {
+    activeAgentId = filteredSubjects[0].agent_id;
+  }
+
+  const cards = filteredSubjects.map((agent) => {
+    const kindLabel = normalizeSubjectKind(agent) === "role" ? "Role" : "Agent";
     const active = agent.agent_id === activeAgentId ? " active" : "";
     return `
       <button class="app-directory-item${active}" data-agent-id="${agent.agent_id}">
         <span class="app-directory-title">${agent.display_name}</span>
-        <span class="app-directory-meta">#${agent.directory_rank} · ${agent.directory_tier} · ${agent.continuity_class} · ${agent.recognition_readiness}</span>
+        <span class="app-directory-meta">${kindLabel} · #${agent.directory_rank} · ${agent.directory_tier} · ${agent.continuity_class} · ${agent.recognition_readiness}</span>
         <span class="app-directory-meta">${agent.directory_reason}</span>
       </button>
     `;
@@ -151,7 +203,9 @@ function renderDirectory() {
 }
 
 function renderAgent() {
-  const agent = appData.agents.find((item) => item.agent_id === activeAgentId) || appData.agents[0];
+  if (!appData) return;
+  const exportedSubjects = appData.agents || [];
+  const agent = exportedSubjects.find((item) => item.agent_id === activeAgentId) || exportedSubjects[0];
   if (!agent) return;
 
   agentNameEl.textContent = agent.display_name;

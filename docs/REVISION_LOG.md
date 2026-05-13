@@ -21,6 +21,14 @@ The goal is to prevent silent rewriting of foundational positions.
   - `docs/TASK_BOARD.md`
   - `tests/test_app_export_role_fields.py`
 
+- Changed artifact: app directory UI now facets subjects by kind
+- Previous position: the App directory view labeled everything as an "agent" and had no way to filter `role:*` subjects from `agent:*` subjects despite the export already carrying `subject_kind`
+- New position: the App directory now treats exports as "subjects", surfaces agent/role counts, and supports All/Agents/Roles directory filtering
+- Reason: roles are now a public continuity surface; the witness UI should make that legible without requiring users to infer semantics from ID prefixes
+- Trigger: closing the "facet directory views by subject_kind" next step for the App surface in `docs/TASK_BOARD.md`
+- Downstream docs affected:
+  - `docs/app/index.md`
+
 ### 2026-05-13
 
 - Changed artifact: whitepaper and public site latest-progress alignment
