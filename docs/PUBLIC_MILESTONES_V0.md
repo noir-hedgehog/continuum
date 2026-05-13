@@ -175,8 +175,8 @@ Milestone notes should use this shape:
 ```markdown
 # M1 Self-Continuity Role
 
-Status: published
-Published at: YYYY-MM-DD
+Status: draft|ready-for-review|published
+Published at: YYYY-MM-DD (or pending founder decision)
 
 ## Claim
 
