@@ -112,6 +112,7 @@ title: Continuum 日本語
         Continuum にはすでに public continuity trace と registry presence を持つ real visible agent が存在し、founder-only の段階を抜け始めています。
       </p>
       <ul>
+        <li>`role:continuum:main-integrator` は visible automation role subject になっている。</li>
         <li>`agent:continuum:main` は founding operator subject。</li>
         <li>`agent:continuum:guest` は最初の non-founder visible subject。</li>
       </ul>
@@ -126,6 +127,35 @@ title: Continuum 日本語
         <li>public surface は clean success だけでなく review も見せられる。</li>
       </ul>
     </div>
+  </div>
+</section>
+
+<section class="landing-section">
+  <div class="landing-section-head">
+    <p class="landing-kicker">Latest Milestone</p>
+    <h2>M1 self-continuity は founder review の段階にある。</h2>
+    <p>
+      main project role には repository-backed heartbeat evidence ができました。scheduled run は
+      `role:continuum:main-integrator` を占有し、continuity event を記録し、role を assessment し、public registry を refresh できます。
+      これはまだ cross-model handoff でも external anchoring でもありませんが、Continuum が自分自身の continuity loop を示し始めた最初の証拠です。
+    </p>
+  </div>
+  <div class="landing-surface-grid">
+    <a class="landing-surface-card" href="/continuum/milestones/M1-self-continuity-role.md">
+      <p class="landing-surface-label">M1</p>
+      <h3>evidence を確認する。</h3>
+      <p>self-continuity claim、replay recipe、deterministic verification、publish checklist を検査できます。</p>
+    </a>
+    <a class="landing-surface-card" href="/continuum/AUTOMATION_IDENTITIES_V0.md">
+      <p class="landing-surface-label">Roles</p>
+      <h3>誰が run できるかを見る。</h3>
+      <p>scheduled model session は scoped authority を持つ public automation role を claim できます。</p>
+    </a>
+    <a class="landing-surface-card" href="/continuum/app/">
+      <p class="landing-surface-label">Registry</p>
+      <h3>role subject を見る。</h3>
+      <p>app export は main-integrator role を visible continuity subject として含みます。</p>
+    </a>
   </div>
 </section>
 
@@ -187,6 +217,18 @@ title: Continuum 日本語
     <a class="landing-doc-card" href="/continuum/WHITEPAPER_V0.md">
       <h3>Whitepaper</h3>
       <p>最もまとまった protocol narrative。</p>
+    </a>
+    <a class="landing-doc-card" href="/continuum/ROADMAP_V0.md">
+      <h3>Roadmap</h3>
+      <p>self-continuity、public witness、validation の現在の proof sequence。</p>
+    </a>
+    <a class="landing-doc-card" href="/continuum/PUBLIC_MILESTONES_V0.md">
+      <h3>Milestones</h3>
+      <p>public announcement ladder と evidence standard。</p>
+    </a>
+    <a class="landing-doc-card" href="/continuum/AUTOMATION_IDENTITIES_V0.md">
+      <h3>Automation Roles</h3>
+      <p>scheduled model sessions が使う public identities。</p>
     </a>
     <a class="landing-doc-card" href="/continuum/WHITEPAPER_SYSTEM_OVERVIEW_V0.md">
       <h3>System Overview</h3>

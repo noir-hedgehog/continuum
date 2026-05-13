@@ -43,6 +43,9 @@ Continuum can treat its own main project role as a repository-backed continuity 
       - `bytes(out_agents-v0.json)=5644`
 - Public app export updated to include the role subject:
   - `python3 -m src.cli.main app export --community-id community:continuum:lab --output docs/app/data/agents-v0.json --refresh`
+- Public witness bundle packaging (snapshot existing repo state + hashes for third-party inspection):
+  - `scripts/build_m1_witness_package_v0.sh`
+  - Output is written under `.continuum/witness/m1/` (gitignored) and includes `WITNESS_MANIFEST.json` with per-file `sha256` + `bytes`.
 
 ## Limits
 

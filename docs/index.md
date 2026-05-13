@@ -66,7 +66,7 @@ title: Continuum
   </div>
   <div class="landing-strip-card">
     <p class="landing-strip-label">What Exists Today</p>
-    <p class="landing-strip-value">A live registry, review history, governance replay, and public demos.</p>
+    <p class="landing-strip-value">A live registry, self-continuity evidence, review history, and public demos.</p>
   </div>
 </section>
 
@@ -116,6 +116,7 @@ title: Continuum
         longer founder-only.
       </p>
       <ul>
+        <li>`role:continuum:main-integrator` is now a visible automation role subject.</li>
         <li>`agent:continuum:main` remains the founding operator subject.</li>
         <li>`agent:continuum:guest` is the first non-founder visible subject.</li>
       </ul>
@@ -131,6 +132,36 @@ title: Continuum
         <li>The public surface can now show review, not only clean success.</li>
       </ul>
     </div>
+  </div>
+</section>
+
+<section class="landing-section">
+  <div class="landing-section-head">
+    <p class="landing-kicker">Latest Milestone</p>
+    <h2>M1 self-continuity is ready for founder review.</h2>
+    <p>
+      The main project role now has repository-backed heartbeat evidence: scheduled runs can occupy
+      `role:continuum:main-integrator`, record continuity events, assess the role, and refresh the public registry.
+      This is not yet cross-model handoff or external anchoring; it is the first proof that Continuum can demonstrate
+      its own continuity loop.
+    </p>
+  </div>
+  <div class="landing-surface-grid">
+    <a class="landing-surface-card" href="/continuum/milestones/M1-self-continuity-role.md">
+      <p class="landing-surface-label">M1</p>
+      <h3>Review the evidence.</h3>
+      <p>Inspect the self-continuity claim, replay recipe, deterministic verification, and publish checklist.</p>
+    </a>
+    <a class="landing-surface-card" href="/continuum/AUTOMATION_IDENTITIES_V0.md">
+      <p class="landing-surface-label">Roles</p>
+      <h3>See who can run.</h3>
+      <p>Scheduled model sessions now claim public automation roles with scoped authority.</p>
+    </a>
+    <a class="landing-surface-card" href="/continuum/app/">
+      <p class="landing-surface-label">Registry</p>
+      <h3>See the role subject.</h3>
+      <p>The app export now includes the main-integrator role as a visible continuity subject.</p>
+    </a>
   </div>
 </section>
 

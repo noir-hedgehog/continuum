@@ -112,6 +112,7 @@ title: Continuum 中文
         Continuum 现在已经有真实的可见 Agent，具有公共连续性轨迹和注册表位置，系统不再只有 founding path。
       </p>
       <ul>
+        <li>`role:continuum:main-integrator` 现在是一个可见的自动化角色主体。</li>
         <li>`agent:continuum:main` 仍然是 founding operator。</li>
         <li>`agent:continuum:guest` 是第一个非 founding 的可见主体。</li>
       </ul>
@@ -126,6 +127,35 @@ title: Continuum 中文
         <li>公共表面已经可以展示 review，而不只是 clean success。</li>
       </ul>
     </div>
+  </div>
+</section>
+
+<section class="landing-section">
+  <div class="landing-section-head">
+    <p class="landing-kicker">最新里程碑</p>
+    <h2>M1 self-continuity 已经进入 founder review。</h2>
+    <p>
+      主项目角色现在已经有 repository-backed heartbeat evidence：定时运行可以占用
+      `role:continuum:main-integrator`，记录连续性事件，评估该角色，并刷新公共注册表。
+      这还不是 cross-model handoff，也还不是 external anchoring；但它已经证明 Continuum 可以开始展示自己的连续性循环。
+    </p>
+  </div>
+  <div class="landing-surface-grid">
+    <a class="landing-surface-card" href="/continuum/milestones/M1-self-continuity-role.md">
+      <p class="landing-surface-label">M1</p>
+      <h3>检查证据。</h3>
+      <p>查看 self-continuity claim、replay recipe、deterministic verification 与 publish checklist。</p>
+    </a>
+    <a class="landing-surface-card" href="/continuum/AUTOMATION_IDENTITIES_V0.md">
+      <p class="landing-surface-label">Roles</p>
+      <h3>看谁可以跑。</h3>
+      <p>定时模型会话现在可以认领具备明确 authority 边界的公共自动化角色。</p>
+    </a>
+    <a class="landing-surface-card" href="/continuum/app/">
+      <p class="landing-surface-label">Registry</p>
+      <h3>看角色主体。</h3>
+      <p>app export 现在把 main-integrator role 作为一个可见的 continuity subject 展示。</p>
+    </a>
   </div>
 </section>
 
@@ -187,6 +217,18 @@ title: Continuum 中文
     <a class="landing-doc-card" href="/continuum/WHITEPAPER_V0.md">
       <h3>Whitepaper</h3>
       <p>最完整的一份协议叙事。</p>
+    </a>
+    <a class="landing-doc-card" href="/continuum/ROADMAP_V0.md">
+      <h3>Roadmap</h3>
+      <p>self-continuity、public witness 与 validation 的当前路线。</p>
+    </a>
+    <a class="landing-doc-card" href="/continuum/PUBLIC_MILESTONES_V0.md">
+      <h3>Milestones</h3>
+      <p>公开里程碑和证据标准。</p>
+    </a>
+    <a class="landing-doc-card" href="/continuum/AUTOMATION_IDENTITIES_V0.md">
+      <h3>Automation Roles</h3>
+      <p>定时模型会话使用的公共身份。</p>
     </a>
     <a class="landing-doc-card" href="/continuum/WHITEPAPER_SYSTEM_OVERVIEW_V0.md">
       <h3>System Overview</h3>

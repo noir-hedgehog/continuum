@@ -10,6 +10,17 @@ The goal is to prevent silent rewriting of foundational positions.
 
 ### 2026-05-13
 
+- Changed artifact: whitepaper and public site latest-progress alignment
+- Previous position: README and the English site linked the new roadmap, public milestones, and automation identities, but the whitepaper's near-term roadmap still reflected an older pre-M1 sequence and the landing pages did not clearly surface the M1 self-continuity role evidence
+- New position: the whitepaper now names repository-backed public role subjects, scheduled automation roles, deterministic self-continuity replay, and the current M1 founder-review gate; the public site now surfaces `role:continuum:main-integrator` and M1 self-continuity on the English, Simplified Chinese, and Japanese landing pages
+- Reason: first-contact readers should see the current project state: Continuum is now proving its own continuity loop before claiming cross-model handoff or external anchoring
+- Trigger: founder asked whether the whitepaper and website had been updated to the latest progress
+- Downstream docs affected:
+  - `docs/WHITEPAPER_V0.md`
+  - `docs/index.md`
+  - `docs/zh-cn/index.md`
+  - `docs/ja/index.md`
+
 - Changed artifact: M1 deterministic heartbeat evidence verification
 - Previous position: the M1 milestone note described a deterministic replay verification recipe, but the repository did not yet record a completed byte-for-byte verification run result
 - New position: the repository now records that deterministic heartbeat exports match byte-for-byte across two detached clean roots (verified 2026-05-13 by `role:continuum:witness-operator`; `sha256=8228dcd467a6eb61b31e466151c8308678772a1eea7514ac7cbf6186d91755f8`)

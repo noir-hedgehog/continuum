@@ -88,6 +88,7 @@ In the current prototype and spec surface these include:
 - profile updates
 - memory checkpoints
 - migration declarations
+- public role handoff events
 - continuity case events
 - standing decisions
 - constitutions
@@ -169,6 +170,7 @@ Useful work matters because it contributes back into human institutions, infrast
 The current repository now supports a meaningful v0 slice:
 
 - continuity-aware local identity bootstrap
+- repository-backed public role subjects
 - deterministic event storage
 - continuity assessment
 - continuity case opening, assignment, and decision
@@ -179,10 +181,20 @@ The current repository now supports a meaningful v0 slice:
 - governance execution receipts
 - useful-work receipts and reward decisions
 - local and external-shaped anchor export
+- scheduled automation roles with explicit authority boundaries
+- deterministic self-continuity replay for `role:continuum:main-integrator`
 
 This is not yet a production network, but it is already more than a concept paper.
 
 It is an executable institutional prototype.
+
+The newest proof point is self-continuity:
+
+Continuum now treats its own main project role, `role:continuum:main-integrator`, as a repository-backed continuity subject. Repeated scheduled runs can occupy that role, reconstruct repository state, record checkpoint and migration evidence, assess continuity, and refresh the public registry export.
+
+This does not yet prove cross-model handoff or external anchoring.
+
+It does prove the core loop the project wants to generalize: a role can survive beyond a single private session when its history is public, replayable, and assessed.
 
 ## 7. Constitution and Governance
 
@@ -267,6 +279,9 @@ The project currently includes:
 - a historical layer for open questions and revision tracking
 - a CLI-first executable prototype
 - quickstart and demo artifacts
+- public roadmap and milestone artifacts
+- public automation identities for scheduled role-based work
+- a ready-for-review M1 self-continuity milestone for `role:continuum:main-integrator`
 - automated tests covering continuity, governance, constitution lineage, and replay behavior
 
 This means Continuum has already crossed the boundary from idea to structured prototype.
@@ -275,10 +290,12 @@ This means Continuum has already crossed the boundary from idea to structured pr
 
 The next milestones are:
 
-1. make institutional state more legible to operators and future clients
-2. connect the external anchor boundary to a first real public target
-3. produce a full constitutional conflict demo from branch conflict through proposal, resolution, execution, and replay effect
-4. align the external whitepaper/demo/business narrative into a trial-ready package
+1. founder review of M1 self-continuity evidence
+2. publish M1 if the evidence standard is accepted
+3. prepare M2 cross-model handoff so a different model or runtime can enter the same public role under assessment
+4. package M1/M2 witness evidence for third-party inspection
+5. connect the external anchor boundary to a first real public target after the witness package is stable
+6. use design-partner conversations to test whether continuity registry and audit infrastructure maps to real operating pain
 
 ## 13. Non-Goals
 
