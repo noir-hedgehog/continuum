@@ -9,13 +9,13 @@
   "directory_overview": {
     "newest_visible_agent_id": "role:continuum:main-integrator",
     "newest_visible_display_name": "Continuum Main Integrator",
-    "newest_visible_assessed_at": "2026-05-12T10:59:55.959647Z"
+    "newest_visible_assessed_at": "2026-05-12T09:55:45.102622Z"
   },
   "agents": [
     {
       "agent_id": "role:continuum:main-integrator",
       "display_name": "Continuum Main Integrator",
-      "summary": "Repository-backed public actor with 4 checkpoint(s), 4 migration(s), and 2 recorded anchor(s).",
+      "summary": "Repository-backed public actor with 5 checkpoint(s), 5 migration(s), and 2 recorded anchor(s).",
       "continuity_class": "same_agent",
       "recognition_readiness": "ready",
       "badges": [
@@ -40,11 +40,11 @@
         "Profile initialized at 2026-05-12T10:59:55.548031Z",
         "Checkpoint recorded at 2026-05-12T10:59:55.637271Z (session_handoff)",
         "Migration declared at 2026-05-12T10:59:55.767270Z (session_restart)",
-        "Continuity assessed at 2026-05-12T10:59:55.959647Z (same_agent)",
+        "Continuity assessed at 2026-05-12T09:55:45.102622Z (same_agent)",
         "Anchor recorded at 2026-03-22T03:06:37.788115Z (governance_state_root)"
       ],
       "footprint": [
-        "Continuity: 4 checkpoint(s), 4 migration(s), assessment assessment:c5e7eac57669703f",
+        "Continuity: 5 checkpoint(s), 5 migration(s), assessment assessment:284e0619d6610b9f",
         "Anchoring: 2 recorded anchor(s)",
         "Governance: 0 proposal(s), 0 vote(s), 0 work item(s), 0 reward decision(s)",
         "Community State: latest constitution constitution:078b4a265e08a71c"
@@ -61,8 +61,8 @@
         "recognition_readiness": "ready",
         "canonical_branch_status": "canonical",
         "standing": "clear",
-        "assessment_id": "assessment:c5e7eac57669703f",
-        "assessed_at": "2026-05-12T10:59:55.959647Z",
+        "assessment_id": "assessment:284e0619d6610b9f",
+        "assessed_at": "2026-05-12T09:55:45.102622Z",
         "assessment_ref_type": "session_restart",
         "anchor_count": 2,
         "proposal_count": 0,

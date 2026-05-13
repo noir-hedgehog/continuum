@@ -28,6 +28,8 @@ Continuum can treat its own main project role as a repository-backed continuity 
         - `deterministic export matches`
         - `sha256=...`
         - `bytes=...`
+  - Low-churn app export refresh (only update `docs/app/data/agents-v0.json` when the export output changes; does not write new continuity events):
+    - `scripts/refresh_m1_export_if_changed_v0.sh "$ROOT" docs/app/data/agents-v0.json`
     - Create two detached clean worktrees:
       - `git worktree add --detach /tmp/continuum_heartbeat_verify_a HEAD`
       - `git worktree add --detach /tmp/continuum_heartbeat_verify_b HEAD`

@@ -25,6 +25,8 @@ Avoid unnecessary diffs:
 
 - Skip the heartbeat when this run is documentation-only and does not need to refresh `docs/app/data/agents-v0.json`.
 - Expect the heartbeat to write continuity events; it is normal for exports to change unless deterministic replay is used for verification.
+- If you want an idempotent app export refresh (no new continuity events; only update `docs/app/data/agents-v0.json` when the current export output actually changes), prefer:
+  - `scripts/refresh_m1_export_if_changed_v0.sh`
 
 Choose the highest-leverage active task that improves roadmap coherence, self-continuity, public witness, or executable validation.
 
