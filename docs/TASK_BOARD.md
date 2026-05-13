@@ -183,6 +183,7 @@ It is intentionally simple in v0. The goal is to keep the current work graph vis
 - New capability: `scripts/refresh_m1_export_if_changed_v0.sh` now self-bootstraps missing `role:continuum:*` automation identities (via `scripts/init_automation_roles_v0.sh` when available) so fresh clones can safely refresh exports in a single step.
 - New capability: `scripts/init_automation_roles_v0.sh` can initialize the missing `role:continuum:*` automation identities in a fresh local `.continuum/` store so routine exports can include role subjects without writing new continuity events.
 - New capability: `continuum role init` no longer overwrites the current agent context (so automation role bootstrapping does not silently switch the active actor).
+- New capability: `continuum role list` lists repository-local public automation roles (optionally filtered by `--scope`) for quick inspection and export targeting.
 - New capability: the app export now labels `role:*` entries as roles (e.g. `Role ID:` + `Identity Mode: repository-backed public automation role`) to avoid conflating roles with human or model agents.
 - Next step: map `role:*` automation identities into registry-visible continuity subjects (so roles themselves can be assessed and displayed like agents).
 

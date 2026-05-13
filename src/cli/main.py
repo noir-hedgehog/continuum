@@ -217,6 +217,17 @@ def cmd_role_init(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_role_list(args: argparse.Namespace) -> int:
+    store = _store()
+    scope = slugify(args.scope) if args.scope else None
+    roles = [agent for agent in store.list_agents() if agent["agent_id"].startswith("role:")]
+    if scope:
+        roles = [agent for agent in roles if agent["agent_id"].startswith(f"role:{scope}:")]
+    roles = sorted(roles, key=lambda agent: agent.get("agent_id", ""))
+    print(json.dumps({"roles": roles}, indent=2, sort_keys=True))
+    return 0
+
+
 def cmd_agent_show(_: argparse.Namespace) -> int:
     store = _store()
     print(json.dumps({"agent": _load_current_agent(store)}, indent=2, sort_keys=True))
@@ -1399,6 +1410,13 @@ def build_parser() -> argparse.ArgumentParser:
     role_init.add_argument("--description", default="")
     role_init.add_argument("--operator-disclosure", default="")
     role_init.set_defaults(func=cmd_role_init)
+
+    role_list = role_sub.add_parser("list")
+    role_list.add_argument(
+        "--scope",
+        help="Filter roles by scope, e.g. 'continuum' for role:continuum:*",
+    )
+    role_list.set_defaults(func=cmd_role_list)
 
     agent = subparsers.add_parser("agent")
     agent_sub = agent.add_subparsers(dest="agent_command", required=True)
