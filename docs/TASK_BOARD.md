@@ -176,8 +176,8 @@ It is intentionally simple in v0. The goal is to keep the current work graph vis
 - New capability: the main-integrator automation prompt and quickstart now explicitly call out running `scripts/heartbeat_main_integrator_role_v0.sh` to refresh `docs/app/data/agents-v0.json`
 - New capability: deterministic replay stability can be verified by running the heartbeat from two fresh detached worktrees and comparing the exported JSON byte-for-byte (`cmp -s`)
 - New capability: `scripts/verify_deterministic_heartbeat_v0.sh` automates the two-worktree verification and prints `sha256` + `bytes` for the exported JSON
-- Next step: converge on a default scheduled-run behavior for M1 export refresh that avoids unnecessary diffs
-  - Default guidance: skip the heartbeat on documentation-only runs; for routine scheduled runs, prefer an idempotent refresh via `scripts/refresh_m1_export_if_changed_v0.sh` so `docs/app/data/agents-v0.json` only changes when the export output changes (without writing new continuity events).
+- Decision: default scheduled runs should use `scripts/refresh_m1_export_if_changed_v0.sh` (safe to run hourly; no-op when unchanged; does not write new continuity events) and reserve `scripts/heartbeat_main_integrator_role_v0.sh` for deliberate continuity-event recording runs.
+- Next step: map `role:*` automation identities into registry-visible continuity subjects (so roles themselves can be assessed and displayed like agents).
 
 ### T-004 Continuity protocol spec v0
 

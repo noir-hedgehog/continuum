@@ -19,7 +19,7 @@ Inspect `git status` before editing.
 Default scheduled-run behavior (to avoid unnecessary diffs):
 
 - Documentation-only run: do not run any export refresh.
-- Routine scheduled run: prefer an idempotent export refresh that writes no new continuity events and only updates `docs/app/data/agents-v0.json` when the current export output actually changes:
+- Routine scheduled run: run an idempotent export refresh (safe to do hourly) that writes no new continuity events and only updates `docs/app/data/agents-v0.json` when the current export output actually changes:
   - `scripts/refresh_m1_export_if_changed_v0.sh`
 
 Only refresh full M1 self-continuity evidence when you explicitly intend to record new continuity events:
