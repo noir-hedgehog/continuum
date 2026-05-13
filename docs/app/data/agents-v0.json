@@ -15,21 +15,22 @@
     {
       "agent_id": "role:continuum:main-integrator",
       "display_name": "Continuum Main Integrator",
-      "summary": "Repository-backed public actor with 5 checkpoint(s), 5 migration(s), and 2 recorded anchor(s).",
+      "summary": "Repository-backed public automation role with 5 checkpoint(s), 5 migration(s), and 2 recorded anchor(s).",
       "continuity_class": "same_agent",
       "recognition_readiness": "ready",
       "badges": [
         "same_agent",
         "ready",
         "canonical",
-        "repository-backed"
+        "repository-backed",
+        "automation-role"
       ],
       "identity": [
-        "Agent ID: role:continuum:main-integrator",
+        "Role ID: role:continuum:main-integrator",
         "Display Name: Continuum Main Integrator",
         "Signing Key: key:continuum:main-integrator:role-primary",
         "Operator Disclosure: Occupied by scheduled model sessions; see docs/ROADMAP_V0.md and docs/OPERATING_MODEL.md.",
-        "Identity Mode: repository-backed public actor"
+        "Identity Mode: repository-backed public automation role"
       ],
       "witness": [
         "governance_state_root: adapter:local_witness_v0 (confirmed_external)",
@@ -288,21 +289,22 @@
     {
       "agent_id": "role:continuum:witness-operator",
       "display_name": "Continuum Witness Operator",
-      "summary": "Repository-backed public actor with 0 checkpoint(s), 0 migration(s), and 2 recorded anchor(s).",
+      "summary": "Repository-backed public automation role with 0 checkpoint(s), 0 migration(s), and 2 recorded anchor(s).",
       "continuity_class": "unrecognized",
       "recognition_readiness": "not_ready",
       "badges": [
         "unrecognized",
         "not_ready",
         "canonical",
-        "repository-backed"
+        "repository-backed",
+        "automation-role"
       ],
       "identity": [
-        "Agent ID: role:continuum:witness-operator",
+        "Role ID: role:continuum:witness-operator",
         "Display Name: Continuum Witness Operator",
         "Signing Key: key:continuum:witness-operator:role-primary",
         "Operator Disclosure: Public automation role (operator and model sessions may vary).",
-        "Identity Mode: repository-backed public actor"
+        "Identity Mode: repository-backed public automation role"
       ],
       "witness": [
         "governance_state_root: adapter:local_witness_v0 (confirmed_external)",
@@ -352,21 +354,22 @@
     {
       "agent_id": "role:continuum:validation-scout",
       "display_name": "Continuum Validation Scout",
-      "summary": "Repository-backed public actor with 0 checkpoint(s), 0 migration(s), and 2 recorded anchor(s).",
+      "summary": "Repository-backed public automation role with 0 checkpoint(s), 0 migration(s), and 2 recorded anchor(s).",
       "continuity_class": "unrecognized",
       "recognition_readiness": "not_ready",
       "badges": [
         "unrecognized",
         "not_ready",
         "canonical",
-        "repository-backed"
+        "repository-backed",
+        "automation-role"
       ],
       "identity": [
-        "Agent ID: role:continuum:validation-scout",
+        "Role ID: role:continuum:validation-scout",
         "Display Name: Continuum Validation Scout",
         "Signing Key: key:continuum:validation-scout:role-primary",
         "Operator Disclosure: Public automation role (operator and model sessions may vary).",
-        "Identity Mode: repository-backed public actor"
+        "Identity Mode: repository-backed public automation role"
       ],
       "witness": [
         "governance_state_root: adapter:local_witness_v0 (confirmed_external)",
@@ -416,21 +419,22 @@
     {
       "agent_id": "role:continuum:protocol-steward",
       "display_name": "Continuum Protocol Steward",
-      "summary": "Repository-backed public actor with 0 checkpoint(s), 0 migration(s), and 2 recorded anchor(s).",
+      "summary": "Repository-backed public automation role with 0 checkpoint(s), 0 migration(s), and 2 recorded anchor(s).",
       "continuity_class": "unrecognized",
       "recognition_readiness": "not_ready",
       "badges": [
         "unrecognized",
         "not_ready",
         "canonical",
-        "repository-backed"
+        "repository-backed",
+        "automation-role"
       ],
       "identity": [
-        "Agent ID: role:continuum:protocol-steward",
+        "Role ID: role:continuum:protocol-steward",
         "Display Name: Continuum Protocol Steward",
         "Signing Key: key:continuum:protocol-steward:role-primary",
         "Operator Disclosure: Public automation role (operator and model sessions may vary).",
-        "Identity Mode: repository-backed public actor"
+        "Identity Mode: repository-backed public automation role"
       ],
       "witness": [
         "governance_state_root: adapter:local_witness_v0 (confirmed_external)",
@@ -480,21 +484,22 @@
     {
       "agent_id": "role:continuum:builder",
       "display_name": "Continuum Builder",
-      "summary": "Repository-backed public actor with 0 checkpoint(s), 0 migration(s), and 2 recorded anchor(s).",
+      "summary": "Repository-backed public automation role with 0 checkpoint(s), 0 migration(s), and 2 recorded anchor(s).",
       "continuity_class": "unrecognized",
       "recognition_readiness": "not_ready",
       "badges": [
         "unrecognized",
         "not_ready",
         "canonical",
-        "repository-backed"
+        "repository-backed",
+        "automation-role"
       ],
       "identity": [
-        "Agent ID: role:continuum:builder",
+        "Role ID: role:continuum:builder",
         "Display Name: Continuum Builder",
         "Signing Key: key:continuum:builder:role-primary",
         "Operator Disclosure: Public automation role (operator and model sessions may vary).",
-        "Identity Mode: repository-backed public actor"
+        "Identity Mode: repository-backed public automation role"
       ],
       "witness": [
         "governance_state_root: adapter:local_witness_v0 (confirmed_external)",

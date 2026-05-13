@@ -90,6 +90,8 @@ def build_agent_app_entry(
     community_id: str | None = None,
     refresh: bool = False,
 ) -> dict[str, Any]:
+    is_role = actor_id.startswith("role:")
+    subject_noun = "Role" if is_role else "Agent"
     try:
         agent = store.load_agent(actor_id)
     except FileNotFoundError as exc:
@@ -185,6 +187,8 @@ def build_agent_app_entry(
         assessment["canonical_branch_status"],
         "repository-backed",
     ]
+    if is_role:
+        badges.append("automation-role")
     if standing_state and standing_state["current_standing"] != "clear":
         badges.append(standing_state["current_standing"])
 
@@ -192,13 +196,18 @@ def build_agent_app_entry(
         f"Repository-backed public actor with {len(checkpoint_lineage)} checkpoint(s), "
         f"{len(migration_lineage)} migration(s), and {len(relevant_anchors)} recorded anchor(s)."
     )
+    if is_role:
+        summary = (
+            f"Repository-backed public automation role with {len(checkpoint_lineage)} checkpoint(s), "
+            f"{len(migration_lineage)} migration(s), and {len(relevant_anchors)} recorded anchor(s)."
+        )
 
     identity = [
-        f"Agent ID: {actor_id}",
+        f"{subject_noun} ID: {actor_id}",
         f"Display Name: {latest_profile.get('display_name', agent.get('display_name', actor_id))}",
         f"Signing Key: {agent['signing_key']}",
         f"Operator Disclosure: {latest_profile.get('operator_disclosure') or agent.get('operator_disclosure') or 'not disclosed'}",
-        f"Identity Mode: repository-backed public actor",
+        f"Identity Mode: {'repository-backed public automation role' if is_role else 'repository-backed public actor'}",
     ]
     if latest_membership:
         identity.append(
