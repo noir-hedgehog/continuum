@@ -286,6 +286,16 @@ If you only want to keep the public export in sync with the current repository s
 scripts/refresh_m1_export_if_changed_v0.sh . docs/app/data/agents-v0.json
 ```
 
+### Verify public export digest against the M1 milestone note
+
+If you want to confirm that the current public app export exactly matches the digest recorded in the M1 milestone note, run:
+
+```bash
+scripts/check_m1_public_export_digest_v0.sh .
+```
+
+This compares `docs/app/data/agents-v0.json` against the latest recorded `sha256(...)` + `bytes(...)` entry in `docs/milestones/M1-self-continuity-role.md`.
+
 On fresh clones, you can also explicitly initialize the public automation roles first:
 
 ```bash
