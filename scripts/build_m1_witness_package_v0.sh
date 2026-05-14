@@ -50,6 +50,10 @@ bundle_dir="${OUT_DIR}/bundle_${ts}"
 mkdir -p "${stage}"
 
 files=(
+  "scripts/build_m1_witness_package_v0.sh"
+  "scripts/init_automation_roles_v0.sh"
+  "scripts/refresh_m1_export_if_changed_v0.sh"
+  "scripts/check_m1_public_export_digest_v0.sh"
   "README.md"
   "docs/ROADMAP_V0.md"
   "docs/PUBLIC_MILESTONES_V0.md"
@@ -93,7 +97,9 @@ How to reproduce from a clean checkout:
   1) git clone the repo, cd into it
   2) ensure docs/app/data/agents-v0.json is current (optional refresh):
        scripts/refresh_m1_export_if_changed_v0.sh "\$PWD" docs/app/data/agents-v0.json
-  3) rebuild this witness snapshot:
+  3) verify the export digest matches the M1 milestone note:
+       scripts/check_m1_public_export_digest_v0.sh "\$PWD"
+  4) rebuild this witness snapshot:
        scripts/build_m1_witness_package_v0.sh
 EOF
 

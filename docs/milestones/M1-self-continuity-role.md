@@ -50,10 +50,10 @@ Continuum can treat its own main project role as a repository-backed continuity 
   - `python3 -m src.cli.main app export --community-id community:continuum:lab --output docs/app/data/agents-v0.json --refresh`
 - Public witness bundle packaging (snapshot existing repo state + hashes for third-party inspection):
   - `scripts/build_m1_witness_package_v0.sh`
-  - Output is written under `.continuum/witness/m1/` (gitignored) and includes `WITNESS_MANIFEST.json` with per-file `sha256` + `bytes`.
+  - Output is written under `.continuum/witness/m1/` (gitignored) and includes `WITNESS_MANIFEST.json` with per-file `sha256` + `bytes` (plus the exact scripts needed to rebuild/verify the bundle from a clean checkout).
   - Latest witness bundle snapshot (verified 2026-05-15 by `role:continuum:witness-operator`):
-    - `built_at_utc=20260514T205954Z`
-    - `bundle_id_sha256(manifest)=a06bdb2dd920fa83dfe41c78130869eb66fbde098844900c7cf912a8f2e502e2`
+    - `built_at_utc=20260514T220225Z`
+    - `bundle_id_sha256(manifest)=585d3fcd6af218c23f05563c2995731b80dbbe8123e8f2380660c401c64881cc`
 
 ## Limits
 
