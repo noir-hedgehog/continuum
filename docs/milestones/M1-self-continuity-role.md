@@ -33,6 +33,8 @@ Continuum can treat its own main project role as a repository-backed continuity 
     - Current public app export digest (re-verified 2026-05-15 by `role:continuum:witness-operator`):
       - `sha256(docs/app/data/agents-v0.json)=10bbdd55de0104e87fed58ebf26fa4abaeab4d63e148cc5a068f820eeda4d43b`
       - `bytes(docs/app/data/agents-v0.json)=24119`
+    - Quick digest check (compare the current export file against the digest recorded in this milestone note):
+      - `scripts/check_m1_public_export_digest_v0.sh "$ROOT"`
     - Create two detached clean worktrees:
       - `git worktree add --detach /tmp/continuum_heartbeat_verify_a HEAD`
       - `git worktree add --detach /tmp/continuum_heartbeat_verify_b HEAD`
