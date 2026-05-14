@@ -55,6 +55,8 @@ files=(
   "docs/PUBLIC_MILESTONES_V0.md"
   "docs/AUTOMATION_IDENTITIES_V0.md"
   "docs/OPERATING_MODEL.md"
+  "docs/QUICKSTART_V0.md"
+  "docs/OPERATOR_RUNBOOK_V0.md"
   "docs/TASK_BOARD.md"
   "docs/REVISION_LOG.md"
   "docs/OPEN_QUESTIONS.md"

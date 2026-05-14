@@ -50,8 +50,8 @@ Continuum can treat its own main project role as a repository-backed continuity 
   - `scripts/build_m1_witness_package_v0.sh`
   - Output is written under `.continuum/witness/m1/` (gitignored) and includes `WITNESS_MANIFEST.json` with per-file `sha256` + `bytes`.
   - Latest witness bundle snapshot (verified 2026-05-14 by `role:continuum:witness-operator`):
-    - `built_at_utc=20260514T094610Z`
-    - `bundle_id_sha256(manifest)=8b71298c5ec72c848175c7d9eaa84427f90981816ec5ae91c36c899f27c012da`
+    - `built_at_utc=20260514T104624Z`
+    - `bundle_id_sha256(manifest)=1d886f2a1bd439c39a7d32674e72170f1b21eaf7139c6e301523c9f2eec79d26`
 
 ## Limits
 
