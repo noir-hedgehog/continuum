@@ -120,6 +120,20 @@ const stateJsonEl = document.getElementById("state-json");
 const relatedDocsEl = document.getElementById("related-docs-list");
 const sourceArtifactsEl = document.getElementById("source-artifacts-list");
 
+function formatBasenameLabel(path) {
+  const normalized = String(path || "").split("#")[0].split("?")[0];
+  const parts = normalized.split("/");
+  const basename = parts[parts.length - 1] || normalized;
+  return basename
+    .replace(/\.md$/i, "")
+    .replace(/\.json$/i, "")
+    .replace(/[-_]/g, " ");
+}
+
+function renderEmptyList(el, message) {
+  el.innerHTML = `<li>${message}</li>`;
+}
+
 function renderScenarioButtons() {
   scenarioSwitchEl.innerHTML = SCENARIOS
     .map(
@@ -173,18 +187,46 @@ function installScenario(scenario) {
   }));
 
   scenarioSummaryEl.textContent = scenario.summary;
-  relatedDocsEl.innerHTML = (scenario.related_docs || [])
-    .map((docPath) => {
-      const parts = docPath.split("/");
-      const label = parts[parts.length - 1]
-        .replace(".md", "")
-        .replace(/[-_]/g, " ");
-      return `<li><a href="${docPath}">${label}</a></li>`;
-    })
-    .join("");
-  sourceArtifactsEl.innerHTML = (scenario.source_artifacts || [])
-    .map((artifact) => `<li><a href="${artifact.path}">${artifact.label}</a></li>`)
-    .join("");
+  const relatedDocs = Array.isArray(scenario.related_docs) ? scenario.related_docs : [];
+  if (!relatedDocs.length) {
+    renderEmptyList(relatedDocsEl, "No related documents declared for this scenario.");
+  } else {
+    relatedDocsEl.innerHTML = relatedDocs
+      .map((docEntry) => {
+        if (typeof docEntry === "string") {
+          const label = formatBasenameLabel(docEntry);
+          return `<li><a href="${docEntry}">${label}</a></li>`;
+        }
+        const path = docEntry && docEntry.path ? String(docEntry.path) : "";
+        if (!path) {
+          return "";
+        }
+        const label = docEntry.label ? String(docEntry.label) : formatBasenameLabel(path);
+        const note = docEntry.note ? String(docEntry.note) : "";
+        return `<li><a href="${path}">${label}</a>${note ? ` <span class="playground-link-note">${note}</span>` : ""}</li>`;
+      })
+      .filter(Boolean)
+      .join("");
+  }
+
+  const sourceArtifacts = Array.isArray(scenario.source_artifacts) ? scenario.source_artifacts : [];
+  if (!sourceArtifacts.length) {
+    renderEmptyList(sourceArtifactsEl, "No source artifacts declared for this scenario.");
+  } else {
+    sourceArtifactsEl.innerHTML = sourceArtifacts
+      .map((artifact) => {
+        const path = artifact && artifact.path ? String(artifact.path) : "";
+        const label = artifact && artifact.label ? String(artifact.label) : "";
+        if (!path || !label) {
+          return "";
+        }
+        const note = artifact.note ? String(artifact.note) : "";
+        return `<li><a href="${path}">${label}</a>${note ? ` <span class="playground-link-note">${note}</span>` : ""}</li>`;
+      })
+      .filter(Boolean)
+      .join("");
+  }
+
   stepContainerEl.innerHTML = scenario.stages
     .map(
       (stage, index) =>

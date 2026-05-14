@@ -86,6 +86,7 @@ It is intentionally simple in v0. The goal is to keep the current work graph vis
 - Current focus: scenario chooser clarity, related-doc linkage, and source-artifact traceability
 - New capability: constitutional conflict can now be exported from real demo history instead of only hand-authored fixture data
 - New capability: session restart continuity can now be exported from real checkpoint, migration, and assessment history instead of only hand-authored fixture data
+- New capability: playground now renders related docs and source artifacts with empty-state messaging and optional trace notes
 
 ### T-003E Public agent explorer and chain witness
 

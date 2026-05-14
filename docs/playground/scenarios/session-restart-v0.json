@@ -10,14 +10,17 @@
   "source_artifacts": [
     {
       "label": "Scenario fixture",
+      "note": "The page hydrates from this JSON.",
       "path": "/continuum/playground/scenarios/session-restart-v0.json"
     },
     {
       "label": "Assessment example",
+      "note": "One assessment output used as an inspectable reference.",
       "path": "../specs/examples/continuity_assessment_session_restart.json"
     },
     {
       "label": "Export script",
+      "note": "Builds the fixture inputs from repository state.",
       "path": "https://github.com/noir-hedgehog/continuum/blob/main/scripts/export_session_restart_playground_v0.sh"
     }
   ],

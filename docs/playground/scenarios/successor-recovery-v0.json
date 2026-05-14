@@ -12,10 +12,12 @@
   "source_artifacts": [
     {
       "label": "Scenario fixture",
+      "note": "The page hydrates from this JSON.",
       "path": "/continuum/playground/scenarios/successor-recovery-v0.json"
     },
     {
       "label": "Assessment example",
+      "note": "One assessment output used as an inspectable reference.",
       "path": "../specs/examples/continuity_assessment_successor_recovery.json"
     }
   ],

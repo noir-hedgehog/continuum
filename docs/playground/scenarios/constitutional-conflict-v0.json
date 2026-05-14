@@ -9,10 +9,12 @@
   "source_artifacts": [
     {
       "label": "Scenario fixture",
+      "note": "The page hydrates from this JSON.",
       "path": "/continuum/playground/scenarios/constitutional-conflict-v0.json"
     },
     {
       "label": "Demo script",
+      "note": "Generates the underlying demo history that this fixture summarizes.",
       "path": "https://github.com/noir-hedgehog/continuum/blob/main/scripts/demo_constitutional_conflict_v0.sh"
     }
   ],
