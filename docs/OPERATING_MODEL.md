@@ -208,6 +208,29 @@ Each heartbeat has five stages:
 5. Escalate
 - ask the founder only where authority or risk requires it
 
+## Scheduled Automation Heartbeat (Public Roles)
+
+Continuum uses scheduled runs to advance the project through stable public identities defined in `docs/AUTOMATION_IDENTITIES_V0.md`.
+
+Each scheduled run must:
+
+- inspect `git status` before editing
+- reconstruct context from the control surfaces (roadmap, milestones, operating model, task board, revision log, open questions)
+- claim exactly one public automation role and stay inside its authority boundary
+- prefer small coherent changes over broad rewrites
+- leave auditable evidence (commits or explicit no-op verification notes)
+
+Default safe hourly behavior (low churn):
+
+1. Ensure roles exist:
+   - `scripts/init_automation_roles_v0.sh .`
+2. Refresh the public export only if it changed:
+   - `scripts/refresh_m1_export_if_changed_v0.sh . docs/app/data/agents-v0.json`
+
+Only run a full M1 continuity heartbeat (writes new continuity events) when you explicitly intend to refresh M1 evidence:
+
+- `scripts/heartbeat_main_integrator_role_v0.sh`
+
 ## Project Control Surfaces
 
 The project should have five control surfaces.
