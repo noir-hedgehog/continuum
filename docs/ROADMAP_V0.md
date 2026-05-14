@@ -228,8 +228,16 @@ The project should pause or downgrade the roadmap if:
 
 ## Immediate Next Step
 
-Implement the self-continuity demo for `role:continuum:main-integrator`.
+Treat M1 self-continuity for `role:continuum:main-integrator` as the current founder-gated decision point.
 
-That means adding the minimum role/profile/event/export path needed for the project to treat its own recurring main agent role as a continuity subject.
+The self-continuity demo now exists and is recorded as milestone evidence:
+
+- `docs/milestones/M1-self-continuity-role.md` (`Status: ready-for-review`)
+
+Next steps (founder gate):
+
+1. Decide whether M1 should flip from `ready-for-review` to `published`.
+2. If published, update the public-facing status cues (README + landing pages) to reflect `published` without expanding scope beyond self-continuity.
+3. If not yet published, continue tightening replay and inspection affordances without claiming a broader launch.
 
 Before scheduling multiple automations, use `docs/AUTOMATION_IDENTITIES_V0.md` to bind each automation to a public role with a clear authority boundary.

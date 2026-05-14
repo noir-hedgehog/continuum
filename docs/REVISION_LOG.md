@@ -8,6 +8,16 @@ The goal is to prevent silent rewriting of foundational positions.
 
 ## Entries
 
+### 2026-05-15
+
+- Changed artifact: roadmap immediate next step
+- Previous position: the roadmap still framed the immediate next step as "implement the self-continuity demo" for `role:continuum:main-integrator`
+- New position: the roadmap treats M1 self-continuity as implemented and shifts the immediate next step to the founder-gated decision to publish (or continue tightening replay/inspection without overclaiming)
+- Reason: the repository already contains ready-for-review M1 evidence; the roadmap should match the current milestone ladder and task board "next step"
+- Trigger: scheduled automation run noticed drift between `docs/ROADMAP_V0.md` and `docs/milestones/M1-self-continuity-role.md`
+- Downstream docs affected:
+  - `docs/ROADMAP_V0.md`
+
 ### 2026-05-14
 
 - Changed artifact: app export subject classification for roles vs agents
