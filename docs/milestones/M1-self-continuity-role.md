@@ -50,8 +50,8 @@ Continuum can treat its own main project role as a repository-backed continuity 
   - `scripts/build_m1_witness_package_v0.sh`
   - Output is written under `.continuum/witness/m1/` (gitignored) and includes `WITNESS_MANIFEST.json` with per-file `sha256` + `bytes`.
   - Latest witness bundle snapshot (verified 2026-05-14 by `role:continuum:witness-operator`):
-    - `built_at_utc=20260514T043730Z`
-    - `bundle_id_sha256(manifest)=77939d634186e7f6e70acfad796b6b3f1168690ded53c3c223ea03dd243a2433`
+    - `built_at_utc=20260514T094610Z`
+    - `bundle_id_sha256(manifest)=8b71298c5ec72c848175c7d9eaa84427f90981816ec5ae91c36c899f27c012da`
 
 ## Limits
 
@@ -75,7 +75,7 @@ Recommended checks (stronger publication evidence, still repo-only):
 - Deterministic replay verification (byte-for-byte):
   - `scripts/verify_deterministic_heartbeat_v0.sh "$ROOT" 2026-05-12T00:00:00Z`
 - Fresh witness snapshot bundle (manifested hashes for third parties):
-  - `scripts/build_m1_witness_package_v0.sh "$ROOT"`
+  - `scripts/build_m1_witness_package_v0.sh --root "$ROOT"`
 
 Publish steps (once approved):
 
