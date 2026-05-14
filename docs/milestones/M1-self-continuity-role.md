@@ -30,7 +30,7 @@ Continuum can treat its own main project role as a repository-backed continuity 
         - `bytes=...`
   - Low-churn app export refresh (only update `docs/app/data/agents-v0.json` when the export output changes; does not write new continuity events):
     - `scripts/refresh_m1_export_if_changed_v0.sh "$ROOT" docs/app/data/agents-v0.json`
-    - Current public app export digest (verified 2026-05-14 by `role:continuum:witness-operator`):
+    - Current public app export digest (re-verified 2026-05-15 by `role:continuum:witness-operator`):
       - `sha256(docs/app/data/agents-v0.json)=10bbdd55de0104e87fed58ebf26fa4abaeab4d63e148cc5a068f820eeda4d43b`
       - `bytes(docs/app/data/agents-v0.json)=24119`
     - Create two detached clean worktrees:
