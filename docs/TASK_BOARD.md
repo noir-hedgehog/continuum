@@ -187,7 +187,8 @@ It is intentionally simple in v0. The goal is to keep the current work graph vis
 - New capability: the app export now labels `role:*` entries as roles (e.g. `Role ID:` + `Identity Mode: repository-backed public automation role`) to avoid conflating roles with human or model agents.
 - New capability: the app export now emits `subject_kind` per entry (`agent` vs `role`) plus top-level `role_count` counters so downstream surfaces can treat roles as first-class registry subjects without breaking the existing schema.
 - Done: the public app directory now facets the directory view by `subject_kind` (All / Agents / Roles) and surfaces role-specific counts without requiring schema-breaking renames.
-- Next step: mirror the same directory faceting and role counts in the Explorer surface.
+- Done: the Explorer surface now mirrors the same directory faceting and role counts (All / Agents / Roles) by consuming `docs/app/data/agents-v0.json`.
+- Next step: once the first chain-backed anchor exists, extend the Explorer with anchor-history details beyond the shared App export fields.
 
 ### T-004 Continuity protocol spec v0
 

@@ -29,6 +29,14 @@ The goal is to prevent silent rewriting of foundational positions.
 - Downstream docs affected:
   - `docs/app/index.md`
 
+- Changed artifact: Explorer directory now facets subjects by kind
+- Previous position: the Explorer page was a static, single-subject prototype and could not mirror the live exported directory view or filter `role:*` subjects from `agent:*` subjects
+- New position: the Explorer now consumes the exported subject registry (`docs/app/data/agents-v0.json`), surfaces agent/role counts, and supports All/Agents/Roles directory filtering consistent with the App surface
+- Reason: public automation roles are now first-class continuity subjects; the Explorer should make that legible and reusable rather than remaining a one-off static mock
+- Trigger: completing the "mirror directory faceting and role counts in the Explorer surface" next step from `docs/TASK_BOARD.md`
+- Downstream docs affected:
+  - `docs/explorer/index.md`
+
 ### 2026-05-13
 
 - Changed artifact: whitepaper and public site latest-progress alignment
