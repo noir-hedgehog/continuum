@@ -11,6 +11,8 @@ Default scheduled-run behavior (to avoid unnecessary diffs):
   - `scripts/refresh_m1_export_if_changed_v0.sh` (self-bootstraps missing automation roles via `scripts/init_automation_roles_v0.sh` when available)
 - Optional verification: confirm the current public export digest matches the digest recorded in the M1 milestone note:
   - `scripts/check_m1_public_export_digest_v0.sh .`
+- Optional verification: confirm the latest witness bundle manifest digest matches the digest recorded in the M1 milestone note:
+  - `scripts/check_m1_witness_bundle_digest_v0.sh .`
 
 Start by reading:
 

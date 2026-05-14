@@ -51,6 +51,8 @@ Continuum can treat its own main project role as a repository-backed continuity 
 - Public witness bundle packaging (snapshot existing repo state + hashes for third-party inspection):
   - `scripts/build_m1_witness_package_v0.sh`
   - Output is written under `.continuum/witness/m1/` (gitignored) and includes `WITNESS_MANIFEST.json` with per-file `sha256` + `bytes` (plus the exact scripts needed to rebuild/verify the bundle from a clean checkout).
+  - Quick digest check (compare the latest witness bundle manifest against the digest recorded in this milestone note):
+    - `scripts/check_m1_witness_bundle_digest_v0.sh "$ROOT"`
   - Latest witness bundle snapshot (verified 2026-05-15 by `role:continuum:witness-operator`):
     - `built_at_utc=20260514T220225Z`
     - `bundle_id_sha256(manifest)=585d3fcd6af218c23f05563c2995731b80dbbe8123e8f2380660c401c64881cc`
