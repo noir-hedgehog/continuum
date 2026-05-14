@@ -60,10 +60,28 @@ Continuum can treat its own main project role as a repository-backed continuity 
 
 ## Publish checklist (founder gate)
 
-- Confirm the evidence section reflects the latest verified replay recipe and deterministic digest.
-- Confirm `docs/app/data/agents-v0.json` is refreshed via `python3 -m src.cli.main app export ... --refresh`.
-- Confirm the public note will describe this as **self-continuity** only (no cross-model handoff, no external anchoring yet).
-- If publishing, flip `Status:` to `published`, set `Published at:`, and update README status cues to match.
+This milestone flips to `published` only with explicit founder approval.
+
+Minimum checks:
+
+- Confirm the Evidence section reflects the latest verified replay recipe and digests.
+- Confirm the public app export is up to date:
+  - `scripts/refresh_m1_export_if_changed_v0.sh "$ROOT" docs/app/data/agents-v0.json`
+  - (or) `python3 -m src.cli.main app export --community-id community:continuum:lab --output docs/app/data/agents-v0.json --refresh`
+- Confirm the milestone copy stays scoped to **self-continuity** only (no cross-model handoff, no external anchoring).
+
+Recommended checks (stronger publication evidence, still repo-only):
+
+- Deterministic replay verification (byte-for-byte):
+  - `scripts/verify_deterministic_heartbeat_v0.sh "$ROOT" 2026-05-12T00:00:00Z`
+- Fresh witness snapshot bundle (manifested hashes for third parties):
+  - `scripts/build_m1_witness_package_v0.sh "$ROOT"`
+
+Publish steps (once approved):
+
+- Flip `Status:` to `published`.
+- Set `Published at:` to an ISO date.
+- Update README + public landing-page status cues to match.
 
 ## Next
 
