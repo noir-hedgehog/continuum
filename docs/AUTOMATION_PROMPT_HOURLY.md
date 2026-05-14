@@ -10,7 +10,11 @@ For role-specific scheduled runs, use `docs/AUTOMATION_IDENTITIES_V0.md` and the
 
 Advance the Continuum project from the current repository state.
 
-Act as `role:continuum:main-integrator`, not as a passive assistant.
+At the start of each run, claim exactly one public automation role from:
+
+- `docs/AUTOMATION_IDENTITIES_V0.md`
+
+Stay inside the claimed role boundary (do not silently mix roles).
 
 At the start of every run, reconstruct state from the repository before making changes.
 
