@@ -278,6 +278,20 @@ scripts/heartbeat_main_integrator_role_v0.sh
 This command writes new continuity events and refreshes `docs/app/data/agents-v0.json`.
 Run it when you intend to refresh M1 evidence, not on documentation-only runs.
 
+### Safe hourly export refresh (no new continuity events)
+
+If you only want to keep the public export in sync with the current repository state (and avoid writing new checkpoint/migration events), prefer the low-churn refresh helper:
+
+```bash
+scripts/refresh_m1_export_if_changed_v0.sh . docs/app/data/agents-v0.json
+```
+
+On fresh clones, you can also explicitly initialize the public automation roles first:
+
+```bash
+scripts/init_automation_roles_v0.sh .
+```
+
 For deterministic replay (fixed event timestamps + deterministic domain IDs), pass a fixed UTC timestamp as the third argument:
 
 ```bash
@@ -296,4 +310,18 @@ git worktree add --detach /tmp/continuum_heartbeat_verify_b HEAD
 /tmp/continuum_heartbeat_verify_b/scripts/heartbeat_main_integrator_role_v0.sh /tmp/continuum_heartbeat_verify_b /tmp/continuum_heartbeat_verify_b/out_agents-v0.json 2026-05-12T00:00:00Z
 
 cmp -s /tmp/continuum_heartbeat_verify_a/out_agents-v0.json /tmp/continuum_heartbeat_verify_b/out_agents-v0.json && echo "deterministic export matches"
+```
+
+If you just want the canned two-worktree deterministic verification, use:
+
+```bash
+scripts/verify_deterministic_heartbeat_v0.sh . 2026-05-12T00:00:00Z
+```
+
+### Optional: snapshot a witness bundle
+
+To snapshot the current repo state into a gitignored witness package (manifest includes `sha256` + `bytes` for each file), run:
+
+```bash
+scripts/build_m1_witness_package_v0.sh
 ```
