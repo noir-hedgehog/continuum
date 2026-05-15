@@ -296,6 +296,12 @@ scripts/check_m1_public_export_digest_v0.sh .
 
 This compares `docs/app/data/agents-v0.json` against the latest recorded `sha256(...)` + `bytes(...)` entry in `docs/milestones/M1-self-continuity-role.md`.
 
+If you want a one-shot verifier that refreshes the export if needed and then checks both the export digest and the latest witness-bundle manifest digest (when present), run:
+
+```bash
+scripts/verify_m1_public_evidence_v0.sh .
+```
+
 On fresh clones, you can also explicitly initialize the public automation roles first:
 
 ```bash

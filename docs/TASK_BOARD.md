@@ -157,6 +157,7 @@ It is intentionally simple in v0. The goal is to keep the current work graph vis
 - New capability: `scripts/check_m1_public_export_digest_v0.sh` compares the current `docs/app/data/agents-v0.json` digest against the expected digest recorded in `docs/milestones/M1-self-continuity-role.md`
 - New capability: `scripts/build_m1_witness_package_v0.sh` snapshots the current M1 evidence into a gitignored bundle with a `sha256`/bytes manifest for third-party inspection
 - New capability: `scripts/check_m1_witness_bundle_digest_v0.sh` compares the latest witness bundle manifest digest against the expected digest recorded in `docs/milestones/M1-self-continuity-role.md`
+- New capability: `scripts/verify_m1_public_evidence_v0.sh` runs the safe export refresh (no new continuity events) and verifies the export + witness digests against `docs/milestones/M1-self-continuity-role.md`
 - New capability: `scripts/build_m2_handoff_package_v0.sh` builds a gitignored M2 handoff scaffold bundle (docs + export snapshot + migration metadata stub + manifest hashes) to make the first cross-model handoff attempt easier to review
 - Next step: founder decision whether the resulting evidence should be treated as publish-ready M1; if yes, flip `docs/milestones/M1-self-continuity-role.md` to `published` (see its publish checklist) and update README/site status cues accordingly
 - Next step (post-M1): prepare the first controlled M2 attempt using `docs/milestones/M2-cross-model-handoff.md` as the evidence template (keep M2 `draft` until a real cross-model run is recorded).

@@ -35,6 +35,8 @@ Continuum can treat its own main project role as a repository-backed continuity 
       - `bytes(docs/app/data/agents-v0.json)=24119`
     - Quick digest check (compare the current export file against the digest recorded in this milestone note):
       - `scripts/check_m1_public_export_digest_v0.sh "$ROOT"`
+    - One-shot verifier (refresh export if needed, then verify export digest + witness bundle digest when present):
+      - `scripts/verify_m1_public_evidence_v0.sh "$ROOT"`
     - Create two detached clean worktrees:
       - `git worktree add --detach /tmp/continuum_heartbeat_verify_a HEAD`
       - `git worktree add --detach /tmp/continuum_heartbeat_verify_b HEAD`
