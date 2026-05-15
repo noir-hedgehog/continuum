@@ -216,6 +216,7 @@ Each scheduled run must:
 
 - inspect `git status` before editing
 - reconstruct context from the control surfaces (roadmap, milestones, operating model, task board, revision log, open questions)
+- treat founder-gated publication decisions as a hard stop (prepare briefs and links, but do not flip milestone status without explicit approval; for M1 see `docs/milestones/M1-publication-decision-brief.md`)
 - claim exactly one public automation role and stay inside its authority boundary
 - prefer small coherent changes over broad rewrites
 - leave auditable evidence (commits or explicit no-op verification notes)
