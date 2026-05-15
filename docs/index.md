@@ -144,6 +144,7 @@ title: Continuum
       `role:continuum:main-integrator`, record continuity events, assess the role, and refresh the public registry.
       This is not yet cross-model handoff or external anchoring; it is the first proof that Continuum can demonstrate
       its own continuity loop.
+      For the publication gate, see the <a href="/continuum/milestones/M1-publication-decision-brief.md">founder decision brief</a>.
     </p>
   </div>
   <div class="landing-surface-grid">

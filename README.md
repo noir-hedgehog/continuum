@@ -67,7 +67,7 @@ Continuum is a live protocol prototype, not a finished network. The current phas
 The GitHub Pages playground is now moving from hand-authored state to repository-backed scenario fixtures.
 
 - The current roadmap now centers on proving Continuum through itself: different model sessions should be able to enter `role:continuum:main-integrator`, reconstruct the repository, continue the work, and leave public continuity evidence.
-- M1 self-continuity evidence for `role:continuum:main-integrator` is `ready-for-review` (publish pending founder decision): [`docs/milestones/M1-self-continuity-role.md`](docs/milestones/M1-self-continuity-role.md).
+- M1 self-continuity evidence for `role:continuum:main-integrator` is `ready-for-review` (publish pending founder decision): [`docs/milestones/M1-self-continuity-role.md`](docs/milestones/M1-self-continuity-role.md). Decision brief: [`docs/milestones/M1-publication-decision-brief.md`](docs/milestones/M1-publication-decision-brief.md).
 - The constitutional conflict playground fixture can now be regenerated from real governance demo history through `playground export`.
 - The session restart continuity playground fixture can now be regenerated from real repository-local continuity history and assessment output.
 - The app shell agent directory can now be regenerated from real repository state, assessment, standing, governance, and anchor data through `app export`, and it now defaults to exporting every known agent when no explicit actor list is provided.
