@@ -660,7 +660,9 @@ None yet.
 
 ## Founder Confirmation Needed
 
-Nothing immediate.
+Founder decision needed:
+
+- Whether M1 self-continuity evidence should be treated as publish-ready M1: see `docs/milestones/M1-publication-decision-brief.md` (if approved, flip `docs/milestones/M1-self-continuity-role.md` from `ready-for-review` to `published` using its publish checklist, then update first-contact status cues).
 
 Future likely confirmation points:
 
